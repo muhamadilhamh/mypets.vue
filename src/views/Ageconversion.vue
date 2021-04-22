@@ -1,5 +1,109 @@
 <template>
-  <h1>Ini Halaman Age Conversion</h1>
+  <div class="page_age">
+    <!-- Heroes -->
+    <v-container class="heroes_age">
+      <v-row class="pa-12">
+        <v-col cols="12" sm="4">
+          <v-img class="il_anjing" src="../assets/Anjing&Berdiri.svg"> </v-img>
+        </v-col>
+        <v-col cols="12" sm="4">
+          <div class="title_age">
+            <p>Calculate easily the age of your favorite animal</p>
+          </div>
+        </v-col>
+        <v-col cols="12" sm="4">
+          <v-img class="il_kucing" src="../assets/Kucing&Jongkok.svg"> </v-img>
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- Opsi Umur Hewan -->
+    <v-container class="option_age">
+      <v-row class="ofset-1">
+        <v-col cols="12" sm="7">
+          <div class="title_age_option">
+            <p>Calculate your pet’s age</p>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row class="ofset-1">
+        <v-col cols="12" sm="7">
+          <div class="desc_age_option">
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- Pilih Opsi -->
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="8" offset-md="2">
+          <v-row>
+            <v-col cols="12" sm="6">
+              <!-- Card Anjing -->
+              <v-row>
+                <v-col cols="12" sm="4">
+                  <v-img
+                    class="il_anjing_age hidden-xs-only"
+                    src="../assets/anjing.svg"
+                  >
+                  </v-img>
+                </v-col>
+                <v-col cols="12" sm="8">
+                  <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
+                    <v-card-title>
+                      <p class="title_dog">Dog</p>
+                    </v-card-title>
+                    <v-card-subtitle>
+                      <p class="desc_anjing">Cek Anjingmu Yuk!</p>
+                    </v-card-subtitle>
+                    <v-card-actions>
+                      <v-btn rounded color="#FFF" block class="btn_dog">
+                        Detail
+                        <v-icon right> mdi-chevron-right </v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <!-- Card Kucing -->
+              <v-row>
+                <v-col cols="12" sm="4">
+                  <v-img
+                    class="il_kucing_age hidden-xs-only"
+                    src="../assets/kucing.svg"
+                  >
+                  </v-img>
+                </v-col>
+                <v-col cols="12" sm="8">
+                  <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
+                    <v-card-title>
+                      <p class="title_dog">Cat</p>
+                    </v-card-title>
+                    <v-card-subtitle>
+                      <p class="desc_anjing">Cek Kucingmu Yuk!</p>
+                    </v-card-subtitle>
+                    <v-card-actions>
+                      <v-btn rounded color="#FFF" block class="btn_dog">
+                        Detail
+                        <v-icon right> mdi-chevron-right </v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 <script>
 export default {
@@ -7,4 +111,51 @@ export default {
 };
 </script>
 <style lang="scss">
+.title_age {
+  font-size: 2rem;
+  color: #ffa62b;
+  letter-spacing: 2%;
+  font-weight: 800;
+  padding: 3%;
+  margin-top: 10%;
+}
+.page_age {
+  background: #ede7e3;
+}
+.title_age_option {
+  font-size: 2.3rem;
+  color: #ffa62b;
+  letter-spacing: 2%;
+  font-weight: 900;
+}
+.option_age {
+  margin-top: 5%;
+}
+.desc_age_option {
+  color: #515151;
+}
+
+.title_dog {
+  color: #fff;
+  font-weight: 600;
+}
+.il_kucing_age {
+  margin-top: 50px;
+  z-index: 1;
+}
+.il_anjing_age {
+  margin-top: 60px;
+  z-index: 1;
+}
+.cat {
+  margin-left: -50px;
+}
+.dog {
+  margin-left: 10px;
+}
+.desc_anjing {
+  padding-left: 15px;
+  color: #515151;
+  font-weight: 400;
+}
 </style>

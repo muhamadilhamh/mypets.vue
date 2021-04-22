@@ -2,10 +2,10 @@
   <v-toolbar flat>
     <v-toolbar-title>
       <v-card-actions>
-        <v-btn to="/" color="orange" text>
+        <v-btn to="/" color="orange" text offset="12">
           <v-img
-            max-height="100"
-            max-width="195"
+            max-height="80"
+            max-width="175"
             src="../assets/LogoPPL.svg"
           ></v-img>
         </v-btn>

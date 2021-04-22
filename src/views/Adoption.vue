@@ -3,7 +3,7 @@
   <div class="adoption_page">
     <v-img src="../assets/heroes_adoption.png">
       <v-row class="pa-12">
-        <v-col cols="12" sm="3" offset="1" class="hidden-xs-only">
+        <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
         </v-col>
         <v-col cols="6" sm="8">
@@ -26,7 +26,7 @@
     <!--Searching-->
     <v-container>
       <v-row>
-        <v-col md="6" offset-md="3">
+        <v-col sm="6" offset-sm="3">
           <div class="search_adop">
             <!-- chips = bakal di highlight, clearable = menghapus highlight, filled = melebarkan layout, rounded = sudut menjadi tidak kaku, solo = membuat menjadi berwarna -->
             <v-autocomplete
@@ -175,7 +175,7 @@ export default {
   margin-top: 5%;
 }
 .search_adop {
-  margin-top: -8%;
+  margin-top: -40px;
 }
 .name_user {
   font-weight: 600;
