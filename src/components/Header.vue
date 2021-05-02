@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar flat>
+  <v-toolbar flat class="header">
     <v-toolbar-title>
       <v-card-actions>
         <v-btn to="/" color="orange" text offset="12">
@@ -13,24 +13,34 @@
     </v-toolbar-title>
     <v-toolbar-items class="hidden-xs-only">
       <v-card-actions>
-        <v-btn to="/about" x-small color="orange" text> About Us </v-btn>
+        <v-btn class="about" to="/about" x-small color="orange" text>
+          About Us
+        </v-btn>
       </v-card-actions>
       <v-card-actions>
-        <v-btn to="/adoption" x-small color="orange" text> Adopsi </v-btn>
+        <v-btn class="adop" to="/adoption" x-small color="orange" text>
+          Adopsi
+        </v-btn>
       </v-card-actions>
       <v-card-actions>
-        <v-btn to="/care" x-small color="orange" text> Care&Training </v-btn>
+        <v-btn class="care" to="/care" x-small color="orange" text>
+          Care&Training
+        </v-btn>
       </v-card-actions>
       <v-card-actions>
-        <v-btn to="/ageconversion" x-small color="orange" text>
+        <v-btn class="age" to="/ageconversion" x-small color="orange" text>
           Age Conversion
         </v-btn>
       </v-card-actions>
       <v-card-actions>
-        <v-btn to="/article" x-small color="orange" text> Article </v-btn>
+        <v-btn class="article" to="/article" x-small color="orange" text>
+          Article
+        </v-btn>
       </v-card-actions>
       <v-card-actions>
-        <v-btn to="/breeds" x-small color="orange" text> Breeds </v-btn>
+        <v-btn class="breeds" to="/breeds" x-small color="orange" text>
+          Breeds
+        </v-btn>
       </v-card-actions>
     </v-toolbar-items>
     <v-spacer></v-spacer>
@@ -42,6 +52,7 @@
         <v-btn to="/login" x-small color="#489FB5" rounded dark> Login </v-btn>
       </v-card-actions>
     </v-toolbar-items>
+
     <div class="hidden-sm-and-up">
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
@@ -117,3 +128,15 @@ export default {
   data: () => ({}),
 };
 </script>
+
+<style lang="scss">
+.about,
+.adop,
+.care,
+.age,
+.breeds,
+.article {
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+</style>
