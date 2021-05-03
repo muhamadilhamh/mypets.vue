@@ -135,9 +135,13 @@
 </template>
 
 <script>
+import navbarfull from "../layouts/navbarfull";
 export default {
   name: "About",
 
+  created() {
+    this.$emit("update:layout", navbarfull);
+  },
   data() {
     return {
       items: [

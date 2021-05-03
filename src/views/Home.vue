@@ -647,9 +647,13 @@
   </div>
 </template>
 <script>
+import navbarfull from "../layouts/navbarfull";
+
 export default {
   name: "Home",
-
+  created() {
+    this.$emit("update:layout", navbarfull);
+  },
   data() {
     return {
       feed_home: [

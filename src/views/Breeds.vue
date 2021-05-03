@@ -230,8 +230,13 @@
   </div>
 </template>
 <script>
+import navbarfull from "../layouts/navbarfull";
+
 export default {
   name: "Breeds",
+  created() {
+    this.$emit("update:layout", navbarfull);
+  },
 
   data() {
     return {

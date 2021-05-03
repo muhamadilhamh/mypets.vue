@@ -1,28 +1,98 @@
 <template>
-  <div>
-    <form class="login" @submit.prevent="login">
-      <h1>Sign in</h1>
-      <label>Email</label>
-      <input required v-model="email" type="text" placeholder="Name" />
-      <label>Password</label>
-      <input
-        required
-        v-model="password"
-        type="password"
-        placeholder="Password"
-      />
-      <hr />
-      <button type="submit">Login</button>
-    </form>
-  </div>
+  <v-row>
+    <v-col cols="12" sm="5" class="hidden-xs-only">
+      <v-img class="bg_login" src="../assets/bg_login.png"> </v-img>
+    </v-col>
+    <v-col cols="12" sm="6">
+      <v-row class="pa-12">
+        <v-container>
+          <h3 class="header_login">Log in to MyPets!</h3>
+          <v-col cols="12">
+            <v-form ref="form" class="login" v-model="valid" lazy-validation>
+              <h5>Username or Email</h5>
+              <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="Username or Email"
+                required
+                outlined
+                rounded
+                dense
+              ></v-text-field>
+
+              <h5>Password</h5>
+              <v-text-field
+                v-model="password"
+                label="Password"
+                :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="() => (value = !value)"
+                :type="value ? 'password' : 'text'"
+                :rules="passwordRules"
+                outlined
+                rounded
+                dense
+              ></v-text-field>
+              <v-row class="hidden-xs-only">
+                <v-col cols="6">
+                  <v-btn
+                    :disabled="!valid"
+                    rounded
+                    dark
+                    class="btn_login"
+                    @click="validate"
+                    color="#489FB5"
+                    block
+                    elevation="7"
+                  >
+                    Log in
+                  </v-btn>
+                </v-col>
+              </v-row>
+
+              <v-row class="hidden-sm-and-up">
+                <v-col>
+                  <v-btn
+                    :disabled="!valid"
+                    rounded
+                    dark
+                    class="btn_login"
+                    @click="validate"
+                    color="#489FB5"
+                    block
+                    elevation="7"
+                  >
+                    Log in
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row class="hidden-sm-and-up">
+                <v-col cols="6">
+                  <p class="member_resp">Not a member?</p>
+                </v-col>
+                <v-col cols="6">
+                  <v-btn
+                    class="register_resp"
+                    to="/register"
+                    x-small
+                    color="orange"
+                    text
+                  >
+                    Register now
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-col>
+        </v-container>
+      </v-row>
+    </v-col>
+  </v-row>
 </template>
 <script>
+import navbarlogo_login from "../layouts/navbarlogo_login";
 export default {
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
+  created() {
+    this.$emit("update:layout", navbarlogo_login);
   },
   methods: {
     login: function () {
@@ -34,5 +104,41 @@ export default {
         .catch((err) => console.log(err));
     },
   },
+  data: () => ({
+    value: true,
+    valid: true,
+    email: "",
+    emailRules: [(value) => !!value || "E-mail or username required"],
+    password: "",
+    passwordRules: [(value) => !!value || "Password is required"],
+  }),
 };
 </script>
+
+<style lang="scss">
+.header_login {
+  font-size: 3rem;
+  color: #ffa62b;
+  letter-spacing: 2%;
+  margin-top: 10%;
+}
+.btn_login {
+  text-transform: capitalize;
+}
+.member_resp {
+  position: absolute;
+  left: 35%;
+  margin-top: 3px;
+  right: 35%;
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+.register_resp {
+  bottom: 1%;
+  position: absolute;
+  left: 40%;
+  margin-top: 3px;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+</style>

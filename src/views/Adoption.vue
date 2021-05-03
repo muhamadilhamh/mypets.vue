@@ -91,9 +91,13 @@
   </div>
 </template>
 <script>
+import navbarfull from "../layouts/navbarfull";
 export default {
   name: "Adoption",
 
+  created() {
+    this.$emit("update:layout", navbarfull);
+  },
   data() {
     return {
       selectedItem: 1,
