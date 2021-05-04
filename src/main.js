@@ -6,6 +6,7 @@ import Axios from 'axios'
 import vuetify from './plugins/vuetify';
 
 Vue.prototype.$http = Axios;
+Vue.use(Axios);
 
 const token = localStorage.getItem('user-token')
 if (token) {
@@ -18,5 +19,6 @@ new Vue({
   router,
   store,
   vuetify,
+  Axios,
   render: h => h(App)
 }).$mount('#app')
