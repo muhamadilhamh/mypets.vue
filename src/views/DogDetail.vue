@@ -1,0 +1,705 @@
+<template>
+  <div>
+    <v-toolbar flat>
+      <v-toolbar-title>
+        <v-card-actions>
+          <h5 class="title_cat">Affenpinscher</h5>
+        </v-card-actions>
+      </v-toolbar-title>
+    </v-toolbar>
+
+    <v-container>
+      <v-row>
+        <v-col cols="2" md="2">
+          <v-btn rounded depressed class="btn_back">
+            <v-icon left> mdi-chevron-left </v-icon>
+            All Breeds
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container>
+      <v-row>
+        <v-col cols="7" md="5" offset="1">
+          <v-card elevation="5">
+            <v-card-title> Affenpinscher </v-card-title>
+            <v-card-text>
+              Small and mischievous with a monkey-like expression, the
+              Affenpinscher is a lively toy breed with a short muzzle, round,
+              dark and sparkling eyes and a rough coat. Despite their small size
+              this compact little dog is not at all delicate and is described in
+              the breed standard as having self confidence and carrying itself
+              with a comic seriousness.
+            </v-card-text>
+            <v-card-actions>
+              <v-card-text>
+                <p><span class="bold">Family:</span> Pinscher</p>
+              </v-card-text>
+              <v-card-text>
+                <p><span class="bold">Type:</span> Dog</p>
+              </v-card-text>
+              <v-card-text>
+                <v-btn icon>
+                  <v-icon> mdi-heart </v-icon>
+                </v-btn>
+              </v-card-text>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+
+        <v-col cols="12" md="5">
+          <v-img src="../assets/satu.png"> </v-img>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container>
+      <v-tabs>
+        <v-tab class="title_fact">Key Fact</v-tab>
+        <v-tab-item class="konten_fact">
+          <!--tab key fact -->
+          <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">Key Fact</h3>
+            </v-col>
+          </v-row>
+          <v-container>
+            <v-row>
+              <!--left side -->
+              <v-col cols="12" md="3" offset-md="1">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in profil" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Weight:</span>{{ item.weight }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Size:</span> {{ item.size }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Origin:</span> {{ item.origin }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+
+                <br />
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in health" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list1 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list2 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list3 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon> Suggested
+                        {{ item.list4 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list5 }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+              </v-col>
+
+              <v-col cols="12" md="7">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in temprament" :key="item.id">
+                    <v-card-title>
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+                <br />
+
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in upkeep" :key="item.id">
+                    <v-card-title>
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+                <br />
+
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in grooming" :key="item.id">
+                    <v-card-title>
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+                <br />
+
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in nutrition" :key="item.id">
+                    <v-card-title>
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
+        <v-tab class="tit">History</v-tab>
+        <v-tab-item class="konten_fact">
+          <!--tab key History -->
+          <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">History</h3>
+            </v-col>
+          </v-row>
+          <v-container>
+            <v-row>
+              <!--left side -->
+              <v-col cols="12" md="3" offset-md="1">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in profil" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Weight:</span>{{ item.weight }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Size:</span> {{ item.size }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Origin:</span> {{ item.origin }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+
+                <br />
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in health" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list1 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list2 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list3 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon> Suggested
+                        {{ item.list4 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list5 }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+              </v-col>
+
+              <v-col cols="12" md="7">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in history" :key="item.id">
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
+
+        <v-tab class="tit">Personality</v-tab>
+        <v-tab-item class="konten_fact">
+          <!--tab key Personality -->
+          <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">Personality</h3>
+            </v-col>
+          </v-row>
+          <v-container>
+            <v-row>
+              <!--left side -->
+              <v-col cols="12" md="3" offset-md="1">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in profil" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Weight:</span>{{ item.weight }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Size:</span> {{ item.size }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Origin:</span> {{ item.origin }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+
+                <br />
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in health" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list1 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list2 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list3 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon> Suggested
+                        {{ item.list4 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list5 }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+              </v-col>
+
+              <v-col cols="12" md="7">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in personality" :key="item.id">
+                    <v-card-text>
+                      {{ item.desc }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
+        <v-tab class="tit">Characteristics</v-tab>
+        <v-tab-item class="konten_fact">
+          <!--tab key Characteristics -->
+          <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">Characteristics</h3>
+            </v-col>
+          </v-row>
+          <v-container>
+            <v-row>
+              <!--left side -->
+              <v-col cols="12" md="3" offset-md="1">
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in profil" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Weight:</span>{{ item.weight }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Size:</span> {{ item.size }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Origin:</span> {{ item.origin }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+
+                <br />
+                <v-card outlined class="rounded-xl">
+                  <v-container v-for="item in health" :key="item.id">
+                    <v-card-title class="justify-center">
+                      <h3>{{ item.title }}</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list1 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list2 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list3 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon> Suggested
+                        {{ item.list4 }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <v-icon left> mdi-circle-small </v-icon>
+                        {{ item.list5 }}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+              </v-col>
+
+              <v-col cols="12" md="7">
+                <v-card outlined class="rounded-xl">
+                  <div class="pa-5">
+                    <v-container>
+                      <v-row>
+                        <v-col cols="7" md="6">
+                          <h5>Energy</h5>
+                          <v-rating
+                            hover
+                            v-model="energy"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Affection</h5>
+                          <v-rating
+                            hover
+                            v-model="affection"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Exercise</h5>
+                          <v-rating
+                            hover
+                            v-model="exercise"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Watchfulness</h5>
+                          <v-rating
+                            hover
+                            v-model="watchfulness"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Playfulness</h5>
+                          <v-rating
+                            hover
+                            v-model="playfulness"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Training</h5>
+                          <v-rating
+                            hover
+                            v-model="training"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Friendliness To Dogs</h5>
+                          <v-rating
+                            hover
+                            v-model="friendlinessDog"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Grooming</h5>
+                          <v-rating
+                            hover
+                            v-model="groom"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Friendliness To Other Pets</h5>
+                          <v-rating
+                            hover
+                            v-model="friendlinessOther"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Heat</h5>
+                          <v-rating
+                            hover
+                            v-model="heat"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Friendliness To Strangers</h5>
+                          <v-rating
+                            hover
+                            v-model="friendlinessStrangers"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                        <v-col cols="7" md="6">
+                          <h5>Vocality</h5>
+                          <v-rating
+                            hover
+                            v-model="vocality"
+                            background-color="grey darken-1"
+                            color="#FFA62B"
+                            large
+                            :empty-icon="emptyIcon"
+                            :full-icon="fullIcon"
+                            readonly
+                          >
+                          </v-rating>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
+        <v-tab class="tit"> Comment</v-tab>
+        <v-tab-item class="konten_fact"> </v-tab-item>
+      </v-tabs>
+    </v-container>
+  </div>
+</template>
+
+<script>
+export default {
+  nama: "DogDetail",
+  data: () => ({
+    energy: 4,
+    affection: 4,
+    exercise: 3,
+    watchfulness: 1,
+    playfulness: 4,
+    training: 3,
+    friendlinessDog: 3,
+    groom: 4,
+    friendlinessOther: 3,
+    heat: 4,
+    friendlinessStrangers: 3,
+    vocality: 5,
+    emptyIcon: "mdi-heart-outline",
+    fullIcon: "mdi-heart ",
+    profil: [
+      {
+        id: 1,
+        title: "Profile",
+        lifespan: "12 – 14 years",
+        weight: " 3 – 4kg",
+        size: "Small",
+        origin: "Germany",
+      },
+    ],
+    health: [
+      {
+        id: 1,
+        title: "Health",
+        list1: "Major concerns: none",
+        list2: "Minor concerns: patellar luxation, corneal ulcers",
+        list3:
+          "Occasionally seen: PDA, open fontanel, respiratory difficulties, Legg-Perthes",
+        list4: "Suggested tests: knee, eye",
+        list5: "Life span: 12–14 years",
+      },
+    ],
+    temprament: [
+      {
+        id: 1,
+        title: "Temprament",
+        desc:
+          "The Affenpinscher lives up to its name monkey terrier in both looks and actions. They are terriers at heart, busy, inquisitive, bold, and stubborn, but also love to monkey around, being playful and mischievous. This breed tends to bark and even climb. Unlike most terriers, they are fairly good with other dogs and pets. This little dog is best with a family that likes entertainment and has a very good sense of humor.",
+      },
+    ],
+    upkeep: [
+      {
+        id: 1,
+        title: "Upkeep",
+        desc:
+          "Although an energetic and active dog, the exercise needs of the Affenpinscher can be met with vigorous indoor games or romps in the yard, or with short walks on leash. The harsh coat needs combing two or three times weekly, plus shaping every three months. Shaping should be handled by a professional groomer.",
+      },
+    ],
+    grooming: [
+      {
+        id: 1,
+        title: "Grooming:",
+        desc:
+          "The Abyssinian cat's coat is easy to care for. It will enjoy brushing or combing and if you really want a 'professional' shine you can 'polish' it by stroking gently with a damp chamois leather to bring out the gleam in the coat. As with all cats, this breed needs regular vaccinations, parasite control and annual health checks.",
+      },
+    ],
+    nutrition: [
+      {
+        id: 1,
+        title: "Nutrition:",
+        desc:
+          "Every cat is unique and each has their own particular likes, dislikes, and needs when it comes to food. However, cats are carnivores and every cat must obtain 41 different and specific nutrients from their food. The proportion of these nutrients will vary depending on age, lifestyle and overall health, so it's not surprising that a growing, energetic kitten needs a different balance of nutrients in her diet than a less active senior cat. Other considerations to bear in mind are feeding the right quantity of food to maintain 'ideal body condition' in accordance with feeding guidelines and catering to individual preference regarding wet or dry food recipes.",
+      },
+    ],
+    history: [
+      {
+        id: 1,
+        desc:
+          "Every cat is unique and each has their own particular likes, dislikes, and needs when it comes to food. However, cats are carnivores and every cat must obtain 41 different and specific nutrients from their food. The proportion of these nutrients will vary depending on age, lifestyle and overall health, so it's not surprising that a growing, energetic kitten needs a different balance of nutrients in her diet than a less active senior cat. Other considerations to bear in mind are feeding the right quantity of food to maintain 'ideal body condition' in accordance with feeding guidelines and catering to individual preference regarding wet or dry food recipes.",
+      },
+    ],
+    personality: [
+      {
+        id: 1,
+        desc:
+          "Lively, self-confident, strong willed and fearless, yet charming and comical, it is easy to see why instead of vanishing into the melting pot of working breeds, the Affenpinscher was promoted to cherished pet! Their sparkling eyes and monkey-whiskered face are irresistible and they are very affectionate with their owners, though often a little wary of strangers. Despite their diminutive stature, the Affenpinscher still believes he is a working terrier at times, so does require some training!",
+      },
+    ],
+  }),
+};
+</script>
+
+<style>
+.title_cat {
+  position: absolute;
+  right: 45%;
+  left: 45%;
+  font-size: 1rem;
+}
+.btn_back {
+  text-transform: capitalize;
+}
+.bold {
+  font-weight: bold;
+}
+.konten_fact {
+  margin-top: 2%;
+}
+.v-tab {
+  text-transform: none !important;
+}
+.text_desc {
+  padding: 2%;
+  text-align: center;
+}
+.desc_fact {
+  text-align: center;
+  font-size: 1.5rem;
+}
+</style>
+

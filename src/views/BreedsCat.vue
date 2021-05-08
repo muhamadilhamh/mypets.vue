@@ -1,28 +1,17 @@
 <template>
-  <!--Hero Static -->
-  <div class="adoption_page">
-    <v-img src="../assets/heroes_adoption.png">
-      {{ species }}
-      <v-row class="pa-12">
-        <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
-          <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
-        </v-col>
-        <v-col cols="6" sm="8">
-          <v-row class="pa-12">
-            <v-container>
-              <h3 class="header_heroes">Be My New Family!</h3>
-              <p class="desc_heroes">
-                Memberikan hewanmu, untuk kasih sayang yang diperlukan
-              </p>
-              <div class="btn_gotoregis">
-                <v-btn to="" rounded small color="#489FB5" dark>
-                  Register
-                </v-btn>
-              </div>
-            </v-container>
-          </v-row>
-        </v-col>
-      </v-row>
+  <div>
+    <v-img src="../assets/bg_breeds_cat.png">
+      <v-container>
+        <v-row class="pa-12">
+          <v-col offset="1" cols="12" md="7">
+            <h3 class="header_BreedsCat">“Cat” Breeds</h3>
+            <p class="desc_BreedsCat">
+              Discover cat breeds from around the world and get help finding
+              your perfect pet.
+            </p>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-img>
     <!--Searching-->
     <v-container>
@@ -36,7 +25,7 @@
               item-text="name"
               :items="animal_list"
               item-value="name"
-              label="Search Adoption"
+              label="Search Cat"
               v-model="search"
               placeholder="Search Adoption"
               prepend-inner-icon="mdi-magnify"
@@ -143,7 +132,7 @@
                     </v-expand-transition>
                   </v-img>
 
-                  <v-card-actions>
+                  <v-card-actions to="/breedsDog">
                     <v-list-item-avatar>
                       <v-img class="elevation-6" :src="item.avatar_src">
                       </v-img>
@@ -164,14 +153,14 @@
     </v-container>
   </div>
 </template>
-<script>
-import navbarfull from "../layouts/navbarfull";
-export default {
-  name: "Adoption",
-  created() {
-    this.$emit("update:layout", navbarfull);
-  },
 
+<script>
+import navbarlogo_register from "../layouts/navbarlogo_register";
+export default {
+  name: "BreedsCat",
+  created() {
+    this.$emit("update:layout", navbarlogo_register);
+  },
   data() {
     return {
       showFilter: false,
@@ -307,41 +296,17 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.il_heroes {
-  width: 100%;
-}
 
-.header_heroes {
-  font-size: 2.5rem;
+<style>
+.header_BreedsCat {
+  font-size: 3rem;
   color: #ffa62b;
   letter-spacing: 2%;
+  margin-top: 20%;
 }
-
-.desc_heroes {
-  color: #515151;
+.desc_BreedsCat {
+  color: #ffff;
   opacity: 70%;
   margin-top: -1%;
-}
-
-.btn_gotoregis {
-  margin-top: 5%;
-}
-
-.search_adop {
-  margin-top: -40px;
-}
-
-.name_user {
-  font-weight: 600;
-}
-
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
 }
 </style>

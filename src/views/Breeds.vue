@@ -63,7 +63,13 @@
                       <p class="desc_anjing">Cek Macam-macam anjing Yuk!</p>
                     </v-card-subtitle>
                     <v-card-actions>
-                      <v-btn rounded color="#FFF" block class="btn_dog">
+                      <v-btn
+                        to="/dogdetail"
+                        rounded
+                        color="#FFF"
+                        block
+                        class="btn_dog"
+                      >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
                       </v-btn>
@@ -92,7 +98,13 @@
                       <p class="desc_anjing">Cek Macam-macam kucing Yuk!</p>
                     </v-card-subtitle>
                     <v-card-actions>
-                      <v-btn rounded color="#FFF" block class="btn_dog">
+                      <v-btn
+                        to="/breedsCat"
+                        rounded
+                        color="#FFF"
+                        block
+                        class="btn_dog"
+                      >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
                       </v-btn>

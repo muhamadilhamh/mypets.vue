@@ -13,6 +13,9 @@ import Secure from './components/Secure.vue'
 import Register from './components/Register.vue'
 import DogConversion from './views/DogConversion.vue'
 import CatConversion from './views/CatConversion.vue'
+import BreedsCat from './views/BreedsCat.vue'
+import BreedsDog from './views/BreedsDog.vue'
+import DogDetail from './views/DogDetail.vue'
 
 Vue.use(Router)
 
@@ -81,7 +84,22 @@ let router = new Router({
       path : '/catconversion',
       name: 'catconversion',
       component : CatConversion
-    }
+    },
+    {
+      path : '/breedscat',
+      name: 'breedscat',
+      component : BreedsCat
+    },
+    {
+      path : '/breedsdog',
+      name: 'breedsdog',
+      component : BreedsDog
+    },
+    {
+      path : '/dogdetail',
+      name: 'dogdetail',
+      component : DogDetail
+    },
   ]
 })
 
