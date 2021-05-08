@@ -64,7 +64,7 @@
         </div>
       </v-col>
       <v-row class="ma-1">
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="name" v-if="showFilter">
             <h5>Animal Type</h5>
             <v-select
@@ -79,7 +79,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="gender" v-if="showFilter">
             <h5>Gender</h5>
             <v-select
@@ -93,7 +93,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="location" v-if="showFilter">
             <h5>Location</h5>
             <v-select
@@ -103,6 +103,20 @@
               item-value="location"
               v-model="location_selected"
               placeholder="Location"
+            ></v-select>
+          </div>
+        </v-col>
+
+        <v-col cols="6" md="3">
+          <div class="age" v-if="showFilter">
+            <h5>Age</h5>
+            <v-select
+              outlined
+              item-text="age"
+              :items="allpet_list"
+              item-value="age"
+              v-model="age_selected"
+              placeholder="Age"
             ></v-select>
           </div>
         </v-col>
