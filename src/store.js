@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         status: '',
         token: localStorage.getItem('token') || '',
-        user: {}
+        user: {},
+        breeds : '',
     },
     mutations: {
         auth_request(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
             state.status = ''
             state.token = ''
         },
+        get_breeds(state,payload){
+            state.breeds = payload
+        }
     },
     actions: {
         login({

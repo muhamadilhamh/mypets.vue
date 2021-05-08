@@ -164,9 +164,7 @@ export default {
   data() {
     return {
       showFilter: false,
-      allpet_list: [],
-      pet_list: [],
-      animal_list: [],
+      breeds_info :[],
       species: null,
       search: null,
       gender_selected: null,
@@ -231,69 +229,15 @@ export default {
     };
   },
   mounted() {
-    let uri = "http://localhost:8000/api/adoption";
+    let uri = "http://localhost:8000/api/animal/dog/"  + $route.params.slug ;
     this.$http.get(uri).then((response) => {
-      this.pet_list = response.data;
-      this.allpet_list = response.data;
-    });
-    let uri_cat = "http://localhost:8000/api/animal/";
-    this.$http.get(uri_cat).then((response) => {
-      this.animal_list = response.data;
+      this.breeds_info = response.data;
     });
   },
   methods: {
-    loadData() {
-      axios
-        .get("http://localhost:8000/api/adoption")
-        .then((response) => (this.pet_list = response.data));
-    },
-    subSpecies(value) {
-      if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
-        this.$http.get(uri_cat).then((response) => {
-          this.animal_list = response.data;
-        });
-      } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
-        this.$http.get(uri_cat).then((response) => {
-          this.animal_list = response.data;
-        });
-      }
-    },
+   
   },
-  computed: {
-    filteredList: function () {
-      return this.pet_list
-        .filter((post) => {
-          if (this.species != null) {
-            return post.animal_name.includes(this.species);
-          } else {
-            return (post = this.allpet_list);
-          }
-        })
-        .filter((post) => {
-          if (this.search != null) {
-            return post.animal_type.includes(this.search);
-          } else {
-            return (post = this.allpet_list);
-          }
-        })
-        .filter((post) => {
-          if (this.gender_selected != null) {
-            return post.gender.includes(this.gender_selected);
-          } else {
-            return (post = this.allpet_list);
-          }
-        })
-        .filter((post) => {
-          if (this.location_selected != null) {
-            return post.location.includes(this.location_selected);
-          } else {
-            return (post = this.allpet_list);
-          }
-        });
-    },
-  },
+  
 };
 </script>
 

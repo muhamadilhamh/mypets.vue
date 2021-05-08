@@ -1,9 +1,9 @@
-<template>
+<template >
   <div>
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">Affenpinscher</h5>
+          <h5 class="title_cat">{{breeds_info[0].name}}</h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
@@ -23,14 +23,9 @@
       <v-row>
         <v-col cols="7" md="5" offset="1">
           <v-card elevation="5">
-            <v-card-title> Affenpinscher </v-card-title>
+            <v-card-title> {{breeds_info[0].name}} </v-card-title>
             <v-card-text>
-              Small and mischievous with a monkey-like expression, the
-              Affenpinscher is a lively toy breed with a short muzzle, round,
-              dark and sparkling eyes and a rough coat. Despite their small size
-              this compact little dog is not at all delicate and is described in
-              the breed standard as having self confidence and carrying itself
-              with a comic seriousness.
+              {{breeds_info[0].description}}
             </v-card-text>
             <v-card-actions>
               <v-card-text>
@@ -49,7 +44,7 @@
         </v-col>
 
         <v-col cols="12" md="5">
-          <v-img src="../assets/satu.png"> </v-img>
+          <v-img :src="breeds_info[0].picture"> </v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -587,7 +582,11 @@
 <script>
 export default {
   nama: "DogDetail",
+  created() {
+    this.$emit("update:layout");
+  },
   data: () => ({
+    breeds_info : [],
     energy: 4,
     affection: 4,
     exercise: 3,
@@ -671,6 +670,22 @@ export default {
       },
     ],
   }),
+  mounted() {
+      let uri = "http://localhost:8000/api/animal/dog/"  + this.$route.params.slug;
+      this.$http.get(uri).then((response) => {
+      this.breeds_info = response.data;
+    });
+    
+  },
+  methods: {
+    loadData(){
+      let uri = "http://localhost:8000/api/animal/dog/"  + this.$route.params.slug;
+      this.$http.get(uri).then((response) => {
+      this.breeds_info = response.data;
+    });
+    }
+  },
+  
 };
 </script>
 
