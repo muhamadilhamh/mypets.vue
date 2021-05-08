@@ -64,7 +64,7 @@
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
-                        to="{ name : 'dogdetail', params : { slug : 'akita' }}"
+                        :to="{ name : 'dogdetail', params : { slug : 'akita' }}"
                         rounded
                         color="#FFF"
                         block

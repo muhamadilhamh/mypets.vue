@@ -583,7 +583,7 @@
 export default {
   nama: "DogDetail",
   created() {
-    this.$emit("update:layout");
+    this.$emit("update:layout","div");
   },
   data: () => ({
     breeds_info : [],
