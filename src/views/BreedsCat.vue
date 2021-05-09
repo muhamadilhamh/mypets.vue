@@ -25,7 +25,7 @@
               item-text="name"
               :items="animal_list"
               item-value="name"
-              label="Search Cat"
+              label="Search Adoption"
               v-model="search"
               placeholder="Search Adoption"
               prepend-inner-icon="mdi-magnify"
@@ -44,16 +44,25 @@
     </v-container>
 
     <v-container>
-      <v-col cols="6" md="4">
-        <div class="filter">
-          <v-btn outlined rounded solo @click="showFilter = !showFilter">
-            <v-icon left> mdi-filter-variant </v-icon>
-            filter
-          </v-btn>
-        </div>
+      <v-col cols="12">
+        <v-row>
+          <div class="filter">
+            <v-btn outlined rounded solo @click="showFilter = !showFilter">
+              <v-icon left> mdi-filter-variant </v-icon>
+              filter
+            </v-btn>
+          </div>
+          <v-spacer></v-spacer>
+          <div class="filter">
+            <v-btn outlined rounded solo class="gotocat" to="/breedsDog">
+              <v-icon left> mdi-dog </v-icon>
+              Go to Dog
+            </v-btn>
+          </div>
+        </v-row>
       </v-col>
       <v-row class="ma-1">
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="name" v-if="showFilter">
             <h5>Animal Type</h5>
             <v-select
@@ -68,7 +77,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="gender" v-if="showFilter">
             <h5>Gender</h5>
             <v-select
@@ -82,7 +91,7 @@
           </div>
         </v-col>
 
-        <v-col cols="6" md="4">
+        <v-col cols="6" md="3">
           <div class="location" v-if="showFilter">
             <h5>Location</h5>
             <v-select
@@ -95,6 +104,20 @@
             ></v-select>
           </div>
         </v-col>
+
+        <v-col cols="6" md="3">
+          <div class="age" v-if="showFilter">
+            <h5>Age</h5>
+            <v-select
+              outlined
+              item-text="age"
+              :items="allpet_list"
+              item-value="age"
+              v-model="age_selected"
+              placeholder="Age"
+            ></v-select>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
 
@@ -104,48 +127,55 @@
         <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
           <v-list dense>
             <v-list-item-group color="primary">
-              <v-hover v-slot="{ hover }">
-                <v-card flat tile class="mx-auto">
+              <v-card flat tile shaped class="mx-auto" :class="`rounded-lg`">
+                <router-link :to="'/catdetail'">
                   <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
-                    <v-expand-transition>
-                      <div
-                        v-if="hover"
-                        class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
-                        style="height: 25%"
-                      >
-                        <v-if item.animal_name="Dog">
-                          <v-icon small left color="#fff"> mdi-dog</v-icon>
-                        </v-if>
-                        {{ item.name }}
-                        <div v-if="item.gender == 'Male'">
-                          <v-icon small left color="#fff">
-                            mdi-gender-male
-                          </v-icon>
-                        </div>
-                        <div v-else>
-                          <v-icon small left color="#fff">
-                            mdi-gender-female
-                          </v-icon>
-                        </div>
-                        {{ item.age }} Years Old
-                      </div>
-                    </v-expand-transition>
                   </v-img>
+                </router-link>
 
-                  <v-card-actions to="/breedsDog">
-                    <v-list-item-avatar>
-                      <v-img class="elevation-6" :src="item.avatar_src">
-                      </v-img>
-                    </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-row>
+                    <v-col cols="1" md="1">
+                      <v-rating
+                        hover
+                        background-color="grey darken-1"
+                        color="#EF5350"
+                        large
+                        :empty-icon="emptyIcon"
+                        :full-icon="fullIcon"
+                        length="1"
+                      >
+                      </v-rating>
+                    </v-col>
+                    <v-col cols="2" md="2">
+                      <p class="rate">256</p>
+                    </v-col>
 
-                    <v-list-item-content>
-                      <v-list-item class="name_user">
-                        {{ item.name }}
-                      </v-list-item>
-                    </v-list-item-content>
-                  </v-card-actions>
-                </v-card>
-              </v-hover>
+                    <v-col cols="1" md="1">
+                      <router-link :to="'/catdetail'">
+                        <v-rating
+                          hover
+                          background-color="grey darken-1"
+                          color="#E0E0E0"
+                          large
+                          :empty-icon="emptyIconComment"
+                          :full-icon="fullIconComment"
+                          length="1"
+                        >
+                        </v-rating>
+                      </router-link>
+                    </v-col>
+
+                    <v-col cols="3" md="3">
+                      <p class="rate">1000</p>
+                    </v-col>
+
+                    <v-col cols="4" md="4">
+                      <p class="name_cat">{{ item.name }}</p>
+                    </v-col>
+                  </v-row>
+                </v-list-item-content>
+              </v-card>
             </v-list-item-group>
           </v-list>
         </v-col>
@@ -161,15 +191,22 @@ export default {
   created() {
     this.$emit("update:layout", navbarlogo_register);
   },
+
   data() {
     return {
       showFilter: false,
-      breeds_info :[],
+      allpet_list: [],
+      pet_list: [],
+      animal_list: [],
       species: null,
       search: null,
       gender_selected: null,
       location_selected: null,
       selectedItem: 1,
+      emptyIcon: "mdi-heart-outline",
+      fullIcon: "mdi-heart ",
+      emptyIconComment: "mdi-comment-outline",
+      fullIconComment: "mdi-comment ",
       feed_adop: [
         {
           id: 1,
@@ -229,19 +266,75 @@ export default {
     };
   },
   mounted() {
-    let uri = "http://localhost:8000/api/animal/dog/"  + $route.params.slug ;
+    let uri = "http://localhost:8000/api/adoption";
     this.$http.get(uri).then((response) => {
-      this.breeds_info = response.data;
+      this.pet_list = response.data;
+      this.allpet_list = response.data;
+    });
+    let uri_cat = "http://localhost:8000/api/animal/";
+    this.$http.get(uri_cat).then((response) => {
+      this.animal_list = response.data;
     });
   },
   methods: {
-   
+    loadData() {
+      axios
+        .get("http://localhost:8000/api/adoption")
+        .then((response) => (this.pet_list = response.data));
+    },
+    subSpecies(value) {
+      if (value != null) {
+        let uri_cat = "http://localhost:8000/api/animal/" + value;
+        this.$http.get(uri_cat).then((response) => {
+          this.animal_list = response.data;
+        });
+      } else {
+        let uri_cat = "http://localhost:8000/api/animal/";
+        this.$http.get(uri_cat).then((response) => {
+          this.animal_list = response.data;
+        });
+      }
+    },
   },
-  
+  computed: {
+    filteredList: function () {
+      return this.pet_list
+        .filter((post) => {
+          if (this.species != null) {
+            return post.animal_name.includes(this.species);
+          } else {
+            return (post = this.allpet_list);
+          }
+        })
+        .filter((post) => {
+          if (this.search != null) {
+            return post.animal_type.includes(this.search);
+          } else {
+            return (post = this.allpet_list);
+          }
+        })
+        .filter((post) => {
+          if (this.gender_selected != null) {
+            return post.gender.includes(this.gender_selected);
+          } else {
+            return (post = this.allpet_list);
+          }
+        })
+        .filter((post) => {
+          if (this.location_selected != null) {
+            return post.location.includes(this.location_selected);
+          } else {
+            return (post = this.allpet_list);
+          }
+        });
+    },
+  },
 };
 </script>
-
-<style>
+<style lang="scss">
+.il_heroes {
+  width: 100%;
+}
 .header_BreedsCat {
   font-size: 3rem;
   color: #ffa62b;
@@ -252,5 +345,49 @@ export default {
   color: #ffff;
   opacity: 70%;
   margin-top: -1%;
+}
+
+.header_heroes {
+  font-size: 2.5rem;
+  color: #ffa62b;
+  letter-spacing: 2%;
+}
+
+.desc_heroes {
+  color: #515151;
+  opacity: 70%;
+  margin-top: -1%;
+}
+
+.btn_gotoregis {
+  margin-top: 5%;
+}
+
+.search_adop {
+  margin-top: -40px;
+}
+
+.name_user {
+  font-weight: 600;
+}
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+}
+.bg {
+  background: #515151;
+}
+.rate,
+.name_cat {
+  padding-top: 15px;
+  padding-left: 12px;
+}
+.name_cat {
+  font-weight: bold;
 }
 </style>

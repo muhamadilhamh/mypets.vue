@@ -16,6 +16,7 @@ import CatConversion from './views/CatConversion.vue'
 import BreedsCat from './views/BreedsCat.vue'
 import BreedsDog from './views/BreedsDog.vue'
 import DogDetail from './views/DogDetail.vue'
+import CatDetail from './views/CatDetail.vue'
 
 Vue.use(Router)
 
@@ -99,6 +100,11 @@ let router = new Router({
       path : '/breeds/dog/:slug',
       name: 'dogdetail',
       component : DogDetail
+    },
+    {
+      path: '/catdetail',
+      name: 'catdetail',
+      component: CatDetail
     },
   ]
 })

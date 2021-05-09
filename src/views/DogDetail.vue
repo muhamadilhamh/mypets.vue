@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">{{breeds_info[0].name}}</h5>
+          <h5 class="title_cat">{{ breeds_info[0].name }}</h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
@@ -11,7 +11,7 @@
     <v-container>
       <v-row>
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back">
+          <v-btn rounded depressed class="btn_back" to="/breedsDog">
             <v-icon left> mdi-chevron-left </v-icon>
             All Breeds
           </v-btn>
@@ -23,22 +23,35 @@
       <v-row>
         <v-col cols="7" md="5" offset="1">
           <v-card elevation="5">
-            <v-card-title> {{breeds_info[0].name}} </v-card-title>
+            <v-card-title> {{ breeds_info[0].name }} </v-card-title>
             <v-card-text>
-              {{breeds_info[0].description}}
+              {{ breeds_info[0].description }}
             </v-card-text>
             <v-card-actions>
-              <v-card-text>
-                <p><span class="bold">Family:</span> Pinscher</p>
-              </v-card-text>
-              <v-card-text>
-                <p><span class="bold">Type:</span> Dog</p>
-              </v-card-text>
-              <v-card-text>
-                <v-btn icon>
-                  <v-icon> mdi-heart </v-icon>
-                </v-btn>
-              </v-card-text>
+              <v-row>
+                <v-col cols="1" md="1">
+                  <v-rating
+                    hover
+                    background-color="grey darken-1"
+                    color="#EF5350"
+                    large
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    length="1"
+                  >
+                  </v-rating>
+                </v-col>
+                <v-col cols="3" md="3">
+                  <p class="rate">256</p>
+                </v-col>
+
+                <v-col cols="4" md="4" class="family">
+                  <p><span class="bold">Family:</span> Pinscher</p>
+                </v-col>
+                <v-col cols="4" md="4" class="type">
+                  <p><span class="bold">Type:</span> Dog</p>
+                </v-col>
+              </v-row>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -583,10 +596,10 @@
 export default {
   nama: "DogDetail",
   created() {
-    this.$emit("update:layout","div");
+    this.$emit("update:layout", "div");
   },
   data: () => ({
-    breeds_info : [],
+    breeds_info: [],
     energy: 4,
     affection: 4,
     exercise: 3,
@@ -671,21 +684,20 @@ export default {
     ],
   }),
   mounted() {
-      let uri = "http://localhost:8000/api/animal/dog/"  + this.$route.params.slug;
-      this.$http.get(uri).then((response) => {
+    let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+    this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
-    
   },
   methods: {
-    loadData(){
-      let uri = "http://localhost:8000/api/animal/dog/"  + this.$route.params.slug;
+    loadData() {
+      let uri =
+        "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
       this.$http.get(uri).then((response) => {
-      this.breeds_info = response.data;
-    });
-    }
+        this.breeds_info = response.data;
+      });
+    },
   },
-  
 };
 </script>
 
@@ -702,6 +714,10 @@ export default {
 .bold {
   font-weight: bold;
 }
+.family,
+.type {
+  padding-top: 24px;
+}
 .konten_fact {
   margin-top: 2%;
 }
@@ -715,6 +731,9 @@ export default {
 .desc_fact {
   text-align: center;
   font-size: 1.5rem;
+}
+.bg {
+  background: red;
 }
 </style>
 
