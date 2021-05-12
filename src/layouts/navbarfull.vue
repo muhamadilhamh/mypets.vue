@@ -52,7 +52,54 @@
         </v-card-actions>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
+      <!-- Is Login -->
+
+      <v-toolbar-items class="hidden-xs-only" v-if="isLoggedIn">
+        <v-card-actions>
+          <v-avatar size="37">
+            <v-img
+              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+            >
+            </v-img>
+          </v-avatar>
+          <v-list-item-content>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-list-item-subtitle v-on="on">
+                  <v-btn to="" text x-small>
+                    Royal Navy
+                    <v-icon right> mdi-chevron-down </v-icon>
+                  </v-btn>
+                </v-list-item-subtitle>
+              </template>
+              <v-list class="responsiveMenus">
+                <v-list-item>
+                  <v-list-item-title
+                    ><v-btn to="/profile" x-small color="orange" text>
+                      Profile
+                    </v-btn></v-list-item-title
+                  >
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title
+                    ><v-btn to="" x-small color="orange" text>
+                      Logout
+                    </v-btn></v-list-item-title
+                  >
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item-content>
+        </v-card-actions>
+        <v-card-actions>
+          <v-btn to="/uploadmoment" x-small color="#489FB5" rounded dark>
+            Moment
+          </v-btn>
+        </v-card-actions>
+      </v-toolbar-items>
+
+      <!-- Is Logout -->
+      <v-toolbar-items class="hidden-xs-only" v-else>
         <v-card-actions>
           <v-btn to="/register" x-small text color="#515151"> Register </v-btn>
         </v-card-actions>
@@ -136,7 +183,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    isLoggedIn: true,
+  }),
+};
 </script>
 
 <style lang="scss">

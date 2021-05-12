@@ -34,8 +34,10 @@
             <v-col v-for="item in feed_care" :key="item.id" cols="12" sm="4">
               <div class="feed_artikel">
                 <v-card flat tile class="mx-auto">
-                  <v-img class="rounded" :src="item.src" aspect-ratio="1.5">
-                  </v-img>
+                  <router-link to="/caredetail">
+                    <v-img class="rounded" :src="item.src" aspect-ratio="1.5">
+                    </v-img>
+                  </router-link>
                   <v-card-text>
                     <div class="title">{{ item.title }}</div>
                     <div class="date">{{ item.date }}</div>

@@ -131,31 +131,37 @@
             <v-list-item-group color="primary">
               <v-hover v-slot="{ hover }">
                 <v-card flat tile class="mx-auto">
-                  <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
-                    <v-expand-transition>
-                      <div
-                        v-if="hover"
-                        class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
-                        style="height: 25%"
-                      >
-                        <v-if item.animal_name="Dog">
-                          <v-icon small left color="#fff"> mdi-dog</v-icon>
-                        </v-if>
-                        {{ item.name }}
-                        <div v-if="item.gender == 'Male'">
-                          <v-icon small left color="#fff">
-                            mdi-gender-male
-                          </v-icon>
+                  <router-link :to="'/adoptiondetail'">
+                    <v-img
+                      class="rounded"
+                      :src="item.picture"
+                      aspect-ratio="1.5"
+                    >
+                      <v-expand-transition>
+                        <div
+                          v-if="hover"
+                          class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
+                          style="height: 25%"
+                        >
+                          <v-if item.animal_name="Dog">
+                            <v-icon small left color="#fff"> mdi-dog</v-icon>
+                          </v-if>
+                          {{ item.name }}
+                          <div v-if="item.gender == 'Male'">
+                            <v-icon small left color="#fff">
+                              mdi-gender-male
+                            </v-icon>
+                          </div>
+                          <div v-else>
+                            <v-icon small left color="#fff">
+                              mdi-gender-female
+                            </v-icon>
+                          </div>
+                          {{ item.age }} Years Old
                         </div>
-                        <div v-else>
-                          <v-icon small left color="#fff">
-                            mdi-gender-female
-                          </v-icon>
-                        </div>
-                        {{ item.age }} Years Old
-                      </div>
-                    </v-expand-transition>
-                  </v-img>
+                      </v-expand-transition>
+                    </v-img>
+                  </router-link>
 
                   <v-card-actions>
                     <v-list-item-avatar>
@@ -354,8 +360,9 @@ export default {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: 0.5;
+
   position: absolute;
   width: 100%;
+  opacity: 1 !important;
 }
 </style>

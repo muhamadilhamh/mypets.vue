@@ -10,6 +10,10 @@ import Adoption from './views/Adoption.vue'
 import Breeds from './views/Breeds.vue'
 import Login from './components/Login.vue'
 import Secure from './components/Secure.vue'
+import UploadAdoption from './components/UploadAdoption.vue'
+import UploadMoment from './components/UploadMoment.vue'
+import UploadVaccine from './components/UploadVaccine.vue'
+import EditProfile from './components/EditProfile.vue'
 import Register from './components/Register.vue'
 import DogConversion from './views/DogConversion.vue'
 import CatConversion from './views/CatConversion.vue'
@@ -17,6 +21,11 @@ import BreedsCat from './views/BreedsCat.vue'
 import BreedsDog from './views/BreedsDog.vue'
 import DogDetail from './views/DogDetail.vue'
 import CatDetail from './views/CatDetail.vue'
+import AdoptionDetail from './views/AdoptionDetail.vue'
+import CareDetail from './views/CareDetail.vue'
+import ArticleDetail from './views/ArticleDetail.vue'
+import Profile from './views/Profile.vue'
+
 
 Vue.use(Router)
 
@@ -105,6 +114,46 @@ let router = new Router({
       path: '/catdetail',
       name: 'catdetail',
       component: CatDetail
+    },
+    {
+      path: '/adoptiondetail',
+      name: 'adoptiondetail',
+      component: AdoptionDetail
+    },
+    {
+      path: '/caredetail',
+      name: 'caredetail',
+      component: CareDetail,
+    },
+    {
+      path: '/articledetail',
+      name: 'articledetail',
+      component: ArticleDetail,
+    },
+    {
+      path: '/uploadadoption',
+      name: 'uploadadoption',
+      component: UploadAdoption,
+    },
+    {
+      path: '/uploadmoment',
+      name: 'uploadmoment',
+      component: UploadMoment,
+    },
+    {
+      path: '/uploadvaccine',
+      name: 'uploadvaccine',
+      component: UploadVaccine,
+    },
+    {
+      path: '/editprofile',
+      name: 'editprofile',
+      component: EditProfile,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
     },
   ]
 })

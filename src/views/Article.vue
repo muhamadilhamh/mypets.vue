@@ -81,6 +81,7 @@
             show-arrows-on-hover
           >
             <!-- Carousel-slide 1 -->
+
             <v-carousel-item>
               <v-row class="pa-5">
                 <v-col
@@ -105,6 +106,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -145,6 +147,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -189,6 +192,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
@@ -229,6 +233,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
@@ -289,6 +294,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -329,6 +335,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -373,6 +380,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
@@ -413,6 +421,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
@@ -473,6 +482,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -513,6 +523,7 @@
                         text
                         class="btn_training"
                         color="#515151"
+                        to="/articledetail"
                       >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
@@ -557,6 +568,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
@@ -597,6 +609,7 @@
                           text
                           class="btn_training"
                           color="#515151"
+                          to="/articledetail"
                         >
                           Detail
                           <v-icon right> mdi-chevron-right </v-icon>
