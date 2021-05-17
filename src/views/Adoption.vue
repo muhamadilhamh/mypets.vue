@@ -126,7 +126,7 @@
     <!--Feed_adop-->
     <v-container>
       <v-row>
-        <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
+        <v-col v-for="item in feed_adop" :key="item.id" cols="12" sm="4">
           <v-list dense>
             <v-list-item-group color="primary">
               <v-hover v-slot="{ hover }">
@@ -146,7 +146,7 @@
                           <v-if item.animal_name="Dog">
                             <v-icon small left color="#fff"> mdi-dog</v-icon>
                           </v-if>
-                          {{ item.name }}
+                          {{ item.title }}
                           <div v-if="item.gender == 'Male'">
                             <v-icon small left color="#fff">
                               mdi-gender-male
@@ -209,54 +209,63 @@ export default {
           src: require("../assets/1x1_ad.png"),
           avatar_src: require("../assets/ava_ad1x1.png"),
           name: "Royal Navy",
+          title: "Kucing Keluarga Ibu dan anak",
         },
         {
           id: 2,
           src: require("../assets/1x2_ad.png"),
           avatar_src: require("../assets/ava_ad1x2.png"),
           name: "Low Short",
+          title: "Garid si anjing gila",
         },
         {
           id: 3,
           src: require("../assets/1x3_ad.png"),
           avatar_src: require("../assets/ava_ad1x3.png"),
           name: "Attitude",
+          title: "Carron",
         },
         {
           id: 4,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "Blacky",
         },
         {
           id: 5,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "Garit",
         },
         {
           id: 6,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "Milly",
         },
         {
           id: 7,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "Yaya toure",
         },
         {
           id: 8,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "Assault",
         },
         {
           id: 9,
           src: require("../assets/1x3.png"),
           avatar_src: require("../assets/ava_adnxn.png"),
           name: "Lorem Ipsum",
+          title: "King",
         },
       ],
     };
@@ -360,7 +369,6 @@ export default {
   align-items: center;
   bottom: 0;
   justify-content: center;
-
   position: absolute;
   width: 100%;
   opacity: 1 !important;
