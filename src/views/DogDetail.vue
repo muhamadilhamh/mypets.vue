@@ -14,6 +14,7 @@
           <v-btn rounded depressed class="btn_back" to="/breedsDog">
             <v-icon left> mdi-chevron-left </v-icon>
             All Breeds
+           
           </v-btn>
         </v-col>
       </v-row>
@@ -249,9 +250,9 @@
 
               <v-col cols="12" md="7">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in history" :key="item.id">
+                  <v-container>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{breeds_info[0].history }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -295,32 +296,29 @@
                 </v-card>
 
                 <br />
-                <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in health" :key="item.id">
+                <v-card outlined class="rounded-xl ">
+                  <v-container>
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Health</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list1 }}
+                        Major Concerns : {{ dog_detail[0].major_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list2 }}
+                      Minor Concerns : {{ dog_detail[0].minor_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list3 }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <v-icon left> mdi-circle-small </v-icon> Suggested
-                        {{ item.list4 }}
+                       Occasionally Seen : {{ dog_detail[0].occasionally_seen}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list5 }}
+                     Suggested Tests : {{ dog_detail[0].suggested_test}}
                       </v-card-text>
+                     
                     </v-container>
                   </v-container>
                 </v-card>
@@ -328,9 +326,9 @@
 
               <v-col cols="12" md="7">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in personality" :key="item.id">
+                  <v-container>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ breeds_info[0].personality }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -351,22 +349,22 @@
               <!--left side -->
               <v-col cols="12" md="3" offset-md="1">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in profil" :key="item.id">
+                  <v-container >
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Profile</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
-                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Weight:</span>{{ item.weight }}
+                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Size:</span> {{ item.size }}
+                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Origin:</span> {{ item.origin }}
+                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -413,7 +411,7 @@
                           <h5>Energy</h5>
                           <v-rating
                             hover
-                            v-model="energy"
+                            v-model="dog_detail[0].energy"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -427,7 +425,7 @@
                           <h5>Affection</h5>
                           <v-rating
                             hover
-                            v-model="affection"
+                            v-model="dog_detail[0].affection"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -441,7 +439,7 @@
                           <h5>Exercise</h5>
                           <v-rating
                             hover
-                            v-model="exercise"
+                            v-model="dog_detail[0].exercise"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -455,7 +453,7 @@
                           <h5>Watchfulness</h5>
                           <v-rating
                             hover
-                            v-model="watchfulness"
+                            v-model="dog_detail[0].watchfulness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -469,7 +467,7 @@
                           <h5>Playfulness</h5>
                           <v-rating
                             hover
-                            v-model="playfulness"
+                            v-model="dog_detail[0].playfulness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -483,7 +481,7 @@
                           <h5>Training</h5>
                           <v-rating
                             hover
-                            v-model="training"
+                            v-model="dog_detail[0].training"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -497,7 +495,7 @@
                           <h5>Friendliness To Dogs</h5>
                           <v-rating
                             hover
-                            v-model="friendlinessDog"
+                            v-model="dog_detail[0].friend_dog"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -511,7 +509,7 @@
                           <h5>Grooming</h5>
                           <v-rating
                             hover
-                            v-model="groom"
+                            v-model="dog_detail[0].grooming"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -525,7 +523,7 @@
                           <h5>Friendliness To Other Pets</h5>
                           <v-rating
                             hover
-                            v-model="friendlinessOther"
+                            v-model="dog_detail[0].friend_pet"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -539,7 +537,7 @@
                           <h5>Heat</h5>
                           <v-rating
                             hover
-                            v-model="heat"
+                            v-model="dog_detail[0].heat"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -553,7 +551,7 @@
                           <h5>Friendliness To Strangers</h5>
                           <v-rating
                             hover
-                            v-model="friendlinessStrangers"
+                            v-model="dog_detail[0].friend_strangers"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -567,7 +565,7 @@
                           <h5>Vocality</h5>
                           <v-rating
                             hover
-                            v-model="vocality"
+                            v-model="dog_detail[0].vocality"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -600,6 +598,7 @@ export default {
   },
   data: () => ({
     breeds_info: [],
+    dog_detail : [],
     energy: 4,
     affection: 4,
     exercise: 3,
@@ -687,6 +686,10 @@ export default {
     let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
+    });
+    let uri_dog = "http://localhost:8000/api/animal/dog/details/" + this.$route.params.slug;
+    this.$http.get(uri_dog).then((response) => {
+      this.dog_detail = response.data;
     });
   },
   methods: {

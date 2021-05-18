@@ -6,9 +6,30 @@
     <v-col cols="12" sm="6">
       <v-row class="pa-12">
         <v-container>
+          <div  v-if="errors">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errors}}
+    </v-alert>
+          </div>
+          <div  v-if="msg == 'register_success'">
+            <v-alert
+      border="top"
+      color="green lighten-2"
+      dark
+    >
+     Register Success
+    </v-alert>
+   
+    </div>
+    
           <h3 class="header_login">Log in to MyPets!</h3>
+          
           <v-col cols="12">
-            <v-form ref="form" class="login" v-model="valid" lazy-validation>
+            <v-form @submit.prevent ="login" ref="form" class="login" v-model="valid" lazy-validation>
               <h5>Username or Email</h5>
               <v-text-field
                 v-model="email"
@@ -38,8 +59,8 @@
                     :disabled="!valid"
                     rounded
                     dark
+                    @click = login
                     class="btn_login"
-                    @click="validate"
                     color="#489FB5"
                     block
                     elevation="7"
@@ -55,8 +76,8 @@
                     :disabled="!valid"
                     rounded
                     dark
+                    @click = login
                     class="btn_login"
-                    @click="validate"
                     color="#489FB5"
                     block
                     elevation="7"
@@ -91,6 +112,7 @@
 <script>
 import navbarlogo_login from "../layouts/navbarlogo_login";
 export default {
+ 
   created() {
     this.$emit("update:layout", navbarlogo_login);
   },
@@ -100,18 +122,25 @@ export default {
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then(() => this.$router.push("/"))
-        .catch((err) => console.log(err));
+        .then( response => {
+        console.log(response)
+        this.$router.push("/adoption")})
+        .catch((error) => this.errors = error.response.data.message);
     },
   },
   data: () => ({
     value: true,
+    msg : '',
     valid: true,
     email: "",
+    errors : null,
     emailRules: [(value) => !!value || "E-mail or username required"],
     password: "",
     passwordRules: [(value) => !!value || "Password is required"],
   }),
+  mounted(){
+    this.msg = this.$route.query.msg;
+  }
 };
 </script>
 

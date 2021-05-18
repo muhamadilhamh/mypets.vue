@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store.js'
+import store from './store'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Care from './views/Care.vue'
@@ -116,7 +116,7 @@ let router = new Router({
       component: CatDetail
     },
     {
-      path: '/adoptiondetail',
+      path: '/adoption/detail/:id_adoption',
       name: 'adoptiondetail',
       component: AdoptionDetail
     },
@@ -151,7 +151,7 @@ let router = new Router({
       component: EditProfile,
     },
     {
-      path: '/profile',
+      path: '/profile/:username',
       name: 'profile',
       component: Profile,
     },

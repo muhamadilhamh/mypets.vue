@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <img
-          src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+          :src="url + 'Profile/' +  user.picture"
           alt="John"
           class="img_profil"
         />
@@ -11,12 +11,12 @@
     </v-row>
     <v-row>
       <v-col>
-        <p class="title_name">Royal Navy</p>
+        <p class="title_name">{{user.full_name}}</p>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <p class="no_telp">+6287800387801</p>
+        <p class="no_telp">{{user.phone}}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -58,7 +58,7 @@
         <!-- Adoption -->
         <v-tab
           ><p>Adoption</p>
-          <p class="score">3</p>
+          <p class="score">{{feed_adop.length}}</p>
         </v-tab>
         <v-tab-item class="tab_item">
           <v-container>
@@ -71,7 +71,7 @@
                         <router-link :to="'/adoptiondetail'">
                           <v-img
                             class="rounded"
-                            :src="item.picture"
+                            :src="url + item.picture"
                             aspect-ratio="1.5"
                           >
                             <v-expand-transition>
@@ -126,7 +126,7 @@
                           </v-menu>
 
                           <v-card-title>
-                            {{ item.name }}
+                            {{ item.owner }}
                           </v-card-title>
                         </v-card-actions>
                       </v-card>
@@ -141,14 +141,14 @@
         <!-- Share Moment -->
         <v-tab>
           <p>Moment</p>
-          <p class="score">3</p></v-tab
+          <p class="score">{{moment.length}}</p></v-tab
         >
         <v-tab-item class="tab_item">
           <v-row>
             <v-col cols="12" md="4" sm="4" v-for="item in moment" :key="item">
               <v-card class="mx-auto rounded-lg" elevation="8" max-width="400">
                 <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  :src="url + item.picture"
                 ></v-img>
 
                 <v-card-title class="title_momment">
@@ -190,7 +190,7 @@
                   >
                     <v-card-text class="pb-0">
                       <v-card-subtitle>
-                        {{ item.desc }}
+                        {{ item.description }}
                       </v-card-subtitle>
                     </v-card-text>
                     <v-card-actions class="pt-0">
@@ -291,49 +291,31 @@ export default {
   created() {
     this.$emit("update:layout", navbarfull);
   },
+  mounted() {
+    let uri = "http://localhost:8000/api/profile/" + this.$route.params.username
+    this.$http.get(uri).then((response) => {
+      this.user = response.data;
+    });
+    let uri_adopt = "http://localhost:8000/api/profile/adoption/" + this.$route.params.username
+    this.$http.get(uri_adopt).then((response) => {
+      this.feed_adop = response.data;
+    });
+    let uri_moment = "http://localhost:8000/api/profile/moment/" + this.$route.params.username
+    this.$http.get(uri_moment).then((response) => {
+      this.moment = response.data;
+    });
+  },
   data() {
     return {
+      url : this.$image_url,
+      user : [],
       isLoggedIn: true,
       reveal: false,
       moment: [
-        {
-          id: 1,
-          title: "With my friend",
-          desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s test dffddf ",
-        },
-        {
-          id: 2,
-          title: "With my best friend",
-          desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s test dffddf",
-        },
-        {
-          id: 3,
-          title: "With my best friend",
-          desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s test dffddf",
-        },
+        
       ],
       feed_adop: [
-        {
-          id: 1,
-          picture: require("../assets/1x1_ad.png"),
-          name: "Royal Navy",
-          title: "Kucing Keluarga Ibu dan anak",
-        },
-        {
-          id: 2,
-          picture: require("../assets/1x2_ad.png"),
-          name: "Royal Navy",
-          title: "Kucing Keluarga Ibu dan anak",
-        },
-        {
-          id: 3,
-          picture: require("../assets/1x3_ad.png"),
-          name: "Royal Navy",
-          title: "Kucing Keluarga Ibu dan anak",
-        },
+
       ],
     };
   },

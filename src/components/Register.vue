@@ -7,8 +7,17 @@
       <v-row class="pa-12">
         <v-container>
           <h3 class="header_register">Register to MyPets</h3>
+          <div  v-if="errors">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errors}}
+    </v-alert>
+          </div>
           <v-col cols="12">
-            <v-form ref="form" class="register" v-model="valid" lazy-validation>
+            <v-form @submit.prevent ="validate" ref="form" class="register" v-model="valid" lazy-validation>
               <v-row>
                 <v-col cols="6">
                   <h5>Name</h5>
@@ -107,6 +116,7 @@
                     @click="validate"
                     color="#489FB5"
                     block
+                    type = submit
                     elevation="7"
                   >
                     Create Account
@@ -124,6 +134,7 @@
                     @click="validate"
                     color="#489FB5"
                     block
+                    type = submit
                     elevation="7"
                   >
                     Create Account
@@ -164,6 +175,7 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+        this.register();
       }
     },
     register: function () {
@@ -176,13 +188,14 @@ export default {
       };
       this.$store
         .dispatch("register", data)
-        .then(() => this.$router.push("/"))
-        .catch((err) => console.log(err));
+        .then(() => this.$router.push("/login?msg=register_success"))
+        .catch((err) =>  this.errors = err.response.data.message);
     },
   },
   data: () => ({
     value: true,
     valid: true,
+    errors : null,  
     name: "",
     nameRules: [
       (value) => !!value || "Name required",
@@ -195,7 +208,6 @@ export default {
       (value) => !!value || "Username required",
       (value) =>
         (value && value.length >= 5) || "Username must have 5+ characters",
-      (value) => /([@])/.test(value) || "Must have one special character [@]",
     ],
     phone: "",
     phoneRules: [

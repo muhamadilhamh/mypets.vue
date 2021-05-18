@@ -54,11 +54,11 @@
       <v-spacer></v-spacer>
       <!-- Is Login -->
 
-      <v-toolbar-items class="hidden-xs-only" v-if="isLoggedIn">
+      <v-toolbar-items class="hidden-xs-only" v-if="isLoggedIn == true">
         <v-card-actions>
           <v-avatar size="37">
             <v-img
-              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+              :src="url + 'Profile/' +  user.picture"
             >
             </v-img>
           </v-avatar>
@@ -67,7 +67,7 @@
               <template v-slot:activator="{ on }">
                 <v-list-item-subtitle v-on="on">
                   <v-btn to="" text x-small>
-                    Royal Navy
+                     {{user.username}}
                     <v-icon right> mdi-chevron-down </v-icon>
                   </v-btn>
                 </v-list-item-subtitle>
@@ -75,14 +75,14 @@
               <v-list class="responsiveMenus">
                 <v-list-item>
                   <v-list-item-title
-                    ><v-btn to="/profile" x-small color="orange" text>
+                    ><v-btn :to="{name : 'profile', params: { username : user.username } }" x-small color="orange" text>
                       Profile
                     </v-btn></v-list-item-title
                   >
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-title
-                    ><v-btn to="" x-small color="orange" text>
+                    ><v-btn to="" x-small color="orange" text @click="logout">
                       Logout
                     </v-btn></v-list-item-title
                   >
@@ -183,10 +183,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  data: () => ({
-    isLoggedIn: true,
-  }),
+  data(){
+    return{
+      url : this.$image_url
+    }
+  },
+  methods: {
+    logout: function() {
+    this.$store.dispatch("logout").then(() => {
+    this.$router.push("/");
+    });
+    }
+  },
+  computed : {
+    ...mapGetters({ 
+        isLoggedIn: 'isLoggedIn',
+        user: 'user',
+      })
+  }
 };
 </script>
 

@@ -129,7 +129,7 @@
             <v-list-item-group color="primary">
               <v-card flat tile shaped class="mx-auto" :class="`rounded-lg`">
                 <router-link
-                  :to="{ name: 'dogdetail', params: { slug: 'akita' } }"
+                  :to="{ name: 'dogdetail', params: { slug: item.slug } }"
                 >
                   <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
                   </v-img>
@@ -275,8 +275,8 @@ export default {
       this.pet_list = response.data;
       this.allpet_list = response.data;
     });
-    let uri_cat = "http://localhost:8000/api/animal/";
-    this.$http.get(uri_cat).then((response) => {
+    let uri_dog = "http://localhost:8000/api/animal/dog";
+    this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
     });
   },
@@ -288,13 +288,13 @@ export default {
     },
     subSpecies(value) {
       if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
-        this.$http.get(uri_cat).then((response) => {
+        let uri_dog = "http://localhost:8000/api/animal/" + value;
+        this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
-        this.$http.get(uri_cat).then((response) => {
+        let uri_dog = "http://localhost:8000/api/animal/";
+        this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
       }
@@ -302,7 +302,7 @@ export default {
   },
   computed: {
     filteredList: function () {
-      return this.pet_list
+      return this.animal_list
         .filter((post) => {
           if (this.species != null) {
             return post.animal_name.includes(this.species);

@@ -32,7 +32,7 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="title_adop">Kucing Keluarga Ibu dan anak</p>
+          <p class="title_adop">{{breeds_info.name}}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -60,7 +60,7 @@
     </v-container>
 
     <v-container>
-      <v-img class="rounded-lg" src="../assets/1x1_ad.png"> </v-img>
+      <v-img class="rounded-lg" :src="url + breeds_info.picture"> </v-img>
     </v-container>
 
     <v-container>
@@ -114,7 +114,7 @@
                 <hr class="hr" />
                 <hr class="hr" />
 
-                <v-card-text> {{ item.desc }}. </v-card-text>
+                <v-card-text> {{ breeds_info.description }}. </v-card-text>
 
                 <v-col md="6">
                   <v-card outlined class="rounded-xl">
@@ -127,7 +127,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ item.gmail }} </v-list-item>
+                        <v-list-item> {{ breeds_info.user.email }} </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                     <v-card-actions class="phone">
@@ -136,7 +136,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ item.phone }} </v-list-item>
+                        <v-list-item> {{ breeds_info.user.phone }} </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                   </v-card>
@@ -150,21 +150,22 @@
               <v-container>
                 <v-card-actions>
                   <v-list-item-avatar>
+                   
                     <v-img
                       class="elevation-6"
-                      src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                      :src="url + 'Profile/' + breeds_info.user.picture"
                     >
                     </v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item class="name_user"> Royal Navy </v-list-item>
+                    <v-list-item class="name_user"> {{breeds_info.user.full_name}} </v-list-item>
                   </v-list-item-content>
                 </v-card-actions>
                 <v-card-actions>
                   <v-btn
                     block
-                    to="/profile"
+                   :to="{ name: 'profile', params: { username : breeds_info.user.username } }"
                     large
                     color="#489FB5"
                     rounded
@@ -190,7 +191,9 @@ export default {
   created() {
     this.$emit("update:layout", "div");
   },
-  data: () => ({
+  data() {
+    return {
+    url : this.$image_url,
     breeds_info: [],
     category: [
       {
@@ -210,17 +213,17 @@ export default {
 
     emptyIcon: "mdi-heart-outline",
     fullIcon: "mdi-heart ",
-  }),
+  }
+  },
   mounted() {
-    let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+    let uri = "http://localhost:8000/api/adoption/detail/" + this.$route.params.id_adoption;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
   },
   methods: {
     loadData() {
-      let uri =
-        "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+      let uri ="http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
       this.$http.get(uri).then((response) => {
         this.breeds_info = response.data;
       });

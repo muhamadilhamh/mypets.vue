@@ -8,10 +8,18 @@ export default new Vuex.Store({
     state: {
         status: '',
         token: localStorage.getItem('token') || '',
-        user: {},
-        breeds : '',
+        user: null,
+        isLoggedIn: false, 
     },
     mutations: {
+        set_user (state, data) {
+            state.user = data
+            state.isLoggedIn = true
+          }, 
+          reset_user (state) {
+            state.user = null
+            state.isLoggedIn = false
+          },
         auth_request(state) {
             state.status = 'loading'
         },
@@ -32,33 +40,37 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        login({
-            commit
-        }, user) {
-            // eslint-disable-next-line no-unused-vars
-            return new Promise((resolve, reject) => {
-                commit('auth_request')
-                axios({
-                        url: 'http://localhost:8000/api/login',
-                        data: user,
-                        method: 'POST'
-                    })
-                    .then(resp => {
-                        const token = resp.data.token
-                        const user = resp.data.user
-                        localStorage.setItem('token', token)
-                        // Add the following line:
-                        axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token, user)
-                        resolve(resp)
-                    })
-                    .catch(err => {
-                        commit('auth_error')
-                        localStorage.removeItem('token')
-                        reject(err)
-                    })
+        login({ dispatch, commit }, data) {
+            return new Promise((resolve, reject) => { 
+              axios.post('http://localhost:8000/api/login', data)
+               .then(response => {
+                 const token = response.data.access_token  
+                 localStorage.setItem('token', token) 
+                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+                 dispatch('get_user')
+                 resolve(response)
+               })
+               .catch(err => {
+                 commit('reset_user')  
+                 localStorage.removeItem('token')
+                 reject(err)
+              })
             })
-        },
+          },
+          async get_user({commit}){ 
+            if(!localStorage.getItem('token')){
+              return
+            }
+            try{ 
+              let response = await axios.get('http://localhost:8000/api/user')
+                commit('set_user', response.data)
+            } catch (error){
+                commit('reset_user') 
+                delete axios.defaults.headers.common['Authorization']
+                localStorage.removeItem('token')
+                return error
+            } 
+          },
         register({
             commit
         }, user) {
@@ -74,7 +86,7 @@ export default new Vuex.Store({
                         const user = resp.data.user
                         localStorage.setItem('token', token)
                         // Add the following line:
-                        axios.defaults.headers.common['Authorization'] = token
+                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                         commit('auth_success', token, user)
                         resolve(resp)
                     })
@@ -85,20 +97,23 @@ export default new Vuex.Store({
                     })
             })
         },
-        logout({
-            commit
-        }) {
-            // eslint-disable-next-line no-unused-vars
-            return new Promise((resolve, reject) => {
-                commit('logout')
-                localStorage.removeItem('token')
-                delete axios.defaults.headers.common['Authorization']
-                resolve()
+        logout({ commit }) {
+            return new Promise((resolve) => {
+             commit('reset_user')
+             localStorage.removeItem('token')
+             delete axios.defaults.headers.common['Authorization']
+             resolve()
             })
         }
     },
     getters: {
-        isLoggedIn: state => !!state.token,
-        authStatus: state => state.status,
+        isLoggedIn (state){
+            return state.isLoggedIn
+          },
+          user (state) {
+            return state.user
+          }
+        /*isLoggedIn: state => !!state.token,
+        authStatus: state => state.status,*/
     }
 })

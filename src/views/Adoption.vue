@@ -126,15 +126,15 @@
     <!--Feed_adop-->
     <v-container>
       <v-row>
-        <v-col v-for="item in feed_adop" :key="item.id" cols="12" sm="4">
+        <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
           <v-list dense>
             <v-list-item-group color="primary">
               <v-hover v-slot="{ hover }">
                 <v-card flat tile class="mx-auto">
-                  <router-link :to="'/adoptiondetail'">
+                  <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
                     <v-img
                       class="rounded"
-                      :src="item.picture"
+                      :src="url + item.picture"
                       aspect-ratio="1.5"
                     >
                       <v-expand-transition>
@@ -146,7 +146,7 @@
                           <v-if item.animal_name="Dog">
                             <v-icon small left color="#fff"> mdi-dog</v-icon>
                           </v-if>
-                          {{ item.title }}
+                          {{item.name}}
                           <div v-if="item.gender == 'Male'">
                             <v-icon small left color="#fff">
                               mdi-gender-male
@@ -165,13 +165,13 @@
 
                   <v-card-actions>
                     <v-list-item-avatar>
-                      <v-img class="elevation-6" :src="item.avatar_src">
+                      <v-img class="elevation-6" :src="item.owner_avatar  ">
                       </v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
                       <v-list-item class="name_user">
-                        {{ item.name }}
+                        {{ item.owner }}
                       </v-list-item>
                     </v-list-item-content>
                   </v-card-actions>
@@ -180,6 +180,11 @@
             </v-list-item-group>
           </v-list>
         </v-col>
+        
+        <v-btn  v-if="loadList == true" @click="listToShow += 9" block>
+    Load More
+  </v-btn >
+ 
       </v-row>
     </v-container>
   </div>
@@ -195,11 +200,15 @@ export default {
   data() {
     return {
       showFilter: false,
+      image : '',
+      url : this.$image_url,
       allpet_list: [],
       pet_list: [],
       animal_list: [],
       species: null,
       search: null,
+      listToShow : 3,
+      loadList : false,
       gender_selected: null,
       location_selected: null,
       selectedItem: 1,
@@ -275,13 +284,22 @@ export default {
     this.$http.get(uri).then((response) => {
       this.pet_list = response.data;
       this.allpet_list = response.data;
+      this.loadList = true;
     });
     let uri_cat = "http://localhost:8000/api/animal/";
     this.$http.get(uri_cat).then((response) => {
       this.animal_list = response.data;
     });
+      let getImage = "http://localhost:8000/api/image/tes.png";
+      this.$http.get(getImage).then((response) =>{
+      this.image = response.data;
+    });console.log(this.image)
+    
   },
   methods: {
+    getImage(path){
+      return require(path)
+    },
     loadData() {
       axios
         .get("http://localhost:8000/api/adoption")
@@ -302,6 +320,7 @@ export default {
     },
   },
   computed: {
+    
     filteredList: function () {
       return this.pet_list
         .filter((post) => {
@@ -310,28 +329,28 @@ export default {
           } else {
             return (post = this.allpet_list);
           }
-        })
+        }).slice(0,this.listToShow)
         .filter((post) => {
           if (this.search != null) {
             return post.animal_type.includes(this.search);
           } else {
             return (post = this.allpet_list);
           }
-        })
+        }).slice(0,this.listToShow)
         .filter((post) => {
           if (this.gender_selected != null) {
             return post.gender.includes(this.gender_selected);
           } else {
             return (post = this.allpet_list);
           }
-        })
+        }).slice(0,this.listToShow)
         .filter((post) => {
           if (this.location_selected != null) {
             return post.location.includes(this.location_selected);
           } else {
             return (post = this.allpet_list);
           }
-        });
+        }).slice(0,this.listToShow);
     },
   },
 };
