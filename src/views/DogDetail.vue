@@ -7,14 +7,12 @@
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
-
     <v-container>
       <v-row>
         <v-col cols="2" md="2">
           <v-btn rounded depressed class="btn_back" to="/breedsDog">
             <v-icon left> mdi-chevron-left </v-icon>
             All Breeds
-           
           </v-btn>
         </v-col>
       </v-row>
@@ -583,8 +581,78 @@
             </v-row>
           </v-container>
         </v-tab-item>
-        <v-tab class="tit"> Comment</v-tab>
-        <v-tab-item class="konten_fact"> </v-tab-item>
+        <v-tab class="tit"
+          > Moment {{moments.length}}</v-tab
+        >
+        <v-tab-item class="konten_fact">
+          <v-row>
+            <v-col cols="12" v-for="item in moments" :key="item.id">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>
+                    <v-icon left> mdi-cat </v-icon>
+                    <v-card-title> {{item.title}}</v-card-title>
+                    <v-menu offset-y v-if="isLoggedIn">
+                      <template v-slot:activator="{ on }">
+                        <v-btn class="mx-2" rounded icon small v-on="on">
+                          <v-icon> mdi-pencil </v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list>
+                        <v-list-item>
+                          <v-icon left> mdi-delete </v-icon>
+                          <v-btn to="" x-small color="orange" text>
+                            delete
+                          </v-btn>
+                        </v-list-item>
+                        <v-list-item>
+                          <v-icon left> mdi-plus</v-icon>
+                          <v-btn to="" x-small color="orange" text>
+                            update
+                          </v-btn>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+
+                    <v-card-list>
+                      <v-card-subtitle>12 Mei 2021 </v-card-subtitle>
+                    </v-card-list>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <v-col offset-md="3">
+                      <v-img
+                        src="../assets/1x3_ad.png"
+                        class="rounded-lg"
+                        max-width="500"
+                      >
+                      </v-img>
+                    </v-col>
+                    <v-card-text
+                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
+                      velit eius qui corrupti ipsam nulla enim molestiae error
+                      sequi ad laudantium deleniti eos?</v-card-text
+                    >
+                    <h4>Vaksine Vaccine</h4>
+                    <v-card-text
+                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
+                      velit eius qui corrupti ipsam nulla enim molestiae error
+                      sequi ad laudantium deleniti eos?</v-card-text
+                    >
+                    <h4>Next Vaccine</h4>
+                    <v-card-text
+                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
+                      velit eius qui corrupti ipsam nulla enim molestiae error
+                      sequi ad laudantium deleniti eos?</v-card-text
+                    >
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-col>
+          </v-row>
+        </v-tab-item>
       </v-tabs>
     </v-container>
   </div>
@@ -599,6 +667,7 @@ export default {
   data: () => ({
     breeds_info: [],
     dog_detail : [],
+    moments : [],
     energy: 4,
     affection: 4,
     exercise: 3,
@@ -691,6 +760,10 @@ export default {
     this.$http.get(uri_dog).then((response) => {
       this.dog_detail = response.data;
     });
+    let uri_moment = "http://localhost:8000/api/moment/" + this.$route.params.slug;
+    this.$http.get(uri_moment).then((response) => {
+      this.moments = response.data;
+    })
   },
   methods: {
     loadData() {

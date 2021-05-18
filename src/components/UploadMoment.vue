@@ -128,7 +128,7 @@
               rounded
               item-text="name"
               :items="animal_list"
-              item-value="name"
+              item-value="slug"
               label="Search Adoption"
               v-model="type"
               placeholder="Select Pet Type"
