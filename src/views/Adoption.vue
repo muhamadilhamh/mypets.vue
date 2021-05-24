@@ -110,14 +110,8 @@
         <v-col cols="6" md="3">
           <div class="age" v-if="showFilter">
             <h5>Age</h5>
-            <v-select
-              outlined
-              item-text="age"
-              :items="allpet_list"
-              item-value="age"
-              v-model="age_selected"
-              placeholder="Age"
-            ></v-select>
+            <v-select outlined item-text="name" :items="age" item-value="value" v-model="age_selected"
+              placeholder="Age"></v-select>
           </div>
         </v-col>
       </v-row>
@@ -157,15 +151,15 @@
                               mdi-gender-female
                             </v-icon>
                           </div>
-                          {{ item.age }} Years Old
-                        </div>
+                          {{ item.age }} Months
+                          </div>
                       </v-expand-transition>
                     </v-img>
                   </router-link>
 
                   <v-card-actions>
                     <v-list-item-avatar>
-                      <v-img class="elevation-6" :src="item.owner_avatar  ">
+                      <v-img class="elevation-6" :src="url + item.owner_avatar  ">
                       </v-img>
                     </v-list-item-avatar>
 
@@ -205,9 +199,18 @@ export default {
       allpet_list: [],
       pet_list: [],
       animal_list: [],
+      age : [
+          {name : 'Under 6 Months ', value : 6},
+          {name : '6 Months - 1 Year', value : 12},
+          {name : '1 Years - 2 Years', value : 24},
+          {name : '2 Years - 3 Years', value : 36},
+          {name : '3 Years - 4 Years', value : 48},
+          {name : '4 Years - 5 Years', value : 60}
+        ],
       species: null,
       search: null,
       listToShow : 3,
+      age_selected : null,
       loadList : false,
       gender_selected: null,
       location_selected: null,
@@ -350,7 +353,26 @@ export default {
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0,this.listToShow);
+        }).slice(0,this.listToShow)
+        .filter(post => {
+            if( this.age_selected != null){
+              if(this.age_selected == 6){
+              return  post.age <= 6;
+              }else if(this.age_selected == 12) {
+                return   6 <= post.age <= 12;
+              }else if (this.age_selected == 24){
+                return 12 <= post.age <=24;
+              }else if (this.age_selected == 36){
+               return 24 <= post.age <=36;
+              }else if (this.age_selected == 48){
+               return 36 <= post.age <=48;
+              }else if (this.age_selected == 60){
+               return 48 <= post.age <=60;
+              }
+            }else {
+              return post  = this.allpet_list;
+            }
+          }).slice(0,this.listToShow);
     },
   },
 };

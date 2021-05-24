@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="tgl">26 Maret 2021</p>
+          <p class="tgl">{{breeds_info.time}}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -58,9 +58,15 @@
         </v-col>
       </v-row>
     </v-container>
-
     <v-container>
-      <v-img class="rounded-lg" :src="url + breeds_info.picture"> </v-img>
+      <v-carousel height="1000px" hide-delimiters>
+        <v-carousel-item
+      v-for="(item,i) in breeds_images"
+      :key="i"
+    >
+    
+      <v-img class="rounded-lg" :src="url + item.img"> </v-img></v-carousel-item>
+      </v-carousel>
     </v-container>
 
     <v-container>
@@ -84,28 +90,28 @@
                   <v-row>
                     <v-col cols="2" md="2" sm="4">
                       <v-chip>
-                        <p class="testing">{{ item.animaltype }}</p>
+                        <p class="testing">{{ breeds_info.animal_name }}</p>
                       </v-chip>
                     </v-col>
                     <v-col cols="2" md="2" sm="4">
                       <v-chip>
-                        <p class="testing">{{ item.gender }}</p></v-chip
+                        <p class="testing">{{ breeds_info.gender }}</p></v-chip
                       >
                     </v-col>
                     <v-col cols="2" md="2" sm="4">
                       <v-chip>
-                        <p class="testing">{{ item.age }}</p></v-chip
+                        <p class="testing">{{ breeds_info.age }}</p></v-chip
                       >
                     </v-col>
 
                     <v-col cols="2" md="2" sm="4">
                       <v-chip
-                        ><p class="testing">{{ item.jenis }}</p></v-chip
+                        ><p class="testing">{{ breeds_info.animal_type }}</p></v-chip
                       >
                     </v-col>
                     <v-col cols="3" md="3" sm="5">
                       <v-chip
-                        ><p class="testing">{{ item.location }}</p></v-chip
+                        ><p class="testing">{{ breeds_info.location }}</p></v-chip
                       >
                     </v-col>
                   </v-row>
@@ -127,7 +133,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ breeds_info.user.email }} </v-list-item>
+                        <v-list-item> {{ breeds_info.email }} </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                     <v-card-actions class="phone">
@@ -136,7 +142,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ breeds_info.user.phone }} </v-list-item>
+                        <v-list-item> {{ breeds_info.phone }} </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                   </v-card>
@@ -153,19 +159,19 @@
                    
                     <v-img
                       class="elevation-6"
-                      :src="url + 'Profile/' + breeds_info.user.picture"
+                      :src="url + 'Profile/' + breeds_info.picture"
                     >
                     </v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item class="name_user"> {{breeds_info.user.full_name}} </v-list-item>
+                    <v-list-item class="name_user"> {{breeds_info.full_name}} </v-list-item>
                   </v-list-item-content>
                 </v-card-actions>
                 <v-card-actions>
                   <v-btn
                     block
-                   :to="{ name: 'profile', params: { username : breeds_info.user.username } }"
+                   :to="{ name: 'profile', params: { username : breeds_info.username } }"
                     large
                     color="#489FB5"
                     rounded
@@ -195,6 +201,7 @@ export default {
     return {
     url : this.$image_url,
     breeds_info: [],
+    breeds_images : [],
     category: [
       {
         id: 1,
@@ -219,6 +226,10 @@ export default {
     let uri = "http://localhost:8000/api/adoption/detail/" + this.$route.params.id_adoption;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
+    });
+    let uri_img = "http://localhost:8000/api/adoption/detail/" + this.$route.params.id_adoption + "/images";
+    this.$http.get(uri_img).then((response) => {
+      this.breeds_images = response.data;
     });
   },
   methods: {

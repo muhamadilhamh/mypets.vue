@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from "vuex-persistedstate";
+
 
 Vue.use(Vuex)
 
@@ -10,7 +12,7 @@ export default new Vuex.Store({
         token: localStorage.getItem('token') || '',
         user: null,
         isLoggedIn: false, 
-    },
+    },plugins: [createPersistedState()],
     mutations: {
         set_user (state, data) {
             state.user = data
@@ -111,7 +113,11 @@ export default new Vuex.Store({
             return state.isLoggedIn
           },
           user (state) {
+            if(state.user != null){
             return state.user
+            }else {
+                return 'guest'
+            }
           }
         /*isLoggedIn: state => !!state.token,
         authStatus: state => state.status,*/

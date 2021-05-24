@@ -13,6 +13,8 @@ import Secure from './components/Secure.vue'
 import UploadAdoption from './components/UploadAdoption.vue'
 import UploadMoment from './components/UploadMoment.vue'
 import UploadVaccine from './components/UploadVaccine.vue'
+import UpdateMoment from './components/UpdateMoment.vue'
+import UpdateProfile from './components/UpdateProfile.vue'
 import EditProfile from './components/EditProfile.vue'
 import Register from './components/Register.vue'
 import DogConversion from './views/DogConversion.vue'
@@ -31,6 +33,7 @@ Vue.use(Router)
 
 let router = new Router({
   mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -40,12 +43,18 @@ let router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        guest: true
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: {
+        guest: true
+      }
     },
     {
       path: '/secure',
@@ -129,45 +138,94 @@ let router = new Router({
       path: '/articledetail',
       name: 'articledetail',
       component: ArticleDetail,
+      
     },
     {
       path: '/uploadadoption',
       name: 'uploadadoption',
       component: UploadAdoption,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile/:id/edit',
+      name: 'updateprofile',
+      component: UpdateProfile,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/uploadmoment',
       name: 'uploadmoment',
       component: UploadMoment,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/moment/:id/edit',
+      name: 'updatemoment',
+      component: UpdateMoment,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/uploadvaccine',
       name: 'uploadvaccine',
       component: UploadVaccine,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/editprofile',
       name: 'editprofile',
       component: EditProfile,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/profile/:username',
       name: 'profile',
       component: Profile,
     },
+    { path: "*", 
+      component: Home ,
+      meta: {
+        notFound: true
+      }
+  }
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+
+router.beforeEach((to, from, next) => { 
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn && store.getters.user) {
       next()
       return
     }
-    next('/login') 
-  } else {
-    next() 
+    console.log(store.getters.user)
+    next('/login')
   }
+  if (to.matched.some(record => record.meta.notFound)) {
+    next('/')
+  }
+
+  if (to.matched.some(record => record.meta.guest)) {
+    if (!store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/')
+  }
+
+  next()
 })
+
 
 export default router

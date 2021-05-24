@@ -8,32 +8,42 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-row>
+      
       <v-col cols="12" md="4" sm="4" offset-md="1">
-        <div
-          class="uploader"
-          @dragenter="OnDragEnter"
-          @dragleave="OnDragLeave"
-          @dragover.prevent
-          @drop="onDrop"
-          :class="{ dragging: isDragging }"
-        >
-          <v-icon size="100">mdi-cloud-upload-outline</v-icon>
-          <p>Drag your images here</p>
-          <div>OR</div>
-          <div class="file-input">
-            <label class="file" for="file">Select a file</label>
-            <input type="file" id="file" @change="onInputChange" multiple />
-          </div>
-           <div class="images-preview" v-show="images.length">
+        <div class="uploader"
+        @dragenter="OnDragEnter"
+        @dragleave="OnDragLeave"
+        @dragover.prevent
+        @drop="onDrop"
+        :class="{ dragging: isDragging }">
+        
+        <div class="upload-control" v-show="images.length">
+            <label for="file">Select a file</label>
+            <button @click="upload">Upload</button>
+        </div>
+
+
+        <div v-show="!images.length">
+            <i class="fa fa-cloud-upload"></i>
+            <p>Drag your images here</p>
+            <div>OR</div>
+            <div class="file-input">
+                <label for="file">Select a file</label>
+                <input type="file" id="file" @change="onInputChange" multiple>
+            </div>
+        </div>
+
+        <div class="images-preview" v-show="images.length">
             <div class="img-wrapper" v-for="(image, index) in images" :key="index">
-                <img :src="image" :alt="`Image Uplaoder ${index}`" height = "500px" width = "500px">
+                <img :src="image" :alt="`Image Uplaoder ${index}`">
                 <div class="details">
                     <span class="name" v-text="files[index].name"></span>
                     <span class="size" v-text="getFileSize(files[index].size)"></span>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+               
       </v-col>
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
@@ -64,18 +74,6 @@
                     color="#489FB5"
                   ></v-textarea>
                 </div>
-
-                <h5>Location</h5>
-                <v-text-field
-                  v-model="loc"
-                  :rules="locRules"
-                  placeholder="Input Location"
-                  outlined
-                  rounded
-                  dense
-                  color="#489FB5"
-                  @click="showform = !showform"
-                ></v-text-field>
 
                 <v-row>
                   <v-col>
@@ -143,19 +141,34 @@
             </v-autocomplete>
           </v-col>
 </v-row>
+<h5>Location</h5>
+                <v-autocomplete
+              clearable
+              rounded
+              :rules="locRules"
+              item-text="name"
+              :items="location_data"
+              item-value="name"
+              label="Select Location"
+              v-model="loc"
+              placeholder="Select Location"
+              prepend-inner-icon="mdi-magnify"
+              solo
+            >
+            
+            </v-autocomplete>
                 <v-row v-if="showform">
                   <v-col cols="6">
-                    <h5>Age</h5>
-                    <v-text-field
-                      v-model="age"
-                      :rules="ageRules"
-                      label="Age"
-                      required
-                      outlined
-                      rounded
-                      dense
-                      color="#489FB5"
-                    ></v-text-field>
+                    <h5>Age (Months)</h5><br>
+                    <v-slider
+      v-model="age"
+      :rules="ageRules"
+      :min="0"
+      :max="60"
+      step="1"
+      
+      thumb-label="always"
+    ></v-slider>
                   </v-col>
                   <v-col cols="6">
                     <h5>Color</h5>
@@ -175,42 +188,47 @@
                 <v-row v-if="showform">
                   <v-col cols="6">
                     <h5>Health</h5>
-                    <v-text-field
-                      v-model="health"
-                      :rules="ageRules"
-                      label="Health"
-                      required
-                      outlined
-                      rounded
-                      dense
-                      color="#489FB5"
-                    ></v-text-field>
+                     <v-autocomplete
+              clearable
+              rounded
+             v-model="health"
+            :items="health_value"
+            dense
+            filled
+            label="Health"
+              solo
+            >
+            
+            </v-autocomplete>
                   </v-col>
                   <v-col cols="6">
                     <h5>Body</h5>
-                    <v-text-field
-                      v-model="body"
-                      :rules="colorRules"
-                      label="Body"
-                      required
-                      outlined
-                      rounded
-                      dense
-                      color="#489FB5"
-                    ></v-text-field>
+                    <v-autocomplete
+              clearable
+              rounded
+             v-model="body"
+            :items="body_value"
+            dense
+            filled
+            label="Body"
+              solo
+            >
+            
+            </v-autocomplete>
+                    
                   </v-col>
                 </v-row>
                 
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
-                      to="/profile"
+                      :to="{ name: 'profile', params: { username : user.username } }"
                       rounded
                       class="btn_login"
                       outlined
                       block
                     >
-                      Back
+                      Back To Profile
                     </v-btn>
                   </v-col>
                   <v-col cols="6">
@@ -249,10 +267,11 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
-    showform: false,
+    showform: true,
     isDragging: false,
     dragCount: 0,
      animal_list: [],
+    health_value : ['Bad Condition','Good Condition'],
     files: [],
     images: [],
     animal_name : "",
@@ -261,12 +280,14 @@ export default {
     name: "",
     body: "",
     health: "",
+    body_value : ['Small','Medium','Big'],
     nameRules: [(value) => !!value || "Name required"],
     desc: "",
     descRules: [(value) => !!value || "Description is required"],
     loc: "",
     locRules: [(value) => !!value || "Location is required"],
     submitStatus: null,
+    location_data : [],
     age: "",
     ageRules: [(value) => !!value || "Age is required"],
     color: "",
@@ -294,6 +315,10 @@ export default {
     let uri_animal = "http://localhost:8000/api/animal/";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
+    });
+    let uri_loc = "http://localhost:8000/api/location/cities";
+    this.$http.get(uri_loc).then((response) => {
+      this.location_data = response.data;
     });
   },
   methods: {
@@ -337,14 +362,18 @@ export default {
         },
         onInputChange(e) {
             const files = e.target.files;
-            Array.from(files).forEach(file => this.addImage(file));
+            for(let i=0 ; i<4; i++){
+            this.addImage(files[i])
+            }
         },
         onDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             this.isDragging = false;
             const files = e.dataTransfer.files;
-            Array.from(files).forEach(file => this.addImage(file));
+            for(let i=0 ; i<4; i++){
+            this.addImage(files[i])
+            }
         },
         addImage(file) {
             if (!file.type.match('image.*')) {
@@ -406,66 +435,107 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 /* Upload Adoption */
 .uploader {
-  top: 20%;
-  width: 100%;
-  background: #489fb5;
-  color: #fff;
-  padding: 40px 15px;
-  text-align: center;
-  border-radius: 10px;
-  border: 3px dashed #fff;
-  font-size: 20px;
-  position: relative;
-  left: auto;
-  right: auto;
-}
-
-.file-input {
-  width: 200px;
-  margin: auto;
-  height: 68px;
-  position: relative;
-}
-
-.file-input .file {
-  background: #fff;
-  color: #489fb5;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 7px;
-  cursor: pointer;
-}
-.file-input label {
-  background: #489fb5;
-  color: #fff;
-}
-.file-input input {
-  background: #fff;
-  color: #489fb5;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 7px;
-  cursor: pointer;
-}
-
-.file-input input {
-  opacity: 0;
-  z-index: -2;
-}
-.dragging {
-  background: #fff;
-  color: #489fb5;
-  border: 3px dashed #489fb5;
+    width: 100%;
+    background: #2196F3;
+    color: #fff;
+    padding: 40px 15px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px dashed #fff;
+    font-size: 20px;
+    position: relative;
+    &.dragging {
+        background: #fff;
+        color: #2196F3;
+        border: 3px dashed #2196F3;
+        .file-input label {
+            background: #2196F3;
+            color: #fff;
+        }
+    }
+    i {
+        font-size: 85px;
+    }
+    .file-input {
+        width: 200px;
+        margin: auto;
+        height: 68px;
+        position: relative;
+        label,
+        input {
+            background: #fff;
+            color: #2196F3;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 7px;
+            cursor: pointer;
+        }
+        input {
+            opacity: 0;
+            z-index: -2;
+        }
+    }
+    .images-preview {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        .img-wrapper {
+            width: 160px;
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            height: 150px;
+            justify-content: space-between;
+            background: #fff;
+            box-shadow: 5px 5px 20px #3e3737;
+            img {
+                max-height: 105px;
+            }
+        }
+        .details {
+            font-size: 12px;
+            background: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: self-start;
+            padding: 3px 6px;
+            .name {
+                overflow: hidden;
+                height: 18px;
+            }
+        }
+    }
+    .upload-control {
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        top: 0;
+        left: 0;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        padding: 10px;
+        padding-bottom: 4px;
+        text-align: right;
+        button, label {
+            background: #2196F3;
+            border: 2px solid #03A9F4;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        label {
+            padding: 2px 5px;
+            margin-right: 10px;
+        }
+    }
 }
 </style>

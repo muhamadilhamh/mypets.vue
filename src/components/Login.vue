@@ -100,6 +100,7 @@
                   >
                     Register now
                   </v-btn>
+                  
                 </v-col>
               </v-row>
             </v-form>

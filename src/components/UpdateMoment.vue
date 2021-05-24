@@ -1,5 +1,6 @@
 <template>
   <div>
+    sss{{user.id }}
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
@@ -42,11 +43,12 @@
               <v-form ref="form" class="login">
                 <h5>Moment Title</h5>
                 <v-text-field
-                  v-model="title"
+                  v-model="moment.title"
                   :rules="nameRules"
                   placeholder="Input Title"
                   required
                   outlined
+                  value=
                   rounded
                   dense
                   color="#489FB5"
@@ -56,7 +58,7 @@
                 <div>
                   <h5>Description</h5>
                   <v-textarea
-                    v-model="desc"
+                    v-model="moment.description"
                     :rules="descRules"
                     placeholder="Input Description"
                     outlined
@@ -68,7 +70,7 @@
 
                 <h5>Location</h5>
                 <v-text-field
-                  v-model="loc"
+                  v-model="moment.location"
                   :rules="locRules"
                   placeholder="Input Location"
                   outlined
@@ -83,8 +85,8 @@
                     <div>
                       <h5>Pet</h5>
 
-                      <v-radio-group v-model="animal_name" row
-                      @change="subSpecies(animal_name)">
+                      <v-radio-group v-model="moment.animal_name" row
+                      @change="subSpecies(moment.animal_name)">
                         <v-radio
                           color="#489FB5"
                           label="Cat"
@@ -105,7 +107,7 @@
                   <v-col>
                     <div>
                       <h5>Gender</h5>
-                      <v-radio-group v-model="gender" row>
+                      <v-radio-group v-model="moment.gender" row>
                         <v-radio
                           label="Male"
                           on-icon="mdi-gender-male"
@@ -129,14 +131,15 @@
               item-text="name"
               :items="animal_list"
               item-value="slug"
-              label="Select Pet Type"
-              v-model="type"
+              label="Search Pet Type"
+              v-model="moment.animal_type"
               placeholder="Select Pet Type"
               prepend-inner-icon="mdi-magnify"
               solo
             >
+            
               <template slot="selection" slot-scope="{ item }">
-                {{ item.type }} - {{ item.name }}
+                {{ item.type }} - {{ item.slug }}
               </template>
               <template slot="item" slot-scope="{ item }">
                 {{ item.type }} - {{ item.name }}
@@ -149,13 +152,13 @@
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
-                      :to="{ name: 'profile', params: { username : user.username } }"
+                      to="/profile"
                       rounded
                       class="btn_login"
                       outlined
                       block
                     >
-                      Back To Profile
+                      Back
                     </v-btn>
                   </v-col>
                   <v-col cols="6">
@@ -168,7 +171,7 @@
                       block
                       @click = "upload"
                     >
-                      Publish Moment
+                      Submit Change
                     </v-btn>
                     
                   </v-col>
@@ -194,6 +197,7 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
+    moment : [],
     showform: false,
     isDragging: false,
     dragCount: 0,
@@ -201,7 +205,7 @@ export default {
     files: [],
     images: [],
     animal_name : "",
-    type : "",
+    type : undefined,
     gender : "",
     name: "",
     title: "",
@@ -237,10 +241,16 @@ export default {
       })
   },
   mounted(){
-    let uri_animal = "http://localhost:8000/api/animal/";
-    this.$http.get(uri_animal).then((response) => {
-      this.animal_list = response.data;
+    let uri_moment = "http://localhost:8000/api/edit/moment/" + this.$route.params.id;
+    this.$http.get(uri_moment).then((response) => {
+      this.moment = response.data;
+      this.type = response.data.animal_type;
     });
+     let uri_animal = "http://localhost:8000/api/animal/";
+    this.$http.get(uri_animal).then((response) => {
+          this.animal_list = response.data;
+    });
+    
   },
   methods: {
      subSpecies(value) {
@@ -323,12 +333,12 @@ export default {
                 }
            
             formData.append('user_id',this.user.id) 
-            formData.append('animal_name',this.animal_name) 
-            formData.append('title',this.title) 
-            formData.append('desc',this.desc) 
-            formData.append('type',this.type)
-            formData.append('gender',this.gender)       
-            formData.append('loc',this.loc)
+            formData.append('animal_name',this.moment.animal_name) 
+            formData.append('title',this.moment.title) 
+            formData.append('desc',this.moment.desc) 
+            formData.append('type',this.moment.animal_type)
+            formData.append('gender',this.moment.gender)       
+            formData.append('loc',this.moment.loc)
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
@@ -336,7 +346,7 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        'http://localhost:8000/api/upload/moment',formData,config
+                        'http://localhost:8000/api/profile/' + this.user.id + '/moment/' + this.$route.params.id ,formData,config
                     )
                 .then(function (response) {
                     self.$router.push('/adoption');

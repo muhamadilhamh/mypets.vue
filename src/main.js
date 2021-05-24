@@ -6,9 +6,15 @@ import Axios from 'axios'
 import Vuelidate from 'vuelidate'
 import vuetify from './plugins/vuetify';
 import VueAxios from 'vue-axios'
+import notif from 'vue-notification'
+import VueToastr from '@deveodk/vue-toastr'
+import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
+
+Vue.use(VueToastr)
 
 Vue.prototype.$http = Axios;
 Vue.prototype.$image_url = 'http://localhost:8000/storage/'
+Vue.use(notif);
 Vue.use(VueAxios,Axios);
 Vue.use(Vuelidate);
 

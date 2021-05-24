@@ -3,11 +3,12 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">Upload Vaccine</h5>
+          <h5 class="title_cat">Edit Profile</h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
     <v-row>
+      
       <v-col cols="12" md="4" sm="4" offset-md="1">
         <div class="uploader"
         @dragenter="OnDragEnter"
@@ -18,22 +19,25 @@
         
         <div class="upload-control" v-show="images.length">
             <label for="file">Select a file</label>
-            <button @click="upload">Upload</button>
+            <button @click="deleteImage" >Delete Image</button>
         </div>
 
-
+{{user.username}}
         <div v-show="!images.length">
             <i class="fa fa-cloud-upload"></i>
-            <p>Drag your images here</p>
-            <div>OR</div>
+            <p>Current Photo</p>
+            <div v-if="user.picture != null"> 
+                  <v-img max-height="400"
+  max-width="400" :src="url + user.picture"/>
+                </div>
             <div class="file-input">
                 <label for="file">Select a file</label>
                 <input type="file" id="file" @change="onInputChange" multiple>
             </div>
         </div>
-
         <div class="images-preview" v-show="images.length">
-            <div class="img-wrapper" v-for="(image, index) in images" :key="index">
+            <div class="img-wrapper justify-center" v-for="(image, index) in images" :key="index" >
+                
                 <img :src="image" :alt="`Image Uplaoder ${index}`">
                 <div class="details">
                     <span class="name" v-text="files[index].name"></span>
@@ -44,168 +48,81 @@
     </div>
                
       </v-col>
+
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                <h5>Pet Name</h5>
+                <h5>Name</h5>
                 <v-text-field
-                  v-model="name"
+                  v-model="user.full_name"
                   :rules="nameRules"
-                  placeholder="Input Pet Name"
+                  placeholder="Input Name"
                   required
                   outlined
                   rounded
                   dense
                   color="#489FB5"
                 ></v-text-field>
-                <h5>Vaccine Type</h5>
-                <v-text-field
-                  v-model="type"
-                  :rules="nameRules"
-                  placeholder="Input Vaccine Type"
-                  required
-                  outlined
-                  rounded
-                  dense
-                  color="#489FB5"
-                ></v-text-field>
-            
-
                 <div>
-                  <h5>Description</h5>
-                  <v-textarea
-                    v-model="desc"
-                    :rules="descRules"
-                    placeholder="Input Description"
+                  <h5>Phone</h5>
+                  <v-text-field
+                    v-model="user.phone"
+                    :rules="phoneRules"
+                    placeholder="Input Phone Number"
+                    type="number"
+                    required
                     outlined
                     rounded
                     dense
                     color="#489FB5"
-                  ></v-textarea>
+                  ></v-text-field>
                 </div>
 
-                <h5>Age</h5>
-                <br>
-                <br>
-               <v-slider
-      v-model="age"
-      :min="0"
-      :max="10"
-      step="0.5"
-      
-      thumb-label="always"
-    ></v-slider>
+                <div>
+                  <h5>Email</h5>
+                  <v-text-field
+                    v-model="user.email"
+                    :rules="emailRules"
+                    placeholder="Input Email"
+                    required
+                    outlined
+                    rounded
+                    dense
+                    color="#489FB5"
+                  ></v-text-field>
+                </div>
 
-                <v-row>
-                  <v-col>
-                    <div>
-                      <h5>Pet</h5>
+                <div>
+                  <h5>Location</h5>
+                   <v-autocomplete
+              clearable
+              rounded
+              :rules="locRules"
+              item-text="name"
+              :items="location_data"
+              item-value="name"
+              label="Select Location"
+              v-model="user.location"
+              placeholder="Select Location"
+              prepend-inner-icon="mdi-magnify"
+              solo
+            >
+            
+            </v-autocomplete>
+                </div>
 
-                      <v-radio-group v-model="animal_name" row>
-                        <v-radio
-                          color="#489FB5"
-                          label="Cat"
-                          on-icon="mdi-cat"
-                          value="Cat"
-                        >
-                        </v-radio>
-                        <v-radio
-                          color="#489FB5"
-                          label="Dog"
-                          on-icon="mdi-dog"
-                          value="Dog"
-                        ></v-radio>
-                      </v-radio-group>
-                    </div>
-                  </v-col>
-
-                  <v-col>
-                    <div>
-                      <h5>Gender</h5>
-                      <v-radio-group v-model="gender" row>
-                        <v-radio
-                          label="Male"
-                          on-icon="mdi-gender-male"
-                          value="Male"
-                        ></v-radio>
-                        <v-radio
-                          label="Female"
-                          value="Female"
-                          on-icon="mdi-gender-female"
-                        ></v-radio>
-                      </v-radio-group>
-                    </div>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col      
-    >
-      <v-menu
-        v-model="menu"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="date"
-            label="First Vaccine"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="date"
-          @input="menu2 = false"
-        ></v-date-picker>
-      </v-menu>
-    </v-col>
-    <v-col      
-    >
-      <v-menu
-        v-model="menu2"
-        :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="next_date"
-            label="Next Vaccine"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="next_date"
-          @input="menu2 = false"
-        ></v-date-picker>
-      </v-menu>
-    </v-col>
-                </v-row>
-               
-                
-                
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
-                      to="/profile"
+                     :to="{ name: 'profile', params: { username : user.username } }"
                       rounded
                       class="btn_login"
                       outlined
                       block
                     >
-                      Back
+                      Back To Profile
                     </v-btn>
                   </v-col>
                   <v-col cols="6">
@@ -217,15 +134,14 @@
                       elevation="7"
                       block
                       @click = "upload"
+
                     >
-                      Publish Moment
+                      Update Profile
                     </v-btn>
-                    
                   </v-col>
                 </v-row>
               </v-form>
             </v-col>
-           
           </v-container>
         </v-row>
       </v-col>
@@ -234,66 +150,68 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
-
-import { mapGetters } from 'vuex'
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 export default {
-  nama: "UploadAdoption",
+  nama: "UploadMoment",
   created() {
     this.$emit("update:layout", "div");
   },
-  data: () => ({
-    showform: false,
-    isDragging: false,
-    dragCount: 0,
-     animal_list: [],
-    files: [],
-    images: [],
-    animal_name : "",
-    gender : "",
-    type : "",
-    name: "",
-    menu : false,
-    menu2 :false,
-   date: new Date().toISOString().substr(0, 10),
-   next_date: new Date().toISOString().substr(0, 10),
-    nameRules: [(value) => !!value || "Name required"],
-    desc: "",
-    descRules: [(value) => !!value || "Description is required"],
-    loc: "",
-    locRules: [(value) => !!value || "Location is required"],
-    submitStatus: null,
-    age: "",
-    ageRules: [(value) => !!value || "Age is required"],
-    color: "",
-    colorRules: [(value) => !!value || "Type is required"],
-  }),
-  validations: {
-    name : {
-      required,
-    },
-    images: {
-      required
-    },
-    desc :{
-      required
-    },
-
-  },
-  computed : {
-    ...mapGetters({ 
-        isLoggedIn: 'isLoggedIn',
-        user: 'user',
-      })
-  },
   mounted(){
-    let uri_animal = "http://localhost:8000/api/animal/";
-    this.$http.get(uri_animal).then((response) => {
-      this.animal_list = response.data;
+    let uri_loc = "http://localhost:8000/api/location/cities";
+    this.$http.get(uri_loc).then((response) => {
+      this.location_data = response.data;
+    });
+    let uri = "http://localhost:8000/api/profile/" + this.$route.params.id + "/information"
+    this.$http.get(uri).then((response) => {
+    this.user = response.data;
+    this.username = response.data.username;
+    }).catch(function (error) {
+    let self = this;
+        self.$router.push('/')
     });
   },
+  data() {
+    return{
+      username : "",
+    url : this.$image_url,
+    isDragging: false,
+    dragCount: 0,
+    files: [],
+    images: [],
+    location_data : [],
+    
+    name: "",
+    nameRules: [
+      (value) => !!value || "Name required",
+      (value) =>
+        (value && value.length >= 5) || "Username must have 5+ characters",
+    ],
+    username: "",
+    usernameRules: [
+      (value) => !!value || "Username required",
+      (value) =>
+        (value && value.length >= 5) || "Username must have 5+ characters",
+      (value) => /([@])/.test(value) || "Must have one special character [@]",
+    ],
+    phone: "",
+    phoneRules: [
+      (value) => !!value || "Must Number & Required",
+      (value) =>
+        (value && value.length >= 7) || "Phone must have 7+ characters",
+    ],
+    email: "",
+    emailRules: [
+      (value) => !!value || "E-mail required",
+      (value) => /.+@.+/.test(value) || "E-mail must be valid",
+    ],
+    loc: "",
+    locRules: [(value) => !!value || "Location required"],
+  }},
   methods: {
+    deleteImage(){
+      this.images.pop();
+    },
     submit(){
       this.$v.$touch()
         if(this.$v.$invalid){
@@ -321,18 +239,18 @@ export default {
         },
         onInputChange(e) {
             const files = e.target.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
+            
+            this.addImage(files[0])
+            
         },
         onDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             this.isDragging = false;
             const files = e.dataTransfer.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
+            
+            this.addImage(files[0])
+            
         },
         addImage(file) {
             if (!file.type.match('image.*')) {
@@ -342,6 +260,7 @@ export default {
             this.files.push(file);
             const img = new Image(),
                 reader = new FileReader();
+            this.images.pop();
             reader.onload = (e) => this.images.push(e.target.result);
             reader.readAsDataURL(file);
         },
@@ -363,16 +282,10 @@ export default {
                         'content-type': 'multipart/form-data'
                     }
                 }
-           
-            formData.append('user_id',this.user.id) 
-            formData.append('animal_name',this.animal_name) 
-            formData.append('name',this.name)
-            formData.append('age',this.age)  
-             formData.append('date',this.date)
-              formData.append('next_vaccine',this.next_date)  
-               formData.append('vaccine_type',this.type) 
-            formData.append('desc',this.desc) 
-            formData.append('gender',this.gender)       
+            formData.append('full_name',this.user.full_name) 
+            formData.append('phone',this.user.phone) 
+            formData.append('email',this.user.email),
+            formData.append('location',this.user.location)  
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
@@ -380,17 +293,24 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        'http://localhost:8000/api/upload/vaccine',formData,config
+                        'http://localhost:8000/api/profile/' + this.user.id + '/update',formData,config
                     )
                 .then(function (response) {
-                    console.log(response.data);
+                    self.$router.push('/')
                 }).catch(function (error) {
     console.log(error);
 });
         }
-    }
+  },
+  computed : {
+    ...mapGetters({ 
+        isLoggedIn: 'isLoggedIn',
+        user: 'user',
+      })
+  },
 };
 </script>
+
 
 <style lang="scss" scoped>
 /* Upload Adoption */
@@ -444,16 +364,15 @@ export default {
         flex-wrap: wrap;
         margin-top: 20px;
         .img-wrapper {
-            width: 160px;
+            width: 400px;
             display: flex;
             flex-direction: column;
-            margin: 10px;
-            height: 150px;
-            justify-content: space-between;
+            margin: 30px;
+            height: 400px;
             background: #fff;
             box-shadow: 5px 5px 20px #3e3737;
             img {
-                max-height: 105px;
+                max-height: 400px;
             }
         }
         .details {
