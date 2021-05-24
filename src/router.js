@@ -27,7 +27,8 @@ import AdoptionDetail from './views/AdoptionDetail.vue'
 import CareDetail from './views/CareDetail.vue'
 import ArticleDetail from './views/ArticleDetail.vue'
 import Profile from './views/Profile.vue'
-
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css';
 
 Vue.use(Router)
 
@@ -225,6 +226,19 @@ router.beforeEach((to, from, next) => {
   }
 
   next()
+})
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start()
+  }
+  next()
+})
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
 })
 
 

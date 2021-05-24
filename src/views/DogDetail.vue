@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">{{ breeds_info[0].name }}</h5>
+          <h5 class="title_cat">{{ breeds_info.name }}</h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
@@ -22,6 +22,7 @@
       <v-row>
         <v-col cols="7" md="5" offset="1">
           <v-card elevation="5">
+            
             <v-card-title> {{ breeds_info[0].name }} </v-card-title>
             <v-card-text>
               {{ breeds_info[0].description }}
@@ -76,54 +77,51 @@
               <!--left side -->
               <v-col cols="12" md="3" offset-md="1">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in profil" :key="item.id">
+                  <v-container >
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Profile</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
-                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Weight:</span>{{ item.weight }}
+                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Size:</span> {{ item.size }}
+                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Origin:</span> {{ item.origin }}
+                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
                       </v-card-text>
                     </v-container>
                   </v-container>
                 </v-card>
 
                 <br />
-                <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in health" :key="item.id">
+                <v-card outlined class="rounded-xl ">
+                  <v-container>
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Health</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list1 }}
+                        Major Concerns : {{ dog_detail[0].major_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list2 }}
+                      Minor Concerns : {{ dog_detail[0].minor_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list3 }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <v-icon left> mdi-circle-small </v-icon> Suggested
-                        {{ item.list4 }}
+                       Occasionally Seen : {{ dog_detail[0].occasionally_seen}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list5 }}
+                     Suggested Tests : {{ dog_detail[0].suggested_test}}
                       </v-card-text>
+                     
                     </v-container>
                   </v-container>
                 </v-card>
@@ -131,12 +129,12 @@
 
               <v-col cols="12" md="7">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in temprament" :key="item.id">
+                  <v-container >
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Temperament</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ dog_detail[0].temperament }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -148,31 +146,31 @@
                       <h3>{{ item.title }}</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ dog_detail[0].upkeep }}
                     </v-card-text>
                   </v-container>
                 </v-card>
                 <br />
 
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in grooming" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Grooming</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ breeds_info[0].grooming }}
                     </v-card-text>
                   </v-container>
                 </v-card>
                 <br />
 
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in nutrition" :key="item.id">
+                  <v-container >
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Nutrition</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ breeds_info[0].nutrition }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -193,54 +191,51 @@
               <!--left side -->
               <v-col cols="12" md="3" offset-md="1">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in profil" :key="item.id">
+                  <v-container >
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Profile</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
-                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Weight:</span>{{ item.weight }}
+                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Size:</span> {{ item.size }}
+                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Origin:</span> {{ item.origin }}
+                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
                       </v-card-text>
                     </v-container>
                   </v-container>
                 </v-card>
 
                 <br />
-                <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in health" :key="item.id">
+                <v-card outlined class="rounded-xl ">
+                  <v-container>
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Health</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list1 }}
+                        Major Concerns : {{ dog_detail[0].major_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list2 }}
+                      Minor Concerns : {{ dog_detail[0].minor_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list3 }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <v-icon left> mdi-circle-small </v-icon> Suggested
-                        {{ item.list4 }}
+                       Occasionally Seen : {{ dog_detail[0].occasionally_seen}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list5 }}
+                     Suggested Tests : {{ dog_detail[0].suggested_test}}
                       </v-card-text>
+                     
                     </v-container>
                   </v-container>
                 </v-card>
@@ -270,24 +265,24 @@
           <v-container>
             <v-row>
               <!--left side -->
-              <v-col cols="12" md="3" offset-md="1">
+             <v-col cols="12" md="3" offset-md="1">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in profil" :key="item.id">
+                  <v-container >
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Profile</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
-                        <span class="bold">Lifespan:</span>{{ item.lifespan }}
+                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Weight:</span>{{ item.weight }}
+                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Size:</span> {{ item.size }}
+                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
                       </v-card-text>
                       <v-card-text class="text_desc">
-                        <span class="bold">Origin:</span> {{ item.origin }}
+                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -369,32 +364,29 @@
                 </v-card>
 
                 <br />
-                <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in health" :key="item.id">
+                <v-card outlined class="rounded-xl ">
+                  <v-container>
                     <v-card-title class="justify-center">
-                      <h3>{{ item.title }}</h3>
+                      <h3>Health</h3>
                     </v-card-title>
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list1 }}
+                        Major Concerns : {{ dog_detail[0].major_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list2 }}
+                      Minor Concerns : {{ dog_detail[0].minor_concerns}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list3 }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <v-icon left> mdi-circle-small </v-icon> Suggested
-                        {{ item.list4 }}
+                       Occasionally Seen : {{ dog_detail[0].occasionally_seen}}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        {{ item.list5 }}
+                     Suggested Tests : {{ dog_detail[0].suggested_test}}
                       </v-card-text>
+                     
                     </v-container>
                   </v-container>
                 </v-card>
@@ -663,10 +655,27 @@ export default {
   nama: "DogDetail",
   created() {
     this.$emit("update:layout", "div");
+     let uri_dog = process.env.VUE_APP_ROOT_API + "animal/dog/details/" + this.$route.params.slug;
+    this.$http.get(uri_dog).then((response) => {
+      this.dog_detail = response.data;
+    });
+    let uri = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
+    this.$http.get(uri).then((response) => {
+      this.breeds_info = response.data;
+    });
+    
+    let uri_moment = process.env.VUE_APP_ROOT_API + "moment/" + this.$route.params.slug;
+    this.$http.get(uri_moment).then((response) => {
+      this.moments = response.data;
+    })
   },
   data: () => ({
-    breeds_info: [],
-    dog_detail : [],
+    breeds_info: [
+      {}
+    ],
+    dog_detail : [{
+
+    }],
     moments : [],
     energy: 4,
     affection: 4,
@@ -752,27 +761,7 @@ export default {
     ],
   }),
   mounted() {
-    let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
-    this.$http.get(uri).then((response) => {
-      this.breeds_info = response.data;
-    });
-    let uri_dog = "http://localhost:8000/api/animal/dog/details/" + this.$route.params.slug;
-    this.$http.get(uri_dog).then((response) => {
-      this.dog_detail = response.data;
-    });
-    let uri_moment = "http://localhost:8000/api/moment/" + this.$route.params.slug;
-    this.$http.get(uri_moment).then((response) => {
-      this.moments = response.data;
-    })
-  },
-  methods: {
-    loadData() {
-      let uri =
-        "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
-      this.$http.get(uri).then((response) => {
-        this.breeds_info = response.data;
-      });
-    },
+   
   },
 };
 </script>

@@ -8,6 +8,7 @@ import vuetify from './plugins/vuetify';
 import VueAxios from 'vue-axios'
 import notif from 'vue-notification'
 import VueToastr from '@deveodk/vue-toastr'
+
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 
 Vue.use(VueToastr)

@@ -199,7 +199,7 @@ export default {
   },
   data() {
     return {
-    url : this.$image_url,
+    url : process.env.VUE_APP_IMAGE_URL,
     breeds_info: [],
     breeds_images : [],
     category: [
@@ -223,18 +223,18 @@ export default {
   }
   },
   mounted() {
-    let uri = "http://localhost:8000/api/adoption/detail/" + this.$route.params.id_adoption;
+    let uri = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
-    let uri_img = "http://localhost:8000/api/adoption/detail/" + this.$route.params.id_adoption + "/images";
+    let uri_img = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption + "/images";
     this.$http.get(uri_img).then((response) => {
       this.breeds_images = response.data;
-    });
+    }); 
   },
   methods: {
     loadData() {
-      let uri ="http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+      let uri = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
       this.$http.get(uri).then((response) => {
         this.breeds_info = response.data;
       });

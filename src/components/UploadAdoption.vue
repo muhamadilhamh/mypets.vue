@@ -312,11 +312,11 @@ export default {
       })
   },
   mounted(){
-    let uri_animal = "http://localhost:8000/api/animal/";
+    let uri_animal = process.env.VUE_APP_ROOT_API + "animal";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
     });
-    let uri_loc = "http://localhost:8000/api/location/cities";
+    let uri_loc = process.env.VUE_APP_ROOT_API + "location/cities";
     this.$http.get(uri_loc).then((response) => {
       this.location_data = response.data;
     });
@@ -324,12 +324,12 @@ export default {
   methods: {
      subSpecies(value) {
       if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal/" + value;
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal/";
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });
@@ -423,7 +423,7 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        'http://localhost:8000/api/upload/adoption',formData,config
+                        process.env.VUE_APP_ROOT_API + 'upload/adoption',formData,config
                     )
                 .then(function (response) {
                     self.$router.push('/adoption');

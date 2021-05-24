@@ -2,7 +2,7 @@
   <!--Hero Static -->
   <div class="adoption_page">
     <v-img src="../assets/heroes_adoption.png">
-      {{ species }}
+      
       <v-row class="pa-12">
         <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
@@ -195,7 +195,7 @@ export default {
     return {
       showFilter: false,
       image : '',
-      url : this.$image_url,
+      url : process.env.VUE_APP_IMAGE_URL,
       allpet_list: [],
       pet_list: [],
       animal_list: [],
@@ -283,39 +283,31 @@ export default {
     };
   },
   mounted() {
-    let uri = "http://localhost:8000/api/adoption";
+    let uri = process.env.VUE_APP_ROOT_API + "adoption";
     this.$http.get(uri).then((response) => {
       this.pet_list = response.data;
       this.allpet_list = response.data;
       this.loadList = true;
     });
-    let uri_cat = "http://localhost:8000/api/animal/";
+    let uri_cat = process.env.VUE_APP_ROOT_API + "animal";
     this.$http.get(uri_cat).then((response) => {
       this.animal_list = response.data;
     });
-      let getImage = "http://localhost:8000/api/image/tes.png";
-      this.$http.get(getImage).then((response) =>{
-      this.image = response.data;
-    });console.log(this.image)
+      
     
   },
   methods: {
     getImage(path){
       return require(path)
     },
-    loadData() {
-      axios
-        .get("http://localhost:8000/api/adoption")
-        .then((response) => (this.pet_list = response.data));
-    },
     subSpecies(value) {
       if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal/" + value;
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal";
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });

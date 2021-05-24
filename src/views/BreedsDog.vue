@@ -270,12 +270,12 @@ export default {
     };
   },
   mounted() {
-    let uri = "http://localhost:8000/api/adoption";
+    let uri = process.env.VUE_APP_ROOT_API + "adoption";
     this.$http.get(uri).then((response) => {
       this.pet_list = response.data;
       this.allpet_list = response.data;
     });
-    let uri_dog = "http://localhost:8000/api/animal/dog";
+    let uri_dog = process.env.VUE_APP_ROOT_API + "animal/dog";
     this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
     });
@@ -283,17 +283,17 @@ export default {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8000/api/adoption")
+        .get(process.env.VUE_APP_ROOT_API + "adoption")
         .then((response) => (this.pet_list = response.data));
     },
     subSpecies(value) {
       if (value != null) {
-        let uri_dog = "http://localhost:8000/api/animal/" + value;
+        let uri_dog = process.env.VUE_APP_ROOT_API + "animal/" + value;
         this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_dog = "http://localhost:8000/api/animal/";
+        let uri_dog =  process.env.VUE_APP_ROOT_API + "animal/";
         this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
