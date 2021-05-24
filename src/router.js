@@ -194,7 +194,7 @@ let router = new Router({
       name: 'profile',
       component: Profile,
     },
-    { path: "*", 
+    { path: '/*', 
       component: Home ,
       meta: {
         notFound: true
