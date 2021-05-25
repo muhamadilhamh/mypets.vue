@@ -2,11 +2,10 @@
   <div>
     <v-row>
       
-    <notifications group="foo" position="center"/>
       <v-col>
         <img
           :src="url +   user.picture"
-          alt="John"
+          alt="img"
           class="img_profil"
         />
       </v-col>
@@ -23,7 +22,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <p class="location_profile">{{user.location}} , Indonesia</p>
+        <p class="location_profile">{{user.location}}</p>
       </v-col>
     </v-row>
     <div v-if="isLoggedIn">
@@ -68,12 +67,12 @@
         <v-tab-item class="tab_item">
           <v-container>
             <v-row>
-              <v-col v-for="item in feed_adop" :key="item.id" cols="12" sm="4">
+              <v-col v-for="(item,index) in feed_adop" :key="index" cols="12" sm="4">
                 <v-list dense>
                   <v-list-item-group color="primary">
                     <v-hover v-slot="{ hover }">
                       <v-card flat tile class="mx-auto">
-                        <router-link :to="'/adoptiondetail'">
+                        <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
                           <v-img
                             class="rounded"
                             :src="url + item.picture"
@@ -123,7 +122,7 @@
                               </v-list-item>
                               <v-list-item>
                                 <v-icon left> mdi-plus</v-icon>
-                                <v-btn to="" x-small color="orange" text>
+                                <v-btn :to="{ name: 'updateadoption', params: { id_adoption : item.id } }" x-small color="orange" text>
                                   update
                                 </v-btn>
                               </v-list-item>
@@ -150,7 +149,7 @@
         >
         <v-tab-item class="tab_item">
           <v-row>
-            <v-col cols="12" md="4" sm="4" v-for="item in moment" :key="item">
+            <v-col cols="12" md="4" sm="4" v-for="(item,index) in moment" :key="index">
               
               <v-card class="mx-auto rounded-lg" elevation="8" max-width="400">
                 <v-img
@@ -218,7 +217,7 @@
         >
         <v-tab-item class="tab_item">
           <v-row>
-            <v-col cols="12" v-for="item in vaccine" :key="item">
+            <v-col cols="12" v-for="(item,index) in vaccine" :key="index">
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header>
@@ -262,7 +261,7 @@
                   <v-expansion-panel-content>
                     <v-col offset-md="3">
                       <v-img
-                        src="../assets/1x3_ad.png"
+                        :src="url + item.picture"
                         class="rounded-lg"
                         max-width="500"
                       >
@@ -336,26 +335,26 @@
 import { mapGetters } from 'vuex'
 import navbarfull from "../layouts/navbarfull";
 export default {
-  nama: "Profile",
+  name: "Profile",
   created() {
     this.$emit("update:layout", navbarfull);
   },
   mounted() {
-    let uri = "http://localhost:8000/api/profile/" + this.$route.params.username
+    let uri = process.env.VUE_APP_ROOT_API + 'profile/' + this.$route.params.username
     this.$http.get(uri).then((response) => {
     this.user = response.data;
     }).catch(function (error) {
     console.log(error);
     });
-    let uri_adopt = "http://localhost:8000/api/profile/adoption/" + this.$route.params.username
+    let uri_adopt = process.env.VUE_APP_ROOT_API + "profile/adoption/" + this.$route.params.username
     this.$http.get(uri_adopt).then((response) => {
       this.feed_adop = response.data;
     });
-    let uri_moment = "http://localhost:8000/api/profile/moment/" + this.$route.params.username
+    let uri_moment = process.env.VUE_APP_ROOT_API + "profile/moment/" + this.$route.params.username
     this.$http.get(uri_moment).then((response) => {
       this.moment = response.data;
     });
-    let uri_vaccine = "http://localhost:8000/api/profile/vaccine/" + this.$route.params.username
+    let uri_vaccine = process.env.VUE_APP_ROOT_API + "profile/vaccine/" + this.$route.params.username
     this.$http.get(uri_vaccine).then((response) => {
       this.vaccine = response.data;
     });
@@ -365,7 +364,7 @@ export default {
       table : "",
       selectedItem : "",
       dialog : false,
-      url : this.$image_url,
+      url : process.env.VUE_APP_IMAGE_URL,
       user : [],
       reveal: false,
       moment: [
@@ -393,17 +392,16 @@ export default {
   type : 'error',
   title: 'Notifications',
   text: 'Data deleted successfully'
-});
+  });
     },
     deleteItem(table, value){
-      const vm = this
       const formData = new FormData();
       formData.append('user_id',this.user.id) 
-      let uri_delete  = "http://localhost:8000/api/profile/" + this.user.id + '/' + table + '/' + value
+      let uri_delete  = process.env.VUE_APP_ROOT_API + "profile/" + this.user.id + '/' + table + '/' + value
 
       if(table == 'moment'){
       this.$http.delete(uri_delete,formData).then((response) => {
-        let uri_moment = "http://localhost:8000/api/profile/moment/" + this.$route.params.username
+        let uri_moment = process.env.VUE_APP_ROOT_API + "profile/moment/" + this.$route.params.username
         this.$http.get(uri_moment).then((response) => {
             this.moment = response.data;
             this.alert();
@@ -411,7 +409,7 @@ export default {
       })
       }else if(table =='adoption'){
         this.$http.delete(uri_delete,formData).then((response) => {
-        let uri_adoption = "http://localhost:8000/api/profile/adoption/" + this.$route.params.username
+        let uri_adoption = process.env.VUE_APP_ROOT_API + "profile/adoption/" + this.$route.params.username
         this.$http.get(uri_adoption).then((response) => {
             this.feed_adop = response.data;
             this.alert();
@@ -419,7 +417,7 @@ export default {
       })
       }else if(table =='vaccine'){
         this.$http.delete(uri_delete,formData).then((response) => {
-        let uri_vaccine = "http://localhost:8000/api/profile/vaccine/" + this.$route.params.username
+        let uri_vaccine = process.env.VUE_APP_ROOT_API + "profile/vaccine/" + this.$route.params.username
         this.$http.get(uri_vaccine).then((response) => {
             this.vaccine = response.data;
             this.alert();

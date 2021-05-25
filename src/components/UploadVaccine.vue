@@ -18,7 +18,7 @@
         
         <div class="upload-control" v-show="images.length">
             <label for="file">Select a file</label>
-            <button @click="upload">Upload</button>
+            <button @click="deleteImage">Clear Image</button>
         </div>
 
 
@@ -288,12 +288,15 @@ export default {
       })
   },
   mounted(){
-    let uri_animal = "http://localhost:8000/api/animal/";
+    let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
     });
   },
   methods: {
+    deleteImage(){
+      this.images.pop();
+    },
     submit(){
       this.$v.$touch()
         if(this.$v.$invalid){
@@ -306,7 +309,7 @@ export default {
           }, 500)
         }
     },
-        OnDragEnter(e) {
+       OnDragEnter(e) {
             e.preventDefault();
             
             this.dragCount++;
@@ -321,18 +324,18 @@ export default {
         },
         onInputChange(e) {
             const files = e.target.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
+            
+            this.addImage(files[0])
+            
         },
         onDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             this.isDragging = false;
             const files = e.dataTransfer.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
+            
+            this.addImage(files[0])
+            
         },
         addImage(file) {
             if (!file.type.match('image.*')) {
@@ -342,6 +345,7 @@ export default {
             this.files.push(file);
             const img = new Image(),
                 reader = new FileReader();
+            this.images.pop();
             reader.onload = (e) => this.images.push(e.target.result);
             reader.readAsDataURL(file);
         },
@@ -380,10 +384,17 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        'http://localhost:8000/api/upload/vaccine',formData,config
+                        process.env.VUE_APP_ROOT_API + 'upload/vaccine',formData,config
                     )
-                .then(function (response) {
-                    console.log(response.data);
+                .then( (response) => {
+                  this.$swal({
+              icon : 'success',
+               confirmButtonColor: '#3085d6',
+                text: "Vaccine has been successfully uploaded",
+            confirmButtonText: 'Confirm',
+            closeOnCancel: true
+            });
+                    self.$router.push({ name: 'profile', params: { username : self.user.username } })
                 }).catch(function (error) {
     console.log(error);
 });

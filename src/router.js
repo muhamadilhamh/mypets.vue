@@ -14,6 +14,8 @@ import UploadAdoption from './components/UploadAdoption.vue'
 import UploadMoment from './components/UploadMoment.vue'
 import UploadVaccine from './components/UploadVaccine.vue'
 import UpdateMoment from './components/UpdateMoment.vue'
+
+import UpdateAdoption from './components/UpdateAdoption.vue'
 import UpdateProfile from './components/UpdateProfile.vue'
 import EditProfile from './components/EditProfile.vue'
 import Register from './components/Register.vue'
@@ -121,7 +123,7 @@ let router = new Router({
       component : DogDetail
     },
     {
-      path: '/catdetail',
+      path: '/breeds/cat/:slug',
       name: 'catdetail',
       component: CatDetail
     },
@@ -169,6 +171,14 @@ let router = new Router({
       path: '/moment/:id/edit',
       name: 'updatemoment',
       component: UpdateMoment,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/adoption/:id_adoption/edit',
+      name: 'updateadoption',
+      component: UpdateAdoption,
       meta: {
         requiresAuth: true
       }

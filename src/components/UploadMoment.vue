@@ -9,31 +9,39 @@
     </v-toolbar>
     <v-row>
       <v-col cols="12" md="4" sm="4" offset-md="1">
-        <div
-          class="uploader"
-          @dragenter="OnDragEnter"
-          @dragleave="OnDragLeave"
-          @dragover.prevent
-          @drop="onDrop"
-          :class="{ dragging: isDragging }"
-        >
-          <v-icon size="100">mdi-cloud-upload-outline</v-icon>
-          <p>Drag your images here</p>
-          <div>OR</div>
-          <div class="file-input">
-            <label class="file" for="file">Select a file</label>
-            <input type="file" id="file" @change="onInputChange" multiple />
-          </div>
-           <div class="images-preview" v-show="images.length">
+        <div class="uploader"
+        @dragenter="OnDragEnter"
+        @dragleave="OnDragLeave"
+        @dragover.prevent
+        @drop="onDrop"
+        :class="{ dragging: isDragging }">
+        
+        <div class="upload-control" v-show="images.length">
+            <label for="file">Select a file</label>
+            <button @click="deleteImage">Clear Image</button>
+        </div>
+
+
+        <div v-show="!images.length">
+            <i class="fa fa-cloud-upload"></i>
+            <p>Drag your images here</p>
+            <div>OR</div>
+            <div class="file-input">
+                <label for="file">Select a file</label>
+                <input type="file" id="file" @change="onInputChange" multiple>
+            </div>
+        </div>
+
+        <div class="images-preview" v-show="images.length">
             <div class="img-wrapper" v-for="(image, index) in images" :key="index">
-                <img :src="image" :alt="`Image Uplaoder ${index}`" height = "500px" width = "500px">
+                <img :src="image" :alt="`Image Uplaoder ${index}`">
                 <div class="details">
                     <span class="name" v-text="files[index].name"></span>
                     <span class="size" v-text="getFileSize(files[index].size)"></span>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
       </v-col>
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
@@ -67,16 +75,19 @@
                 </div>
 
                 <h5>Location</h5>
-                <v-text-field
-                  v-model="loc"
-                  :rules="locRules"
-                  placeholder="Input Location"
-                  outlined
-                  rounded
-                  dense
-                  color="#489FB5"
-                  @click="showform = !showform"
-                ></v-text-field>
+                <v-autocomplete
+              clearable
+              rounded
+              :rules="locRules"
+              item-text="name"
+              :items="location_data"
+              item-value="name"
+              label="Select Location"
+              v-model="loc"
+              placeholder="Select Location"
+              prepend-inner-icon="mdi-magnify"
+              solo
+            ></v-autocomplete>
 
                 <v-row>
                   <v-col>
@@ -200,6 +211,7 @@ export default {
      animal_list: [],
     files: [],
     images: [],
+    location_data : [],
     animal_name : "",
     type : "",
     gender : "",
@@ -237,26 +249,41 @@ export default {
       })
   },
   mounted(){
-    let uri_animal = "http://localhost:8000/api/animal/";
+    let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
     });
+    let uri_loc = process.env.VUE_APP_ROOT_API + "location/cities";
+    this.$http.get(uri_loc).then((response) => {
+      this.location_data = response.data;
+    });
   },
   methods: {
+    deleteImage(){
+       this.images.splice(0,this.images.length);
+    },
      subSpecies(value) {
       if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal/" + value;
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
+        let uri_cat = process.env.VUE_APP_ROOT_API + "animal/";
         this.$http.get(uri_cat).then((response) => {
           this.animal_list = response.data;
         });
       }
     },
-    submit(){
+    notification(){
+      console.log("test")
+     this.$notify({
+  group: 'foo',
+  type : 'error',
+  title: 'Notifications',
+  text: 'Data deleted successfully'
+  });
+    },    submit(){
       this.$v.$touch()
         if(this.$v.$invalid){
           this.submitStatus = 'Error'
@@ -283,14 +310,18 @@ export default {
         },
         onInputChange(e) {
             const files = e.target.files;
-            Array.from(files).forEach(file => this.addImage(file));
+            for(let i=0 ; i<4; i++){
+            this.addImage(files[i])
+            }
         },
         onDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             this.isDragging = false;
             const files = e.dataTransfer.files;
-            Array.from(files).forEach(file => this.addImage(file));
+            for(let i=0 ; i<4; i++){
+            this.addImage(files[i])
+            }
         },
         addImage(file) {
             if (!file.type.match('image.*')) {
@@ -335,12 +366,19 @@ export default {
           this.files.forEach(file => {
                 formData.append('images[]', file, file.name);
             });
-           axios.post(
-                        'http://localhost:8000/api/upload/moment',formData,config
+           this.$http.post(
+                        process.env.VUE_APP_ROOT_API + 'upload/moment',formData,config
                     )
-                .then(function (response) {
-                    self.$router.push('/adoption');
-                }).catch(function (error) {
+                .then((response) => {
+            this.$swal({
+              icon : 'success',
+               confirmButtonColor: '#3085d6',
+                text: "Moment has been successfully uploaded",
+            confirmButtonText: 'Confirm',
+            closeOnCancel: true
+            });
+            this.$router.push({ name: 'profile', params: { username : this.user.username } })
+        }).catch(function (error) {
     console.log(error);
 });
         }
@@ -348,66 +386,107 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 /* Upload Adoption */
 .uploader {
-  top: 20%;
-  width: 100%;
-  background: #489fb5;
-  color: #fff;
-  padding: 40px 15px;
-  text-align: center;
-  border-radius: 10px;
-  border: 3px dashed #fff;
-  font-size: 20px;
-  position: relative;
-  left: auto;
-  right: auto;
-}
-
-.file-input {
-  width: 200px;
-  margin: auto;
-  height: 68px;
-  position: relative;
-}
-
-.file-input .file {
-  background: #fff;
-  color: #489fb5;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 7px;
-  cursor: pointer;
-}
-.file-input label {
-  background: #489fb5;
-  color: #fff;
-}
-.file-input input {
-  background: #fff;
-  color: #489fb5;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 7px;
-  cursor: pointer;
-}
-
-.file-input input {
-  opacity: 0;
-  z-index: -2;
-}
-.dragging {
-  background: #fff;
-  color: #489fb5;
-  border: 3px dashed #489fb5;
+    width: 100%;
+    background: #2196F3;
+    color: #fff;
+    padding: 40px 15px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px dashed #fff;
+    font-size: 20px;
+    position: relative;
+    &.dragging {
+        background: #fff;
+        color: #2196F3;
+        border: 3px dashed #2196F3;
+        .file-input label {
+            background: #2196F3;
+            color: #fff;
+        }
+    }
+    i {
+        font-size: 85px;
+    }
+    .file-input {
+        width: 200px;
+        margin: auto;
+        height: 68px;
+        position: relative;
+        label,
+        input {
+            background: #fff;
+            color: #2196F3;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 7px;
+            cursor: pointer;
+        }
+        input {
+            opacity: 0;
+            z-index: -2;
+        }
+    }
+    .images-preview {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        .img-wrapper {
+            width: 160px;
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            height: 150px;
+            justify-content: space-between;
+            background: #fff;
+            box-shadow: 5px 5px 20px #3e3737;
+            img {
+                max-height: 105px;
+            }
+        }
+        .details {
+            font-size: 12px;
+            background: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: self-start;
+            padding: 3px 6px;
+            .name {
+                overflow: hidden;
+                height: 18px;
+            }
+        }
+    }
+    .upload-control {
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        top: 0;
+        left: 0;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        padding: 10px;
+        padding-bottom: 4px;
+        text-align: right;
+        button, label {
+            background: #2196F3;
+            border: 2px solid #03A9F4;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        label {
+            padding: 2px 5px;
+            margin-right: 10px;
+        }
+    }
 }
 </style>

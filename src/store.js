@@ -44,7 +44,7 @@ export default new Vuex.Store({
     actions: {
         login({ dispatch, commit }, data) {
             return new Promise((resolve, reject) => { 
-              axios.post('http://localhost:8000/api/login', data)
+              axios.post(process.env.VUE_APP_ROOT_API + 'login', data)
                .then(response => {
                  const token = response.data.access_token  
                  localStorage.setItem('token', token) 
@@ -64,7 +64,7 @@ export default new Vuex.Store({
               return
             }
             try{ 
-              let response = await axios.get('http://localhost:8000/api/user')
+              let response = await axios.get(process.env.VUE_APP_ROOT_API + 'user')
                 commit('set_user', response.data)
             } catch (error){
                 commit('reset_user') 
@@ -79,7 +79,7 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 commit('auth_request')
                 axios({
-                        url: 'http://localhost:8000/api/signup',
+                        url: process.env.VUE_APP_ROOT_API + 'signup',
                         data: user,
                         method: 'POST'
                     })

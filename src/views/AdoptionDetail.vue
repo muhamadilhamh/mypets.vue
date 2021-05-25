@@ -159,7 +159,7 @@
                    
                     <v-img
                       class="elevation-6"
-                      :src="url + 'Profile/' + breeds_info.picture"
+                      :src="url + breeds_info.picture"
                     >
                     </v-img>
                   </v-list-item-avatar>

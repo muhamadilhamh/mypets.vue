@@ -158,11 +158,11 @@ export default {
     this.$emit("update:layout", "div");
   },
   mounted(){
-    let uri_loc = "http://localhost:8000/api/location/cities";
+    let uri_loc = process.env.VUE_APP_ROOT_API + "location/cities";
     this.$http.get(uri_loc).then((response) => {
       this.location_data = response.data;
     });
-    let uri = "http://localhost:8000/api/profile/" + this.$route.params.id + "/information"
+    let uri = process.env.VUE_APP_ROOT_API + "profile/" + this.$route.params.id + "/information"
     this.$http.get(uri).then((response) => {
     this.user = response.data;
     this.username = response.data.username;
@@ -174,7 +174,7 @@ export default {
   data() {
     return{
       username : "",
-    url : this.$image_url,
+    url : process.env.VUE_APP_IMAGE_URL,
     isDragging: false,
     dragCount: 0,
     files: [],
@@ -275,7 +275,6 @@ export default {
             return `${(Math.round(size * 100) / 100)} ${fSExt[i]}`;
         },
         upload() {
-          let self = this;
             const formData = new FormData();
             const config = {
                     headers: {
@@ -293,10 +292,17 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        'http://localhost:8000/api/profile/' + this.user.id + '/update',formData,config
+                        process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/update',formData,config
                     )
-                .then(function (response) {
-                    self.$router.push('/')
+                .then(response =>{
+                  this.$swal({
+              icon : 'success',
+               confirmButtonColor: '#3085d6',
+                text: "Profile has been successfully updated",
+            confirmButtonText: 'Confirm',
+            closeOnCancel: true
+            });
+                  this.$router.push('/')
                 }).catch(function (error) {
     console.log(error);
 });

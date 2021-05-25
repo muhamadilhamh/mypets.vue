@@ -19,7 +19,7 @@
         
         <div class="upload-control" v-show="images.length">
             <label for="file">Select a file</label>
-            <button @click="upload">Upload</button>
+            <button @click="deleteImage">Clear Image</button>
         </div>
 
 
@@ -322,6 +322,9 @@ export default {
     });
   },
   methods: {
+    deleteImage(){
+       this.images.splice(0,this.images.length);
+    },
      subSpecies(value) {
       if (value != null) {
         let uri_cat = process.env.VUE_APP_ROOT_API + "animal/" + value;
@@ -425,7 +428,14 @@ export default {
            axios.post(
                         process.env.VUE_APP_ROOT_API + 'upload/adoption',formData,config
                     )
-                .then(function (response) {
+                .then((response) => {
+                  this.$swal({
+              icon : 'success',
+               confirmButtonColor: '#3085d6',
+                text: "Adoption has been successfully uploaded",
+                 confirmButtonText: 'Confirm',
+                });
+                console.log(response.data)
                     self.$router.push('/adoption');
                 }).catch(function (error) {
     console.log(error);

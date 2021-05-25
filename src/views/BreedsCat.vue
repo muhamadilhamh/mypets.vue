@@ -128,7 +128,9 @@
           <v-list dense>
             <v-list-item-group color="primary">
               <v-card flat tile shaped class="mx-auto" :class="`rounded-lg`">
-                <router-link :to="'/catdetail'">
+                <router-link
+                  :to="{ name: 'catdetail', params: { slug: item.slug } }"
+                >
                   <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
                   </v-img>
                 </router-link>
@@ -152,7 +154,9 @@
                     </v-col>
 
                     <v-col cols="1" md="1">
-                      <router-link :to="'/catdetail'">
+                      <router-link
+                        :to="{ name: 'catdetail', params: { slug: item.slug } }"
+                      >
                         <v-rating
                           hover
                           background-color="grey darken-1"
@@ -187,7 +191,7 @@
 <script>
 import navbarlogo_register from "../layouts/navbarlogo_register";
 export default {
-  name: "BreedsCat",
+  name: "BreedsDog",
   created() {
     this.$emit("update:layout", navbarlogo_register);
   },
@@ -266,31 +270,31 @@ export default {
     };
   },
   mounted() {
-    let uri = "http://localhost:8000/api/adoption";
+    let uri = process.env.VUE_APP_ROOT_API + "adoption";
     this.$http.get(uri).then((response) => {
       this.pet_list = response.data;
       this.allpet_list = response.data;
     });
-    let uri_cat = "http://localhost:8000/api/animal/";
-    this.$http.get(uri_cat).then((response) => {
+    let uri_dog = process.env.VUE_APP_ROOT_API + "animal/cat";
+    this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
     });
   },
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8000/api/adoption")
+        .get(process.env.VUE_APP_ROOT_API + "adoption")
         .then((response) => (this.pet_list = response.data));
     },
     subSpecies(value) {
       if (value != null) {
-        let uri_cat = "http://localhost:8000/api/animal/" + value;
-        this.$http.get(uri_cat).then((response) => {
+        let uri_dog = process.env.VUE_APP_ROOT_API + "animal/" + value;
+        this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
       } else {
-        let uri_cat = "http://localhost:8000/api/animal/";
-        this.$http.get(uri_cat).then((response) => {
+        let uri_dog =  process.env.VUE_APP_ROOT_API + "animal/";
+        this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });
       }
@@ -298,7 +302,7 @@ export default {
   },
   computed: {
     filteredList: function () {
-      return this.pet_list
+      return this.animal_list
         .filter((post) => {
           if (this.species != null) {
             return post.animal_name.includes(this.species);
@@ -331,6 +335,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 .il_heroes {
   width: 100%;
@@ -389,5 +394,8 @@ export default {
 }
 .name_cat {
   font-weight: bold;
+}
+.gotocat {
+  text-transform: none !important;
 }
 </style>

@@ -58,7 +58,7 @@
         <v-card-actions>
           <v-avatar size="37">
             <v-img
-              :src="url + 'Profile/' +  user.picture"
+              :src="url + user.picture"
             >
             </v-img>
           </v-avatar>
@@ -187,7 +187,7 @@ import { mapGetters } from 'vuex'
 export default {
   data(){
     return{
-      url : this.$image_url
+      url : process.env.VUE_APP_IMAGE_URL
     }
   },
   methods: {

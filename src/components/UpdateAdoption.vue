@@ -3,69 +3,42 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">Upload Moment</h5>
+          <h5 class="title_cat">Upload Adoption</h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
     <v-row>
       <v-col cols="12" md="4" sm="4" offset-md="1">
-         <div class="uploader"
-        @dragenter="OnDragEnter"
-        @dragleave="OnDragLeave"
-        @dragover.prevent
-        @drop="onDrop"
-        :class="{ dragging: isDragging }">
-        
-        <div class="upload-control" v-show="images.length">
-            <label for="file">Select a file</label>
-            <button @click="deleteImage">Clear Image</button>
-        </div>
-
-
-        <div v-show="!images.length">
-            <i class="fa fa-cloud-upload"></i>
-            <p>Drag your images here</p>
-            <div>OR</div>
-            <div class="file-input">
-                <label for="file">Select a file</label>
-                <input type="file" id="file" @change="onInputChange" multiple>
-            </div>
-        </div>
-
-        <div class="images-preview" v-show="images.length">
-            <div class="img-wrapper" v-for="(image, index) in images" :key="index">
-                <img :src="image" :alt="`Image Uplaoder ${index}`">
-                <div class="details">
-                    <span class="name" v-text="files[index].name"></span>
-                    <span class="size" v-text="getFileSize(files[index].size)"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+         <v-carousel height = "800px">         <v-carousel-item
+      v-for="(item,i) in adoption_image"
+      :key="i"
+    >
+    
+      <v-img class="rounded-lg" :src="url + item.img"> </v-img></v-carousel-item>
+      </v-carousel>
+               
       </v-col>
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                <h5>Moment Title</h5>
+                <h5>Name</h5>
                 <v-text-field
-                  v-model="moment.title"
+                  v-model="adoption_info.name"
                   :rules="nameRules"
-                  placeholder="Input Title"
+                  placeholder="Input Name"
                   required
                   outlined
-                  value=
                   rounded
                   dense
                   color="#489FB5"
                 ></v-text-field>
-            {{moment}}
 
                 <div>
                   <h5>Description</h5>
                   <v-textarea
-                    v-model="moment.description"
+                    v-model="adoption_info.description"
                     :rules="descRules"
                     placeholder="Input Description"
                     outlined
@@ -75,30 +48,13 @@
                   ></v-textarea>
                 </div>
 
-                <h5>Location</h5>
-                 <v-autocomplete
-              clearable
-              rounded
-              :rules="locRules"
-              item-text="name"
-              :items="location_data"
-              item-value="name"
-              label="Select Location"
-              v-model="moment.location"
-              placeholder="Select Location"
-              prepend-inner-icon="mdi-magnify"
-              solo
-            >
-            
-            </v-autocomplete>
-
                 <v-row>
                   <v-col>
-                    <div>
+                    <div v-if="showform">
                       <h5>Pet</h5>
 
-                      <v-radio-group v-model="moment.animal_name" row
-                      @change="subSpecies(moment.animal_name)">
+                      <v-radio-group v-model="adoption_info.animal_name" row
+                      @change="subSpecies(animal_name)">
                         <v-radio
                           color="#489FB5"
                           label="Cat"
@@ -117,9 +73,9 @@
                   </v-col>
 
                   <v-col>
-                    <div>
+                    <div v-if="showform">
                       <h5>Gender</h5>
-                      <v-radio-group v-model="moment.gender" row>
+                      <v-radio-group v-model="adoption_info.gender" row>
                         <v-radio
                           label="Male"
                           on-icon="mdi-gender-male"
@@ -134,7 +90,7 @@
                     </div>
                   </v-col>
                 </v-row>
-                <v-row >
+                <v-row v-if="showform">
                 <v-col cols="12" sm="12" md="12">
                 <h5>Type</h5>
                 <v-autocomplete
@@ -142,16 +98,15 @@
               rounded
               item-text="name"
               :items="animal_list"
-              item-value="slug"
-              label="Search Pet Type"
-              v-model="moment.animal_type"
-              placeholder="Select Pet Type"
+              item-value="name"
+              label="Search Adoption"
+              v-model="adoption_info.animal_type"
+              placeholder="Search Adoption"
               prepend-inner-icon="mdi-magnify"
               solo
             >
-            
               <template slot="selection" slot-scope="{ item }">
-                {{ item.type }} - {{ item.slug }}
+                {{ item.type }} - {{ item.name }}
               </template>
               <template slot="item" slot-scope="{ item }">
                 {{ item.type }} - {{ item.name }}
@@ -159,18 +114,94 @@
             </v-autocomplete>
           </v-col>
 </v-row>
-                
+<h5>Location</h5>
+                <v-autocomplete
+              clearable
+              rounded
+              :rules="locRules"
+              item-text="name"
+              :items="location_data"
+              item-value="name"
+              label="Select Location"
+              v-model="adoption_info.location"
+              placeholder="Select Location"
+              prepend-inner-icon="mdi-magnify"
+              solo
+            >
+            
+            </v-autocomplete>
+                <v-row v-if="showform">
+                  <v-col cols="6">
+                    <h5>Age (Months)</h5><br>
+                    <v-slider
+      v-model="adoption_info.age"
+      :rules="ageRules"
+      :min="0"
+      :max="60"
+      step="1"
+      
+      thumb-label="always"
+    ></v-slider>
+                  </v-col>
+                  <v-col cols="6">
+                    <h5>Color</h5>
+                    <v-text-field
+                      v-model="adoption_info.color"
+                      :rules="ageRules"
+                      label="Color"
+                      required
+                      outlined
+                      rounded
+                      dense
+                      color="#489FB5"
+                    ></v-text-field>
+                    
+                  </v-col>
+                </v-row>
+                <v-row v-if="showform">
+                  <v-col cols="6">
+                    <h5>Health</h5>
+                     <v-autocomplete
+              clearable
+              rounded
+             v-model="adoption_info.health"
+            :items="health_value"
+            dense
+            filled
+            label="Health"
+              solo
+            >
+            
+            </v-autocomplete>
+                  </v-col>
+                  <v-col cols="6">
+                    <h5>Body</h5>
+                    <v-autocomplete
+              clearable
+              rounded
+             v-model="adoption_info.body"
+            :items="body_value"
+            dense
+            filled
+            label="Body"
+              solo
+            >
+            
+            </v-autocomplete>
+                    
+                  </v-col>
+                </v-row>
                 
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
-                      to="/profile"
+                      :to="{ name: 'profile', params: { username : user.username } }"
                       rounded
                       class="btn_login"
                       outlined
                       block
                     >
-                      Back
+                      Back To Profile
                     </v-btn>
                   </v-col>
                   <v-col cols="6">
@@ -183,7 +214,7 @@
                       block
                       @click = "upload"
                     >
-                      Submit Change
+                      Publish Adoption
                     </v-btn>
                     
                   </v-col>
@@ -209,27 +240,30 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
-    moment : [],
-    showform: false,
+    showform: true,
+     url : process.env.VUE_APP_IMAGE_URL,
     isDragging: false,
+    adoption_image : [],
     dragCount: 0,
      animal_list: [],
+     adoption_info : [],
+    health_value : ['Bad Condition','Good Condition'],
     files: [],
     images: [],
     animal_name : "",
-    type : undefined,
+    type : "",
     gender : "",
     name: "",
-    title: "",
-    location_data : [],
     body: "",
     health: "",
+    body_value : ['Small','Medium','Big'],
     nameRules: [(value) => !!value || "Name required"],
     desc: "",
     descRules: [(value) => !!value || "Description is required"],
     loc: "",
     locRules: [(value) => !!value || "Location is required"],
     submitStatus: null,
+    location_data : [],
     age: "",
     ageRules: [(value) => !!value || "Age is required"],
     color: "",
@@ -254,24 +288,28 @@ export default {
       })
   },
   mounted(){
-    let uri_moment = process.env.VUE_APP_ROOT_API + "edit/moment/" + this.$route.params.id;
-    this.$http.get(uri_moment).then((response) => {
-      this.moment = response.data;
-      this.type = response.data.animal_type;
+    let uri = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
+    this.$http.get(uri).then((response) => {
+      this.adoption_info = response.data;
     });
-     let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
+    
+    let uri_animal = process.env.VUE_APP_ROOT_API + "animal";
     this.$http.get(uri_animal).then((response) => {
-          this.animal_list = response.data;
+      this.animal_list = response.data;
     });
     let uri_loc = process.env.VUE_APP_ROOT_API + "location/cities";
     this.$http.get(uri_loc).then((response) => {
       this.location_data = response.data;
     });
-    
+    let uri_img = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption + "/images";
+    this.$http.get(uri_img).then((response) => {
+        this.adoption_image = response.data;
+     
+    }); 
   },
   methods: {
     deleteImage(){
-      this.images.splice(0,this.images.length);
+       this.images.splice(0,this.images.length);
     },
      subSpecies(value) {
       if (value != null) {
@@ -333,7 +371,7 @@ export default {
             }
             this.files.push(file);
             const img = new Image(),
-                reader = new FileReader();
+            reader = new FileReader();
             reader.onload = (e) => this.images.push(e.target.result);
             reader.readAsDataURL(file);
         },
@@ -348,6 +386,7 @@ export default {
             return `${(Math.round(size * 100) / 100)} ${fSExt[i]}`;
         },
         upload() {
+          let self = this;
             const formData = new FormData();
             const config = {
                     headers: {
@@ -356,12 +395,16 @@ export default {
                 }
            
             formData.append('user_id',this.user.id) 
-            formData.append('animal_name',this.moment.animal_name) 
-            formData.append('title',this.moment.title) 
-            formData.append('desc',this.moment.description) 
-            formData.append('type',this.moment.animal_type)
-            formData.append('gender',this.moment.gender)       
-            formData.append('loc',this.moment.location)
+            formData.append('animal_name',this.adoption_info.animal_name) 
+            formData.append('name',this.adoption_info.name) 
+            formData.append('desc',this.adoption_info.description) 
+            formData.append('type',this.adoption_info.animal_type)
+            formData.append('gender',this.adoption_info.gender)       
+            formData.append('color',this.adoption_info.color)  
+            formData.append('loc',this.adoption_info.location)
+             formData.append('age',this.adoption_info.age)
+            formData.append('body',this.adoption_info.body)
+            formData.append('health',this.adoption_info.health)
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
@@ -369,17 +412,17 @@ export default {
                 formData.append('images[]', file, file.name);
             });
            axios.post(
-                        process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/moment/' + this.$route.params.id ,formData,config
+                        process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/adoption/' + this.$route.params.id ,formData,config
                     )
-                .then( (response)  => {
+                .then((response) => {
                   this.$swal({
               icon : 'success',
                confirmButtonColor: '#3085d6',
-                text: "Moment has been updated successfully",
+                text: "Adoption has been successfully uploaded",
             confirmButtonText: 'Confirm',
             closeOnCancel: true
             });
-                    this.$router.push('/adoption');
+                    self.$router.push('/adoption');
                 }).catch(function (error) {
     console.log(error);
 });
@@ -446,8 +489,6 @@ export default {
             margin: 10px;
             height: 150px;
             justify-content: space-between;
-            background: #fff;
-            box-shadow: 5px 5px 20px #3e3737;
             img {
                 max-height: 105px;
             }

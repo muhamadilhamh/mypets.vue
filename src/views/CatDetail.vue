@@ -23,15 +23,9 @@
       <v-row>
         <v-col cols="7" md="5" offset="1">
           <v-card elevation="5">
-            <v-card-title> Abyssinian</v-card-title>
+            <v-card-title> {{breeds_info[0].name}}</v-card-title>
             <v-card-text>
-              Abyssinian are elegant medium-sized cats with strong, lithe bodies
-              and long, slender legs. They have round, wedge-shaped heads with
-              distinctive small tufts on the tips of ears and large
-              almond-shaped eyes. The short, close-lying coat of an Abyssinian
-              cat, has a distinctive 'ticked' look caused by bands of colour on
-              each hair. The most well know colour is 'ruddy' but there are
-              several others.
+              {{breeds_info[0].description}}
             </v-card-text>
             <v-card-actions>
               <v-row>
@@ -60,7 +54,7 @@
         </v-col>
 
         <v-col cols="12" md="5">
-          <v-img src="../assets/dua.png"> </v-img>
+          <v-img :src="breeds_info[0].picture"> </v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -71,7 +65,33 @@
         <v-tab-item class="konten_fact">
           <!--tab key fact -->
           <v-row>
-            <v-col cols="12">
+            <v-col cols="12" md="3">
+                <v-card outlined class="rounded-xl">
+                  <v-container>
+                    <v-card-title class="justify-center">
+                      <h3>Profile</h3>
+                    </v-card-title>
+                    <v-container>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
+                      </v-card-text>
+                      <v-card-text class="text_desc">
+                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
+                      </v-card-text>
+                    </v-container>
+                  </v-container>
+                </v-card>
+
+                <br />
+                
+              </v-col>
+            <v-col cols="12" md="9">
               <h3 class="desc_fact">Physical Attributes</h3>
             </v-col>
           </v-row>
@@ -80,52 +100,52 @@
               <!--left side -->
               <v-col cols="5" md="5" offset-md="1">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in body" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Body</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ item.desc }}
+                      {{cat_detail.body }}
                     </v-card-text>
                   </v-container>
                 </v-card>
 
                 <br />
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in head" :key="item.id">
+                  <v-container >
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Head</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.head}}
                     </v-card-text>
                   </v-container>
                 </v-card>
 
                 <br />
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in legs" :key="item.id">
+                  <v-container >
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Legs</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.legs }}
                     </v-card-text>
                   </v-container>
                 </v-card>
 
                 <br />
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in color" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Color</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.color }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -133,48 +153,48 @@
 
               <v-col cols="6" md="6">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in ears" :key="item.id">
+                  <v-container >
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Ears</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.ears }}
                     </v-card-text>
                   </v-container>
                 </v-card>
                 <br />
 
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in eyes" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Eyes</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.eyes }}
                     </v-card-text>
                   </v-container>
                 </v-card>
                 <br />
 
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in tail" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Tail</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{cat_detail.tail }}
                     </v-card-text>
                   </v-container>
                 </v-card>
                 <br />
 
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in coat" :key="item.id">
+                  <v-container>
                     <v-card-title>
-                      <h3>{{ item.title }}</h3>
+                      <h3>Coat</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ item.desc }}
+                      {{ cat_detail.coat}}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -198,9 +218,9 @@
 
               <v-col cols="8" md="8" offset-md="2">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in history" :key="item.id">
+                  <v-container >
                     <v-card-text>
-                      {{ item.desc }}
+                      {{breeds_info[0].description}}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -218,15 +238,37 @@
               <h3 class="desc_fact">Personality</h3>
             </v-col>
           </v-row>
+          
           <v-container>
             <v-row>
               <!--left side -->
 
               <v-col cols="8" md="8" offset="2">
                 <v-card outlined class="rounded-xl">
-                  <v-container v-for="item in personality" :key="item.id">
+                  <v-container >
                     <v-card-text>
-                      {{ item.desc }}
+                      {{breeds_info[0].personality}}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+           <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">Characteristics</h3>
+            </v-col>
+          </v-row>
+          
+          <v-container>
+            <v-row>
+              <!--left side -->
+
+              <v-col cols="8" md="8" offset="2">
+                <v-card outlined class="rounded-xl">
+                  <v-container >
+                    <v-card-text>
+                      {{breeds_info[0].characteristics}}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -255,7 +297,7 @@
                           <h5>Activity</h5>
                           <v-rating
                             hover
-                            v-model="actifity"
+                            v-model="cat_detail.activity_level"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -269,7 +311,7 @@
                           <h5>Attention</h5>
                           <v-rating
                             hover
-                            v-model="attention"
+                            v-model="cat_detail.attention"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -283,7 +325,7 @@
                           <h5>Hardiness</h5>
                           <v-rating
                             hover
-                            v-model="Hardiness"
+                            v-model="cat_detail.hardiness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -297,7 +339,7 @@
                           <h5>Affection to Owners</h5>
                           <v-rating
                             hover
-                            v-model="Affection"
+                            v-model="cat_detail.affection_owner"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -311,7 +353,7 @@
                           <h5>Playfulness</h5>
                           <v-rating
                             hover
-                            v-model="playfulness"
+                            v-model="cat_detail.playfulness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -325,7 +367,7 @@
                           <h5>Grooming</h5>
                           <v-rating
                             hover
-                            v-model="groom"
+                            v-model="cat_detail.grooming"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -339,7 +381,7 @@
                           <h5>Friendliness To Children</h5>
                           <v-rating
                             hover
-                            v-model="friendlinessChild"
+                            v-model="cat_detail.friends_children"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -353,7 +395,7 @@
                           <h5>Independence</h5>
                           <v-rating
                             hover
-                            v-model="independence"
+                            v-model="cat_detail.independence"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -367,7 +409,7 @@
                           <h5>Friendliness To Other Pets</h5>
                           <v-rating
                             hover
-                            v-model="friendlinessOther"
+                            v-model="cat_detail.friends_pet"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -381,7 +423,7 @@
                           <h5>Docility</h5>
                           <v-rating
                             hover
-                            v-model="docility"
+                            v-model="cat_detail.docility"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -395,7 +437,7 @@
                           <h5>Intelligence</h5>
                           <v-rating
                             hover
-                            v-model="intelligence"
+                            v-model="cat_detail.intelligence"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -409,7 +451,7 @@
                           <h5>Vocality</h5>
                           <v-rating
                             hover
-                            v-model="vocality"
+                            v-model="cat_detail.vocality"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -443,8 +485,10 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
+    url : process.env.VUE_APP_IMAGE_URL,
     breeds_info: [],
     actifity: 5,
+    cat_detail : [{}],
     attention: 4,
     Hardiness: 2,
     Affection: 4,
@@ -537,7 +581,12 @@ export default {
     ],
   }),
   mounted() {
-    let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+    let uri_cat = process.env.VUE_APP_ROOT_API + "animal/cat/details/" + this.$route.params.slug;
+      this.$http.get(uri_cat).then((response) => {
+        this.cat_detail = response.data;
+
+      });
+    let uri = process.env.VUE_APP_ROOT_API + "animal/cat/" + this.$route.params.slug;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
@@ -545,7 +594,7 @@ export default {
   methods: {
     loadData() {
       let uri =
-        "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+        process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
       this.$http.get(uri).then((response) => {
         this.breeds_info = response.data;
       });
