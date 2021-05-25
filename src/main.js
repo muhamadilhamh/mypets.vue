@@ -9,11 +9,25 @@ import VueAxios from 'vue-axios'
 import Notifications  from 'vue-notification'
 import VueToastr from '@deveodk/vue-toastr'
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueLoading from 'vue-loading-overlay';
 
+import 'vue-loading-overlay/dist/vue-loading.css';
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueToastr)
+Axios.interceptors.request.use(function (config) {
+  store.commit("set_loading", true) //vuex mutation set loading state to true
+  return config;
+  }, function (error) {
+  return Promise.reject(error);
+  });
+  Axios.interceptors.response.use(function (config) {
+    store.commit("set_loading", false) //vuex mutation set loading state to false
+    return config;
+    }, function (error) {
+    return Promise.reject(error);
+    });
 
 Vue.prototype.$http = Axios;
 Vue.prototype.$image_url = 'http://localhost:8000/storage/'
@@ -21,6 +35,9 @@ Vue.use(Notifications );
 Vue.use(VueAxios,Axios);
 Vue.use(Vuelidate);
 Vue.use(VueSweetalert2);
+Vue.use(VueLoading, {
+ 
+})
 
 const token = localStorage.getItem('token')
 if (token) {
@@ -33,5 +50,8 @@ new Vue({
   router,
   store,
   vuetify,
+  components : {
+    Loading : VueLoading
+  },
   render: h => h(App)
 }).$mount('#app')

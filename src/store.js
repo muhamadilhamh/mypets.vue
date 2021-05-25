@@ -11,6 +11,7 @@ export default new Vuex.Store({
         status: '',
         token: localStorage.getItem('token') || '',
         user: null,
+        isLoading: false,
         isLoggedIn: false, 
     },plugins: [createPersistedState()],
     mutations: {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
         },
         get_breeds(state,payload){
             state.breeds = payload
+        },
+        set_loading(state,data){
+          state.isLoading = data
         }
     },
     actions: {
@@ -109,6 +113,9 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        isLoading(state){
+          return state.isLoading
+        },
         isLoggedIn (state){
             return state.isLoggedIn
           },
