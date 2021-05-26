@@ -4,7 +4,6 @@
       <notifications group="foo" position="center"/>
        <loading :active.sync="isLoading" 
         :can-cancel="true" 
-        :on-cancel="onCancel"
         :is-full-page="fullPage"></loading>
     
       <router-view :layout.sync="layout" />
@@ -25,6 +24,9 @@ export default {
       layout : "div",
       fullPage : true,
     };
+  },
+  created(){
+    this.$store.commit("set_loading", false);
   },
   components : {
     Loading

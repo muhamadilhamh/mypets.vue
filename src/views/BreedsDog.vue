@@ -146,11 +146,13 @@
                         :empty-icon="emptyIcon"
                         :full-icon="fullIcon"
                         length="1"
+                        value="1"
+                        readonly
                       >
                       </v-rating>
                     </v-col>
                     <v-col cols="2" md="2">
-                      <p class="rate">256</p>
+                      <p class="rate">{{item.user.length}}</p>
                     </v-col>
 
                     <v-col cols="1" md="1">
@@ -171,7 +173,7 @@
                     </v-col>
 
                     <v-col cols="3" md="3">
-                      <p class="rate">1000</p>
+                      <p class="rate">{{item.moments.length}}</p>
                     </v-col>
 
                     <v-col cols="4" md="4">

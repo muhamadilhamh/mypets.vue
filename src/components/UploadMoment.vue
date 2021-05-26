@@ -379,7 +379,7 @@ export default {
             });
             this.$router.push({ name: 'profile', params: { username : this.user.username } })
         }).catch(function (error) {
-    console.log(error);
+    console.log(error.data);
 });
         }
     }

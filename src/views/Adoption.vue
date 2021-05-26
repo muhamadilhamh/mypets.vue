@@ -2,7 +2,7 @@
   <!--Hero Static -->
   <div class="adoption_page">
     <v-img src="../assets/heroes_adoption.png">
-      
+      {{allpet_list[0]}}
       <v-row class="pa-12">
         <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
@@ -120,15 +120,26 @@
     <!--Feed_adop-->
     <v-container>
       <v-row>
-        <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
+        <v-col v-for="item in filteredList" :key="item.id" cols="12" md="4">
           <v-list dense>
             <v-list-item-group color="primary">
               <v-hover v-slot="{ hover }">
                 <v-card flat tile class="mx-auto">
-                  <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
-                    <v-img
+                  
+                   <v-carousel   
+    height="400"
+    hide-delimiter-background
+    show-arrows-on-hover
+    hide-delimiters
+    hide-arrows
+  >
+  <v-carousel-item
+      v-for="(img, i) in item.image"
+      :key="i"
+    ><router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
+                   <v-img
                       class="rounded"
-                      :src="url + item.picture"
+                      :src="url + img.img"
                       aspect-ratio="1.5"
                     >
                       <v-expand-transition>
@@ -155,8 +166,11 @@
                           </div>
                       </v-expand-transition>
                     </v-img>
-                  </router-link>
+                    </router-link>
 
+                       </v-carousel-item>
+                      </v-carousel>
+                  
                   <v-card-actions>
                     <v-list-item-avatar>
                       <v-img class="elevation-6" :src="url + item.owner_avatar  ">
@@ -209,7 +223,7 @@ export default {
         ],
       species: null,
       search: null,
-      listToShow : 3,
+      listToShow : 9,
       age_selected : null,
       loadList : false,
       gender_selected: null,

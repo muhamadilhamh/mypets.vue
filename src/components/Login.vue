@@ -124,7 +124,7 @@ export default {
       this.$store
         .dispatch("login", { email, password })
         .then( response => {
-        console.log(response)
+        console.log(response.data)
         this.$router.push("/adoption")})
         .catch((error) => this.errors = error.response.data.message);
     },

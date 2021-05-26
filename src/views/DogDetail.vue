@@ -32,12 +32,19 @@
             <v-card-actions>
               <v-row>
                 <v-col cols="1" md="1">
-                  <v-rating hover background-color="grey darken-1" color="#EF5350" large :empty-icon="emptyIcon"
+                  <template v-if="!likeStatus">
+                  <button @click="addLike(user.id)" ><v-rating hover background-color="grey darken-1" color="#787878" large :empty-icon="emptyIcon"
                     :full-icon="fullIcon" length="1">
-                  </v-rating>
+                  </v-rating></button>
+                  </template>
+                  <template v-if="likeStatus">
+                  <button @click="addLike(user.id)" ><v-rating hover background-color="grey darken-1" color="#EF5350" large :empty-icon="emptyIcon"
+                    :full-icon="fullIcon" length="1" value="1">
+                  </v-rating></button>
+                  </template>
                 </v-col>
                 <v-col cols="3" md="3">
-                  <p class="rate">256</p>
+                  <p class="rate">{{breeds_info[0].user.length}}</p>
                 </v-col>
 
                 <v-col cols="4" md="4" class="family">
@@ -556,6 +563,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
   export default {
     nama: "DogDetail",
     created() {
@@ -575,14 +583,17 @@
       let uri_moment = process.env.VUE_APP_ROOT_API + "moment/" + this.$route.params.slug;
       this.$http.get(uri_moment).then((response) => {
         this.moments = response.data;
-      })
+      }),
+      this.getLikeStatus()
+    },mounted(){
+      
     },
     data: () => ({
       loading_detail: true,
       loading_breeds: true,
       breeds_info: [{}],
       dog_detail: [{}],
-
+      likeStatus : false,
       moments: [],
       energy: 4,
       affection: 4,
@@ -644,9 +655,48 @@
         desc: "Lively, self-confident, strong willed and fearless, yet charming and comical, it is easy to see why instead of vanishing into the melting pot of working breeds, the Affenpinscher was promoted to cherished pet! Their sparkling eyes and monkey-whiskered face are irresistible and they are very affectionate with their owners, though often a little wary of strangers. Despite their diminutive stature, the Affenpinscher still believes he is a working terrier at times, so does require some training!",
       }, ],
     }),
-    mounted() {
+    methods : {
+      getLikeStatus(){
+        if(this.isLoggedIn){
+        let uri = process.env.VUE_APP_ROOT_API + 'animal/like/'+ this.$route.params.slug  + '/' +  this.user.id
+        this.$http.get(uri).then((response) => {
+          this.likeStatus = response.data.message
+      })
+      }else{
+        this.likeStatus = false;
+      }
+        
 
+      },
+      addLike(id){
+        if(this.isLoggedIn){
+        let uri = process.env.VUE_APP_ROOT_API + 'animal/like/'+ this.$route.params.slug  + '/' +  this.user.id
+        this.$http.post(uri,id).then((response) => {
+        let uri_pet = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
+        this.getLikeStatus();
+        this.$http.get(uri_pet).then((response) => {
+        this.breeds_info = response.data;
+      });
+      }).catch((error) => this.errors = error.response.data.message);
+      }else{
+        this.$swal({
+              icon : 'error',
+               confirmButtonColor: '#3085d6',
+                text: "You need to login first before doing this action",
+            confirmButtonText: 'Confirm',
+           
+            });
+        this.$router.push('/login')
+      }
+      }
     },
+    computed : {
+    ...mapGetters({ 
+        isLoggedIn: 'isLoggedIn',
+        user: 'user',
+      }),
+  }
+  
   };
 </script>
 
