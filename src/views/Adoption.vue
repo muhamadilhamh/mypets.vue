@@ -2,7 +2,7 @@
   <!--Hero Static -->
   <div class="adoption_page">
     <v-img src="../assets/heroes_adoption.png">
-      {{allpet_list[0]}}
+      {{allpet_list[0].create_time}}
       <v-row class="pa-12">
         <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
@@ -55,14 +55,19 @@
     </v-container>
 
     <v-container>
-      <v-col cols="6" md="4">
+      <v-col cols="12" md="4">
         <div class="filter">
-          <v-btn outlined rounded solo @click="showFilter = !showFilter">
+          <v-btn outlined rounded solo @click="showFilter = !showFilter;showSort = false">
             <v-icon left> mdi-filter-variant </v-icon>
             filter
           </v-btn>
+          <v-btn outlined rounded solo @click="showSort = !showSort; showFilter = false">
+            <v-icon left> mdi-sort-variant </v-icon>
+            Sort
+          </v-btn>
         </div>
       </v-col>
+      
       <v-row class="ma-1">
         <v-col cols="6" md="3">
           <div class="name" v-if="showFilter">
@@ -114,6 +119,34 @@
               placeholder="Age"></v-select>
           </div>
         </v-col>
+        <v-col cols="6" md="3">
+          <div class="location" v-if="showSort">
+           <h5>Name</h5>
+            <v-select
+              outlined
+              item-text="name"
+              :items="sortName"
+              item-value="value"
+              v-model="sortType"
+              placeholder="Name"
+              @change="sortedItem = 'name'"
+            ></v-select>
+          </div>
+        </v-col>
+        <v-col cols="6" md="3">
+          <div class="location" v-if="showSort">
+           <h5>Age</h5>
+            <v-select
+              outlined
+              item-text="name"
+              :items="sortName"
+              item-value="value"
+              v-model="sortType"
+              placeholder="Age"
+              @change="sortedItem = 'age'"
+            ></v-select>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
 
@@ -148,10 +181,13 @@
                           class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
                           style="height: 25%"
                         >
-                          <v-if item.animal_name="Dog">
-                            <v-icon small left color="#fff"> mdi-dog</v-icon>
-                          </v-if>
-                          {{item.name}}
+                          <template v-if="item.animal_name==  'Dog'">
+                            <v-icon  left color="#fff"> mdi-dog</v-icon>
+                          </template>
+                          <template v-if="item.animal_name=='Cat'">
+                            <v-icon  left color="#fff"> mdi-cat</v-icon>
+                          </template>
+                         
                           <div v-if="item.gender == 'Male'">
                             <v-icon small left color="#fff">
                               mdi-gender-male
@@ -162,7 +198,8 @@
                               mdi-gender-female
                             </v-icon>
                           </div>
-                          {{ item.age }} Months
+                          {{ item.age }} Months,
+                          {{item.upload_time}}
                           </div>
                       </v-expand-transition>
                     </v-img>
@@ -173,14 +210,16 @@
                   
                   <v-card-actions>
                     <v-list-item-avatar>
-                      <v-img class="elevation-6" :src="url + item.owner_avatar  ">
+                      <v-img class="elevation-6" :src="url + item.user.picture  ">
                       </v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
+                      <router-link :to="{ name: 'profile', params: { username : item.user.username } }" style="text-decoration:none">
                       <v-list-item class="name_user">
-                        {{ item.owner }}
+                        {{ item.user.full_name }}
                       </v-list-item>
+                      </router-link>
                     </v-list-item-content>
                   </v-card-actions>
                 </v-card>
@@ -208,7 +247,17 @@ export default {
   data() {
     return {
       showFilter: false,
+      showSort:false,
+      sortedItem : '',
+      sortType : '',
+      sortName : [{
+        name : 'Ascending', value : 'asc'},
+        {
+        name : 'Descending', value : 'desc'
+        }
+      ],
       image : '',
+      sort : null,
       url : process.env.VUE_APP_IMAGE_URL,
       allpet_list: [],
       pet_list: [],
@@ -307,7 +356,7 @@ export default {
     this.$http.get(uri_cat).then((response) => {
       this.animal_list = response.data;
     });
-      
+    
     
   },
   methods: {
@@ -331,6 +380,7 @@ export default {
   computed: {
     
     filteredList: function () {
+     
       return this.pet_list
         .filter((post) => {
           if (this.species != null) {
@@ -378,7 +428,17 @@ export default {
             }else {
               return post  = this.allpet_list;
             }
-          }).slice(0,this.listToShow);
+          }).slice(0,this.listToShow)
+        .sort((a,b) => {
+           let modifier = 1;
+           if(this.sortType == 'desc') modifier = -1;
+           if(a[this.sortedItem] < b[this.sortedItem]){
+            return -1 * modifier; 
+           }if(a[this.sortedItem] > b[this.sortedItem])
+           return 1 * modifier;
+           return 0;
+        }).slice(0,this.listToShow)
+          
     },
   },
 };

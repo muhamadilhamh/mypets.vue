@@ -438,7 +438,7 @@ export default {
                 console.log(response.data)
                     self.$router.push('/adoption');
                 }).catch(function (error) {
-    console.log(error);
+    console.log(error.data);
 });
         }
     }

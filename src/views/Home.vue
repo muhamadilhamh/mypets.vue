@@ -13,6 +13,7 @@
                 Ingin menyayangi, mengadopsi dan mencari tahu mengenai masalah
                 hewanmu. Mari kita eksplor
               </p>
+              
               <div class="btn_eksplore">
                 <v-btn to="" rounded small color="#489FB5" dark> Start </v-btn>
               </div>
@@ -290,8 +291,8 @@
               <v-container>
                 <v-row>
                   <v-col
-                    v-for="item in feed_adop"
-                    :key="item.id"
+                    v-for="(item,index) in feed_adop"
+                    :key="index"
                     cols="12"
                     sm="4"
                   >
@@ -299,9 +300,21 @@
                       <v-list-item-group color="primary">
                         <v-hover v-slot="{ hover }">
                           <v-card flat tile class="mx-auto">
+                            <v-carousel   
+    height="400"
+    hide-delimiter-background
+    show-arrows-on-hover
+    hide-delimiters
+    hide-arrows
+  >
+  <v-carousel-item
+      v-for="(img, i) in item.image"
+      :key="i"
+    >
+                            <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
                             <v-img
                               class="rounded"
-                              :src="item.src"
+                              :src="url + item.picture"
                               aspect-ratio="1.5"
                             >
                               <v-expand-transition>
@@ -310,29 +323,44 @@
                                   class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
                                   style="height: 25%"
                                 >
-                                  <v-icon small left color="#fff">
-                                    mdi-dog</v-icon
-                                  >
-                                  Lorem Ipsum
-                                  <v-icon small left color="#fff">
-                                    mdi-gender-male
-                                  </v-icon>
+                                 <template v-if="item.animal_name==  'Dog'">
+                            <v-icon  left color="#fff"> mdi-dog</v-icon>
+                          </template>
+                          <template v-if="item.animal_name=='Cat'">
+                            <v-icon  left color="#fff"> mdi-cat</v-icon>
+                          </template>
+                                  {{item.name}}
+                                 <div v-if="item.gender == 'Male'">
+                            <v-icon small left color="#fff">
+                              mdi-gender-male
+                            </v-icon>
+                          </div>
+                          <div v-else>
+                            <v-icon small left color="#fff">
+                              mdi-gender-female
+                            </v-icon>
+                            
+                          </div>
+                          {{ item.age }} Months,
+                          {{item.upload_time}}
                                 </div>
                               </v-expand-transition>
                             </v-img>
-
+                            </router-link>
+                            </v-carousel-item>
+                      </v-carousel>
                             <v-card-actions>
                               <v-list-item-avatar>
                                 <v-img
                                   class="elevation-6"
-                                  :src="item.avatar_src"
+                                  :src="url + item.user.picture"
                                 >
                                 </v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
                                 <v-list-item class="name_user">
-                                  {{ item.name }}
+                                  {{ item.user.full_name }}
                                 </v-list-item>
                               </v-list-item-content>
                             </v-card-actions>
@@ -654,8 +682,15 @@ export default {
   created() {
     this.$emit("update:layout", navbarfull);
   },
+  mounted() {
+    let uri = process.env.VUE_APP_ROOT_API + 'adoption/3'
+    this.$http.get(uri).then((response) => {
+      this.feed_adop = response.data;
+    })
+  },
   data() {
     return {
+      url : process.env.VUE_APP_IMAGE_URL,
       feed_home: [
         {
           id: 1,
@@ -700,26 +735,7 @@ export default {
           desc: "Yang butuh mandi bukan kamu aja loh, hewanmu pun butuh mandi",
         },
       ],
-      feed_adop: [
-        {
-          id: 1,
-          src: require("../assets/1x1_ad.png"),
-          avatar_src: require("../assets/ava_ad1x1.png"),
-          name: "Royal Navy",
-        },
-        {
-          id: 2,
-          src: require("../assets/1x2_ad.png"),
-          avatar_src: require("../assets/ava_ad1x2.png"),
-          name: "Low Short",
-        },
-        {
-          id: 3,
-          src: require("../assets/1x3_ad.png"),
-          avatar_src: require("../assets/ava_ad1x3.png"),
-          name: "Attitude",
-        },
-      ],
+      feed_adop : [],
       feed_age_dog: [
         {
           id: 1,
