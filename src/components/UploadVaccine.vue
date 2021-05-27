@@ -296,6 +296,7 @@ export default {
   methods: {
     deleteImage(){
       this.images.pop();
+      this.files.pop();
     },
     submit(){
       this.$v.$touch()

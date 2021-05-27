@@ -138,7 +138,7 @@
                     </v-col>
                     <v-col cols="2" md="2" sm="4">
                       <v-chip>
-                        <p class="testing">{{ breeds_info.age }}</p></v-chip
+                        <p class="testing">{{ breeds_info.age }} Months</p></v-chip
                       >
                     </v-col>
 
@@ -182,6 +182,16 @@
 
                       <v-list-item-content>
                         <v-list-item> {{ breeds_info.phone }} </v-list-item>
+                      </v-list-item-content>
+                    </v-card-actions>
+                     <v-card-actions class="phone">
+                      <v-list-item-avatar>
+                        <v-icon> mdi-eye </v-icon>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item v-if ="breeds_info.interest"> {{ breeds_info.interest.length }} Peoples interested to adopt this pet </v-list-item>
+                        <v-list-item v-if ="!breeds_info.interest"> {{ breeds_info.interest.length }} Peoples interested to adopt this pet </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                   </v-card>
@@ -245,7 +255,7 @@
         </v-card-title>
 
         <v-card-text>
-          By accepting this term, you'll see Original Owner Contact Information
+          Please make sure you will contact the owner regarding this pet about adoption, otherwise this pet will be sad
         </v-card-text>
 
         <v-card-actions>
@@ -337,7 +347,10 @@ export default {
      this.dialog = false;
      let uri = process.env.VUE_APP_ROOT_API + "adoption/" + this.$route.params.id_adoption + "/" + this.current_user.id + "/interest"
      this.$http.post(uri).then((response) => {
-       
+       let uri_breed = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
+    this.$http.get(uri_breed).then((response) => {
+      this.breeds_info = response.data;
+    });
      })
    } 
   },
