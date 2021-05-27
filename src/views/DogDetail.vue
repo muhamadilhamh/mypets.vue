@@ -506,27 +506,7 @@
                   <v-expansion-panel-header>
                     <v-icon left> mdi-cat </v-icon>
                     <v-card-title> {{item.title}}</v-card-title>
-                    <v-menu offset-y v-if="isLoggedIn">
-                      <template v-slot:activator="{ on }">
-                        <v-btn class="mx-2" rounded icon small v-on="on">
-                          <v-icon> mdi-pencil </v-icon>
-                        </v-btn>
-                      </template>
-                      <v-list>
-                        <v-list-item>
-                          <v-icon left> mdi-delete </v-icon>
-                          <v-btn to="" x-small color="orange" text>
-                            delete
-                          </v-btn>
-                        </v-list-item>
-                        <v-list-item>
-                          <v-icon left> mdi-plus</v-icon>
-                          <v-btn to="" x-small color="orange" text>
-                            update
-                          </v-btn>
-                        </v-list-item>
-                      </v-list>
-                    </v-menu>
+                   
 
                     <v-card-list>
                       <v-card-subtitle>12 Mei 2021 </v-card-subtitle>

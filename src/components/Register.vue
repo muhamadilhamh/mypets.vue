@@ -189,7 +189,7 @@ export default {
       this.$store
         .dispatch("register", data)
         .then(() => this.$router.push("/login?msg=register_success"))
-        .catch((err) =>  this.errors = err.response.data.message);
+        .catch((err) =>  this.errors = err.response.data);
     },
   },
   data: () => ({

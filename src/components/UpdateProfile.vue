@@ -315,8 +315,8 @@ export default {
             confirmButtonText: 'Confirm',
             });
                   this.$router.push('/')
-                }).catch( (error)  => {
-    this.errMessage = error.response.data;
+                }).catch( (err)  => {
+    this.errMessage = err.response;
 });
         }
   },
