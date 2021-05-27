@@ -261,6 +261,7 @@ export default {
   methods: {
     deleteImage(){
        this.images.splice(0,this.images.length);
+        this.files.splice(0,this.files.length);
     },
      subSpecies(value) {
       if (value != null) {

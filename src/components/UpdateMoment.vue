@@ -8,40 +8,15 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-row>
+    
       <v-col cols="12" md="4" sm="4" offset-md="1">
-         <div class="uploader"
-        @dragenter="OnDragEnter"
-        @dragleave="OnDragLeave"
-        @dragover.prevent
-        @drop="onDrop"
-        :class="{ dragging: isDragging }">
-        
-        <div class="upload-control" v-show="images.length">
-            <label for="file">Select a file</label>
-            <button @click="deleteImage">Clear Image</button>
-        </div>
-
-
-        <div v-show="!images.length">
-            <i class="fa fa-cloud-upload"></i>
-            <p>Drag your images here</p>
-            <div>OR</div>
-            <div class="file-input">
-                <label for="file">Select a file</label>
-                <input type="file" id="file" @change="onInputChange" multiple>
-            </div>
-        </div>
-
-        <div class="images-preview" v-show="images.length">
-            <div class="img-wrapper" v-for="(image, index) in images" :key="index">
-                <img :src="image" :alt="`Image Uplaoder ${index}`">
-                <div class="details">
-                    <span class="name" v-text="files[index].name"></span>
-                    <span class="size" v-text="getFileSize(files[index].size)"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+         <v-carousel height = "600px">         <v-carousel-item
+      v-for="(item,i) in moment.image"
+      :key="i"
+    >
+    
+      <v-img class="rounded-lg" :src="url + item.img"> </v-img></v-carousel-item>
+      </v-carousel>
       </v-col>
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
@@ -60,8 +35,6 @@
                   dense
                   color="#489FB5"
                 ></v-text-field>
-            {{moment}}
-
                 <div>
                   <h5>Description</h5>
                   <v-textarea
@@ -209,6 +182,7 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
+    url : process.env.VUE_APP_IMAGE_URL,
     moment : [],
     showform: false,
     isDragging: false,
