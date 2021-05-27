@@ -367,24 +367,62 @@
                     <v-col offset-md="3">
                       <v-img
                         :src="url + item.picture"
-                        class="rounded-lg"
-                        max-width="500"
+                        class="rounded-lg img_expand"
+                        max-width="350"
                       >
                       </v-img>
                     </v-col>
-                    <h4>Description</h4>
-                    <v-card-text>{{ item.description }}</v-card-text>
-                    <h4>Age</h4>
-                    <v-card-text>{{ item.age }}</v-card-text>
-                    <h4>Next Vaccine</h4>
-                    <v-card-text
-                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
-                      velit eius qui corrupti ipsam nulla enim molestiae error
-                      sequi ad laudantium deleniti eos?</v-card-text
-                    >
-                    <h4>Vaccine Type</h4>
-                    <v-card-text>{{ item.vaksin_type }}</v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-card outlined class="rounded-xl">
+                            <v-card-title class="justify-center">
+                              <h4>Description</h4>
+                            </v-card-title>
+                            <v-card-text class="text-center">{{
+                              item.description
+                            }}</v-card-text>
+                          </v-card>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <v-card outlined class="rounded-xl">
+                            <v-card-title class="justify-center">
+                              <h4>Next Vaccine</h4>
+                            </v-card-title>
+                            <v-card-text class="text-center"
+                              >Lorem, ipsum dolor sit amet consectetur
+                              adipisicing elit. Autem nobis dolor rerum
+                              dignissimos sapiente unde, commodi velit eius qui
+                              corrupti ipsam nulla enim molestiae error sequi ad
+                              laudantium deleniti eos?</v-card-text
+                            >
+                          </v-card>
+                        </v-col>
+                      </v-row>
+
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-card outlined class="rounded-xl">
+                            <v-card-title class="justify-center">
+                              <h4>Age</h4>
+                            </v-card-title>
+                            <v-card-text class="text-center">{{
+                              item.age
+                            }}</v-card-text>
+                          </v-card>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <v-card outlined class="rounded-xl">
+                            <v-card-title class="justify-center">
+                              <h4>Vaccine Type</h4>
+                            </v-card-title>
+                            <v-card-text class="text-center">{{
+                              item.vaksin_type
+                            }}</v-card-text>
+                          </v-card>
+                        </v-col>
+                      </v-row>
+                    </v-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -654,5 +692,10 @@ export default {
   margin-left: 300px;
   margin-right: 270px;
   margin-bottom: 30px;
+}
+.img_expand {
+  clip-path: inset(20px 20px 50px round 25px 0);
+  margin-left: 70px;
+  margin-right: 70px;
 }
 </style>
