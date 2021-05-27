@@ -39,7 +39,7 @@
                   </template>
                   <template v-if="likeStatus">
                   <button @click="addLike(user.id)" ><v-rating hover background-color="grey darken-1" color="#EF5350" large :empty-icon="emptyIcon"
-                    :full-icon="fullIcon" length="1" value="1">
+                    :full-icon="fullIcon" length="1" :value="1">
                   </v-rating></button>
                   </template>
                 </v-col>
@@ -48,7 +48,7 @@
                 </v-col>
 
                 <v-col cols="4" md="4" class="family">
-                  <p><span class="bold">Family:</span> Pinscher</p>
+                  <p><span class="bold">Family:</span> {{dog_detail[0].family}}</p>
                 </v-col>
                 <v-col cols="4" md="4" class="type">
                   <p><span class="bold">Type:</span> Dog</p>

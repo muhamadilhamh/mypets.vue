@@ -304,7 +304,7 @@ export default {
             });
                   this.$router.push('/')
                 }).catch(function (error) {
-    console.log(error);
+    console.log(error.data);
 });
         }
   },

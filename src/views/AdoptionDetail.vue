@@ -18,7 +18,7 @@
         </v-col>
       </v-row>
     </v-container>
-
+{{current_url}}ss
     <v-container>
       <v-row>
         <v-col offset="2">
@@ -36,26 +36,64 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col offset="2" cols="2" class="fb">
+      <v-col offset-sm="2" md="8">
+        <v-row>       
+           <v-col  cols="6" sm="2">
+          <ShareNetwork
+    network="facebook"
+    :url="current_url"
+    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+    quote="The hot reload is so fast it\'s near instant. - Evan You"
+    hashtags="vuejs,vite"
+  tag="v-btn">
           <v-btn outlined rounded>
-            <v-icon left>mdi-facebook</v-icon> Share
+<v-icon>mdi-facebook</v-icon> Share
+
+            
           </v-btn>
+</ShareNetwork>
         </v-col>
-        <v-col cols="2">
-          <v-btn outlined rounded class="tw">
-            <v-icon left>mdi-twitter</v-icon> Share
+        <v-col  cols="6" sm="2">
+          <ShareNetwork
+    network="twitter"
+    :url="current_url"
+    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+    quote="The hot reload is so fast it\'s near instant. - Evan You"
+    hashtags="vuejs,vite"
+  tag="v-btn">
+          <v-btn outlined rounded>
+<v-icon>mdi-twitter</v-icon> Share
+
+            
           </v-btn>
+</ShareNetwork>
         </v-col>
-        <v-col cols="2">
-          <v-btn outlined rounded class="ig">
-            <v-icon left>mdi-instagram</v-icon> Share
+        <v-col  cols="6" sm="2">
+          <ShareNetwork
+    network="facebook"
+    :url="current_url"
+    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+    quote="The hot reload is so fast it\'s near instant. - Evan You"
+    hashtags="vuejs,vite"
+  tag="v-btn">
+          <v-btn outlined rounded>
+<v-icon>mdi-instagram</v-icon> Share
+
+            
           </v-btn>
+</ShareNetwork>
         </v-col>
-        <v-col cols="2">
-          <v-btn outlined rounded class="link">
+        <v-col cols="6" md="2">
+          <v-btn outlined rounded>
             <v-icon left>mdi-link-variant</v-icon> Copy Link
           </v-btn>
         </v-col>
+        </v-row>
+        </v-col>
+
       </v-row>
     </v-container>
     <v-container>
@@ -135,6 +173,7 @@
                       <v-list-item-content>
                         <v-list-item> {{ breeds_info.email }} </v-list-item>
                       </v-list-item-content>
+                      
                     </v-card-actions>
                     <v-card-actions class="phone">
                       <v-list-item-avatar>
@@ -147,6 +186,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-col>
+                
               </v-container>
             </v-card>
           </v-col>
@@ -180,6 +220,55 @@
                   >
                     About Profile
                   </v-btn>
+                  
+                </v-card-actions>
+                   <v-card-actions>
+                  <v-btn
+                    block
+                   
+                    large
+                    color="#489FB5"
+                    rounded
+                    dark
+                    @click="dialog = true"
+                    elevation="9"
+                  >
+                    Plan to Adopt
+                  </v-btn>
+                  <v-dialog
+      v-model="dialog"
+      max-width="500"
+    >
+      <v-card>
+        <v-card-title class="headline">
+       Are you sure you really plant to adopt this
+        </v-card-title>
+
+        <v-card-text>
+          By accepting this term, you'll see Original Owner Contact Information
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            No
+          </v-btn>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = addInterest()"
+          >
+            Yes
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
                 </v-card-actions>
               </v-container>
             </v-card>
@@ -192,6 +281,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   nama: "CatDetail",
   created() {
@@ -199,6 +289,8 @@ export default {
   },
   data() {
     return {
+      dialog : false,
+      current_url : 'mypets-vue.netlify.app' + this.$router.currentRoute.path,
     url : process.env.VUE_APP_IMAGE_URL,
     breeds_info: [],
     breeds_images : [],
@@ -240,6 +332,21 @@ export default {
       });
     },
   },
+  methods : {
+   addInterest(){
+     this.dialog = false;
+     let uri = process.env.VUE_APP_ROOT_API + "adoption/" + this.$route.params.id_adoption + "/" + this.current_user.id + "/interest"
+     this.$http.post(uri).then((response) => {
+       
+     })
+   } 
+  },
+  computed : {
+    ...mapGetters({ 
+        isLoggedIn: 'isLoggedIn',
+        current_user: 'user',
+      })
+  }
 };
 </script>
 

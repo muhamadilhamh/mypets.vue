@@ -9,12 +9,15 @@ import VueAxios from 'vue-axios'
 import Notifications  from 'vue-notification'
 import VueToastr from '@deveodk/vue-toastr'
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueSocialSharing from 'vue-social-sharing'
+
 
 import 'vue-loading-overlay/dist/vue-loading.css';
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueToastr)
+Vue.use(VueSocialSharing);
 Axios.interceptors.request.use(function (config) {
   store.commit("set_loading", true) //vuex mutation set loading state to true
   return config;

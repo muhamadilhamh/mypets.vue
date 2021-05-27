@@ -471,7 +471,7 @@
         </v-tab-item>
 
         <!--Fourth-->
-        <v-tab class="tit"> Comment</v-tab>
+        <v-tab class="tit"> Moment</v-tab>
         <v-tab-item class="konten_fact"> </v-tab-item>
       </v-tabs>
     </v-container>

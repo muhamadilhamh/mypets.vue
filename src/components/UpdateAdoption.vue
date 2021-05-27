@@ -50,7 +50,7 @@
 
                 <v-row>
                   <v-col>
-                    <div v-if="showform">
+                    <div>
                       <h5>Pet</h5>
 
                       <v-radio-group v-model="adoption_info.animal_name" row
@@ -73,7 +73,7 @@
                   </v-col>
 
                   <v-col>
-                    <div v-if="showform">
+                    <div >
                       <h5>Gender</h5>
                       <v-radio-group v-model="adoption_info.gender" row>
                         <v-radio
@@ -90,7 +90,7 @@
                     </div>
                   </v-col>
                 </v-row>
-                <v-row v-if="showform">
+                <v-row >
                 <v-col cols="12" sm="12" md="12">
                 <h5>Type</h5>
                 <v-autocomplete
@@ -130,7 +130,7 @@
             >
             
             </v-autocomplete>
-                <v-row v-if="showform">
+                <v-row>
                   <v-col cols="6">
                     <h5>Age (Months)</h5><br>
                     <v-slider
@@ -158,7 +158,7 @@
                     
                   </v-col>
                 </v-row>
-                <v-row v-if="showform">
+                <v-row >
                   <v-col cols="6">
                     <h5>Health</h5>
                      <v-autocomplete
@@ -191,6 +191,25 @@
                     
                   </v-col>
                 </v-row>
+                <v-row>
+                  <v-col cols="6">
+                    <h3>Adoption Status</h3>
+                      <v-radio-group
+      v-model="adoption_info.adoption_status"
+      row
+    >
+      <v-radio
+        label="Waiting to be adopted"
+        :value=0
+      ></v-radio>
+      <v-radio
+        label="Found a new home"
+        :value=1
+      ></v-radio>
+    </v-radio-group>
+                  </v-col>
+                 
+                </v-row>
                 
                 <v-row>
                   <v-col cols="4" offset-md="1">
@@ -214,7 +233,7 @@
                       block
                       @click = "upload"
                     >
-                      Publish Adoption
+                      Update Adoption
                     </v-btn>
                     
                   </v-col>
@@ -336,64 +355,9 @@ export default {
           }, 500)
         }
     },
-        OnDragEnter(e) {
-            e.preventDefault();
-            
-            this.dragCount++;
-            this.isDragging = true;
-            return false;
-        },
-        OnDragLeave(e) {
-            e.preventDefault();
-            this.dragCount--;
-            if (this.dragCount <= 0)
-                this.isDragging = false;
-        },
-        onInputChange(e) {
-            const files = e.target.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
-        },
-        onDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.isDragging = false;
-            const files = e.dataTransfer.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
-        },
-        addImage(file) {
-            if (!file.type.match('image.*')) {
-                this.$toastr.e(`${file.name} is not an image`);
-                return;
-            }
-            this.files.push(file);
-            const img = new Image(),
-            reader = new FileReader();
-            reader.onload = (e) => this.images.push(e.target.result);
-            reader.readAsDataURL(file);
-        },
-        getFileSize(size) {
-            const fSExt = ['Bytes', 'KB', 'MB', 'GB'];
-            let i = 0;
-            
-            while(size > 900) {
-                size /= 1024;
-                i++;
-            }
-            return `${(Math.round(size * 100) / 100)} ${fSExt[i]}`;
-        },
         upload() {
           let self = this;
             const formData = new FormData();
-            const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                }
-           
             formData.append('user_id',this.user.id) 
             formData.append('animal_name',this.adoption_info.animal_name) 
             formData.append('name',this.adoption_info.name) 
@@ -405,14 +369,13 @@ export default {
              formData.append('age',this.adoption_info.age)
             formData.append('body',this.adoption_info.body)
             formData.append('health',this.adoption_info.health)
+            formData.append('adoption_status',this.adoption_info.adoption_status)
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
-          this.files.forEach(file => {
-                formData.append('images[]', file, file.name);
-            });
+          
            axios.post(
-                        process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/adoption/' + this.$route.params.id ,formData,config
+                        process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/adoption/' + this.$route.params.id_adoption ,formData
                     )
                 .then((response) => {
                   this.$swal({

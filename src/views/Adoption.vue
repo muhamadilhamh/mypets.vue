@@ -1,8 +1,9 @@
 <template>
   <!--Hero Static -->
+  
   <div class="adoption_page">
+    
     <v-img src="../assets/heroes_adoption.png">
-      {{allpet_list[0].create_time}}
       <v-row class="pa-12">
         <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>

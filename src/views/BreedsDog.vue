@@ -191,11 +191,11 @@
 </template>
 
 <script>
-import navbarlogo_register from "../layouts/navbarlogo_register";
+import navbarfull from "../layouts/navbarfull";
 export default {
   name: "BreedsDog",
   created() {
-    this.$emit("update:layout", navbarlogo_register);
+    this.$emit("update:layout", navbarfull);
   },
 
   data() {

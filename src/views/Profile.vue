@@ -73,10 +73,11 @@
                     <v-hover v-slot="{ hover }">
                       <v-card flat tile class="mx-auto">
                         <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
-                          <v-img
+                          <template v-if="item.adoption_status == 1">                          <v-img 
                             class="rounded"
                             :src="url + item.picture"
                             aspect-ratio="1.5"
+                            gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
                           >
                             <v-expand-transition>
                               <div
@@ -103,7 +104,45 @@
                                 {{ item.age }} Years Old
                               </div>
                             </v-expand-transition>
+                            
                           </v-img>
+                          </template>
+                          <template v-if="item.adoption_status == 0">                          
+                            <v-img 
+                            class="rounded"
+                            :src="url + item.picture"
+                            aspect-ratio="1.5"
+                           
+                          >
+                            <v-expand-transition>
+                              <div
+                                v-if="hover"
+                                class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
+                                style="height: 25%"
+                              >
+                                <v-if item.animal_name="Dog">
+                                  <v-icon small left color="#fff">
+                                    mdi-dog</v-icon
+                                  >
+                                </v-if>
+                                {{ item.title }}
+                                <div v-if="item.gender == 'Male'">
+                                  <v-icon small left color="#fff">
+                                    mdi-gender-male
+                                  </v-icon>
+                                </div>
+                                <div v-else>
+                                  <v-icon small left color="#fff">
+                                    mdi-gender-female
+                                  </v-icon>
+                                </div>
+                                {{ item.age }} Years Old
+                              </div>
+                            </v-expand-transition>
+                            
+                          </v-img>
+                          </template>
+
                         </router-link>
 
                         <v-card-actions>
