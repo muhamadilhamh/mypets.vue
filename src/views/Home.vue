@@ -9,7 +9,7 @@
           <v-row class="pa-12">
             <v-container>
               <h3 class="header_home">Find Anything!</h3>
-              <p class="desc_home">
+              <p class="desc_age_option">
                 Want to love, adopt and find out more about your pet's problem.
                 Let's explore
               </p>

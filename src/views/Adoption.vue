@@ -7,11 +7,26 @@
         <v-col cols="3" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
         </v-col>
-        <v-col cols="8" offset-lg="1">
+        <v-col cols="8" offset-lg="1" class="hidden-xs-only">
           <v-row>
             <v-container>
               <h3 class="header_heroes">Be My New Family!</h3>
-              <p class="desc_heroes">
+              <p class="desc_age_option">
+                Memberikan hewanmu, untuk kasih sayang yang diperlukan
+              </p>
+              <div class="btn_gotoregis">
+                <v-btn to="/register" rounded small color="#489FB5" dark>
+                  Register
+                </v-btn>
+              </div>
+            </v-container>
+          </v-row>
+        </v-col>
+        <v-col cols="11" offset-lg="1" class="d-sm-none">
+          <v-row>
+            <v-container>
+              <h3 class="header_heroes">Be My New Family!</h3>
+              <p class="desc_age_option">
                 Memberikan hewanmu, untuk kasih sayang yang diperlukan
               </p>
               <div class="btn_gotoregis">

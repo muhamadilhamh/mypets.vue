@@ -28,11 +28,7 @@
       <v-row class="ofset-1">
         <v-col cols="12" sm="7">
           <div class="desc_age_option">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <p>Compare your age with your pet's age. Lets try it</p>
           </div>
         </v-col>
       </v-row>
