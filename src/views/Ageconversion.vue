@@ -58,10 +58,16 @@
                       <p class="title_dog">Dog</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">Cek Anjingmu Yuk!</p>
+                      <p class="desc_anjing">More about 'dog'</p>
                     </v-card-subtitle>
                     <v-card-actions>
-                      <v-btn rounded  to="/dogconversion" color="#FFF" block class="btn_dog">
+                      <v-btn
+                        rounded
+                        to="/dogconversion"
+                        color="#FFF"
+                        block
+                        class="btn_dog"
+                      >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
                       </v-btn>
@@ -87,10 +93,16 @@
                       <p class="title_dog">Cat</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">Cek Kucingmu Yuk!</p>
+                      <p class="desc_anjing">More about 'cat'</p>
                     </v-card-subtitle>
                     <v-card-actions>
-                      <v-btn rounded color="#FFF"  to="/catconversion" block class="btn_dog">
+                      <v-btn
+                        rounded
+                        color="#FFF"
+                        to="/catconversion"
+                        block
+                        class="btn_dog"
+                      >
                         Detail
                         <v-icon right> mdi-chevron-right </v-icon>
                       </v-btn>

@@ -1,27 +1,35 @@
 <template>
   <!--Hero Static -->
-  
+
   <div class="adoption_page">
-    
     <v-img src="../assets/heroes_adoption.png">
+      {{ allpet_list[0] }}
       <v-row class="pa-12">
-        <v-col cols="12" sm="3" offset-sm="1" class="hidden-xs-only">
+        <v-col cols="3" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>
         </v-col>
-        <v-col cols="6" sm="8">
-          <v-row class="pa-12">
+        <v-col cols="8" offset-lg="1">
+          <v-row>
             <v-container>
               <h3 class="header_heroes">Be My New Family!</h3>
               <p class="desc_heroes">
                 Memberikan hewanmu, untuk kasih sayang yang diperlukan
               </p>
               <div class="btn_gotoregis">
-                <v-btn to="" rounded small color="#489FB5" dark>
+                <v-btn to="/register" rounded small color="#489FB5" dark>
                   Register
                 </v-btn>
               </div>
             </v-container>
           </v-row>
+        </v-col>
+        <v-col cols="8" class="d-sm-none">
+          <v-img
+            aspect-ratio="1"
+            class="il_heroes_respn"
+            src="../assets/il_heroes_adp.svg"
+          >
+          </v-img>
         </v-col>
       </v-row>
     </v-img>
@@ -58,17 +66,33 @@
     <v-container>
       <v-col cols="12" md="4">
         <div class="filter">
-          <v-btn outlined rounded solo @click="showFilter = !showFilter;showSort = false">
+          <v-btn
+            outlined
+            rounded
+            solo
+            @click="
+              showFilter = !showFilter;
+              showSort = false;
+            "
+          >
             <v-icon left> mdi-filter-variant </v-icon>
             filter
           </v-btn>
-          <v-btn outlined rounded solo @click="showSort = !showSort; showFilter = false">
+          <v-btn
+            outlined
+            rounded
+            solo
+            @click="
+              showSort = !showSort;
+              showFilter = false;
+            "
+          >
             <v-icon left> mdi-sort-variant </v-icon>
             Sort
           </v-btn>
         </div>
       </v-col>
-      
+
       <v-row class="ma-1">
         <v-col cols="6" md="3">
           <div class="name" v-if="showFilter">
@@ -116,13 +140,19 @@
         <v-col cols="6" md="3">
           <div class="age" v-if="showFilter">
             <h5>Age</h5>
-            <v-select outlined item-text="name" :items="age" item-value="value" v-model="age_selected"
-              placeholder="Age"></v-select>
+            <v-select
+              outlined
+              item-text="name"
+              :items="age"
+              item-value="value"
+              v-model="age_selected"
+              placeholder="Age"
+            ></v-select>
           </div>
         </v-col>
         <v-col cols="6" md="3">
           <div class="location" v-if="showSort">
-           <h5>Name</h5>
+            <h5>Name</h5>
             <v-select
               outlined
               item-text="name"
@@ -136,7 +166,7 @@
         </v-col>
         <v-col cols="6" md="3">
           <div class="location" v-if="showSort">
-           <h5>Age</h5>
+            <h5>Age</h5>
             <v-select
               outlined
               item-text="name"
@@ -159,67 +189,74 @@
             <v-list-item-group color="primary">
               <v-hover v-slot="{ hover }">
                 <v-card flat tile class="mx-auto">
-                  
-                   <v-carousel   
-    height="400"
-    hide-delimiter-background
-    show-arrows-on-hover
-    hide-delimiters
-    hide-arrows
-  >
-  <v-carousel-item
-      v-for="(img, i) in item.image"
-      :key="i"
-    ><router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
-                   <v-img
-                      class="rounded"
-                      :src="url + img.img"
-                      aspect-ratio="1.5"
-                    >
-                      <v-expand-transition>
-                        <div
-                          v-if="hover"
-                          class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
-                          style="height: 25%"
+                  <v-carousel
+                    height="250"
+                    hide-delimiter-background
+                    show-arrows-on-hover
+                    hide-delimiters
+                    hide-arrows
+                  >
+                    <v-carousel-item v-for="(img, i) in item.image" :key="i"
+                      ><router-link
+                        :to="{
+                          name: 'adoptiondetail',
+                          params: { id_adoption: item.id },
+                        }"
+                      >
+                        <v-img
+                          class="rounded"
+                          :src="url + img.img"
+                          aspect-ratio="1.5"
                         >
-                          <template v-if="item.animal_name==  'Dog'">
-                            <v-icon  left color="#fff"> mdi-dog</v-icon>
-                          </template>
-                          <template v-if="item.animal_name=='Cat'">
-                            <v-icon  left color="#fff"> mdi-cat</v-icon>
-                          </template>
-                         
-                          <div v-if="item.gender == 'Male'">
-                            <v-icon small left color="#fff">
-                              mdi-gender-male
-                            </v-icon>
-                          </div>
-                          <div v-else>
-                            <v-icon small left color="#fff">
-                              mdi-gender-female
-                            </v-icon>
-                          </div>
-                          {{ item.age }} Months,
-                          {{item.upload_time}}
-                          </div>
-                      </v-expand-transition>
-                    </v-img>
-                    </router-link>
+                          <v-expand-transition>
+                            <div
+                              v-if="hover"
+                              class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
+                              style="height: 25%"
+                            >
+                              <template v-if="item.animal_name == 'Dog'">
+                                <v-icon left color="#fff"> mdi-dog</v-icon>
+                              </template>
+                              <template v-if="item.animal_name == 'Cat'">
+                                <v-icon left color="#fff"> mdi-cat</v-icon>
+                              </template>
 
-                       </v-carousel-item>
-                      </v-carousel>
-                  
+                              <div v-if="item.gender == 'Male'">
+                                <v-icon small left color="#fff">
+                                  mdi-gender-male
+                                </v-icon>
+                              </div>
+                              <div v-else>
+                                <v-icon small left color="#fff">
+                                  mdi-gender-female
+                                </v-icon>
+                              </div>
+                              {{ item.age }} Months,
+                              {{ item.upload_time }}
+                            </div>
+                          </v-expand-transition>
+                        </v-img>
+                      </router-link>
+                    </v-carousel-item>
+                  </v-carousel>
+
                   <v-card-actions>
                     <v-list-item-avatar>
-                      <v-img class="elevation-6" :src="url + item.user.picture  ">
+                      <v-img class="elevation-6" :src="url + item.user.picture">
                       </v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <router-link :to="{ name: 'profile', params: { username : item.user.username } }" style="text-decoration:none">
-                      <v-list-item class="name_user">
-                        {{ item.user.full_name }}
-                      </v-list-item>
+                      <router-link
+                        :to="{
+                          name: 'profile',
+                          params: { username: item.user.username },
+                        }"
+                        style="text-decoration: none"
+                      >
+                        <v-list-item class="name_user">
+                          {{ item.user.full_name }}
+                        </v-list-item>
                       </router-link>
                     </v-list-item-content>
                   </v-card-actions>
@@ -228,11 +265,17 @@
             </v-list-item-group>
           </v-list>
         </v-col>
-        
-        <v-btn  v-if="loadList == true" @click="listToShow += 9" block>
-    Load More
-  </v-btn >
- 
+
+        <v-btn
+          class="load_more"
+          text
+          large
+          v-if="loadList == true"
+          @click="listToShow += 9"
+          block
+        >
+          Load More
+        </v-btn>
       </v-row>
     </v-container>
   </div>
@@ -248,34 +291,38 @@ export default {
   data() {
     return {
       showFilter: false,
-      showSort:false,
-      sortedItem : '',
-      sortType : '',
-      sortName : [{
-        name : 'Ascending', value : 'asc'},
+      showSort: false,
+      sortedItem: "",
+      sortType: "",
+      sortName: [
         {
-        name : 'Descending', value : 'desc'
-        }
+          name: "Ascending",
+          value: "asc",
+        },
+        {
+          name: "Descending",
+          value: "desc",
+        },
       ],
-      image : '',
-      sort : null,
-      url : process.env.VUE_APP_IMAGE_URL,
+      image: "",
+      sort: null,
+      url: process.env.VUE_APP_IMAGE_URL,
       allpet_list: [],
       pet_list: [],
       animal_list: [],
-      age : [
-          {name : 'Under 6 Months ', value : 6},
-          {name : '6 Months - 1 Year', value : 12},
-          {name : '1 Years - 2 Years', value : 24},
-          {name : '2 Years - 3 Years', value : 36},
-          {name : '3 Years - 4 Years', value : 48},
-          {name : '4 Years - 5 Years', value : 60}
-        ],
+      age: [
+        { name: "Under 6 Months ", value: 6 },
+        { name: "6 Months - 1 Year", value: 12 },
+        { name: "1 Years - 2 Years", value: 24 },
+        { name: "2 Years - 3 Years", value: 36 },
+        { name: "3 Years - 4 Years", value: 48 },
+        { name: "4 Years - 5 Years", value: 60 },
+      ],
       species: null,
       search: null,
-      listToShow : 9,
-      age_selected : null,
-      loadList : false,
+      listToShow: 9,
+      age_selected: null,
+      loadList: false,
       gender_selected: null,
       location_selected: null,
       selectedItem: 1,
@@ -357,12 +404,10 @@ export default {
     this.$http.get(uri_cat).then((response) => {
       this.animal_list = response.data;
     });
-    
-    
   },
   methods: {
-    getImage(path){
-      return require(path)
+    getImage(path) {
+      return require(path);
     },
     subSpecies(value) {
       if (value != null) {
@@ -379,9 +424,7 @@ export default {
     },
   },
   computed: {
-    
     filteredList: function () {
-     
       return this.pet_list
         .filter((post) => {
           if (this.species != null) {
@@ -389,96 +432,65 @@ export default {
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0,this.listToShow)
+        })
+        .slice(0, this.listToShow)
         .filter((post) => {
           if (this.search != null) {
             return post.animal_type.includes(this.search);
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0,this.listToShow)
+        })
+        .slice(0, this.listToShow)
         .filter((post) => {
           if (this.gender_selected != null) {
             return post.gender.includes(this.gender_selected);
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0,this.listToShow)
+        })
+        .slice(0, this.listToShow)
         .filter((post) => {
           if (this.location_selected != null) {
             return post.location.includes(this.location_selected);
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0,this.listToShow)
-        .filter(post => {
-            if( this.age_selected != null){
-              if(this.age_selected == 6){
-              return  post.age <= 6;
-              }else if(this.age_selected == 12) {
-                return   6 <= post.age <= 12;
-              }else if (this.age_selected == 24){
-                return 12 <= post.age <=24;
-              }else if (this.age_selected == 36){
-               return 24 <= post.age <=36;
-              }else if (this.age_selected == 48){
-               return 36 <= post.age <=48;
-              }else if (this.age_selected == 60){
-               return 48 <= post.age <=60;
-              }
-            }else {
-              return post  = this.allpet_list;
+        })
+        .slice(0, this.listToShow)
+        .filter((post) => {
+          if (this.age_selected != null) {
+            if (this.age_selected == 6) {
+              return post.age <= 6;
+            } else if (this.age_selected == 12) {
+              return 6 <= post.age <= 12;
+            } else if (this.age_selected == 24) {
+              return 12 <= post.age <= 24;
+            } else if (this.age_selected == 36) {
+              return 24 <= post.age <= 36;
+            } else if (this.age_selected == 48) {
+              return 36 <= post.age <= 48;
+            } else if (this.age_selected == 60) {
+              return 48 <= post.age <= 60;
             }
-          }).slice(0,this.listToShow)
-        .sort((a,b) => {
-           let modifier = 1;
-           if(this.sortType == 'desc') modifier = -1;
-           if(a[this.sortedItem] < b[this.sortedItem]){
-            return -1 * modifier; 
-           }if(a[this.sortedItem] > b[this.sortedItem])
-           return 1 * modifier;
-           return 0;
-        }).slice(0,this.listToShow)
-          
+          } else {
+            return (post = this.allpet_list);
+          }
+        })
+        .slice(0, this.listToShow)
+        .sort((a, b) => {
+          let modifier = 1;
+          if (this.sortType == "desc") modifier = -1;
+          if (a[this.sortedItem] < b[this.sortedItem]) {
+            return -1 * modifier;
+          }
+          if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
+          return 0;
+        })
+        .slice(0, this.listToShow);
     },
   },
 };
 </script>
 <style lang="scss">
-.il_heroes {
-  width: 100%;
-}
-
-.header_heroes {
-  font-size: 2.5rem;
-  color: #ffa62b;
-  letter-spacing: 2%;
-}
-
-.desc_heroes {
-  color: #515151;
-  opacity: 70%;
-  margin-top: -1%;
-}
-
-.btn_gotoregis {
-  margin-top: 5%;
-}
-
-.search_adop {
-  margin-top: -40px;
-}
-
-.name_user {
-  font-weight: 600;
-}
-
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  opacity: 1 !important;
-}
 </style>

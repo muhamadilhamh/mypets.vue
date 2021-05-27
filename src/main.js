@@ -11,7 +11,7 @@ import VueToastr from '@deveodk/vue-toastr'
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueSocialSharing from 'vue-social-sharing'
 
-
+import './assets/css/style.css'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import 'sweetalert2/dist/sweetalert2.min.css';

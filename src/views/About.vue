@@ -5,14 +5,20 @@
       <v-img src="../assets/heroes_aboutus.png">
         <v-row class="pa-12 fill-height">
           <v-col cols="12" sm="6">
-            <v-container class="heroes_about">
+            <v-container>
               <div class="headline">
                 <h2>MyPets</h2>
               </div>
-              <div class="desc">
+              <div class="desc hidden-xs-only">
                 <h3>
-                  Aplikasi berbasis website dalam membantu para pecinta hewan
-                  peliharaan dengan lebih mengenal hewan peliharaan mereka.
+                  Website based application to help pet owner get to know their
+                  pets better.
+                </h3>
+              </div>
+              <div class="desc_resp d-sm-none">
+                <h3>
+                  Website based application to help pet owner get to know their
+                  pets better.
                 </h3>
               </div>
             </v-container>
@@ -38,9 +44,10 @@
               >
                 <v-card flat tile color="#ede7e3" class="mx-auto">
                   <v-img
-                    class="white--text align-end"
                     :src="item.src"
                     aspect-ratio="1"
+                    max-width="350"
+                    class="img_us"
                   >
                   </v-img>
                   <v-card-text class="text-center">
@@ -70,8 +77,8 @@
           </v-card-actions>
           <div class="desc">
             <p>
-              Aplikasi berbasis website dalam membantu para pecinta hewan
-              peliharaan dengan lebih mengenal hewan peliharaan mereka.
+              Website based application to help pet owner get to know their pets
+              better.
             </p>
           </div>
         </v-container>
@@ -87,19 +94,23 @@
             <v-btn to="/about" x-small text color="#515151"> About Us </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151"> Adopsi </v-btn>
+            <v-btn to="/adoption" x-small text color="#515151"> Adopsi </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151"> Care&Training </v-btn>
+            <v-btn to="/care" x-small text color="#515151">
+              Care&Training
+            </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151"> Age Conversion </v-btn>
+            <v-btn to="/ageconversion" x-small text color="#515151">
+              Age Conversion
+            </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151"> Article </v-btn>
+            <v-btn to="/article" x-small text color="#515151"> Article </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151"> Breeds </v-btn>
+            <v-btn to="/breeds" x-small text color="#515151"> Breeds </v-btn>
           </v-card-actions>
         </v-container>
       </v-col>
@@ -111,24 +122,23 @@
             <h3>Follow Us!</h3>
           </v-content>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151">
-              <v-icon small left> mdi-youtube</v-icon>
-              Comingsoon
-            </v-btn>
+            <v-icon small left> mdi-youtube</v-icon>
+            <p class="comingsoon">Comingsoon</p>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151">
-              <v-icon small left> mdi-instagram</v-icon>
-              Comingsoon
-            </v-btn>
+            <v-icon small left> mdi-instagram</v-icon>
+            <p class="comingsoon">Comingsoon</p>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="" x-small text color="#515151">
-              <v-icon small left> mdi-facebook</v-icon>
-              Comingsoon
-            </v-btn>
+            <v-icon small left> mdi-facebook</v-icon>
+            <p class="comingsoon">Comingsoon</p>
           </v-card-actions>
         </v-container>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <p class="copyright">Copyright &copy; MyPets 2021</p>
       </v-col>
     </v-row>
   </div>
@@ -175,28 +185,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.headline {
-  color: #ffa62b;
-  size: 45px;
-}
-.heroes_about {
-  padding-top: 10%;
-}
-.desc {
-  margin-top: 5%;
-  color: #515151;
-}
-.rounded-b-xl {
-  background: #ede7e3;
-}
-.konten {
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  color: #ffa62b;
-}
-.aboutus {
-  background: #82c0cc;
-  color: #515151;
-}
 </style>

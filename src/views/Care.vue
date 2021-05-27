@@ -122,7 +122,7 @@ export default {
 </script>
 <style lang="scss">
 .btn_search_care {
-  margin-top: 3%;
+  margin-top: 5px;
 }
 
 .date {

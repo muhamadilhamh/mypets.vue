@@ -10,22 +10,24 @@
             <v-container>
               <h3 class="header_home">Find Anything!</h3>
               <p class="desc_home">
-                Ingin menyayangi, mengadopsi dan mencari tahu mengenai masalah
-                hewanmu. Mari kita eksplor
+                Want to love, adopt and find out more about your pet's problem.
+                Let's explore
               </p>
-              
               <div class="btn_eksplore">
                 <v-btn to="" rounded small color="#489FB5" dark> Start </v-btn>
               </div>
             </v-container>
           </v-row>
         </v-col>
+        <v-col cols="12" sm="6">
+          <v-img class="d-sm-none il_home" src="../assets/il_home.svg"> </v-img>
+        </v-col>
       </v-row>
       <v-row>
         <v-container>
           <v-col>
-            <h3 class="header_artikel">Kami membantumu,</h3>
-            <h3 class="header_artikel_second">untuk sayang dengan hewanmu</h3>
+            <h3 class="header_artikel">We help you,</h3>
+            <h3 class="header_artikel_second">To love your pet</h3>
           </v-col>
           <v-row>
             <v-col cols="12" sm="1" class="hidden-xs-only">
@@ -35,60 +37,47 @@
 
           <!--Artikel -->
           <!-- Layar monitor -->
-          <v-carousel
-            height="320"
-            hide-delimiter-background
-            show-arrows-on-hover
-            class="hidden-xs-only"
-          >
-            <v-carousel-item>
-              <v-row class="pa-5">
-                <v-col
-                  v-for="item in feed_home"
-                  :key="item.id"
-                  cols="12"
-                  sm="4"
-                >
-                  <v-container>
-                    <v-card class="rounded-xl" color="#489FB5" elevation="8">
-                      <v-btn
-                        color="#F5F1EC"
-                        fab
-                        tile
-                        large
-                        absolute
-                        left
-                        class="pa-5 rounded"
-                        to="/article"
-                      >
-                        <v-img :src="item.src" class="img"></v-img>
-                      </v-btn>
-                      <v-card-title>
-                        <p class="title_home_train">{{ item.title }}</p>
-                      </v-card-title>
-                      <v-card-subtitle>
-                        <p class="desc_home_train">
-                          {{ item.desc }}
-                        </p>
-                      </v-card-subtitle>
-                      <v-card-actions>
-                        <v-btn
-                          rounded
-                          block
-                          elevation="10"
-                          class="btn_home_train"
-                          color="#82C0CC"
-                          to="/article"
-                        >
-                          Detail
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-container>
-                </v-col>
-              </v-row>
-            </v-carousel-item>
-          </v-carousel>
+          <v-row class="pa-5 hidden-xs-only">
+            <v-col v-for="item in feed_home" :key="item.id" cols="12" sm="4">
+              <v-container>
+                <v-card class="rounded-xl" color="#489FB5" elevation="8">
+                  <v-btn
+                    color="#F5F1EC"
+                    fab
+                    tile
+                    large
+                    absolute
+                    left
+                    class="pa-5 rounded"
+                    to="/article"
+                  >
+                    <v-img :src="item.src" class="img"></v-img>
+                  </v-btn>
+                  <v-card-title>
+                    <p class="title_home_train">{{ item.title }}</p>
+                  </v-card-title>
+                  <v-card-subtitle>
+                    <p class="desc_home_train_resp">
+                      {{ item.desc }}
+                    </p>
+                  </v-card-subtitle>
+                  <v-card-actions>
+                    <v-btn
+                      rounded
+                      block
+                      dark
+                      elevation="10"
+                      class="btn_home_train"
+                      color="#82C0CC"
+                      to="/article"
+                    >
+                      Learn more
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-container>
+            </v-col>
+          </v-row>
 
           <!--Artikel -->
           <!-- Layar Responsif -->
@@ -138,7 +127,7 @@
                           color="#82C0CC"
                           to="/article"
                         >
-                          Detail
+                          Learn more
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -187,7 +176,7 @@
                           color="#82C0CC"
                           to="/article"
                         >
-                          Detail
+                          Learn more
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -236,7 +225,7 @@
                           color="#82C0CC"
                           to="/article"
                         >
-                          Detail
+                          Learn more
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -254,10 +243,8 @@
       <v-container>
         <v-col>
           <v-col>
-            <h3 class="header_artikel">Kamu ingin mencari hewan</h3>
-            <h3 class="header_artikel_second">
-              untuk diadopsi, kami berikan opsi
-            </h3>
+            <h3 class="header_artikel">You want to adopt a pet?</h3>
+            <h3 class="header_artikel_second">Here we have a lot of choice.</h3>
             <v-row>
               <v-spacer></v-spacer>
               <v-col cols="12" sm="1" class="hidden-xs-only">
@@ -273,7 +260,7 @@
               color="#489FB5"
               to="/adoption"
             >
-              Selengkapnya
+              Eksplore
             </v-btn>
 
             <v-btn
@@ -291,7 +278,7 @@
               <v-container>
                 <v-row>
                   <v-col
-                    v-for="(item,index) in feed_adop"
+                    v-for="(item, index) in feed_adop"
                     :key="index"
                     cols="12"
                     sm="4"
@@ -300,55 +287,67 @@
                       <v-list-item-group color="primary">
                         <v-hover v-slot="{ hover }">
                           <v-card flat tile class="mx-auto">
-                            <v-carousel   
-    height="400"
-    hide-delimiter-background
-    show-arrows-on-hover
-    hide-delimiters
-    hide-arrows
-  >
-  <v-carousel-item
-      v-for="(img, i) in item.image"
-      :key="i"
-    >
-                            <router-link :to="{ name: 'adoptiondetail', params: { id_adoption: item.id } }">
-                            <v-img
-                              class="rounded"
-                              :src="url + item.picture"
-                              aspect-ratio="1.5"
+                            <v-carousel
+                              height="250"
+                              hide-delimiter-background
+                              show-arrows-on-hover
+                              hide-delimiters
+                              hide-arrows
                             >
-                              <v-expand-transition>
-                                <div
-                                  v-if="hover"
-                                  class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
-                                  style="height: 25%"
+                              <v-carousel-item
+                                v-for="(img, i) in item.image"
+                                :key="i"
+                              >
+                                <router-link
+                                  :to="{
+                                    name: 'adoptiondetail',
+                                    params: { id_adoption: item.id },
+                                  }"
                                 >
-                                 <template v-if="item.animal_name==  'Dog'">
-                            <v-icon  left color="#fff"> mdi-dog</v-icon>
-                          </template>
-                          <template v-if="item.animal_name=='Cat'">
-                            <v-icon  left color="#fff"> mdi-cat</v-icon>
-                          </template>
-                                  {{item.name}}
-                                 <div v-if="item.gender == 'Male'">
-                            <v-icon small left color="#fff">
-                              mdi-gender-male
-                            </v-icon>
-                          </div>
-                          <div v-else>
-                            <v-icon small left color="#fff">
-                              mdi-gender-female
-                            </v-icon>
-                            
-                          </div>
-                          {{ item.age }} Months,
-                          {{item.upload_time}}
-                                </div>
-                              </v-expand-transition>
-                            </v-img>
-                            </router-link>
-                            </v-carousel-item>
-                      </v-carousel>
+                                  <v-img
+                                    class="rounded"
+                                    :src="url + item.picture"
+                                    aspect-ratio="1.5"
+                                  >
+                                    <v-expand-transition>
+                                      <div
+                                        v-if="hover"
+                                        class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
+                                        style="height: 25%"
+                                      >
+                                        <template
+                                          v-if="item.animal_name == 'Dog'"
+                                        >
+                                          <v-icon left color="#fff">
+                                            mdi-dog</v-icon
+                                          >
+                                        </template>
+                                        <template
+                                          v-if="item.animal_name == 'Cat'"
+                                        >
+                                          <v-icon left color="#fff">
+                                            mdi-cat</v-icon
+                                          >
+                                        </template>
+                                        {{ item.name }}
+                                        <div v-if="item.gender == 'Male'">
+                                          <v-icon small left color="#fff">
+                                            mdi-gender-male
+                                          </v-icon>
+                                        </div>
+                                        <div v-else>
+                                          <v-icon small left color="#fff">
+                                            mdi-gender-female
+                                          </v-icon>
+                                        </div>
+                                        {{ item.age }} Months,
+                                        {{ item.upload_time }}
+                                      </div>
+                                    </v-expand-transition>
+                                  </v-img>
+                                </router-link>
+                              </v-carousel-item>
+                            </v-carousel>
                             <v-card-actions>
                               <v-list-item-avatar>
                                 <v-img
@@ -359,9 +358,9 @@
                               </v-list-item-avatar>
 
                               <v-list-item-content>
-                                <v-list-item class="name_user">
+                                <p class="name_user">
                                   {{ item.user.full_name }}
-                                </v-list-item>
+                                </p>
                               </v-list-item-content>
                             </v-card-actions>
                           </v-card>
@@ -382,8 +381,8 @@
       <v-img src="../assets/heroes_adoption.png">
         <v-container>
           <v-col>
-            <h3 class="header_artikel">Temukan Hewan</h3>
-            <h3 class="header_artikel_second">Favoritmu</h3>
+            <h3 class="header_artikel">Find your</h3>
+            <h3 class="header_artikel_second">Favorite pet!</h3>
           </v-col>
           <v-row>
             <v-col cols="12" sm="1" class="hidden-xs-only">
@@ -414,14 +413,14 @@
                           to="/breeds"
                         >
                           <v-card-title>
-                            <p class="title_dog">Dog</p>
+                            <p class="title_dog">'Dog'</p>
                           </v-card-title>
                           <v-card-subtitle>
-                            <p class="desc_anjing">Cek Anjingmu Yuk!</p>
+                            <p class="desc_anjing">More about 'dog'</p>
                           </v-card-subtitle>
                           <v-card-actions>
                             <v-btn rounded color="#FFF" block class="btn_dog">
-                              Detail
+                              Learn more
                               <v-icon right> mdi-chevron-right </v-icon>
                             </v-btn>
                           </v-card-actions>
@@ -448,14 +447,14 @@
                           to="/breeds"
                         >
                           <v-card-title>
-                            <p class="title_dog">Cat</p>
+                            <p class="title_dog">'Cat'</p>
                           </v-card-title>
                           <v-card-subtitle>
-                            <p class="desc_anjing">Cek Kucingmu Yuk!</p>
+                            <p class="desc_anjing">More about 'cat'</p>
                           </v-card-subtitle>
                           <v-card-actions>
                             <v-btn rounded color="#FFF" block class="btn_dog">
-                              Detail
+                              Learn more
                               <v-icon right> mdi-chevron-right </v-icon>
                             </v-btn>
                           </v-card-actions>
@@ -522,7 +521,7 @@
                                 class="btn_home_age"
                                 color="#FFA62B"
                               >
-                                Detail
+                                Learn more
                                 <v-icon right> mdi-chevron-right </v-icon>
                               </v-btn>
                             </v-card-actions>
@@ -577,7 +576,7 @@
                                 class="btn_home_age"
                                 color="#FFA62B"
                               >
-                                Detail
+                                Learn more
                                 <v-icon right> mdi-chevron-right </v-icon>
                               </v-btn>
                             </v-card-actions>
@@ -610,8 +609,8 @@
             </v-card-actions>
             <div class="desc">
               <p>
-                Aplikasi berbasis website dalam membantu para pecinta hewan
-                peliharaan dengan lebih mengenal hewan peliharaan mereka.
+                Website based application to help pet owner get to know their
+                pets better
               </p>
             </div>
           </v-container>
@@ -627,19 +626,27 @@
               <v-btn to="/about" x-small text color="#515151"> About Us </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151"> Adopsi </v-btn>
+              <v-btn to="/adoption" x-small text color="#515151">
+                Adopsi
+              </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151"> Care&Training </v-btn>
+              <v-btn to="/care" x-small text color="#515151">
+                Care&Training
+              </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151"> Age Conversion </v-btn>
+              <v-btn to="/ageconversion" x-small text color="#515151">
+                Age Conversion
+              </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151"> Article </v-btn>
+              <v-btn to="/article" x-small text color="#515151">
+                Article
+              </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151"> Breeds </v-btn>
+              <v-btn to="/breeds" x-small text color="#515151"> Breeds </v-btn>
             </v-card-actions>
           </v-container>
         </v-col>
@@ -651,24 +658,23 @@
               <h3>Follow Us!</h3>
             </v-content>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151">
-                <v-icon small left> mdi-youtube</v-icon>
-                Comingsoon
-              </v-btn>
+              <v-icon small left> mdi-youtube</v-icon>
+              <p class="comingsoon">Comingsoon</p>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151">
-                <v-icon small left> mdi-instagram</v-icon>
-                Comingsoon
-              </v-btn>
+              <v-icon small left> mdi-instagram</v-icon>
+              <p class="comingsoon">Comingsoon</p>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="" x-small text color="#515151">
-                <v-icon small left> mdi-facebook</v-icon>
-                Comingsoon
-              </v-btn>
+              <v-icon small left> mdi-facebook</v-icon>
+              <p class="comingsoon">Comingsoon</p>
             </v-card-actions>
           </v-container>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <p class="copyright">Copyright &copy; MyPets 2021</p>
         </v-col>
       </v-row>
     </div>
@@ -683,32 +689,33 @@ export default {
     this.$emit("update:layout", navbarfull);
   },
   mounted() {
-    let uri = process.env.VUE_APP_ROOT_API + 'adoption/3'
+    let uri = process.env.VUE_APP_ROOT_API + "adoption/3";
     this.$http.get(uri).then((response) => {
       this.feed_adop = response.data;
-    })
+    });
   },
   data() {
     return {
-      url : process.env.VUE_APP_IMAGE_URL,
+      url: process.env.VUE_APP_IMAGE_URL,
       feed_home: [
         {
           id: 1,
           title: "Training",
           src: require("../assets/kesehatan.svg"),
-          desc: "Tahukah kamu setiap hewan memiliki penyakit yang berbeda-beda",
+          desc:
+            "Did you know, every animal has a different issues of their own",
         },
         {
           id: 2,
-          title: "Nutrisi",
+          title: "Nutrition",
           src: require("../assets/nutrision.svg"),
-          desc: "Kadar nutrisi antara setiap hewan berbeda-beda",
+          desc: "Your little friend got a different diet of their own",
         },
         {
           id: 3,
           title: "Care",
           src: require("../assets/care.svg"),
-          desc: "Yang butuh mandi bukan kamu aja loh, hewanmu pun butuh mandi",
+          desc: "Its not just you who need to take a bath, your pet too!",
         },
       ],
       feed_home_respn1: [
@@ -735,7 +742,7 @@ export default {
           desc: "Yang butuh mandi bukan kamu aja loh, hewanmu pun butuh mandi",
         },
       ],
-      feed_adop : [],
+      feed_adop: [],
       feed_age_dog: [
         {
           id: 1,
@@ -755,80 +762,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.il_home {
-  width: 100%;
-  margin-top: 10%;
-}
-.header_home {
-  font-size: 3rem;
-  color: #ffa62b;
-  letter-spacing: 2%;
-  margin-top: 30%;
-}
-.desc_home {
-  color: #515151;
-  opacity: 70%;
-}
-.btn_eksplore {
-  margin-top: 5%;
-}
-.header_artikel {
-  font-size: 2rem;
-  color: #ffa62b;
-  letter-spacing: 2%;
-  margin-top: 5%;
-  text-align: center;
-}
-.header_artikel_second {
-  font-size: 2rem;
-  color: #ffa62b;
-  letter-spacing: 2%;
-  line-height: -2.5rem;
-  text-align: center;
-}
-.btn_home_train,
-.btn_home_age {
-  text-transform: capitalize;
-  padding: 20 20 20 20;
-}
-
-.btn_home_adop {
-  text-transform: capitalize;
-  left: 45%;
-  right: 45%;
-}
-.btn_home_adop_res {
-  text-transform: capitalize;
-  left: 35%;
-  right: 35%;
-  margin-top: 10%;
-}
-.title_home_train {
-  margin-top: 20%;
-}
-.title_home_age {
-  margin-top: 15%;
-}
-.title_home_train,
-.title_home_age .desc_home_train {
-  color: #fff;
-}
-.desc_home_age {
-  color: #515151;
-}
-.img {
-  width: 37px;
-  height: 27px;
-}
-.img_anjing {
-  width: 55px;
-  height: 70px;
-}
-.feed_adop {
-  margin-top: 10%;
-}
-
-.footer {
-  background: #82c0cc;
-}
 </style>

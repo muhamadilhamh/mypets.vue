@@ -1,0 +1,218 @@
+#app {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Home */
+.adoption_page {
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+.desc_home_train_resp {
+    color: rgba(255, 255, 255, 0.70);
+    text-transform: capitalize !important;
+}
+
+.btn_home_train {
+    color: rgba(255, 255, 255, 0.70);
+    text-transform: capitalize !important;
+}
+
+.il_home {
+    width: 100%;
+    margin-top: 10%;
+}
+
+.header_home {
+    font-size: 3rem;
+    color: #ffa62b;
+    letter-spacing: 2%;
+    margin-top: 30%;
+}
+
+.desc_home {
+    color: #515151;
+    opacity: 70%;
+}
+
+.btn_eksplore {
+    margin-top: 5%;
+}
+
+.header_artikel {
+    font-size: 2rem;
+    color: #ffa62b;
+    letter-spacing: 2%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.header_artikel_second {
+    font-size: 2rem;
+    color: #ffa62b;
+    letter-spacing: 2%;
+    line-height: -2.5rem;
+    text-align: center;
+}
+
+.btn_home_train,
+.btn_home_age {
+    text-transform: capitalize !important;
+    padding: 20 20 20 20;
+}
+
+.btn_home_adop {
+    text-transform: capitalize !important;
+    left: 45%;
+    right: 45%;
+}
+
+.btn_home_adop_res {
+    text-transform: capitalize;
+    left: 35%;
+    right: 35%;
+    margin-top: 10%;
+}
+
+.title_home_train {
+    margin-top: 20%;
+}
+
+.title_home_age {
+    margin-top: 15%;
+}
+
+.title_home_train,
+.title_home_age .desc_home_train {
+    color: #fff;
+}
+
+.desc_home_age {
+    color: #515151;
+}
+
+.img {
+    width: 37px;
+    height: 27px;
+}
+
+.img_anjing {
+    width: 55px;
+    height: 70px;
+}
+
+.feed_adop {
+    margin-top: 10%;
+}
+
+.footer {
+    background: #82c0cc;
+}
+
+.name_user {
+    padding-top: 15px;
+}
+
+/* About Us */
+.headline {
+    color: #ffa62b;
+    size: 45px;
+    padding-top: 10%;
+}
+
+
+
+.desc {
+    margin-top: 5%;
+    color: #515151;
+    line-height: auto;
+    font-size: 1.3rem;
+}
+
+.desc_resp {
+    margin-top: 5%;
+    color: #515151;
+    line-height: auto;
+    font-size: 1rem;
+}
+
+.rounded-b-xl {
+    background: #ede7e3;
+}
+
+.konten {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    color: #ffa62b;
+}
+
+.aboutus {
+    background: #82c0cc;
+    color: #515151;
+}
+
+.img_us {
+    justify-content: center;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 30px;
+}
+
+.comingsoon {
+    font-size: 0.8rem;
+    padding-top: 15px;
+}
+
+.copyright {
+    text-align: center;
+    color: #515151;
+    font-weight: 700;
+}
+
+/* Adoption */
+.il_heroes {
+    width: 100%;
+}
+
+.header_heroes {
+    font-size: 2.5rem;
+    color: #ffa62b;
+    letter-spacing: 2%;
+    margin-top: 70px;
+}
+
+.desc_heroes {
+    color: #515151;
+    opacity: 70%;
+    margin-top: -1%;
+}
+
+.btn_gotoregis {
+    margin-top: 5%;
+}
+
+.search_adop {
+    margin-top: -40px;
+}
+
+.name_user {
+    font-weight: 600;
+}
+
+.v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    opacity: 1 !important;
+}
+
+.il_heroes_respn {
+    width: 100%;
+}
+
+.load_more {
+    text-transform: capitalize !important;
+}
