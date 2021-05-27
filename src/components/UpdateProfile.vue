@@ -22,7 +22,6 @@
             <button @click="deleteImage" >Delete Image</button>
         </div>
 
-{{user.username}}
         <div v-show="!images.length">
             <i class="fa fa-cloud-upload"></i>
             <p>Current Photo</p>
@@ -54,6 +53,15 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errMessage}}
+    </v-alert>
+          </div> 
                 <h5>Name</h5>
                 <v-text-field
                   v-model="user.full_name"
@@ -112,7 +120,10 @@
             
             </v-autocomplete>
                 </div>
-
+               <v-checkbox
+      v-model="user.whatsapp"
+     label="Does your phone number attached to Whatsapp Application?"
+    ></v-checkbox>
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
@@ -174,6 +185,7 @@ export default {
   data() {
     return{
       username : "",
+    errMessage : "",
     url : process.env.VUE_APP_IMAGE_URL,
     isDragging: false,
     dragCount: 0,
@@ -285,6 +297,7 @@ export default {
             formData.append('phone',this.user.phone) 
             formData.append('email',this.user.email),
             formData.append('location',this.user.location)  
+            formData.append('whatsapp',this.user.whatsapp)  
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
@@ -294,17 +307,16 @@ export default {
            axios.post(
                         process.env.VUE_APP_ROOT_API + 'profile/' + this.user.id + '/update',formData,config
                     )
-                .then(response =>{
+                .then((response) =>{
                   this.$swal({
               icon : 'success',
                confirmButtonColor: '#3085d6',
                 text: "Profile has been successfully updated",
             confirmButtonText: 'Confirm',
-            closeOnCancel: true
             });
                   this.$router.push('/')
-                }).catch(function (error) {
-    console.log(error.data);
+                }).catch( (error)  => {
+    this.errMessage = error.response.data;
 });
         }
   },

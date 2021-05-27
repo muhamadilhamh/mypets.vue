@@ -49,6 +49,15 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                 <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errMessage}}
+    </v-alert>
+          </div> 
                 <h5>Pet Name</h5>
                 <v-text-field
                   v-model="name"
@@ -245,6 +254,7 @@ export default {
   },
   data: () => ({
     showform: false,
+    errMessage : '',
     isDragging: false,
     dragCount: 0,
      animal_list: [],
@@ -396,8 +406,8 @@ export default {
             closeOnCancel: true
             });
                     self.$router.push({ name: 'profile', params: { username : self.user.username } })
-                }).catch(function (error) {
-    console.log(error);
+                }).catch((error) => {
+    this.errMessage = error.response.data;
 });
         }
     }

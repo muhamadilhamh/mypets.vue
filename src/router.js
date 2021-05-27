@@ -138,7 +138,7 @@ let router = new Router({
       component: CareDetail,
     },
     {
-      path: '/articledetail',
+      path: '/article/:id_article/detail',
       name: 'articledetail',
       component: ArticleDetail,
       

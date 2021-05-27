@@ -23,6 +23,15 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                 <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errMessage}}
+    </v-alert>
+          </div> 
                 <h5>Moment Title</h5>
                 <v-text-field
                   v-model="moment.title"
@@ -190,6 +199,7 @@ export default {
      animal_list: [],
     files: [],
     images: [],
+    errMessage : '',
     animal_name : "",
     type : undefined,
     gender : "",
@@ -354,8 +364,8 @@ export default {
             closeOnCancel: true
             });
                     this.$router.push('/adoption');
-                }).catch(function (error) {
-    console.log(error);
+                }).catch( (error) => {
+    this.errMessage = error.response.data;
 });
         }
     }

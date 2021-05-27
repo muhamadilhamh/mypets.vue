@@ -48,6 +48,15 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                 <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errMessage}}
+    </v-alert>
+          </div> 
                 <h5>Moment Title</h5>
                 <v-text-field
                   v-model="title"
@@ -214,6 +223,7 @@ export default {
     location_data : [],
     animal_name : "",
     type : "",
+    errMessage : "",
     gender : "",
     name: "",
     title: "",
@@ -379,8 +389,8 @@ export default {
             closeOnCancel: true
             });
             this.$router.push({ name: 'profile', params: { username : this.user.username } })
-        }).catch(function (error) {
-    console.log(error.data);
+        }).catch((error) => {
+    this.errMessage = error.response.data;
 });
         }
     }

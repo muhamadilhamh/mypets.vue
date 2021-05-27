@@ -171,7 +171,21 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ breeds_info.email }} </v-list-item>
+                        <v-list-item> {{ breeds_info.email }} 
+                          <v-btn class="ma-2" color="blue-grey" small >
+                            <v-icon left> mdi-email</v-icon>
+                          <ShareNetwork
+    network="email"
+    :url="current_url"
+    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+    quote="The hot reload is so fast it\'s near instant. - Evan You"
+    hashtags="vuejs,vite"
+     tag="v-btn"
+  >
+  Send Me an Email
+</ShareNetwork></v-btn>
+                        </v-list-item>
                       </v-list-item-content>
                       
                     </v-card-actions>
@@ -181,7 +195,10 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item> {{ breeds_info.phone }} </v-list-item>
+                        <v-list-item> {{ breeds_info.phone }} 
+                          
+                        <template v-if="breeds_info.user.whatsapp == 1"><v-btn  class="ma-2" color="success" small @click="redirect('https://api.whatsapp.com/send?phone=62' + breeds_info.phone)"> <v-icon left>mdi-whatsapp</v-icon> Reach me on Whatsapp</v-btn></template>
+                        </v-list-item>
                       </v-list-item-content>
                     </v-card-actions>
                      <v-card-actions class="phone">
@@ -352,7 +369,10 @@ export default {
       this.breeds_info = response.data;
     });
      })
-   } 
+   },
+   redirect: function (link, target = '_blank') {
+            window.open(link, target);
+        } 
   },
   computed : {
     ...mapGetters({ 

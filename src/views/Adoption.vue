@@ -3,7 +3,6 @@
 
   <div class="adoption_page">
     <v-img src="../assets/heroes_adoption.png">
-      {{ allpet_list[0] }}
       <v-row class="pa-12">
         <v-col cols="3" class="hidden-xs-only">
           <v-img class="il_heroes" src="../assets/il_heroes_adp.svg"> </v-img>

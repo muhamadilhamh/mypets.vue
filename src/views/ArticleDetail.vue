@@ -32,7 +32,7 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="title_adop">Berbahaya membawa Anjing di dalam mobil</p>
+          <p class="title_adop">{{article_info.title}}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -72,10 +72,7 @@
     <v-container>
       <v-col cols="10" offset="2">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-          ratione distinctio necessitatibus eius beatae officiis, quas,
-          quibusdam sit delectus totam, illo a possimus deserunt deleniti nulla
-          molestias minus cum? Harum.
+          {{article_info.description}}
         </p>
       </v-col>
     </v-container>
@@ -89,7 +86,7 @@ export default {
     this.$emit("update:layout", "div");
   },
   data: () => ({
-    breeds_info: [],
+    article_info: [],
     category: [
       {
         id: 1,
@@ -110,9 +107,9 @@ export default {
     fullIcon: "mdi-heart ",
   }),
   mounted() {
-    let uri = "http://localhost:8000/api/animal/dog/" + this.$route.params.slug;
+    let uri = process.env.VUE_APP_ROOT_API + 'article/' + this.$route.params.id_article + '/details';
     this.$http.get(uri).then((response) => {
-      this.breeds_info = response.data;
+      this.article_info = response.data;
     });
   },
   methods: {

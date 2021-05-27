@@ -50,6 +50,15 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                 <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+      {{errMessage}}
+    </v-alert>
+          </div> 
                 <h5>Name</h5>
                 <v-text-field
                   v-model="name"
@@ -268,6 +277,7 @@ export default {
   },
   data: () => ({
     showform: true,
+    errMessage : '',
     isDragging: false,
     dragCount: 0,
      animal_list: [],
@@ -438,8 +448,8 @@ export default {
                 });
                 console.log(response.data)
                     self.$router.push('/adoption');
-                }).catch(function (error) {
-    console.log(error);
+                }).catch( (error) => {
+    this.errMessage = error.response.data;
 });
         }
     }
