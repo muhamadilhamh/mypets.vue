@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="pa-3">
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back" to="/catconversion">
+          <v-btn rounded depressed class="btn_back" to="/blank">
             <v-icon left> mdi-cat </v-icon>
             Go to Cat
           </v-btn>
@@ -125,7 +125,7 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">Real dog age</th>
+                <th class="text-left">Age Of Dog</th>
                 <th class="text-left">1</th>
                 <th class="text-left">2</th>
                 <th class="text-left">3</th>
@@ -142,14 +142,13 @@
                 <th class="text-left">14</th>
                 <th class="text-left">15</th>
                 <th class="text-left">16</th>
-                <th class="text-left">17</th>
-                <th class="text-left">18</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th class="text-left">Small dog age</th>
-                <th class="text-left">20</th>
+                <th class="text-left">Small dog age to human</th>
+                <th class="text-left">15</th>
+                <th class="text-left">24</th>
                 <th class="text-left">28</th>
                 <th class="text-left">32</th>
                 <th class="text-left">36</th>
@@ -164,40 +163,44 @@
                 <th class="text-left">72</th>
                 <th class="text-left">76</th>
                 <th class="text-left">80</th>
-                <th class="text-left">84</th>
-                <th class="text-left">88</th>
-                <th class="text-left">94</th>
               </tr>
               <tr>
-                <th class="text-left">Average dog</th>
-                <th class="text-left">18</th>
-                <th class="text-left">27</th>
-                <th class="text-left">33</th>
-                <th class="text-left">39</th>
-                <th class="text-left">45</th>
+                <th class="text-left">Medium dog age to human</th>
+                <th class="text-left">15</th>
+                <th class="text-left">24</th>
+                <th class="text-left">28</th>
+                <th class="text-left">32</th>
+                <th class="text-left">36</th>
+                <th class="text-left">42</th>
+                <th class="text-left">47</th>
                 <th class="text-left">51</th>
-                <th class="text-left">57</th>
-                <th class="text-left">63</th>
+                <th class="text-left">56</th>
+                <th class="text-left">60</th>
+                <th class="text-left">65</th>
                 <th class="text-left">69</th>
-                <th class="text-left">75</th>
-                <th class="text-left">81</th>
+                <th class="text-left">74</th>
+                <th class="text-left">78</th>
+                <th class="text-left">83</th>
                 <th class="text-left">87</th>
-                <th class="text-left">93</th>
-                <th class="text-left">100</th>
               </tr>
               <tr>
-                <th class="text-left">Big dog age</th>
-                <th class="text-left">16</th>
-                <th class="text-left">22</th>
-                <th class="text-left">31</th>
-                <th class="text-left">40</th>
-                <th class="text-left">49</th>
-                <th class="text-left">58</th>
-                <th class="text-left">67</th>
-                <th class="text-left">76</th>
-                <th class="text-left">85</th>
-                <th class="text-left">96</th>
-                <th class="text-left">105</th>
+                <th class="text-left">Large dog age to human</th>
+                <th class="text-left">15</th>
+                <th class="text-left">24</th>
+                <th class="text-left">28</th>
+                <th class="text-left">32</th>
+                <th class="text-left">36</th>
+                <th class="text-left">45</th>
+                <th class="text-left">50</th>
+                <th class="text-left">55</th>
+                <th class="text-left">61</th>
+                <th class="text-left">66</th>
+                <th class="text-left">72</th>
+                <th class="text-left">77</th>
+                <th class="text-left">82</th>
+                <th class="text-left">88</th>
+                <th class="text-left">93</th>
+                <th class="text-left">120</th>
               </tr>
             </tbody>
           </template>
@@ -237,7 +240,6 @@ export default {
   },
   data() {
     return {
-      showOutput: false,
       yearCount: 0,
       size: null,
       humanYear: 0,

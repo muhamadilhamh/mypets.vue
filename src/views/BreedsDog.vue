@@ -3,7 +3,7 @@
     <v-img src="../assets/bg_breeds_dog.png">
       <v-container>
         <v-row class="pa-12">
-          <v-col offset="5" cols="12" md="6">
+          <v-col offset-md="5" cols="12" md="6">
             <h3 class="header_BreedsCat">Dog Breeds</h3>
             <p class="desc_BreedsCat">
               Discover cat breeds from around the world and get help finding
@@ -152,7 +152,7 @@
                       </v-rating>
                     </v-col>
                     <v-col cols="2" md="2">
-                      <p class="rate">{{item.user.length}}</p>
+                      <p class="rate">{{ item.user.length }}</p>
                     </v-col>
 
                     <v-col cols="1" md="1">
@@ -172,8 +172,8 @@
                       </router-link>
                     </v-col>
 
-                    <v-col cols="3" md="3">
-                      <p class="rate">{{item.moments.length}}</p>
+                    <v-col cols="2" md="2">
+                      <p class="rate">{{ item.moments.length }}</p>
                     </v-col>
 
                     <v-col cols="4" md="4">
@@ -211,8 +211,8 @@ export default {
       selectedItem: 1,
       emptyIcon: "mdi-heart-outline",
       fullIcon: "mdi-heart ",
-      emptyIconComment: "mdi-comment-outline",
-      fullIconComment: "mdi-comment ",
+      emptyIconComment: "mdi-camera-plus-outline",
+      fullIconComment: "mdi-camera-plus ",
       feed_adop: [
         {
           id: 1,
@@ -295,7 +295,7 @@ export default {
           this.animal_list = response.data;
         });
       } else {
-        let uri_dog =  process.env.VUE_APP_ROOT_API + "animal/";
+        let uri_dog = process.env.VUE_APP_ROOT_API + "animal/";
         this.$http.get(uri_dog).then((response) => {
           this.animal_list = response.data;
         });

@@ -14,6 +14,7 @@ import UploadAdoption from './components/UploadAdoption.vue'
 import UploadMoment from './components/UploadMoment.vue'
 import UploadVaccine from './components/UploadVaccine.vue'
 import UpdateMoment from './components/UpdateMoment.vue'
+import Blank from './views/Blank.vue'
 
 import UpdateAdoption from './components/UpdateAdoption.vue'
 import UpdateProfile from './components/UpdateProfile.vue'
@@ -76,6 +77,11 @@ let router = new Router({
       path: '/care',
       name: 'care',
       component: Care
+    },
+    {
+      path: '/blank',
+      name: 'blank',
+      component: Blank
     },
     {
       path: '/adoption',

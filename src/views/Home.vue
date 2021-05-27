@@ -271,7 +271,7 @@
               color="#489FB5"
               to="/adoption"
             >
-              Selengkapnya
+              Eksplore
             </v-btn>
 
             <v-row class="feed_adop">
