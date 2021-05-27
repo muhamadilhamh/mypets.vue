@@ -60,20 +60,27 @@
     </v-container>
 
     <v-container>
-      <v-col cols="10" offset="2">
+      <v-col cols="12" offset-md="2">
         <v-img
           class="rounded-lg img_care"
-          src="https://images.unsplash.com/photo-1619326229465-1942c876e17c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNhcmUlMjBjYXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
+          :src="article_info.picture"
+          
         >
         </v-img>
       </v-col>
     </v-container>
 
     <v-container>
-      <v-col cols="10" offset="2">
-        <p>
+      <v-col cols="12" md="6" offset-md="2">
+      <v-card outlined class="rounded-xl" width="800px" elevation="2" >
+        
+          <v-col cols="12" md="10" offset-md="1" class="justify-start ">
+            <p  class="mt-5" style="white-space: pre-line">
           {{article_info.description}}
-        </p>
+          </p>
+          </v-col>
+      
+      </v-card>
       </v-col>
     </v-container>
   </div>
