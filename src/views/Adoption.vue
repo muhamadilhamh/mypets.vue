@@ -15,7 +15,14 @@
                 Memberikan hewanmu, untuk kasih sayang yang diperlukan
               </p>
               <div class="btn_gotoregis">
-                <v-btn to="/register" rounded small color="#489FB5" dark>
+                <v-btn
+                  to="/register"
+                  rounded
+                  small
+                  color="#489FB5"
+                  dark
+                  v-show="(islogin = !islogin)"
+                >
                   Register
                 </v-btn>
               </div>
@@ -305,6 +312,7 @@ export default {
   data() {
     return {
       showFilter: false,
+      islogin: false,
       showSort: false,
       sortedItem: "",
       sortType: "",

@@ -6,30 +6,27 @@
     <v-col cols="12" sm="6">
       <v-row class="pa-12">
         <v-container>
-          <div  v-if="errors">
-            <v-alert
-      border="top"
-      color="red lighten-2"
-      dark
-    >
-      {{errors}}
-    </v-alert>
+          <div v-if="errors">
+            <v-alert border="top" color="red lighten-2" dark>
+              {{ errors }}
+            </v-alert>
           </div>
-          <div  v-if="msg == 'register_success'">
-            <v-alert
-      border="top"
-      color="green lighten-2"
-      dark
-    >
-     Register Success
-    </v-alert>
-   
-    </div>
-    
+          <div v-if="msg == 'register_success'">
+            <v-alert border="top" color="green lighten-2" dark>
+              Register Success
+            </v-alert>
+          </div>
+
           <h3 class="header_login">Log in to MyPets!</h3>
-          
+
           <v-col cols="12">
-            <v-form @submit.prevent ="login" ref="form" class="login" v-model="valid" lazy-validation>
+            <v-form
+              @submit.prevent="login"
+              ref="form"
+              class="login"
+              v-model="valid"
+              lazy-validation
+            >
               <h5>Username or Email</h5>
               <v-text-field
                 v-model="email"
@@ -56,16 +53,31 @@
               <v-row class="hidden-xs-only">
                 <v-col cols="6">
                   <v-btn
+                    rounded
+                    dark
+                    class="btn_login"
+                    outlined
+                    color="#489FB5"
+                    block
+                    to="/home"
+                    elevation="7"
+                  >
+                    Back
+                  </v-btn>
+                </v-col>
+
+                <v-col cols="6">
+                  <v-btn
                     :disabled="!valid"
                     rounded
                     dark
-                    @click = login
+                    @click="login"
                     class="btn_login"
                     color="#489FB5"
                     block
                     elevation="7"
                   >
-                    Log in
+                    Login
                   </v-btn>
                 </v-col>
               </v-row>
@@ -76,13 +88,29 @@
                     :disabled="!valid"
                     rounded
                     dark
-                    @click = login
+                    @click="login"
                     class="btn_login"
                     color="#489FB5"
                     block
                     elevation="7"
                   >
                     Log in
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row class="hidden-sm-and-up">
+                <v-col>
+                  <v-btn
+                    rounded
+                    dark
+                    class="btn_login"
+                    outlined
+                    color="#489FB5"
+                    block
+                    to="/home"
+                    elevation="7"
+                  >
+                    Back
                   </v-btn>
                 </v-col>
               </v-row>
@@ -100,7 +128,6 @@
                   >
                     Register now
                   </v-btn>
-                  
                 </v-col>
               </v-row>
             </v-form>
@@ -113,7 +140,6 @@
 <script>
 import navbarlogo_login from "../layouts/navbarlogo_login";
 export default {
- 
   created() {
     this.$emit("update:layout", navbarlogo_login);
   },
@@ -123,25 +149,26 @@ export default {
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then( response => {
-        console.log(response.data)
-        this.$router.push("/adoption")})
-        .catch((error) => this.errors = error.response.data.message);
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push("/adoption");
+        })
+        .catch((error) => (this.errors = error.response.data.message));
     },
   },
   data: () => ({
     value: true,
-    msg : '',
+    msg: "",
     valid: true,
     email: "",
-    errors : null,
+    errors: null,
     emailRules: [(value) => !!value || "E-mail or username required"],
     password: "",
     passwordRules: [(value) => !!value || "Password is required"],
   }),
-  mounted(){
+  mounted() {
     this.msg = this.$route.query.msg;
-  }
+  },
 };
 </script>
 

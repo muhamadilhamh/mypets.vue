@@ -9,54 +9,57 @@
     </v-toolbar>
     <v-row>
       <v-col cols="12" md="4" sm="4" offset-md="1">
-        <div class="uploader"
-        @dragenter="OnDragEnter"
-        @dragleave="OnDragLeave"
-        @dragover.prevent
-        @drop="onDrop"
-        :class="{ dragging: isDragging }">
-        
-        <div class="upload-control" v-show="images.length">
+        <div
+          class="uploader"
+          @dragenter="OnDragEnter"
+          @dragleave="OnDragLeave"
+          @dragover.prevent
+          @drop="onDrop"
+          :class="{ dragging: isDragging }"
+        >
+          <div class="upload-control" v-show="images.length">
             <label for="file">Select a file</label>
             <button @click="deleteImage">Clear Image</button>
-        </div>
+          </div>
 
-
-        <div v-show="!images.length">
+          <div v-show="!images.length">
             <i class="fa fa-cloud-upload"></i>
             <p>Drag your images here</p>
             <div>OR</div>
             <div class="file-input">
-                <label for="file">Select a file</label>
-                <input type="file" id="file" @change="onInputChange" multiple>
+              <label for="file">Select a file</label>
+              <input type="file" id="file" @change="onInputChange" multiple />
             </div>
-        </div>
+          </div>
 
-        <div class="images-preview" v-show="images.length">
-            <div class="img-wrapper" v-for="(image, index) in images" :key="index">
-                <img :src="image" :alt="`Image Uplaoder ${index}`">
-                <div class="details">
-                    <span class="name" v-text="files[index].name"></span>
-                    <span class="size" v-text="getFileSize(files[index].size)"></span>
-                </div>
+          <div class="images-preview" v-show="images.length">
+            <div
+              class="img-wrapper"
+              v-for="(image, index) in images"
+              :key="index"
+            >
+              <img :src="image" :alt="`Image Uplaoder ${index}`" />
+              <div class="details">
+                <span class="name" v-text="files[index].name"></span>
+                <span
+                  class="size"
+                  v-text="getFileSize(files[index].size)"
+                ></span>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
       </v-col>
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                 <div  v-if="errMessage">
-            <v-alert
-      border="top"
-      color="red lighten-2"
-      dark
-    >
-      {{errMessage}}
-    </v-alert>
-          </div> 
+                <div v-if="errMessage">
+                  <v-alert border="top" color="red lighten-2" dark>
+                    {{ errMessage }}
+                  </v-alert>
+                </div>
                 <h5>Moment Title</h5>
                 <v-text-field
                   v-model="title"
@@ -68,7 +71,6 @@
                   dense
                   color="#489FB5"
                 ></v-text-field>
-            
 
                 <div>
                   <h5>Description</h5>
@@ -85,26 +87,29 @@
 
                 <h5>Location</h5>
                 <v-autocomplete
-              clearable
-              rounded
-              :rules="locRules"
-              item-text="name"
-              :items="location_data"
-              item-value="name"
-              label="Select Location"
-              v-model="loc"
-              placeholder="Select Location"
-              prepend-inner-icon="mdi-magnify"
-              solo
-            ></v-autocomplete>
+                  clearable
+                  rounded
+                  :rules="locRules"
+                  item-text="name"
+                  :items="location_data"
+                  item-value="name"
+                  label="Select Location"
+                  v-model="loc"
+                  placeholder="Select Location"
+                  prepend-inner-icon="mdi-magnify"
+                  solo
+                ></v-autocomplete>
 
                 <v-row>
                   <v-col>
                     <div>
                       <h5>Pet</h5>
 
-                      <v-radio-group v-model="animal_name" row
-                      @change="subSpecies(animal_name)">
+                      <v-radio-group
+                        v-model="animal_name"
+                        row
+                        @change="subSpecies(animal_name)"
+                      >
                         <v-radio
                           color="#489FB5"
                           label="Cat"
@@ -140,45 +145,50 @@
                     </div>
                   </v-col>
                 </v-row>
-                <v-row >
-                <v-col cols="12" sm="12" md="12">
-                <h5>Type</h5>
-                <v-autocomplete
-              clearable
-              rounded
-              item-text="name"
-              :items="animal_list"
-              item-value="slug"
-              label="Select Pet Type"
-              v-model="type"
-              placeholder="Select Pet Type"
-              prepend-inner-icon="mdi-magnify"
-              solo
-            >
-              <template slot="selection" slot-scope="{ item }">
-                {{ item.type }} - {{ item.name }}
-              </template>
-              <template slot="item" slot-scope="{ item }">
-                {{ item.type }} - {{ item.name }}
-              </template>
-            </v-autocomplete>
-          </v-col>
-</v-row>
-                
-                
                 <v-row>
-                  <v-col cols="4" offset-md="1">
+                  <v-col cols="12" sm="12" md="12">
+                    <h5>Type</h5>
+                    <v-autocomplete
+                      clearable
+                      rounded
+                      item-text="name"
+                      :items="animal_list"
+                      item-value="slug"
+                      label="Select Pet Type"
+                      v-model="type"
+                      placeholder="Select Pet Type"
+                      prepend-inner-icon="mdi-magnify"
+                      solo
+                    >
+                      <template slot="selection" slot-scope="{ item }">
+                        {{ item.type }} - {{ item.name }}
+                      </template>
+                      <template slot="item" slot-scope="{ item }">
+                        {{ item.type }} - {{ item.name }}
+                      </template>
+                    </v-autocomplete>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <v-col cols="12" lg="6">
                     <v-btn
-                      :to="{ name: 'profile', params: { username : user.username } }"
                       rounded
                       class="btn_login"
                       outlined
                       block
+                      dark
+                      color="#489FB5"
+                      :to="{
+                        name: 'profile',
+                        params: { username: user.username },
+                      }"
+                      elevation="7"
                     >
                       Back To Profile
                     </v-btn>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="12" lg="6">
                     <v-btn
                       rounded
                       class="btn_login"
@@ -186,16 +196,14 @@
                       dark
                       elevation="7"
                       block
-                      @click = "upload"
+                      @click="upload"
                     >
                       Publish Moment
                     </v-btn>
-                    
                   </v-col>
                 </v-row>
               </v-form>
             </v-col>
-           
           </v-container>
         </v-row>
       </v-col>
@@ -204,10 +212,10 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength } from "vuelidate/lib/validators";
 
-import { mapGetters } from 'vuex'
-import axios from 'axios'
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   nama: "UploadAdoption",
   created() {
@@ -217,14 +225,14 @@ export default {
     showform: false,
     isDragging: false,
     dragCount: 0,
-     animal_list: [],
+    animal_list: [],
     files: [],
     images: [],
-    location_data : [],
-    animal_name : "",
-    type : "",
-    errMessage : "",
-    gender : "",
+    location_data: [],
+    animal_name: "",
+    type: "",
+    errMessage: "",
+    gender: "",
     name: "",
     title: "",
     body: "",
@@ -241,24 +249,23 @@ export default {
     colorRules: [(value) => !!value || "Type is required"],
   }),
   validations: {
-    name : {
+    name: {
       required,
     },
     images: {
-      required
+      required,
     },
-    desc :{
-      required
+    desc: {
+      required,
     },
-
   },
-  computed : {
-    ...mapGetters({ 
-        isLoggedIn: 'isLoggedIn',
-        user: 'user',
-      })
+  computed: {
+    ...mapGetters({
+      isLoggedIn: "isLoggedIn",
+      user: "user",
+    }),
   },
-  mounted(){
+  mounted() {
     let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
@@ -269,11 +276,11 @@ export default {
     });
   },
   methods: {
-    deleteImage(){
-       this.images.splice(0,this.images.length);
-        this.files.splice(0,this.files.length);
+    deleteImage() {
+      this.images.splice(0, this.images.length);
+      this.files.splice(0, this.files.length);
     },
-     subSpecies(value) {
+    subSpecies(value) {
       if (value != null) {
         let uri_cat = process.env.VUE_APP_ROOT_API + "animal/" + value;
         this.$http.get(uri_cat).then((response) => {
@@ -286,218 +293,221 @@ export default {
         });
       }
     },
-    notification(){
-      console.log("test")
-     this.$notify({
-  group: 'foo',
-  type : 'error',
-  title: 'Notifications',
-  text: 'Data deleted successfully'
-  });
-    },    submit(){
-      this.$v.$touch()
-        if(this.$v.$invalid){
-          this.submitStatus = 'Error'
-        }else {
-          console.log("sss"),
-          this.submitStatus = 'Pending'
-          setTimeout(() => {
-            this.submitStatus = 'OK'
-          }, 500)
-        }
+    notification() {
+      console.log("test");
+      this.$notify({
+        group: "foo",
+        type: "error",
+        title: "Notifications",
+        text: "Data deleted successfully",
+      });
     },
-        OnDragEnter(e) {
-            e.preventDefault();
-            
-            this.dragCount++;
-            this.isDragging = true;
-            return false;
+    submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = "Error";
+      } else {
+        console.log("sss"), (this.submitStatus = "Pending");
+        setTimeout(() => {
+          this.submitStatus = "OK";
+        }, 500);
+      }
+    },
+    OnDragEnter(e) {
+      e.preventDefault();
+
+      this.dragCount++;
+      this.isDragging = true;
+      return false;
+    },
+    OnDragLeave(e) {
+      e.preventDefault();
+      this.dragCount--;
+      if (this.dragCount <= 0) this.isDragging = false;
+    },
+    onInputChange(e) {
+      const files = e.target.files;
+      for (let i = 0; i < 4; i++) {
+        this.addImage(files[i]);
+      }
+    },
+    onDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.isDragging = false;
+      const files = e.dataTransfer.files;
+      for (let i = 0; i < 4; i++) {
+        this.addImage(files[i]);
+      }
+    },
+    addImage(file) {
+      if (!file.type.match("image.*")) {
+        this.$toastr.e(`${file.name} is not an image`);
+        return;
+      }
+      this.files.push(file);
+      const img = new Image(),
+        reader = new FileReader();
+      reader.onload = (e) => this.images.push(e.target.result);
+      reader.readAsDataURL(file);
+    },
+    getFileSize(size) {
+      const fSExt = ["Bytes", "KB", "MB", "GB"];
+      let i = 0;
+
+      while (size > 900) {
+        size /= 1024;
+        i++;
+      }
+      return `${Math.round(size * 100) / 100} ${fSExt[i]}`;
+    },
+    upload() {
+      let self = this;
+      const formData = new FormData();
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
         },
-        OnDragLeave(e) {
-            e.preventDefault();
-            this.dragCount--;
-            if (this.dragCount <= 0)
-                this.isDragging = false;
-        },
-        onInputChange(e) {
-            const files = e.target.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
-        },
-        onDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.isDragging = false;
-            const files = e.dataTransfer.files;
-            for(let i=0 ; i<4; i++){
-            this.addImage(files[i])
-            }
-        },
-        addImage(file) {
-            if (!file.type.match('image.*')) {
-                this.$toastr.e(`${file.name} is not an image`);
-                return;
-            }
-            this.files.push(file);
-            const img = new Image(),
-                reader = new FileReader();
-            reader.onload = (e) => this.images.push(e.target.result);
-            reader.readAsDataURL(file);
-        },
-        getFileSize(size) {
-            const fSExt = ['Bytes', 'KB', 'MB', 'GB'];
-            let i = 0;
-            
-            while(size > 900) {
-                size /= 1024;
-                i++;
-            }
-            return `${(Math.round(size * 100) / 100)} ${fSExt[i]}`;
-        },
-        upload() {
-          let self = this;
-            const formData = new FormData();
-            const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                }
-           
-            formData.append('user_id',this.user.id) 
-            formData.append('animal_name',this.animal_name) 
-            formData.append('title',this.title) 
-            formData.append('desc',this.desc) 
-            formData.append('type',this.type)
-            formData.append('gender',this.gender)       
-            formData.append('loc',this.loc)
-        /*$.each(this.images, function (key, image) {
+      };
+
+      formData.append("user_id", this.user.id);
+      formData.append("animal_name", this.animal_name);
+      formData.append("title", this.title);
+      formData.append("desc", this.desc);
+      formData.append("type", this.type);
+      formData.append("gender", this.gender);
+      formData.append("loc", this.loc);
+      /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/
-          this.files.forEach(file => {
-                formData.append('images[]', file, file.name);
-            });
-           this.$http.post(
-                        process.env.VUE_APP_ROOT_API + 'upload/moment',formData,config
-                    )
-                .then((response) => {
-            this.$swal({
-              icon : 'success',
-               confirmButtonColor: '#3085d6',
-                text: "Moment has been successfully uploaded",
-            confirmButtonText: 'Confirm',
-            closeOnCancel: true
-            });
-            this.$router.push({ name: 'profile', params: { username : this.user.username } })
-        }).catch((error) => {
-    this.errMessage = error.response.data;
-});
-        }
-    }
+      this.files.forEach((file) => {
+        formData.append("images[]", file, file.name);
+      });
+      this.$http
+        .post(process.env.VUE_APP_ROOT_API + "upload/moment", formData, config)
+        .then((response) => {
+          this.$swal({
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+            text: "Moment has been successfully uploaded",
+            confirmButtonText: "Confirm",
+            closeOnCancel: true,
+          });
+          this.$router.push({
+            name: "profile",
+            params: { username: this.user.username },
+          });
+        })
+        .catch((error) => {
+          this.errMessage = error.response.data;
+        });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 /* Upload Adoption */
 .uploader {
-    width: 100%;
-    background: #2196F3;
-    color: #fff;
-    padding: 40px 15px;
-    text-align: center;
-    border-radius: 10px;
-    border: 3px dashed #fff;
-    font-size: 20px;
+  width: 100%;
+  background: #2196f3;
+  color: #fff;
+  padding: 40px 15px;
+  text-align: center;
+  border-radius: 10px;
+  border: 3px dashed #fff;
+  font-size: 20px;
+  position: relative;
+  &.dragging {
+    background: #fff;
+    color: #2196f3;
+    border: 3px dashed #2196f3;
+    .file-input label {
+      background: #2196f3;
+      color: #fff;
+    }
+  }
+  i {
+    font-size: 85px;
+  }
+  .file-input {
+    width: 200px;
+    margin: auto;
+    height: 68px;
     position: relative;
-    &.dragging {
-        background: #fff;
-        color: #2196F3;
-        border: 3px dashed #2196F3;
-        .file-input label {
-            background: #2196F3;
-            color: #fff;
-        }
+    label,
+    input {
+      background: #fff;
+      color: #2196f3;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 7px;
+      cursor: pointer;
     }
-    i {
-        font-size: 85px;
+    input {
+      opacity: 0;
+      z-index: -2;
     }
-    .file-input {
-        width: 200px;
-        margin: auto;
-        height: 68px;
-        position: relative;
-        label,
-        input {
-            background: #fff;
-            color: #2196F3;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 7px;
-            cursor: pointer;
-        }
-        input {
-            opacity: 0;
-            z-index: -2;
-        }
+  }
+  .images-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    .img-wrapper {
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      height: 150px;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 5px 5px 20px #3e3737;
+      img {
+        max-height: 105px;
+      }
     }
-    .images-preview {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 20px;
-        .img-wrapper {
-            width: 160px;
-            display: flex;
-            flex-direction: column;
-            margin: 10px;
-            height: 150px;
-            justify-content: space-between;
-            background: #fff;
-            box-shadow: 5px 5px 20px #3e3737;
-            img {
-                max-height: 105px;
-            }
-        }
-        .details {
-            font-size: 12px;
-            background: #fff;
-            color: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: self-start;
-            padding: 3px 6px;
-            .name {
-                overflow: hidden;
-                height: 18px;
-            }
-        }
+    .details {
+      font-size: 12px;
+      background: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: self-start;
+      padding: 3px 6px;
+      .name {
+        overflow: hidden;
+        height: 18px;
+      }
     }
-    .upload-control {
-        position: absolute;
-        width: 100%;
-        background: #fff;
-        top: 0;
-        left: 0;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-        padding: 10px;
-        padding-bottom: 4px;
-        text-align: right;
-        button, label {
-            background: #2196F3;
-            border: 2px solid #03A9F4;
-            border-radius: 3px;
-            color: #fff;
-            font-size: 15px;
-            cursor: pointer;
-        }
-        label {
-            padding: 2px 5px;
-            margin-right: 10px;
-        }
+  }
+  .upload-control {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 10px;
+    padding-bottom: 4px;
+    text-align: right;
+    button,
+    label {
+      background: #2196f3;
+      border: 2px solid #03a9f4;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
     }
+    label {
+      padding: 2px 5px;
+      margin-right: 10px;
+    }
+  }
 }
 </style>
