@@ -14,14 +14,7 @@
       </v-toolbar-title>
       <v-toolbar-items class="hidden-xs-only">
         <v-card-actions>
-          <v-btn
-            class="about"
-            to="/about"
-            x-small
-            color="orange"
-            text
-            lowercase
-          >
+          <v-btn class="about" to="/about" x-small color="orange" text>
             About Us
           </v-btn>
         </v-card-actions>
@@ -57,17 +50,14 @@
       <v-toolbar-items class="hidden-xs-only" v-if="isLoggedIn == true">
         <v-card-actions>
           <v-avatar size="37">
-            <v-img
-              :src="url + user.picture"
-            >
-            </v-img>
+            <v-img :src="url + user.picture"> </v-img>
           </v-avatar>
           <v-list-item-content>
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
                 <v-list-item-subtitle v-on="on">
                   <v-btn to="" text x-small>
-                     {{user.username}}
+                    {{ user.username }}
                     <v-icon right> mdi-chevron-down </v-icon>
                   </v-btn>
                 </v-list-item-subtitle>
@@ -75,7 +65,15 @@
               <v-list class="responsiveMenus">
                 <v-list-item>
                   <v-list-item-title
-                    ><v-btn :to="{name : 'profile', params: { username : user.username } }" x-small color="orange" text>
+                    ><v-btn
+                      :to="{
+                        name: 'profile',
+                        params: { username: user.username },
+                      }"
+                      x-small
+                      color="orange"
+                      text
+                    >
                       Profile
                     </v-btn></v-list-item-title
                   >
@@ -183,31 +181,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      url : process.env.VUE_APP_IMAGE_URL
-    }
+  data() {
+    return {
+      url: process.env.VUE_APP_IMAGE_URL,
+    };
   },
   methods: {
-    logout: function() {
-    this.$store.dispatch("logout").then(() => {
-    this.$router.push("/");
-    });
-    }
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/");
+      });
+    },
   },
-  computed : {
-    ...mapGetters({ 
-        isLoggedIn: 'isLoggedIn',
-        user: 'user',
-      })
-  }
+  computed: {
+    ...mapGetters({
+      isLoggedIn: "isLoggedIn",
+      user: "user",
+    }),
+  },
 };
 </script>
 
 <style lang="scss">
-.about {
-  text-transform: lowercase;
-}
 </style>

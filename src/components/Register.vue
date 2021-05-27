@@ -7,18 +7,20 @@
       <v-row class="pa-12">
         <v-container>
           <h3 class="header_register">Register to MyPets</h3>
-          <div  v-if="errors">
-            <v-alert
-      border="top"
-      color="red lighten-2"
-      dark
-    >
-      {{errors}}
-    </v-alert>
+          <div v-if="errors">
+            <v-alert border="top" color="red lighten-2" dark>
+              {{ errors }}
+            </v-alert>
           </div>
           <v-col cols="12">
-            <v-form @submit.prevent ="validate" ref="form" class="register" v-model="valid" lazy-validation>
-              <v-row>
+            <v-form
+              @submit.prevent="validate"
+              ref="form"
+              class="register"
+              v-model="valid"
+              lazy-validation
+            >
+              <v-row class="hidden-xs-only">
                 <v-col cols="6">
                   <h5>Name</h5>
                   <v-text-field
@@ -32,6 +34,36 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="6">
+                  <h5>Username</h5>
+                  <v-text-field
+                    v-model="username"
+                    :rules="usernameRules"
+                    label="Username"
+                    required
+                    outlined
+                    rounded
+                    dense
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row class="hidden-sm-and-up">
+                <v-col class="name_register">
+                  <h5>Name</h5>
+                  <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    label="Name"
+                    required
+                    outlined
+                    rounded
+                    dense
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row class="hidden-sm-and-up">
+                <v-col>
                   <h5>Username</h5>
                   <v-text-field
                     v-model="username"
@@ -68,7 +100,7 @@
                 type="number"
               ></v-text-field>
 
-              <v-row>
+              <v-row class="hidden-xs-only">
                 <v-col cols="6">
                   <h5>Password</h5>
                   <v-text-field
@@ -99,6 +131,39 @@
                 </v-col>
               </v-row>
 
+              <v-row class="hidden-sm-and-up">
+                <v-col class="name_password">
+                  <h5>Password</h5>
+                  <v-text-field
+                    v-model="password"
+                    label="Password"
+                    type="password"
+                    required
+                    :rules="passwordRules"
+                    outlined
+                    rounded
+                    dense
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row class="hidden-sm-and-up">
+                <v-col>
+                  <h5>Repeat Password</h5>
+                  <v-text-field
+                    v-model="confirmPassword"
+                    label="Repeat Password"
+                    type="password"
+                    required
+                    :rules="
+                      confirmPasswordRules.concat(passwordConfirmationRule)
+                    "
+                    outlined
+                    rounded
+                    dense
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
               <v-checkbox
                 v-model="checkbox"
                 :rules="[(v) => !!v || 'You must agree to continue!']"
@@ -109,6 +174,20 @@
               <v-row class="hidden-xs-only">
                 <v-col cols="6">
                   <v-btn
+                    rounded
+                    outlined
+                    class="btn_login"
+                    color="#489FB5"
+                    block
+                    type="submit"
+                    elevation="7"
+                  >
+                    Back
+                  </v-btn>
+                </v-col>
+
+                <v-col cols="6">
+                  <v-btn
                     :disabled="!valid"
                     rounded
                     dark
@@ -116,7 +195,7 @@
                     @click="validate"
                     color="#489FB5"
                     block
-                    type = submit
+                    type="submit"
                     elevation="7"
                   >
                     Create Account
@@ -134,13 +213,31 @@
                     @click="validate"
                     color="#489FB5"
                     block
-                    type = submit
+                    type="submit"
                     elevation="7"
                   >
                     Create Account
                   </v-btn>
                 </v-col>
               </v-row>
+
+              <v-row class="hidden-sm-and-up">
+                <v-col>
+                  <v-btn
+                    rounded
+                    dark
+                    class="btn_login"
+                    outlined
+                    color="#489FB5"
+                    block
+                    type="submit"
+                    elevation="7"
+                  >
+                    Back
+                  </v-btn>
+                </v-col>
+              </v-row>
+
               <v-row class="hidden-sm-and-up">
                 <v-col cols="6">
                   <p class="member_resp">Already a member?</p>
@@ -189,13 +286,13 @@ export default {
       this.$store
         .dispatch("register", data)
         .then(() => this.$router.push("/login?msg=register_success"))
-        .catch((err) =>  this.errors = err.response.data);
+        .catch((err) => (this.errors = err.response.data));
     },
   },
   data: () => ({
     value: true,
     valid: true,
-    errors : null,  
+    errors: null,
     name: "",
     nameRules: [
       (value) => !!value || "Name required",
@@ -240,5 +337,19 @@ export default {
   color: #ffa62b;
   letter-spacing: 2%;
   margin-top: 3%;
+}
+.register_resp {
+  margin-top: 100px;
+}
+.member_resp {
+  right: 10%;
+}
+.name_register {
+  margin-top: 10px;
+  margin-bottom: -20px;
+}
+.name_password {
+  margin-top: -20px;
+  margin-bottom: -20px;
 }
 </style>
