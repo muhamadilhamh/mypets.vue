@@ -4,7 +4,10 @@
     <v-container class="heroes_age">
       <v-row class="pa-12">
         <v-col cols="12" sm="4">
-          <v-img class="il_anjing" src="../assets/Anjing&Berdiri.svg"> </v-img>
+          <router-link to="/dogconversion">
+            <v-img class="il_anjing" src="../assets/Anjing&Berdiri.svg">
+            </v-img>
+          </router-link>
         </v-col>
         <v-col cols="12" sm="4">
           <div class="title_age">
@@ -12,7 +15,10 @@
           </div>
         </v-col>
         <v-col cols="12" sm="4">
-          <v-img class="il_kucing" src="../assets/Kucing&Jongkok.svg"> </v-img>
+          <router-link to="/catconversion">
+            <v-img class="il_kucing" src="../assets/Kucing&Jongkok.svg">
+            </v-img>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -51,10 +57,10 @@
                 <v-col cols="12" sm="8">
                   <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
                     <v-card-title>
-                      <p class="title_dog">Dog</p>
+                      <p class="title_dog">'Dog'</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">More about 'dog'</p>
+                      <p class="desc_anjing">More about dog</p>
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
@@ -86,10 +92,10 @@
                 <v-col cols="12" sm="8">
                   <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
                     <v-card-title>
-                      <p class="title_dog">Cat</p>
+                      <p class="title_dog">'Cat'</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">More about 'cat'</p>
+                      <p class="desc_anjing">More about cat</p>
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
@@ -248,15 +254,15 @@ export default {
       feed_age_dog: [
         {
           id: 1,
-          title: "Kucing",
-          desc: "Mau tau perbadingan umurmu dengan kucingmu?",
+          title: "'Cat'",
+          desc: "More about cat",
         },
       ],
       feed_age_cat: [
         {
           id: 1,
-          title: "Anjing",
-          desc: "Mau tau perbadingan umurmu dengan anjingmu?",
+          title: "'Dog'",
+          desc: "More about dog",
         },
       ],
     };

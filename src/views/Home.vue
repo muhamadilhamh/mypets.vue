@@ -416,7 +416,7 @@
                             <p class="title_dog">'Dog'</p>
                           </v-card-title>
                           <v-card-subtitle>
-                            <p class="desc_anjing">More about 'dog'</p>
+                            <p class="desc_anjing">More about dog</p>
                           </v-card-subtitle>
                           <v-card-actions>
                             <v-btn rounded color="#FFF" block class="btn_dog">
@@ -450,7 +450,7 @@
                             <p class="title_dog">'Cat'</p>
                           </v-card-title>
                           <v-card-subtitle>
-                            <p class="desc_anjing">More about 'cat'</p>
+                            <p class="desc_anjing">More about cat</p>
                           </v-card-subtitle>
                           <v-card-actions>
                             <v-btn rounded color="#FFF" block class="btn_dog">
@@ -746,15 +746,15 @@ export default {
       feed_age_dog: [
         {
           id: 1,
-          title: "Kucing",
-          desc: "Mau tau perbadingan umurmu dengan kucingmu?",
+          title: "'Cat'",
+          desc: "More about cat",
         },
       ],
       feed_age_cat: [
         {
           id: 1,
-          title: "Anjing",
-          desc: "Mau tau perbadingan umurmu dengan anjingmu?",
+          title: "'Dog'",
+          desc: "More about dog",
         },
       ],
     };

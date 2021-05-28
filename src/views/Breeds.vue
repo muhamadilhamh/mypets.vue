@@ -4,8 +4,10 @@
     <v-container class="heroes_age">
       <v-row class="pa-12">
         <v-col cols="12" sm="4">
-          <v-img class="il_anjing_Nocalcu" src="../assets/anjing_Nocalcu.svg">
-          </v-img>
+          <router-link to="/breedsDog">
+            <v-img class="il_anjing_Nocalcu" src="../assets/anjing_Nocalcu.svg">
+            </v-img>
+          </router-link>
         </v-col>
         <v-col cols="12" sm="4">
           <div class="title_breeds">
@@ -13,8 +15,10 @@
           </div>
         </v-col>
         <v-col cols="12" sm="4">
-          <v-img class="il_kucing_nocalcu" src="../assets/kucing_Nocalcu.svg">
-          </v-img>
+          <router-link to="/breedsCat">
+            <v-img class="il_kucing_nocalcu" src="../assets/kucing_Nocalcu.svg">
+            </v-img>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -57,10 +61,10 @@
                 <v-col cols="12" sm="8">
                   <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
                     <v-card-title>
-                      <p class="title_dog">Anjing</p>
+                      <p class="title_dog">'Dog'</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">Cek Macam-macam anjing Yuk!</p>
+                      <p class="desc_anjing">More about dog</p>
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
@@ -92,10 +96,10 @@
                 <v-col cols="12" sm="8">
                   <v-card elevation="11" class="rounded-xl cat" color="#FFA62B">
                     <v-card-title>
-                      <p class="title_dog">Cat</p>
+                      <p class="title_dog">'Cat'</p>
                     </v-card-title>
                     <v-card-subtitle>
-                      <p class="desc_anjing">Cek Macam-macam kucing Yuk!</p>
+                      <p class="desc_anjing">More about cat</p>
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
@@ -139,7 +143,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breeds"
+                      to="/breedsdog"
                     >
                       <v-btn
                         color="#F5F1EC"
@@ -194,7 +198,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breeds"
+                      to="/breedscat"
                     >
                       <v-btn
                         color="#F5F1EC"
@@ -255,15 +259,15 @@ export default {
       feed_age_dog: [
         {
           id: 1,
-          title: "Kucing",
-          desc: "Cek Macam-macam kucing Yuk!",
+          title: "'Cat'",
+          desc: "More about cat",
         },
       ],
       feed_age_cat: [
         {
           id: 1,
-          title: "Anjing",
-          desc: "Cek Macam-macam anjing Yuk!",
+          title: "'Dog'",
+          desc: "More about dog",
         },
       ],
     };

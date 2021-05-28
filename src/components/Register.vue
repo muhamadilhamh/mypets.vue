@@ -167,7 +167,7 @@
               <v-checkbox
                 v-model="checkbox"
                 :rules="[(v) => !!v || 'You must agree to continue!']"
-                label="Creating an account means you’re okay with our Terms of Service, Privacy Policy, and our default Notification Settings. "
+                label="Creating an account means you’re agree with our Terms of Service and Privacy Policy. "
                 required
               ></v-checkbox>
 

@@ -4,7 +4,7 @@
     <v-container>
       <v-row class="pa-3">
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back" to="/blank">
+          <v-btn rounded depressed class="btn_back" to="/catconversion">
             <v-icon left> mdi-cat </v-icon>
             Go to Cat
           </v-btn>

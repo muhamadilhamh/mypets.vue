@@ -4,7 +4,7 @@
       <v-container>
         <v-row class="pa-12">
           <v-col offset-md="1" cols="12" md="7">
-            <h3 class="header_BreedsCat">“Cat” Breeds</h3>
+            <h3 class="header_BreedsCat">'Cat' Breeds</h3>
             <p class="desc_BreedsCat">
               Discover cat breeds from around the world and get help finding
               your perfect pet.
