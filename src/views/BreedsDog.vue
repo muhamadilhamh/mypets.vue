@@ -25,7 +25,7 @@
               item-text="name"
               :items="animal_list"
               item-value="name"
-              label="Search Adoption"
+              label="Search Breeds"
               v-model="search"
               placeholder="Search Adoption"
               prepend-inner-icon="mdi-magnify"
@@ -48,8 +48,8 @@
         <v-row>
           <div class="filter">
             <v-btn outlined rounded solo @click="showFilter = !showFilter">
-              <v-icon left> mdi-filter-variant </v-icon>
-              filter
+              <v-icon left> mdi-sort-variant </v-icon>
+              Sort
             </v-btn>
           </div>
           <v-spacer></v-spacer>
@@ -64,60 +64,22 @@
       <v-row class="ma-1">
         <v-col cols="6" md="3">
           <div class="name" v-if="showFilter">
-            <h5>Animal Type</h5>
+            <h5>Sort By Name</h5>
             <v-select
               outlined
-              item-text="animal_name"
-              :items="allpet_list"
-              item-value="animal_name"
-              v-model="species"
-              placeholder="Animal Type"
-              @change="subSpecies(species)"
+              item-text="name"
+              :items="sortName"
+              item-value="value"
+              v-model="sortType"
+              placeholder="Name"
+              @change="sortedItem = 'name'"
             ></v-select>
           </div>
         </v-col>
 
-        <v-col cols="6" md="3">
-          <div class="gender" v-if="showFilter">
-            <h5>Gender</h5>
-            <v-select
-              outlined
-              item-text="gender"
-              :items="allpet_list"
-              item-value="gender"
-              v-model="gender_selected"
-              placeholder="Gender"
-            ></v-select>
-          </div>
-        </v-col>
+      
 
-        <v-col cols="6" md="3">
-          <div class="location" v-if="showFilter">
-            <h5>Location</h5>
-            <v-select
-              outlined
-              item-text="location"
-              :items="allpet_list"
-              item-value="location"
-              v-model="location_selected"
-              placeholder="Location"
-            ></v-select>
-          </div>
-        </v-col>
-
-        <v-col cols="6" md="3">
-          <div class="age" v-if="showFilter">
-            <h5>Age</h5>
-            <v-select
-              outlined
-              item-text="age"
-              :items="allpet_list"
-              item-value="age"
-              v-model="age_selected"
-              placeholder="Age"
-            ></v-select>
-          </div>
-        </v-col>
+       
       </v-row>
     </v-container>
 
@@ -146,7 +108,7 @@
                         :empty-icon="emptyIcon"
                         :full-icon="fullIcon"
                         length="1"
-                        value="1"
+                        :value=1
                         readonly
                       >
                       </v-rating>
@@ -186,6 +148,16 @@
           </v-list>
         </v-col>
       </v-row>
+      <v-btn
+          class="load_more"
+          text
+          large
+          v-if="loadList == true"
+          @click="listToShow += 9"
+          block
+        >
+          Load More
+        </v-btn>
     </v-container>
   </div>
 </template>
@@ -202,84 +174,41 @@ export default {
     return {
       showFilter: false,
       allpet_list: [],
+      sortedItem : '',
+      sortType : null,
       pet_list: [],
       animal_list: [],
+       sortName: [
+        {
+          name: "Ascending",
+          value: "asc",
+        },
+        {
+          name: "Descending",
+          value: "desc",
+        },
+      ],
       species: null,
       search: null,
       gender_selected: null,
       location_selected: null,
+      listToShow : 9,
+      loadList : false,
       selectedItem: 1,
       emptyIcon: "mdi-heart-outline",
       fullIcon: "mdi-heart ",
       emptyIconComment: "mdi-camera-plus-outline",
       fullIconComment: "mdi-camera-plus ",
-      feed_adop: [
-        {
-          id: 1,
-          src: require("../assets/1x1_ad.png"),
-          avatar_src: require("../assets/ava_ad1x1.png"),
-          name: "Royal Navy",
-        },
-        {
-          id: 2,
-          src: require("../assets/1x2_ad.png"),
-          avatar_src: require("../assets/ava_ad1x2.png"),
-          name: "Low Short",
-        },
-        {
-          id: 3,
-          src: require("../assets/1x3_ad.png"),
-          avatar_src: require("../assets/ava_ad1x3.png"),
-          name: "Attitude",
-        },
-        {
-          id: 4,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-        {
-          id: 5,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-        {
-          id: 6,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-        {
-          id: 7,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-        {
-          id: 8,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-        {
-          id: 9,
-          src: require("../assets/1x3.png"),
-          avatar_src: require("../assets/ava_adnxn.png"),
-          name: "Lorem Ipsum",
-        },
-      ],
+      feed_adop: [],
     };
   },
   mounted() {
-    let uri = process.env.VUE_APP_ROOT_API + "adoption";
-    this.$http.get(uri).then((response) => {
-      this.pet_list = response.data;
-      this.allpet_list = response.data;
-    });
+  
     let uri_dog = process.env.VUE_APP_ROOT_API + "animal/dog";
     this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
+       this.allpet_list = response.data;
+      this.loadList = true;
     });
   },
   methods: {
@@ -306,33 +235,22 @@ export default {
     filteredList: function () {
       return this.animal_list
         .filter((post) => {
-          if (this.species != null) {
-            return post.animal_name.includes(this.species);
-          } else {
-            return (post = this.allpet_list);
-          }
-        })
-        .filter((post) => {
           if (this.search != null) {
-            return post.animal_type.includes(this.search);
+            return post.name.includes(this.search);
           } else {
-            return (post = this.allpet_list);
+            return post
           }
-        })
-        .filter((post) => {
-          if (this.gender_selected != null) {
-            return post.gender.includes(this.gender_selected);
-          } else {
-            return (post = this.allpet_list);
+        }).slice(0,this.listToShow)
+         .sort((a, b) => {
+          let modifier = 1;
+          if (this.sortType == "desc") modifier = -1;{
+          if (a[this.sortedItem] < b[this.sortedItem]) {
+            return -1 * modifier;
           }
-        })
-        .filter((post) => {
-          if (this.location_selected != null) {
-            return post.location.includes(this.location_selected);
-          } else {
-            return (post = this.allpet_list);
           }
-        });
+          if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
+          return 0;
+        }).slice(0, this.listToShow)
     },
   },
 };

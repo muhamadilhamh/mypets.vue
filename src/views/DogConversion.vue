@@ -266,18 +266,19 @@ export default {
       this.ageCalculation();
     },
     decreaseYear() {
+      if(this.yearCount > 0)
       this.yearCount -= 1;
       this.ageCalculation();
     },
     ageCalculation() {
-      if (this.yearCount == 1) {
+      if (this.yearCount <= 1) {
         this.humanYear = 15;
       } else if (
         this.yearCount < 6 ||
         (this.size == "small" && this.yearCount > 1)
       ) {
         this.humanYear = 24 + 4 * (this.yearCount - 2);
-      } else if (this.yearCount > 5 && this.size != "small") {
+      } else if (this.yearCount > 5 && this.size == "medium") {
         if (this.yearCount % 2 == 1) {
           this.humanYear = parseInt(
             24 + 4 * (this.yearCount - 2) + this.yearCount / 2
@@ -286,6 +287,30 @@ export default {
           this.humanYear = parseInt(
             24 + 4 * (this.yearCount - 2) + (this.yearCount - 1) / 2
           );
+        }
+      } else if (this.yearCount > 5 && this.size == "big"){
+        if(this.yearCount < 9){
+        if (this.yearCount % 2 == 1) {
+          this.humanYear = parseInt(
+            24 + 4 * (this.yearCount - 1) + this.yearCount - 5
+          );
+        } else {
+          this.humanYear = parseInt(
+            24 + 4 * (this.yearCount - 1) + (this.yearCount - 5) 
+          );
+        }
+        }else {
+          if(this.yearCount == 9) return this.humanYear = 61
+          if(this.yearCount == 10) return this.humanYear = 66
+          if(this.yearCount == 11) return this.humanYear = 72
+          if(this.yearCount == 12) return this.humanYear = 77
+          if(this.yearCount == 13) return this.humanYear = 82
+          if(this.yearCount == 14) return this.humanYear = 88
+          if(this.yearCount == 15) return this.humanYear = 93
+           if(this.yearCount == 16) return this.humanYear = 120
+          if(this.yearCount > 16){
+            this.humanYear = 7 * this.yearCount + this.yearCount - 3
+          }
         }
       }
     },
