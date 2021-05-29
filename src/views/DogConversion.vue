@@ -67,19 +67,19 @@
               on-icon="mdi-dog"
               label="Small Dog"
               value="small"
-              @click="showOutput = !showOutput"
+              @click="showOutput = true"
             ></v-radio>
             <v-radio
               on-icon="mdi-dog"
               label="Medium Dog"
               value="medium"
-              @click="showOutput = !showOutput"
+              @click="showOutput =  true"
             ></v-radio>
             <v-radio
               on-icon="mdi-dog"
               label="Big Dog"
               value="big"
-              @click="showOutput = !showOutput"
+              @click="showOutput =  true"
             ></v-radio>
           </v-radio-group>
 

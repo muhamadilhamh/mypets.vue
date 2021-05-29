@@ -4,7 +4,7 @@
     <v-container class="heroes_age">
       <v-row class="pa-12">
         <v-col cols="12" sm="4">
-          <router-link to="/breedsDog">
+          <router-link to="/breeds/dog">
             <v-img class="il_anjing_Nocalcu" src="../assets/anjing_Nocalcu.svg">
             </v-img>
           </router-link>
@@ -15,7 +15,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="4">
-          <router-link to="/breedsCat">
+          <router-link to="/breeds/cat">
             <v-img class="il_kucing_nocalcu" src="../assets/kucing_Nocalcu.svg">
             </v-img>
           </router-link>
@@ -68,7 +68,7 @@
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
-                        to="/breedsDog"
+                        to="/breeds/dog"
                         rounded
                         color="#FFF"
                         block
@@ -103,7 +103,7 @@
                     </v-card-subtitle>
                     <v-card-actions>
                       <v-btn
-                        to="/breedsCat"
+                        to="/breeds/cat"
                         rounded
                         color="#FFF"
                         block
@@ -143,7 +143,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breedsdog"
+                      to="/breeds/dog"
                     >
                       <v-btn
                         color="#F5F1EC"
@@ -198,7 +198,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breedscat"
+                      to="/breeds/cat"
                     >
                       <v-btn
                         color="#F5F1EC"

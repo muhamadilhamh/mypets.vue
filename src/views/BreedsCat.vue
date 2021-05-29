@@ -54,7 +54,7 @@
           </div>
           <v-spacer></v-spacer>
           <div class="filter">
-            <v-btn outlined rounded solo class="gotocat" to="/breedsDog">
+            <v-btn outlined rounded solo class="gotocat" to="/breeds/dog">
               <v-icon left> mdi-dog </v-icon>
               Go to Dog
             </v-btn>
@@ -150,7 +150,7 @@
                       </v-rating>
                     </v-col>
                     <v-col cols="2" md="2">
-                      <p class="rate">20</p>
+                      <p class="rate">{{ item.user.length}}</p>
                     </v-col>
 
                     <v-col cols="1" md="1">
@@ -171,7 +171,7 @@
                     </v-col>
 
                     <v-col cols="2" md="2">
-                      <p class="rate">20</p>
+                      <p class="rate">{{item.moments.length}}</p>
                     </v-col>
 
                     <v-col cols="4" md="4">

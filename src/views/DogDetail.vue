@@ -10,7 +10,7 @@
     <v-container>
       <v-row>
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back" to="/breedsDog">
+          <v-btn rounded depressed class="btn_back" to="/breeds/dog">
             <v-icon left> mdi-chevron-left </v-icon>
             All Breeds
           </v-btn>
@@ -653,11 +653,11 @@
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header>
-                    <v-icon left> mdi-cat </v-icon>
+                    <v-icon left> mdi-dog </v-icon>
                     <v-card-title> {{ item.title }}</v-card-title>
 
                     <v-card-list>
-                      <v-card-subtitle>12 Mei 2021 </v-card-subtitle>
+                      <v-card-subtitle>{{item.date}} </v-card-subtitle>
                     </v-card-list>
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -669,32 +669,26 @@
                       >
                       </v-img>
                     </v-col>
+                     <h4>Description</h4>
                     <v-card-text
-                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
-                      velit eius qui corrupti ipsam nulla enim molestiae error
-                      sequi ad laudantium deleniti eos?</v-card-text
+                      >{{item.description}}</v-card-text
                     >
-                    <h4>Vaksine Vaccine</h4>
+                    <h4>Location</h4>
                     <v-card-text
-                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
-                      velit eius qui corrupti ipsam nulla enim molestiae error
-                      sequi ad laudantium deleniti eos?</v-card-text
+                      >{{item.location}}</v-card-text
                     >
-                    <h4>Next Vaccine</h4>
-                    <v-card-text
-                      >Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem nobis dolor rerum dignissimos sapiente unde, commodi
-                      velit eius qui corrupti ipsam nulla enim molestiae error
-                      sequi ad laudantium deleniti eos?</v-card-text
-                    >
+                    
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-col>
           </v-row>
         </v-tab-item>
+         <v-tab class="tit"> Comments</v-tab>
+        <v-tab-item>  <section class='comments' aria-labelledby="comment">
+    <h2 id="comment">Comments</h2>
+    <Disqus shortname='mypets-1' />
+  </section></v-tab-item>
       </v-tabs>
     </v-container>
   </div>
@@ -702,8 +696,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { Disqus } from 'vue-disqus'
 export default {
   nama: "DogDetail",
+   components: {
+    Disqus
+  },
   created() {
     this.$emit("update:layout", "div");
     let uri_dog =

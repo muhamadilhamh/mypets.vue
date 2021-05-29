@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="tgl">26 Maret 2021</p>
+          <p class="tgl">{{article_info.publish_time}}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -117,7 +117,11 @@ export default {
     let uri = process.env.VUE_APP_ROOT_API + 'article/' + this.$route.params.id_article + '/details';
     this.$http.get(uri).then((response) => {
       this.article_info = response.data;
-    });
+    }).catch(error => {
+      if(error.response.status === 404)
+        this.$router.push("/error")
+    }
+    )
   },
   methods: {
     loadData() {

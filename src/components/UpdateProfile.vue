@@ -62,11 +62,17 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                <div v-if="errMessage">
-                  <v-alert border="top" color="red lighten-2" dark>
-                    {{ errMessage }}
-                  </v-alert>
-                </div>
+                <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+    <div v-for="(item,index) in errMessage.errors" :key="index">
+      <p>{{item}}</p>
+      </div> 
+    </v-alert>
+          </div> 
                 <h5 class="name_edit_profile">Name</h5>
                 <v-text-field
                   v-model="user.full_name"

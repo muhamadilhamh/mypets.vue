@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">Adoption</h5>
+          <h5 class="title_cat"></h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
@@ -11,27 +11,27 @@
     <v-container>
       <v-row>
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back" to="/adoption">
+          <v-btn rounded depressed class="btn_back" to="/">
             <v-icon left> mdi-chevron-left </v-icon>
-            All Adoption
+            Back to Home
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
     <v-container>
       <v-row>
-        <v-col offset="2">
-          <p class="adop_detail">Adoption Detail</p>
+        <v-col offset-md="2" cols="12">
+          <p class="adop_detail">{{breeds_info.user.username}}'s Moment</p>
         </v-col>
       </v-row>
       <v-row>
-        <v-col offset="2">
-          <p class="tgl">{{breeds_info.time}}</p>
+        <v-col offset-md="2">
+          <p class="tgl">Post Time : {{breeds_info.time}}</p>
         </v-col>
       </v-row>
       <v-row>
-        <v-col offset="2">
-          <p class="title_adop">{{breeds_info.name}}</p>
+        <v-col offset-md="2">
+          <p class="title_adop">{{breeds_info.title}}</p>
         </v-col>
       </v-row>
       <v-row>
@@ -69,22 +69,6 @@
           </v-btn>
 </ShareNetwork>
         </v-col>
-        <v-col  cols="6" sm="2">
-          <ShareNetwork
-    network="facebook"
-    :url="current_url"
-    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-    quote="The hot reload is so fast it\'s near instant. - Evan You"
-    hashtags="vuejs,vite"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-instagram</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
-        </v-col>
         <v-col cols="6" md="2">
           <v-btn outlined rounded>
             <v-icon left>mdi-link-variant</v-icon> Copy Link
@@ -98,7 +82,7 @@
     <v-container>
       <v-carousel height="1000px" hide-delimiters class="hidden-xs-only">
         <v-carousel-item
-      v-for="(item,i) in breeds_images"
+      v-for="(item,i) in breeds_info.image"
       :key="i"
     >
     
@@ -106,7 +90,7 @@
       </v-carousel>
       <v-carousel height="400px" hide-delimiters class="hidden-sm-and-up">
         <v-carousel-item
-      v-for="(item,i) in breeds_images"
+      v-for="(item,i) in breeds_info.image"
       :key="i"
     >
     
@@ -145,25 +129,28 @@
                     </v-col>
                     <v-col cols="6" md="2" sm="4">
                       <v-chip>
-                        <p class="testing">{{ breeds_info.age }} Months</p></v-chip
+                        <p class="testing">{{ breeds_info.gender }}</p></v-chip
                       >
                     </v-col>
 
                     <v-col cols="6" md="2" sm="4">
-                      <v-chip
+                        <div v-if="breeds_info.animal_name == 'Dog'">
+                      <router-link :to="{ name: 'dogdetail', params: { slug: breeds_info.animal_type } }" style="text-decoration:none"><v-chip
                         ><p class="testing">{{ breeds_info.animal_type }}</p></v-chip
-                      >
+                      ></router-link>
+                      </div>
+                       <div v-if="breeds_info.animal_name == 'Cat'">
+                      <router-link :to="{ name: 'catdetail', params: { slug: breeds_info.animal_type } }" style="text-decoration:none"><v-chip
+                        ><p class="testing">{{ breeds_info.animal_type }}</p></v-chip
+                      ></router-link>
+                      </div>
                     </v-col>
-                    <v-col cols="12" md="2" sm="5">
+                    <v-col cols="12" md="3" sm="5">
                       <v-chip
                         ><p class="testing">{{ breeds_info.location }}</p></v-chip
                       >
                     </v-col>
-                    <v-col cols="6" md="2" sm="5">
-                      <v-chip
-                        ><p class="testing">{{ breeds_info.health }}</p></v-chip
-                      >
-                    </v-col>
+                
                     
                   </v-row>
                 </v-card-subtitle>
@@ -172,58 +159,13 @@
                 <hr class="hr" />
 
                 <v-card-text> {{ breeds_info.description }}. </v-card-text>
+                <v-card-text> Date : {{ breeds_info.date }} </v-card-text>
 
-                <v-col md="6">
-                  <v-card outlined class="rounded-xl">
-                    <v-card-title class="justify-center">
-                      Adopt now
-                    </v-card-title>
-                    <v-card-actions class="phone">
-                      <v-list-item-avatar>
-                        <v-icon> mdi-gmail </v-icon>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item> {{ breeds_info.email }} 
-                          <v-btn class="ma-2" color="blue-grey" small >
-                            <v-icon left> mdi-email</v-icon>
-                          <ShareNetwork
-    network="email"
-    :url="current_url"
-    :title="'Adoption Request ' + breeds_info.name"
-    description="Hey, I am interested in adopting pet that you posted on mypets website"
-     tag="v-btn"
-  >
-  Send Me an Email
-</ShareNetwork></v-btn>
-                        </v-list-item>
-                      </v-list-item-content>
-                      
-                    </v-card-actions>
-                    <v-card-actions class="phone">
-                      <v-list-item-avatar>
-                        <v-icon> mdi-phone </v-icon>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item> {{ breeds_info.phone }} 
-                          
-                        <template v-if="breeds_info.user.whatsapp == 1"><v-btn  class="ma-2" color="success" small @click="redirect('https://api.whatsapp.com/send?phone=62' + breeds_info.phone + '&text=Hey, I am interested in adopting pet that you posted on mypets website ' + current_url )"> <v-icon left>mdi-whatsapp</v-icon> Reach me on Whatsapp</v-btn></template>
-                        </v-list-item>
-                      </v-list-item-content>
-                    </v-card-actions>
-                     <v-card-actions class="phone">
-                      <v-list-item-avatar>
-                        <v-icon> mdi-eye </v-icon>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item v-if ="breeds_info.interest"> {{ breeds_info.interest.length }} Peoples interested to adopt this pet </v-list-item>
-                        <v-list-item v-if ="!breeds_info.interest"> {{ breeds_info.interest.length }} Peoples interested to adopt this pet </v-list-item>
-                      </v-list-item-content>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
+  <section class='comments' aria-labelledby="comment">
+    <h2 id="comment">Comments</h2>
+    <Disqus shortname='mypets-1' />
+  </section>
+ 
                 
               </v-container>
             </v-card>
@@ -261,52 +203,8 @@
                   
                 </v-card-actions>
                    <v-card-actions>
-                  <v-btn
-                    block
-                   
-                    large
-                    color="#489FB5"
-                    rounded
-                    dark
-                    @click="dialog = true"
-                    elevation="9"
-                  >
-                    Plan to Adopt
-                  </v-btn>
-                  <v-dialog
-      v-model="dialog"
-      max-width="500"
-    >
-      <v-card>
-        <v-card-title class="headline">
-       Are you sure you really plant to adopt this
-        </v-card-title>
-
-        <v-card-text>
-          Please make sure you will contact the owner regarding this pet about adoption, otherwise this pet will be sad
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            No
-          </v-btn>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = addInterest()"
-          >
-            Yes
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+               
+                
                 </v-card-actions>
               </v-container>
             </v-card>
@@ -320,7 +218,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { Disqus } from 'vue-disqus'
 export default {
+components: {
+    Disqus
+  },
   nama: "CatDetail",
   created() {
     this.$emit("update:layout", "div");
@@ -353,25 +255,13 @@ export default {
   }
   },
   mounted() {
-    let uri = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
+    let uri = process.env.VUE_APP_ROOT_API + "moment/detail/" + this.$route.params.id_moment;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     }).catch(error => {
        if(error.response.status === 404)
       this.$router.push('/error')
-    });
-    let uri_img = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption + "/images";
-    this.$http.get(uri_img).then((response) => {
-      this.breeds_images = response.data;
     }); 
-  },
-  methods: {
-    loadData() {
-      let uri = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
-      this.$http.get(uri).then((response) => {
-        this.breeds_info = response.data;
-      });
-    },
   },
   methods : {
    addInterest(){
@@ -385,7 +275,6 @@ export default {
      })
    },
    redirect: function (link, target = '_blank') {
-
             window.open(link, target);
         } 
   },

@@ -54,7 +54,7 @@
           </div>
           <v-spacer></v-spacer>
           <div class="filter">
-            <v-btn outlined rounded solo class="gotocat" to="/breedsCat">
+            <v-btn outlined rounded solo class="gotocat" to="/breeds/cat">
               <v-icon left> mdi-cat </v-icon>
               Go to Cat
             </v-btn>

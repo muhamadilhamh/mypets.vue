@@ -55,11 +55,17 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                <div v-if="errMessage">
-                  <v-alert border="top" color="red lighten-2" dark>
-                    {{ errMessage }}
-                  </v-alert>
-                </div>
+                <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+    <div v-for="(item,index) in errMessage.errors" :key="index">
+      <p>{{item}}</p>
+      </div> 
+    </v-alert>
+          </div>  
                 <h5>Moment Title</h5>
                 <v-text-field
                   v-model="title"
@@ -169,6 +175,30 @@
                     </v-autocomplete>
                   </v-col>
                 </v-row>
+                <v-menu
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="date"
+                          label="Date"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="date"
+                        
+                        @input="menu2 = false"
+                      ></v-date-picker>
+                    </v-menu>
 
                 <v-row>
                   <v-col cols="12" lg="6">
@@ -233,6 +263,7 @@ export default {
     type: "",
     errMessage: "",
     gender: "",
+    date : "",
     name: "",
     title: "",
     body: "",
@@ -375,6 +406,7 @@ export default {
       formData.append("title", this.title);
       formData.append("desc", this.desc);
       formData.append("type", this.type);
+      formData.append("date", this.date);
       formData.append("gender", this.gender);
       formData.append("loc", this.loc);
       /*$.each(this.images, function (key, image) {

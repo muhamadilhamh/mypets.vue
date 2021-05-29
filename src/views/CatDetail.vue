@@ -11,7 +11,7 @@
     <v-container>
       <v-row>
         <v-col cols="2" md="2">
-          <v-btn rounded depressed class="btn_back" to="/breedsCat">
+          <v-btn rounded depressed class="btn_back" to="/breeds/cat">
             <v-icon left> mdi-chevron-left </v-icon>
             All Breeds
           </v-btn>
@@ -30,19 +30,38 @@
             <v-card-actions>
               <v-row>
                 <v-col cols="1" md="1">
-                  <v-rating
-                    hover
-                    background-color="grey darken-1"
-                    color="#EF5350"
-                    large
-                    :empty-icon="emptyIcon"
-                    :full-icon="fullIcon"
-                    length="1"
-                  >
-                  </v-rating>
+                 <template v-if="!likeStatus">
+                    <button @click="addLike(user.id)">
+                      <v-rating
+                        hover
+                        background-color="grey darken-1"
+                        color="#787878"
+                        large
+                        :empty-icon="emptyIcon"
+                        :full-icon="fullIcon"
+                        length="1"
+                      >
+                      </v-rating>
+                    </button>
+                  </template>
+                  <template v-if="likeStatus">
+                    <button @click="addLike(user.id)">
+                      <v-rating
+                        hover
+                        background-color="grey darken-1"
+                        color="#EF5350"
+                        large
+                        :empty-icon="emptyIcon"
+                        :full-icon="fullIcon"
+                        length="1"
+                        :value="1"
+                      >
+                      </v-rating>
+                    </button>
+                  </template>
                 </v-col>
                 <v-col cols="3" md="3">
-                  <p class="rate">256</p>
+                  <p class="rate">{{breeds_info[0].user.length}}</p>
                 </v-col>
 
                 <v-col cols="4" md="4" class="type">
@@ -471,16 +490,68 @@
         </v-tab-item>
 
         <!--Fourth-->
-        <v-tab class="tit"> Moment</v-tab>
-        <v-tab-item class="konten_fact"> </v-tab-item>
+        <v-tab class="tit"> Moment {{moments.length}}</v-tab>
+         <v-tab-item class="konten_fact">
+          <v-row>
+            <v-col cols="12" v-for="item in moments" :key="item.id">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>
+                    <v-icon left> mdi-cat </v-icon>
+                    <v-card-title> {{ item.title }}</v-card-title>
+
+                    <v-card-list>
+                      <v-card-subtitle>{{item.date}} </v-card-subtitle>
+                    </v-card-list>
+                    <v-card-list> <v-btn :to="{
+                            name: 'momentdetail',
+                            params: { id_moment : item.id },
+                          }">Go to Moment Page</v-btn></v-card-list>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <v-col offset-md="3">
+                      <v-img
+                        src="../assets/1x3_ad.png"
+                        class="rounded-lg"
+                        max-width="500"
+                      >
+                      </v-img>
+                    </v-col>
+                     <h4>Description</h4>
+                    <v-card-text
+                      >{{item.description}}</v-card-text
+                    >
+                    <h4>Location</h4>
+                    <v-card-text
+                      >{{item.location}}</v-card-text
+                    >
+                   
+                    
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-col>
+          </v-row>
+        </v-tab-item>
+        <v-tab class="tit"> Comments</v-tab>
+        <v-tab-item>  <section class='comments' aria-labelledby="comment">
+    <h2 id="comment">Comments</h2>
+    <Disqus shortname='mypets-1' />
+  </section></v-tab-item>
       </v-tabs>
+      
     </v-container>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { Disqus } from 'vue-disqus'
 export default {
   nama: "CatDetail",
+  components: {
+    Disqus
+  },
   created() {
     this.$emit("update:layout", "div");
   },
@@ -489,6 +560,7 @@ export default {
     breeds_info: [],
     actifity: 5,
     cat_detail : [{}],
+    likeStatus: false,
     attention: 4,
     Hardiness: 2,
     Affection: 4,
@@ -499,86 +571,11 @@ export default {
     friendlinessOther: 3,
     docility: 1,
     intelligence: 4,
+    moments : [],
     vocality: 1,
     emptyIcon: "mdi-heart-outline",
     fullIcon: "mdi-heart ",
-    body: [
-      {
-        id: 1,
-        title: "Body",
-        desc:
-          "Medium long, lithe, and graceful. They tend to show well developed muscular strength and they often strike a medium between a stocky and svelte body type.",
-      },
-    ],
-    head: [
-      {
-        id: 1,
-        title: "Head",
-        desc:
-          "Modified, slightly rounded wedge without flat planes; brow, cheek, and profilelines usually show a gentle contour. Slight rise from the bridge of their nose to their forehead, with width between their ears and flowing into their arched neck. Their muzzle tends not to be sharply pointed or square; their chin neither receding nor protruding.",
-      },
-    ],
-    legs: [
-      {
-        id: 1,
-        title: "Legs & Paws",
-        desc:
-          "Their legs and feet proportionately slim, fine boned, giving impression of being on tip toe. Their paws are small, oval, and compact. Then have five toes in front and four behind.",
-      },
-    ],
-    color: [
-      {
-        id: 1,
-        title: "Color",
-        desc:
-          "Ruddy, red (cinnamon gene; also called sorrel), blue, and fawn. In England, Australia, and New Zealand, a fifth color, silver, has been accepted.",
-      },
-    ],
-    ears: [
-      {
-        id: 1,
-        title: "Ears",
-        desc:
-          "Alert, large, and moderately pointed; broad and cupped at base, set as though listening. Hair on their ears tends to be very short and close lying.",
-      },
-    ],
-    eyes: [
-      {
-        id: 1,
-        title: "Eyes",
-        desc:
-          "Their eyes are often almond-shaped, large, brilliant, and expressive. Neither round nor Oriental. Their eyes are often accentuated by a fine dark line, encircled by light colored area. Their eye color can be gold or green, often with a beautiful richness and depth of color.",
-      },
-    ],
-    tail: [
-      {
-        id: 1,
-        title: "Tail",
-        desc: "Thick at base, fairly long and tapering.",
-      },
-    ],
-    coat: [
-      {
-        id: 1,
-        title: "Coat",
-        desc:
-          "Soft, silky, fine in texture, dense and resilient to the touch with lustrous sheen; medium in length but long enough to accommodate two or three dark bands of ticking.",
-      },
-    ],
-    history: [
-      {
-        id: 1,
-        desc:
-          "The Abyssinian is unquestionably one of the oldest known breeds, but no one knows exactly when or where they originated. Some think the Abyssinians’s ancestors came from Abyssinia (now Ethiopia), and that they were named for that country. Others think the breed originated on the coast of the Indian Ocean and in parts of Southeast Asia; recent genetic studies indicate today’s Abyssinian may have descended from a type of cat found in those areas.The best known tale is that today’s Abyssinians is a descendant of the sacred cats worshiped as the physical manifestations of the gods in the temples and palaces of the ancient Egyptians some 4,000 to 6,000 years ago. Abyssinians do look like the cats depicted in Egyptian murals and sculptures, but so does the African wildcat (Felis silvestris lybica), the species known to have been mummified by the ancient Egyptians and from which feline experts believe all domestic cats arose. Abyssinians are often known for their lively temperaments.A cat named Zula was transported from Abyssinia to England at the end of the Abyssinian War in 1868, but whether Zula was an Abyssinian is subject to debate. The illustration of Zula shows a cat with very small ears and a head type unlike a typical Abyssinian. Since there’s no written evidence linking Zula with today’s breed, some maintain that the original lines died out, and the Abyssinian was recreated by the British from existing British Bunny cats that have Abyssinian-like ticking.Without question, the breed was promoted and refined by the British until World War II decimated the breed, forcing the British to start over from scratch. Two Abyssinians arrived in America from England in the early 1900s. However, the Abyssinians who began  today’s North American breed were imported from Britain in the 1930s. Since then. the breed has gained popularity for their beauty and acrobatic antics. Today, the Abyssinian one of the most popular shorthairs.",
-      },
-    ],
-    personality: [
-      {
-        id: 1,
-        desc:
-          "Abyssinians aren’t for those who want a cat that enjoys being picked up and cuddled. Because they can often be courageous, curious, and high-spirited, when they feel restrained Abyssinians tend to attempt to struggle free.That’s not to say Abyssinians are aloof or standoffish; they’re typically affectionate, devoted, and loving companions. While typically not lap cats, they may prefer to sit next to you rather than on you. Nevertheless, they’ll follow you from room to room to keep an eye on what you’re doing.While Abyssinians will cheerfully entertain themselves, they are most happy when they’re very involved member of the household. They are particularly involved at dinnertime. Abyssinians regularly perform antics for your-and their-amusement, earning them the reputation of the clowns of the cat kingdom. They may perch on shoulders, crawl under covers, and sit beside you purring madly before racing off to bat imaginary butterflies and make flying leaps at the tallest bookcases.Natural athletes, no closed room or cupboard is safe from their agile paws and inquiring minds. Vocally they tend to be quiet. They purr with great enthusiasm, however, particularly around dinner time. If you’ll be away all day, you may want to consider providing a cat companion to keep your Abyssinians entertained or she will become bored and may act out.  If you work all day and have an active social life at night, an Abyssinian may not be the cat for you.",
-      },
-    ],
+
   }),
   mounted() {
     let uri_cat = process.env.VUE_APP_ROOT_API + "animal/cat/details/" + this.$route.params.slug;
@@ -590,15 +587,66 @@ export default {
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
+    let uri_moment =
+      process.env.VUE_APP_ROOT_API + "moment/" + this.$route.params.slug;
+    this.$http.get(uri_moment).then((response) => {
+      this.moments = response.data;
+    }),
+    this.getLikeStatus();
   },
   methods: {
-    loadData() {
-      let uri =
-        process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
-      this.$http.get(uri).then((response) => {
-        this.breeds_info = response.data;
-      });
+     getLikeStatus() {
+      if (this.isLoggedIn) {
+        let uri =
+          process.env.VUE_APP_ROOT_API +
+          "animal/like/" +
+          this.$route.params.slug +
+          "/" +
+          this.user.id;
+        this.$http.get(uri).then((response) => {
+          this.likeStatus = response.data.message;
+        });
+      } else {
+        this.likeStatus = false;
+      }
     },
+    addLike(id) {
+      if (this.isLoggedIn) {
+        let uri =
+          process.env.VUE_APP_ROOT_API +
+          "animal/like/" +
+          this.$route.params.slug +
+          "/" +
+          this.user.id;
+        this.$http
+          .post(uri, id)
+          .then((response) => {
+            let uri_pet =
+              process.env.VUE_APP_ROOT_API +
+              "animal/cat/" +
+              this.$route.params.slug;
+            this.getLikeStatus();
+            this.$http.get(uri_pet).then((response) => {
+              this.breeds_info = response.data;
+            });
+          })
+          .catch((error) => (this.errors = error.response.data.message));
+      } else {
+        this.$swal({
+          icon: "error",
+          confirmButtonColor: "#3085d6",
+          text: "You need to login first before doing this action",
+          confirmButtonText: "Confirm",
+        });
+        this.$router.push("/login");
+      }
+    },
+  },
+  computed: {
+    ...mapGetters({
+      isLoggedIn: "isLoggedIn",
+      user: "user",
+    }),
   },
 };
 </script>

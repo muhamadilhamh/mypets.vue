@@ -1,5 +1,6 @@
 <template>
   <div>
+  
     <v-row>
       <v-col>
         <img :src="url + user.picture" alt="img" class="img_profil" />
@@ -111,7 +112,7 @@
                                       mdi-gender-female
                                     </v-icon>
                                   </div>
-                                  {{ item.age }} Years Old
+                                  {{ item.age }} Months
                                 </div>
                               </v-expand-transition>
                             </v-img>
@@ -128,11 +129,16 @@
                                   class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
                                   style="height: 25%"
                                 >
-                                  <v-if item.animal_name="Dog">
+                                  <div v-if="item.animal_name=='Dog'">
                                     <v-icon small left color="#fff">
                                       mdi-dog</v-icon
                                     >
-                                  </v-if>
+                                  </div>
+                                  <div v-if="item.animal_name=='Cat'">
+                                    <v-icon small left color="#fff">
+                                      mdi-cat</v-icon
+                                    >
+                                  </div>
                                   {{ item.title }}
                                   <div v-if="item.gender == 'Male'">
                                     <v-icon small left color="#fff">
@@ -144,7 +150,7 @@
                                       mdi-gender-female
                                     </v-icon>
                                   </div>
-                                  {{ item.age }} Years Old
+                                  {{ item.age }} Months 
                                 </div>
                               </v-expand-transition>
                             </v-img>
@@ -189,7 +195,7 @@
                           </v-menu>
 
                           <v-card-title>
-                            {{ item.owner }}
+                            {{ item.name }}
                           </v-card-title>
                         </v-card-actions>
                       </v-card>
@@ -216,8 +222,14 @@
               :key="index"
             >
               <v-card class="mx-auto rounded-lg" elevation="8" max-width="400">
+                <router-link style="text-decoration:none"
+                          :to="{
+                            name: 'momentdetail',
+                            params: { id_moment : item.id },
+                          }"
+                        >
                 <v-img :src="url + item.picture"></v-img>
-
+                 </router-link>
                 <v-card-title class="title_momment">
                   {{ item.title }}
                   <!-- Login -->
@@ -257,15 +269,19 @@
                     </v-list>
                   </v-menu>
                 </v-card-title>
+                <v-card-text>
+                  Posted at {{item.date}}
+                </v-card-text>
+               
                 <v-card-actions>
-                  <v-btn text color="#489FB5" @click="reveal = !reveal">
-                    Learn More
+                  <v-btn text color="#489FB5" @click="reveal = item.id">
+                    Learn More{{clickDetail[0]}}
                   </v-btn>
                 </v-card-actions>
 
                 <v-expand-transition>
                   <v-card
-                    v-if="reveal"
+                    v-if="reveal == item.id"
                     class="transition-fast-in-fast-out v-card--reveal1"
                     style="height: 100%"
                   >
@@ -281,6 +297,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-expand-transition>
+                
               </v-card>
             </v-col>
           </v-row>
@@ -364,15 +381,18 @@
                     </v-card-list>
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <v-col offset-md="3">
+                    <v-container>
+                      <v-row>                    <v-col cols="12" md="4">
                       <v-img
                         :src="url + item.picture"
                         class="rounded-lg img_expand"
-                        max-width="350"
+                        contain
+                        max-width="500px"
+                        max-height="500px"
                       >
                       </v-img>
                     </v-col>
-                    <v-container>
+                    <v-col cols="12" md="8">
                       <v-row>
                         <v-col cols="12" md="6">
                           <v-card outlined class="rounded-xl">
@@ -390,11 +410,7 @@
                               <h4>Next Vaccine</h4>
                             </v-card-title>
                             <v-card-text class="text-center"
-                              >Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Autem nobis dolor rerum
-                              dignissimos sapiente unde, commodi velit eius qui
-                              corrupti ipsam nulla enim molestiae error sequi ad
-                              laudantium deleniti eos?</v-card-text
+                              >{{item.next_vaksin}}</v-card-text
                             >
                           </v-card>
                         </v-col>
@@ -422,6 +438,9 @@
                           </v-card>
                         </v-col>
                       </v-row>
+                    </v-col>
+                    </v-row>
+
                     </v-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -468,19 +487,43 @@ export default {
   name: "Profile",
   created() {
     this.$emit("update:layout", navbarfull);
-  },
-  mounted() {
     let uri =
       process.env.VUE_APP_ROOT_API + "profile/" + this.$route.params.username;
     this.$http
       .get(uri)
       .then((response) => {
         this.user = response.data;
+        this.loadData();
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch( (error)  => {
+        if(error.response.status === 404)
+        this.$router.push("/error")
       });
-    let uri_adopt =
+  },
+  mounted() {
+    
+   
+  },
+  data() {
+    return {
+      table: "",
+      clickDetail : [],
+      selectedItem: "",
+      dialog: false,
+      url: process.env.VUE_APP_IMAGE_URL,
+      user: [],
+      reveal: '',
+      moment: [],
+      feed_adop: [],
+      vaccine: [],
+    };
+  },
+  methods: {
+    revealDetail(index){
+      this.clickDetail[index] = true;
+    },
+    loadData(){
+       let uri_adopt =
       process.env.VUE_APP_ROOT_API +
       "profile/adoption/" +
       this.$route.params.username;
@@ -501,21 +544,7 @@ export default {
     this.$http.get(uri_vaccine).then((response) => {
       this.vaccine = response.data;
     });
-  },
-  data() {
-    return {
-      table: "",
-      selectedItem: "",
-      dialog: false,
-      url: process.env.VUE_APP_IMAGE_URL,
-      user: [],
-      reveal: false,
-      moment: [],
-      feed_adop: [],
-      vaccine: [],
-    };
-  },
-  methods: {
+    },
     openDialog(table, value) {
       this.dialog = true;
       this.table = table;

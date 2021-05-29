@@ -23,6 +23,17 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
+                 <div  v-if="errMessage">
+            <v-alert
+      border="top"
+      color="red lighten-2"
+      dark
+    >
+    <div v-for="(item,index) in errMessage.errors" :key="index">
+      <p>{{item}}</p>
+      </div> 
+    </v-alert>
+          </div> 
                 <h5>Name</h5>
                 <v-text-field
                   v-model="adoption_info.name"
@@ -260,6 +271,7 @@ export default {
   },
   data: () => ({
     showform: true,
+    errMessage : [],
      url : process.env.VUE_APP_IMAGE_URL,
     isDragging: false,
     adoption_image : [],
@@ -386,8 +398,8 @@ export default {
             closeOnCancel: true
             });
                     self.$router.push('/adoption');
-                }).catch(function (error) {
-    console.log(error);
+                }).catch((error) => {
+    this.errMessage = error.response.data;
 });
         }
     }

@@ -8,7 +8,6 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-row>
-    
       <v-col cols="12" md="4" sm="4" offset-md="1">
          <v-carousel height = "600px">         <v-carousel-item
       v-for="(item,i) in moment.image"
@@ -29,7 +28,9 @@
       color="red lighten-2"
       dark
     >
-      {{errMessage}}
+    <div v-for="(item,index) in errMessage.errors" :key="index">
+      <p>{{item}}</p>
+      </div> 
     </v-alert>
           </div> 
                 <h5>Moment Title</h5>
@@ -141,12 +142,40 @@
             </v-autocomplete>
           </v-col>
 </v-row>
+ <v-menu
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                    
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="moment.date"
+                          label="Date"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="moment.date"
+                        
+                        @input="menu2 = false"
+                      ></v-date-picker>
+                    </v-menu>
                 
                 
                 <v-row>
                   <v-col cols="4" offset-md="1">
                     <v-btn
-                      to="/profile"
+                       :to="{
+                          name: 'profile',
+                          params: { username : moment.user.username },
+                        }"
                       rounded
                       class="btn_login"
                       outlined
@@ -193,6 +222,7 @@ export default {
   data: () => ({
     url : process.env.VUE_APP_IMAGE_URL,
     moment : [],
+    menu2 : false,
     showform: false,
     isDragging: false,
     dragCount: 0,
@@ -346,6 +376,7 @@ export default {
             formData.append('type',this.moment.animal_type)
             formData.append('gender',this.moment.gender)       
             formData.append('loc',this.moment.location)
+            formData.append('date',this.moment.date)
         /*$.each(this.images, function (key, image) {
         formData.append(`images[${key}]`, image)
         })*/

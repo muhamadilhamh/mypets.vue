@@ -27,6 +27,7 @@ import BreedsDog from './views/BreedsDog.vue'
 import DogDetail from './views/DogDetail.vue'
 import CatDetail from './views/CatDetail.vue'
 import AdoptionDetail from './views/AdoptionDetail.vue'
+import MomentDetail from './views/MomentDetail.vue'
 import CareDetail from './views/CareDetail.vue'
 import ArticleDetail from './views/ArticleDetail.vue'
 import Profile from './views/Profile.vue'
@@ -114,12 +115,12 @@ let router = new Router({
       component : CatConversion
     },
     {
-      path : '/breedscat',
+      path : '/breeds/cat',
       name: 'breedscat',
       component : BreedsCat
     },
     {
-      path : '/breedsdog',
+      path : '/breeds/dog',
       name: 'breedsdog',
       component : BreedsDog
     },
@@ -134,9 +135,14 @@ let router = new Router({
       component: CatDetail
     },
     {
-      path: '/adoption/detail/:id_adoption',
+      path: '/adoption/:id_adoption/details',
       name: 'adoptiondetail',
       component: AdoptionDetail
+    },
+    {
+      path: '/moment/:id_moment/details',
+      name: 'momentdetail',
+      component: MomentDetail
     },
     {
       path: '/caredetail',
@@ -211,10 +217,14 @@ let router = new Router({
       component: Profile,
     },
     { path: '/*', 
-      component: Home ,
+      component: Blank ,
       meta: {
         notFound: true
-      }
+      }  
+  },
+  {
+    path: '/error', 
+      component: Blank ,
   }
   ]
 })
@@ -229,9 +239,7 @@ router.beforeEach((to, from, next) => {
     console.log(store.getters.user)
     next('/login')
   }
-  if (to.matched.some(record => record.meta.notFound)) {
-    next('/')
-  }
+ 
 
   if (to.matched.some(record => record.meta.guest)) {
     if (!store.getters.isLoggedIn) {

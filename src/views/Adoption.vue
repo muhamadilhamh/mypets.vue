@@ -21,7 +21,7 @@
                   small
                   color="#489FB5"
                   dark
-                  v-show="(islogin = !islogin)"
+                  v-show="islogin"
                 >
                   Register
                 </v-btn>
@@ -110,6 +110,17 @@
           >
             <v-icon left> mdi-sort-variant </v-icon>
             Sort
+          </v-btn>
+          <v-btn
+            outlined
+            rounded
+            solo
+            @click="
+              resetFilter()
+            "
+          >
+            <v-icon left> mdi-refresh </v-icon>
+            Clear Filter & Sort
           </v-btn>
         </div>
       </v-col>
@@ -444,6 +455,15 @@ export default {
         });
       }
     },
+    resetFilter(){
+      this.age_selected = null,
+      this.sortType = null,
+      this.sortedItem = null,
+      this.location_selected = null,
+      this.species = null,
+      this.search = null
+      this.subSpecies()
+    }
   },
   computed: {
     filteredList: function () {
@@ -509,7 +529,8 @@ export default {
           if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
           return 0;
         })
-        .slice(0, this.listToShow);
+        .slice(0, this.listToShow)
+       
     },
   },
 };
