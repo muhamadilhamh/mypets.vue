@@ -62,34 +62,15 @@
     quote="Wow guys look, this pet is so cute!! found it on MyPets website"
     hashtags="adoption,pet,breeds,animal"
   tag="v-btn">
-          <v-btn outlined rounded>
+          <v-btn>
 <v-icon>mdi-twitter</v-icon> Share
 
             
           </v-btn>
 </ShareNetwork>
         </v-col>
-        <v-col  cols="6" sm="2">
-          <ShareNetwork
-    network="facebook"
-    :url="current_url"
-    title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-    description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-    quote="The hot reload is so fast it\'s near instant. - Evan You"
-    hashtags="vuejs,vite"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-instagram</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
-        </v-col>
-        <v-col cols="6" md="2">
-          <v-btn outlined rounded>
-            <v-icon left>mdi-link-variant</v-icon> Copy Link
-          </v-btn>
-        </v-col>
+      
+        
         </v-row>
         </v-col>
 
@@ -122,8 +103,7 @@
             <v-card
               outlined
               class="rounded-xl"
-              v-for="item in category"
-              :key="item.id"
+             
             >
               <v-container>
                 <v-card-title>
@@ -261,7 +241,7 @@
                   
                 </v-card-actions>
                    <v-card-actions>
-                  <v-btn
+                  <v-btn v-if="!interest_status"
                     block
                    
                     large
@@ -272,6 +252,18 @@
                     elevation="9"
                   >
                     Plan to Adopt
+                  </v-btn>
+                   <v-btn v-if="interest_status"
+                    block
+                   
+                    large
+                    color="#489FB5"
+                    rounded
+                    dark
+                    @click="addInterest()"
+                    elevation="9"
+                  >
+                    Cancel Adoption Plan
                   </v-btn>
                   <v-dialog
       v-model="dialog"
@@ -325,64 +317,68 @@ export default {
   created() {
     this.$emit("update:layout", "div");
   },
-  data() {
-    return {
-      dialog : false,
-      current_url : 'mypets-vue.netlify.app' + this.$router.currentRoute.path,
-    url : process.env.VUE_APP_IMAGE_URL,
-    breeds_info: [],
-    breeds_images : [],
-    category: [
-      {
-        id: 1,
-        profile: "testing",
-        animaltype: "Cat",
-        gender: "Female",
-        age: "1 years",
-        jenis: "Persian",
-        location: "DKI Jakarta",
-        desc:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eaque, modi ipsa quae consectetur esse molestiae iure, aut doloremque veritatis laboriosam fugiat assumenda? Animi rem tenetur hic, temporibus qui quasi.",
-        gmail: "duniagenggamanmu@gmail.com",
-        phone: "0811223456789 ",
-      },
-    ],
-
-    emptyIcon: "mdi-heart-outline",
-    fullIcon: "mdi-heart ",
-  }
-  },
-  mounted() {
+   mounted() {
     let uri = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
+     
+     
     }).catch(error => {
-       if(error.response.status === 404)
-      this.$router.push('/error')
+        if(error.response.status === 404)
+          this.$router.push('/error')
     });
     let uri_img = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption + "/images";
     this.$http.get(uri_img).then((response) => {
       this.breeds_images = response.data;
     }); 
+     this.getLikeStatus();
   },
-  methods: {
-    loadData() {
-      let uri = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
-      this.$http.get(uri).then((response) => {
-        this.breeds_info = response.data;
-      });
-    },
+  data() {
+    return {
+      dialog : false,
+      current_url : 'mypets-vue.netlify.app' + this.$router.currentRoute.path,
+      url : process.env.VUE_APP_IMAGE_URL,
+      breeds_info: [{}],
+      breeds_images : [],
+      interest_status : false,
+   
+
+    emptyIcon: "mdi-heart-outline",
+    fullIcon: "mdi-heart ",
+  }
   },
   methods : {
+     getLikeStatus() {
+      if (this.isLoggedIn) {
+        let uri = process.env.VUE_APP_ROOT_API + "adoption/" + this.$route.params.id_adoption + '/' + this.current_user.id + '/interest' ;
+        this.$http.get(uri).then((response) => {
+          this.interest_status = response.data.message;
+        });
+      } else {
+      
+        this.interest_status = false;
+      }
+    },
    addInterest(){
      this.dialog = false;
+     if(this.isLoggedIn){
      let uri = process.env.VUE_APP_ROOT_API + "adoption/" + this.$route.params.id_adoption + "/" + this.current_user.id + "/interest"
      this.$http.post(uri).then((response) => {
-       let uri_breed = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
-    this.$http.get(uri_breed).then((response) => {
+       this.interest_status = !this.interest_status
+      let uri_breed = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
+      this.$http.get(uri_breed).then((response) => {
       this.breeds_info = response.data;
     });
      })
+    }else {
+        this.$swal({
+          icon: "error",
+          confirmButtonColor: "#3085d6",
+          text: "You need to login first before doing this action",
+          confirmButtonText: "Confirm",
+        });
+        this.$router.push("/login");
+      }
    },
    redirect: function (link, target = '_blank') {
 

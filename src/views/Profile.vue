@@ -286,6 +286,7 @@
                     style="height: 100%"
                   >
                     <v-card-text class="pb-0">
+                      <v-card-title>Description</v-card-title>
                       <v-card-subtitle>
                         {{ item.description }}
                       </v-card-subtitle>
@@ -367,13 +368,7 @@
                               delete
                             </v-btn>
                           </v-list-item>
-                          <v-list-item>
-                            <v-icon left> mdi-plus</v-icon>
-                            <v-btn to="" x-small color="orange" text>
-                              update
-                            </v-btn>
-                          </v-list-item>
-                        </v-list>
+                          </v-list>
                       </v-menu>
                     </div>
                     <v-card-list>

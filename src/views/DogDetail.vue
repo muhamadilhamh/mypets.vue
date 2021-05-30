@@ -22,12 +22,7 @@
       <v-row>
         <v-col cols="11" md="5" offset="1">
           <v-card elevation="5">
-            <div v-if="loading_detail == true">
-              <v-progress-circular
-                indeterminate
-                color="primary"
-              ></v-progress-circular>
-            </div>
+          
             <v-card-title> {{ breeds_info[0].name }} </v-card-title>
             <v-card-text>
               {{ breeds_info[0].description }}
@@ -83,13 +78,7 @@
         </v-col>
 
         <v-col cols="12" md="5">
-          <div v-if="loading_detail == true">
-            <v-progress-circular
-              indeterminate
-              color="primary"
-              :size="70"
-            ></v-progress-circular>
-          </div>
+         
           <v-img :src="breeds_info[0].picture"> </v-img>
         </v-col>
       </v-row>
@@ -171,12 +160,7 @@
                       <h3>Temperament</h3>
                     </v-card-title>
                     <v-card-text>
-                      <div v-if="loading_detail == true">
-                        <v-progress-circular
-                          indeterminate
-                          color="primary"
-                        ></v-progress-circular>
-                      </div>
+                    
                       {{ dog_detail[0].temperament }}
                     </v-card-text>
                   </v-container>
@@ -189,12 +173,7 @@
                       <h3>{{ item.title }}</h3>
                     </v-card-title>
                     <v-card-text>
-                      <div v-if="loading_detail == true">
-                        <v-progress-circular
-                          indeterminate
-                          color="primary"
-                        ></v-progress-circular>
-                      </div>
+                    
                       {{ dog_detail[0].upkeep }}
                     </v-card-text>
                   </v-container>
@@ -207,12 +186,7 @@
                       <h3>Grooming</h3>
                     </v-card-title>
                     <v-card-text>
-                      <div v-if="loading_breeds == true">
-                        <v-progress-circular
-                          indeterminate
-                          color="primary"
-                        ></v-progress-circular>
-                      </div>
+                   
                       {{ breeds_info[0].grooming }}
                     </v-card-text>
                   </v-container>
@@ -225,12 +199,7 @@
                       <h3>Nutrition</h3>
                     </v-card-title>
                     <v-card-text>
-                      <div v-if="loading_breeds == true">
-                        <v-progress-circular
-                          indeterminate
-                          color="primary"
-                        ></v-progress-circular>
-                      </div>
+                 
                       {{ breeds_info[0].nutrition }}
                     </v-card-text>
                   </v-container>
@@ -704,19 +673,19 @@ export default {
   },
   created() {
     this.$emit("update:layout", "div");
-    let uri_dog =
+     let uri_dog =
       process.env.VUE_APP_ROOT_API +
-      "animal/dog/details/" +
-      this.$route.params.slug;
-    this.$http.get(uri_dog).then((response) => {
-      this.dog_detail = response.data;
-      this.loading_detail = false;
-    });
-    let uri =
-      process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
+      "animal/dog/details/" + this.$route.params.slug;
+      this.$http.get(uri_dog).then((response) => {
+        this.dog_detail = response.data;
+
+      }).catch(error => {
+       if(error.response.status === 404)
+          this.$router.push('/error')
+      });
+    let uri = process.env.VUE_APP_ROOT_API + "animal/dog/" + this.$route.params.slug;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
-      this.loading_breeds = false;
     });
 
     let uri_moment =
@@ -726,12 +695,13 @@ export default {
     }),
       this.getLikeStatus();
   },
-  mounted() {},
-  data: () => ({
-    loading_detail: true,
-    loading_breeds: true,
-    breeds_info: [{}],
-    dog_detail: [{}],
+  mounted() {
+   
+  },
+  data(){
+    return{
+    breeds_info: [],
+    dog_detail: [],
     likeStatus: false,
     moments: [],
     energy: 4,
@@ -816,7 +786,7 @@ export default {
           "Lively, self-confident, strong willed and fearless, yet charming and comical, it is easy to see why instead of vanishing into the melting pot of working breeds, the Affenpinscher was promoted to cherished pet! Their sparkling eyes and monkey-whiskered face are irresistible and they are very affectionate with their owners, though often a little wary of strangers. Despite their diminutive stature, the Affenpinscher still believes he is a working terrier at times, so does require some training!",
       },
     ],
-  }),
+  }},
   methods: {
     getLikeStatus() {
       if (this.isLoggedIn) {

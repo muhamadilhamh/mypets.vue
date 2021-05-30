@@ -24,7 +24,7 @@
           </v-btn>
         </v-card-actions>
         <v-card-actions>
-          <v-btn class="care" to="/care" x-small color="orange" text>
+          <v-btn class="care" to="/care_training" x-small color="orange" text>
             Care&Training
           </v-btn>
         </v-card-actions>

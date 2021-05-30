@@ -268,10 +268,13 @@ export default {
       })
   },
   mounted(){
-    let uri_moment = process.env.VUE_APP_ROOT_API + "edit/moment/" + this.$route.params.id;
+    let uri_moment = process.env.VUE_APP_ROOT_API + "auth/moment/" + this.$route.params.id;
     this.$http.get(uri_moment).then((response) => {
       this.moment = response.data;
       this.type = response.data.animal_type;
+    }).catch(error => {
+       if(error.response.status === 404 || error.response.status === 422)
+      this.$router.push('/error')
     });
      let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
     this.$http.get(uri_animal).then((response) => {

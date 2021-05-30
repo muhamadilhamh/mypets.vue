@@ -54,13 +54,12 @@
 </ShareNetwork>
         </v-col>
         <v-col  cols="6" sm="2">
-          <ShareNetwork
+           <ShareNetwork
     network="twitter"
     :url="current_url"
-    :title="breeds_info.name + 'Adoption'"
-    description="Wow guys look, this pet is so cute!! found it on MyPets website"
-    quote="Wow guys look, this pet is so cute!! found it on MyPets website"
-    hashtags="adoption,pet,breeds,animal"
+   
+    :title="breeds_info.title + ' - Wow guys look, this pet is so cute!! found it on MyPets website'"
+    hashtags="moment,pet,breeds,animal"
   tag="v-btn">
           <v-btn outlined rounded>
 <v-icon>mdi-twitter</v-icon> Share

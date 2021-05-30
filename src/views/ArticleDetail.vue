@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="tgl">{{article_info.publish_time}}</p>
+          <p class="tgl">{{article_info.date}}</p>
         </v-col>
       </v-row>
       <v-row>

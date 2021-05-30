@@ -23,7 +23,7 @@
           <v-container>
             <v-col cols="12">
               <v-form ref="form" class="login">
-                 <div  v-if="errMessage">
+                 <div  v-show="errMessage.errors">
             <v-alert
       border="top"
       color="red lighten-2"
@@ -319,9 +319,12 @@ export default {
       })
   },
   mounted(){
-    let uri = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
+    let uri = process.env.VUE_APP_ROOT_API + "auth/adoption/" + this.$route.params.id_adoption;
     this.$http.get(uri).then((response) => {
       this.adoption_info = response.data;
+    }).catch(error => {
+       if(error.response.status === 404)
+      this.$router.push('/error')
     });
     
     let uri_animal = process.env.VUE_APP_ROOT_API + "animal";

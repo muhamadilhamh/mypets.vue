@@ -75,7 +75,7 @@ let router = new Router({
       component: About
     },
     {
-      path: '/care',
+      path: '/care_training',
       name: 'care',
       component: Care
     },
@@ -145,7 +145,7 @@ let router = new Router({
       component: MomentDetail
     },
     {
-      path: '/caredetail',
+      path: '/care_training/:id_care/details',
       name: 'caredetail',
       component: CareDetail,
     },

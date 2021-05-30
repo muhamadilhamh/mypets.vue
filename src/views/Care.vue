@@ -13,29 +13,29 @@
               ><div class="search_care">
                 <!-- chips = bakal di highlight, clearable = menghapus highlight, filled = melebarkan layout, rounded = sudut menjadi tidak kaku, solo = membuat menjadi berwarna -->
                 <v-autocomplete
-                  chips
+                  
                   clearable
                   rounded
                   solo
-                  item-text="name"
-                  item-value="name"
-                  label="Search Care & Trainng..."
-                  placeholder="Search Care & Trainng..."
+                  :items="feed_care"
+                  item-text="title"
+                  item-value="title"
+                  v-model="search"
+                  label="Select Care & Training"
+                  placeholder="Select Care & Training"
                 ></v-autocomplete>
               </div>
             </v-col>
             <!-- Button click -->
             <v-col cols="6" sm="6" @click="model = null">
-              <div class="btn_search_care">
-                <v-btn rounded color="primary" dark> Search </v-btn>
-              </div>
+              
             </v-col>
             <!--feed-->
-            <v-col v-for="item in feed_care" :key="item.id" cols="12" sm="4">
+            <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
               <div class="feed_artikel">
                 <v-card flat tile class="mx-auto">
-                  <router-link to="/caredetail">
-                    <v-img class="rounded" :src="item.src" aspect-ratio="1.5">
+                  <router-link  :to="{ name: 'caredetail', params: { id_care : item.id } }">
+                    <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
                     </v-img>
                   </router-link>
                   <v-card-text>
@@ -48,6 +48,16 @@
           </v-row>
         </v-container>
       </v-row>
+        <v-btn
+          class="load_more"
+          text
+          large
+          v-if="loadList == true"
+          @click="listToShow += 9"
+          block
+        >
+          Load More
+        </v-btn>
     </v-app>
   </div>
 </template>
@@ -58,66 +68,35 @@ export default {
   created() {
     this.$emit("update:layout", navbarfull);
   },
+  mounted(){
+    let uri  = process.env.VUE_APP_ROOT_API + 'care_training';
+    this.$http.get(uri).then(response => {
+      this.feed_care = response.data;
+      this.loadList = true;
+    })
+  },
   data() {
     return {
+      loadList : false,
+      listToShow : 9,
+      search : '',
+      url : process.env.VUE_APP_IMAGE_URL,
       feed_care: [
-        {
-          id: 1,
-          src: require("../assets/1x1.png"),
-          title: "Berbahaya membawa Anjing di dalam mobil",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 2,
-          src: require("../assets/1x2.png"),
-          title: "Ahmad Fadholi baru beli anjing",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 3,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 4,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 5,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 6,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 7,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 8,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
-        {
-          id: 9,
-          src: require("../assets/1x3.png"),
-          title: "Harga kucing melambung sangat tinggi",
-          date: "26 Maret 2021",
-        },
+        
       ],
     };
   },
+  computed :{
+    filteredList : function(){
+      return this.feed_care.filter(post => {
+        if(this.search != null){
+          return post.title.includes(this.search);
+        }else{
+          return post
+        }
+      }).slice(0, this.listToShow)
+    }
+  }
 };
 </script>
 <style lang="scss">

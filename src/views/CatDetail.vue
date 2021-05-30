@@ -582,7 +582,10 @@ export default {
       this.$http.get(uri_cat).then((response) => {
         this.cat_detail = response.data;
 
-      });
+      }).catch(error => {
+       if(error.response.status === 404)
+      this.$router.push('/error')
+    });
     let uri = process.env.VUE_APP_ROOT_API + "animal/cat/" + this.$route.params.slug;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
