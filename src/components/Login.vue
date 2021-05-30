@@ -59,7 +59,7 @@
                     outlined
                     color="#489FB5"
                     block
-                    to="/home"
+                    to="/"
                     elevation="7"
                   >
                     Back
@@ -107,7 +107,7 @@
                     outlined
                     color="#489FB5"
                     block
-                    to="/home"
+                    to="/"
                     elevation="7"
                   >
                     Back

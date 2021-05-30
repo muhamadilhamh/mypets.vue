@@ -46,7 +46,7 @@
     <v-container>
       <v-col cols="12">
         <v-row>
-           <div class="filter">
+          <div class="filter">
             <v-btn outlined rounded solo @click="showFilter = !showFilter">
               <v-icon left> mdi-sort-variant </v-icon>
               Sort
@@ -54,7 +54,15 @@
           </div>
           <v-spacer></v-spacer>
           <div class="filter">
-            <v-btn outlined rounded solo class="gotocat" to="/breeds/dog">
+            <v-btn
+              color="#489FB5"
+              rounded
+              solo
+              class="gotocat"
+              to="/breeds/dog"
+              dark
+              elevation="2"
+            >
               <v-icon left> mdi-dog </v-icon>
               Go to Dog
             </v-btn>
@@ -63,7 +71,7 @@
       </v-col>
       <v-row class="ma-1">
         <v-col cols="6" md="3">
-            <div class="name" v-if="showFilter">
+          <div class="name" v-if="showFilter">
             <h5>Sort By Name</h5>
             <v-select
               outlined
@@ -76,8 +84,6 @@
             ></v-select>
           </div>
         </v-col>
-
-       
       </v-row>
     </v-container>
 
@@ -97,7 +103,7 @@
 
                 <v-list-item-content>
                   <v-row>
-                    <v-col cols="1" md="1">
+                    <v-col cols="2" md="1">
                       <v-rating
                         hover
                         background-color="grey darken-1"
@@ -112,10 +118,10 @@
                       </v-rating>
                     </v-col>
                     <v-col cols="2" md="2">
-                      <p class="rate">{{ item.user.length}}</p>
+                      <p class="rate">{{ item.user.length }}</p>
                     </v-col>
 
-                    <v-col cols="1" md="1">
+                    <v-col cols="2" md="1">
                       <router-link
                         :to="{ name: 'catdetail', params: { slug: item.slug } }"
                       >
@@ -133,7 +139,7 @@
                     </v-col>
 
                     <v-col cols="2" md="2">
-                      <p class="rate">{{item.moments.length}}</p>
+                      <p class="rate">{{ item.moments.length }}</p>
                     </v-col>
 
                     <v-col cols="4" md="4">
@@ -146,16 +152,16 @@
           </v-list>
         </v-col>
       </v-row>
-       <v-btn
-          class="load_more"
-          text
-          large
-          v-if="loadList == true"
-          @click="listToShow += 9"
-          block
-        >
-          Load More
-        </v-btn>
+      <v-btn
+        class="load_more"
+        text
+        large
+        v-if="loadList == true"
+        @click="listToShow += 9"
+        block
+      >
+        Load More
+      </v-btn>
     </v-container>
   </div>
 </template>
@@ -176,8 +182,8 @@ export default {
       animal_list: [],
       species: null,
       search: null,
-      sortedItem : null,
-      sortType : null,
+      sortedItem: null,
+      sortType: null,
       sortName: [
         {
           name: "Ascending",
@@ -190,8 +196,8 @@ export default {
       ],
       gender_selected: null,
       location_selected: null,
-      loadList : false,
-      listToShow : 9,
+      loadList: false,
+      listToShow: 9,
       selectedItem: 1,
       emptyIcon: "mdi-heart-outline",
       fullIcon: "mdi-heart ",
@@ -256,7 +262,6 @@ export default {
     };
   },
   mounted() {
-    
     let uri_dog = process.env.VUE_APP_ROOT_API + "animal/cat";
     this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
@@ -293,17 +298,20 @@ export default {
           } else {
             return (post = this.allpet_list);
           }
-        }).slice(0, this.listToShow)
-         .sort((a, b) => {
+        })
+        .slice(0, this.listToShow)
+        .sort((a, b) => {
           let modifier = 1;
-          if (this.sortType == "desc") modifier = -1;{
-          if (a[this.sortedItem] < b[this.sortedItem]) {
-            return -1 * modifier;
-          }
+          if (this.sortType == "desc") modifier = -1;
+          {
+            if (a[this.sortedItem] < b[this.sortedItem]) {
+              return -1 * modifier;
+            }
           }
           if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
           return 0;
-        }).slice(0, this.listToShow)
+        })
+        .slice(0, this.listToShow);
     },
   },
 };

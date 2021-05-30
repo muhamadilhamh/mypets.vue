@@ -22,35 +22,34 @@
             <v-col cols="12" sm="6">
               <v-row class="pa-12">
                 <div></div>
-              
+
                 <!-- Dog -->
-                <template v-if ="selected =='Dog'">
+                <template v-if="selected == 'Dog'">
                   <v-btn
-                  block
-                 
-                  rounded-lg
-                  x-large
-                  elevation="5"
-                  class="btn text-capitalize"
-                  color="primary"
-                  @click="selected ='Dog'"
-                >
-                  Dog
-                </v-btn>
+                    block
+                    rounded-lg
+                    x-large
+                    elevation="5"
+                    class="btn text-capitalize"
+                    color="primary"
+                    @click="selected = 'Dog'"
+                  >
+                    Dog
+                  </v-btn>
                 </template>
-                <template v-if="selected !='Dog'">
-                <v-btn
-                  block
-                  outlined
-                  rounded-lg
-                  x-large
-                  elevation="5"
-                  class="btn text-capitalize"
-                  color="#515151"
-                  @click="selected ='Dog'"
-                >
-                  Dog
-                </v-btn>
+                <template v-if="selected != 'Dog'">
+                  <v-btn
+                    block
+                    outlined
+                    rounded-lg
+                    x-large
+                    elevation="5"
+                    class="btn text-capitalize"
+                    color="#515151"
+                    @click="selected = 'Dog'"
+                  >
+                    Dog
+                  </v-btn>
                 </template>
               </v-row>
             </v-col>
@@ -58,33 +57,32 @@
             <v-col cols="12" sm="6">
               <v-row class="pa-12">
                 <!-- Cat -->
-                <template v-if ="selected =='Cat'">
+                <template v-if="selected == 'Cat'">
                   <v-btn
-                  block
-                 
-                  rounded-lg
-                  x-large
-                  elevation="5"
-                  class="btn text-capitalize"
-                  color="primary"
-                  @click="selected ='Cat'"
-                >
-                  Cat
-                </v-btn>
+                    block
+                    rounded-lg
+                    x-large
+                    elevation="5"
+                    class="btn text-capitalize"
+                    color="primary"
+                    @click="selected = 'Cat'"
+                  >
+                    Cat
+                  </v-btn>
                 </template>
-                <template v-if="selected !='Cat'">
-                <v-btn
-                  block
-                  outlined
-                  rounded-lg
-                  x-large
-                  elevation="5"
-                  class="btn text-capitalize"
-                  color="#515151"
-                  @click="selected ='Cat'"
-                >
-                  Cat
-                </v-btn>
+                <template v-if="selected != 'Cat'">
+                  <v-btn
+                    block
+                    outlined
+                    rounded-lg
+                    x-large
+                    elevation="5"
+                    class="btn text-capitalize"
+                    color="#515151"
+                    @click="selected = 'Cat'"
+                  >
+                    Cat
+                  </v-btn>
                 </template>
               </v-row>
             </v-col>
@@ -103,47 +101,58 @@
             </v-col>
           </v-row>
           <v-row class="pa-2 desc_training">
-            <v-col cols="12" sm="5">
-              <p>Agar tetap bugar Anjing pun perlu dilatih</p>
+            <v-col lg="7" sm="5">
+              <p v-if="selected == 'Dog'">
+                To keep your dog healthy, Your dog needs regular exercise
+              </p>
+              <p v-if="selected == 'Cat'">
+                To keep your dog healthy, Your cat needs regular exercise
+              </p>
             </v-col>
           </v-row>
         </v-container>
         <v-container>
-            <v-slide-group>
-            <v-slide-item v-for="(item,index) in filteredTraining" :key="index" class="ma-5">
-                 <v-container>
-                    <v-card class="rounded-xl" color="#fff" elevation="8" max-width="350px">
-                      <v-img
-                    :src="item.picture"
-                    height="300px"
-                  ></v-img>
-                      <v-card-title>
-                        <p class="">{{ item.title }}</p>
-                      </v-card-title>
-                      <v-card-subtitle>
-                        <p class="desc">
-                          {{ item.desc }}
-                        </p>
-                      </v-card-subtitle>
-                      <v-btn
-                        rounded
-                        block
-                        text
-                        class="btn_training"
-                        color="#515151"
-                        :to="{ name: 'articledetail', params: { id_article : item.id } }" 
-                      >
-                        Detail
-                        <v-icon right> mdi-chevron-right </v-icon>
-                      </v-btn>
-                    </v-card>
-                  </v-container>
-              </v-slide-item>
-            </v-slide-group>
-      
+          <v-slide-group>
+            <v-slide-item
+              v-for="(item, index) in filteredTraining"
+              :key="index"
+              class="ma-5"
+            >
+              <v-container>
+                <v-card
+                  class="rounded-xl"
+                  color="#fff"
+                  elevation="8"
+                  max-width="250px"
+                >
+                  <v-img :src="item.picture" height="200px"></v-img>
+                  <v-card-title>
+                    <p class="">{{ item.title }}</p>
+                  </v-card-title>
+                  <v-card-subtitle>
+                    <p class="desc">
+                      {{ item.desc }}
+                    </p>
+                  </v-card-subtitle>
+                  <v-btn
+                    rounded
+                    block
+                    text
+                    class="btn_training"
+                    color="#515151"
+                    :to="{
+                      name: 'articledetail',
+                      params: { id_article: item.id },
+                    }"
+                  >
+                    Detail
+                    <v-icon right> mdi-chevron-right </v-icon>
+                  </v-btn>
+                </v-card>
+              </v-container>
+            </v-slide-item>
+          </v-slide-group>
         </v-container>
-
-        
       </v-row>
     </div>
 
@@ -157,51 +166,65 @@
           </v-row>
           <v-row class="pa-2 desc_training">
             <v-col cols="12" sm="5">
-              <p>Nutrisi Anjing sangat diperlukan agar tetap terjaga</p>
+              <p v-if="selected == 'Dog'">
+                Dog Nutrition is really important because with proper diet, your
+                dog will keep healthy and active
+              </p>
+              <p v-if="selected == 'Cat'">
+                Cat Nutrition is really important because with proper diet, your
+                cat will keep healthy and active
+              </p>
             </v-col>
           </v-row>
         </v-container>
-       <v-container>
-         <v-col cols="12">
+        <v-container>
+          <v-col cols="12">
             <v-slide-group>
-              <v-slide-item v-for="(item,index) in filteredNutrition" :key="index" class="ma-5">
-                 <v-container>
-                    <v-card class="rounded-xl" color="#fff" elevation="8" max-width="350px">
-                      <v-img
-                    :src="item.picture"
-                    height="300px"
-                  ></v-img>
-                      <v-card-title>
-                        <p class="">{{ item.title }}</p>
-                      </v-card-title>
-                      <v-card-subtitle>
-                        <p class="desc">
-                          {{ item.desc }}
-                        </p>
-                      </v-card-subtitle>
-                      <v-btn
-                        rounded
-                        block
-                        text
-                        class="btn_training"
-                        color="#515151"
-                        :to="{ name: 'articledetail', params: { id_article : item.id } }" 
-                      >
-                        Detail
-                        <v-icon right> mdi-chevron-right </v-icon>
-                      </v-btn>
-                    </v-card>
-                  </v-container>
+              <v-slide-item
+                v-for="(item, index) in filteredNutrition"
+                :key="index"
+                class="ma-5"
+              >
+                <v-container>
+                  <v-card
+                    class="rounded-xl"
+                    color="#fff"
+                    elevation="8"
+                    max-width="250px"
+                  >
+                    <v-img :src="item.picture" height="200px"></v-img>
+                    <v-card-title>
+                      <p class="">{{ item.title }}</p>
+                    </v-card-title>
+                    <v-card-subtitle>
+                      <p class="desc">
+                        {{ item.desc }}
+                      </p>
+                    </v-card-subtitle>
+                    <v-btn
+                      rounded
+                      block
+                      text
+                      class="btn_training"
+                      color="#515151"
+                      :to="{
+                        name: 'articledetail',
+                        params: { id_article: item.id },
+                      }"
+                    >
+                      Detail
+                      <v-icon right> mdi-chevron-right </v-icon>
+                    </v-btn>
+                  </v-card>
+                </v-container>
               </v-slide-item>
             </v-slide-group>
-      </v-col>
+          </v-col>
         </v-container>
-
-     
       </v-row>
     </div>
 
-     <div :class="`rounded-t-xl`" class="bg_training">
+    <div :class="`rounded-t-xl`" class="bg_training">
       <v-row>
         <v-container>
           <v-row class="pa-2 training">
@@ -211,47 +234,56 @@
           </v-row>
           <v-row class="pa-2 desc_training">
             <v-col cols="12" sm="5">
-              <p>Agar tetap bugar Anjing pun perlu dilatih</p>
+              <p v-if="selected == 'Cat'">Give your dog plenty of love</p>
+
+              <p v-if="selected == 'Dog'">Give your dog plenty of love</p>
             </v-col>
           </v-row>
         </v-container>
-       <v-container>
-         <v-col cols="12">
+        <v-container>
+          <v-col cols="12">
             <v-slide-group>
-              <v-slide-item v-for="(item,index) in filteredCare" :key="index" class="ma-5">
-                 <v-container>
-                    <v-card class="rounded-xl" color="#fff" elevation="8" max-width="350px">
-                      <v-img
-                    :src="item.picture"
-                    height="300px"
-                  ></v-img>
-                      <v-card-title>
-                        <p class="">{{ item.title }}</p>
-                      </v-card-title>
-                      <v-card-subtitle>
-                        <p class="desc">
-                          {{ item.desc }}
-                        </p>
-                      </v-card-subtitle>
-                      <v-btn
-                        rounded
-                        block
-                        text
-                        class="btn_training"
-                        color="#515151"
-                        :to="{ name: 'articledetail', params: { id_article : item.id } }" 
-                      >
-                        Detail
-                        <v-icon right> mdi-chevron-right </v-icon>
-                      </v-btn>
-                    </v-card>
-                  </v-container>
+              <v-slide-item
+                v-for="(item, index) in filteredCare"
+                :key="index"
+                class="ma-5"
+              >
+                <v-container>
+                  <v-card
+                    class="rounded-xl"
+                    color="#fff"
+                    elevation="8"
+                    max-width="250px"
+                  >
+                    <v-img :src="item.picture" height="200px"></v-img>
+                    <v-card-title>
+                      <p class="">{{ item.title }}</p>
+                    </v-card-title>
+                    <v-card-subtitle>
+                      <p class="desc">
+                        {{ item.desc }}
+                      </p>
+                    </v-card-subtitle>
+                    <v-btn
+                      rounded
+                      block
+                      text
+                      class="btn_training"
+                      color="#515151"
+                      :to="{
+                        name: 'articledetail',
+                        params: { id_article: item.id },
+                      }"
+                    >
+                      Detail
+                      <v-icon right> mdi-chevron-right </v-icon>
+                    </v-btn>
+                  </v-card>
+                </v-container>
               </v-slide-item>
             </v-slide-group>
-      </v-col>
+          </v-col>
         </v-container>
-
-     
       </v-row>
     </div>
   </div>
@@ -262,57 +294,51 @@ export default {
   name: "Article",
   created() {
     this.$emit("update:layout", navbarfull);
-  },mounted(){
   },
-  mounted(){
+  mounted() {},
+  mounted() {
     this.loadData();
   },
-  methods : {
-    loadData(){
-    let uri_training = process.env.VUE_APP_ROOT_API  + 'article/training'
-    this.$http.get(uri_training).then(response =>{
+  methods: {
+    loadData() {
+      let uri_training = process.env.VUE_APP_ROOT_API + "article/training";
+      this.$http.get(uri_training).then((response) => {
         this.feed_training = response.data;
-    })
-    let uri_nutrition = process.env.VUE_APP_ROOT_API + 'article/nutrition'
-    this.$http.get(uri_nutrition).then(response =>{
+      });
+      let uri_nutrition = process.env.VUE_APP_ROOT_API + "article/nutrition";
+      this.$http.get(uri_nutrition).then((response) => {
         this.feed_nutrition = response.data;
-    })
-    let uri_care = process.env.VUE_APP_ROOT_API + 'article/care'
-    this.$http.get(uri_care).then(response =>{
+      });
+      let uri_care = process.env.VUE_APP_ROOT_API + "article/care";
+      this.$http.get(uri_care).then((response) => {
         this.feed_care = response.data;
-    })
-    }
+      });
+    },
   },
-  computed : {
-     filteredTraining : function () {
-       return this.feed_training.filter(post => {
-         return post.animal_type.includes(this.selected);
-         
-       }
-       )
-     },
-     filteredNutrition : function () {
-       return this.feed_nutrition.filter(post => {
-         return post.animal_type.includes(this.selected);
-         
-       }
-       )
-     },
-     filteredCare : function () {
-       return this.feed_care.filter(post => {
-         return post.animal_type.includes(this.selected);
-         
-       }
-       )
-     },
+  computed: {
+    filteredTraining: function () {
+      return this.feed_training.filter((post) => {
+        return post.animal_type.includes(this.selected);
+      });
+    },
+    filteredNutrition: function () {
+      return this.feed_nutrition.filter((post) => {
+        return post.animal_type.includes(this.selected);
+      });
+    },
+    filteredCare: function () {
+      return this.feed_care.filter((post) => {
+        return post.animal_type.includes(this.selected);
+      });
+    },
   },
   data() {
     return {
-      animal : 'Dog',
-      selected : 'Dog',
-      feed_training : [],
+      animal: "Dog",
+      selected: "Dog",
+      feed_training: [],
       feed_nutrition: [],
-      feed_care : [],
+      feed_care: [],
       feed_training1: [
         {
           id: 1,

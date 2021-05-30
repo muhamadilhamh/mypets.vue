@@ -1,14 +1,18 @@
-<template>
+<template >
   <div class="blank">
-    <p>404</p>
-    <v-img src="../assets/blank.png" max-height="300"> </v-img>
-
-    <p>This Page You Requested Could Not Be Found</p>
+    <v-img src="../assets/blank.png"> </v-img>
+    <v-img class="d-sm-none" src="../assets/blank.png"> </v-img>
+    <v-img class="d-sm-none" src="../assets/blank.png"> </v-img>
   </div>
 </template>
 
 <script>
-export default {};
+import navbarfull from "../layouts/navbarfull";
+export default {
+  created() {
+    this.$emit("update:layout", navbarfull);
+  },
+};
 </script>
 
 <style>

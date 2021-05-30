@@ -35,9 +35,8 @@
         <v-col cols="12" sm="7">
           <div class="desc_breeds_option">
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
+              Find out more about your lovely pet! About your pets favorite
+              foods, health, and much more
             </p>
           </div>
         </v-col>
