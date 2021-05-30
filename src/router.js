@@ -45,7 +45,7 @@ let router = new Router({
       name: 'home',
       component: Home,
       meta : {
-        title : 'Home'
+        title : 'Home - Mypets'
       }
     },
     {
@@ -53,7 +53,8 @@ let router = new Router({
       name: 'login',
       component: Login,
       meta: {
-        guest: true
+        guest: true,
+        title : 'Login - Mypets'
       }
     },
     {
@@ -61,7 +62,8 @@ let router = new Router({
       name: 'register',
       component: Register,
       meta: {
-        guest: true
+        guest: true,
+        title : 'Register - Mypets'
       }
     },
     {
@@ -75,87 +77,133 @@ let router = new Router({
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      meta : {
+        title : 'About Us - Mypets'
+      }
     },
     {
       path: '/care_training',
       name: 'care',
-      component: Care
-    },
-    {
-      path: '/blank',
-      name: 'blank',
-      component: Blank
+      component: Care,
+      meta : {
+        title : 'Care & Training - Mypets'
+      }
     },
     {
       path: '/adoption',
       name: 'adoption',
-      component: Adoption
+      component: Adoption,
+      meta : {
+        title : 'Adoption - Mypets'
+      }
     },
     {
       path: '/ageconversion',
       name: 'ageconversion',
-      component: Ageconversion
+      component: Ageconversion,
+      meta : {
+        title : 'Age Conversion - Mypets'
+      }
     },
     {
       path: '/article',
       name: 'article',
-      component: Article
+      component: Article,
+      meta : {
+        title : 'Article - Mypets'
+      }
     },
     {
       path: '/breeds',
       name: 'breeds',
       component: Breeds
+      ,
+      meta : {
+        title : 'Breeds - Mypets'
+      }
     },
     {
       path : '/dogconversion',
       name: 'dogconversion',
       component: DogConversion
+      ,
+      meta : {
+        title : 'Dog Age Conversion - Mypets'
+      }
     },
     {
       path : '/catconversion',
       name: 'catconversion',
-      component : CatConversion
+      component : CatConversion,
+      meta : {
+        title : 'Cat Age Conversion - Mypets'
+      }
     },
     {
       path : '/breeds/cat',
       name: 'breedscat',
-      component : BreedsCat
+      component : BreedsCat,
+      meta : {
+        title : 'Cat Breeds - Mypets'
+      }
+      
     },
     {
       path : '/breeds/dog',
       name: 'breedsdog',
-      component : BreedsDog
+      component : BreedsDog,
+      meta : {
+        title : 'Dog Breeds - Mypets'
+      }
     },
     {
       path : '/breeds/dog/:slug',
       name: 'dogdetail',
-      component : DogDetail
+      component : DogDetail,
+      meta : {
+        title : 'Dog Information - Mypets'
+      }
     },
     {
       path: '/breeds/cat/:slug',
       name: 'catdetail',
-      component: CatDetail
+      component: CatDetail,
+      meta : {
+        title : 'Cat Information - Mypets'
+      }
     },
     {
       path: '/adoption/:id_adoption/details',
       name: 'adoptiondetail',
-      component: AdoptionDetail
+      component: AdoptionDetail,
+      meta : {
+        title : 'Adoption Details - Mypets'
+      }
     },
     {
       path: '/moment/:id_moment/details',
       name: 'momentdetail',
-      component: MomentDetail
+      component: MomentDetail,
+      meta : {
+        title : 'About Moment - Mypets'
+      }
     },
     {
       path: '/care_training/:id_care/details',
       name: 'caredetail',
       component: CareDetail,
+      meta : {
+        title : 'Care & Training - Mypets'
+      }
     },
     {
       path: '/article/:id_article/detail',
       name: 'articledetail',
       component: ArticleDetail,
+      meta : {
+        title : 'Article Information - Mypets'
+      }
       
     },
     {
@@ -163,7 +211,8 @@ let router = new Router({
       name: 'uploadadoption',
       component: UploadAdoption,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Upload Adoption - Mypets'
       }
     },
     {
@@ -171,7 +220,8 @@ let router = new Router({
       name: 'updateprofile',
       component: UpdateProfile,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Update Profile Information - Mypets'
       }
     },
     {
@@ -179,7 +229,8 @@ let router = new Router({
       name: 'uploadmoment',
       component: UploadMoment,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Upload Moment  - Mypets'
       }
     },
     {
@@ -187,7 +238,8 @@ let router = new Router({
       name: 'updatemoment',
       component: UpdateMoment,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Update Moment  - Mypets'
       }
     },
     {
@@ -195,7 +247,8 @@ let router = new Router({
       name: 'updateadoption',
       component: UpdateAdoption,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Update Adoption  - Mypets'
       }
     },
     {
@@ -203,7 +256,8 @@ let router = new Router({
       name: 'uploadvaccine',
       component: UploadVaccine,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Upload Vaccine  - Mypets'
       }
     },
     {
@@ -211,7 +265,8 @@ let router = new Router({
       name: 'editprofile',
       component: EditProfile,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title : 'Edit Profile - Mypets'
       }
     },
     {
@@ -222,12 +277,14 @@ let router = new Router({
     { path: '/*', 
       component: Blank ,
       meta: {
-        notFound: true
+        notFound: true,
+        title : 'Page Not Found - Mypets'
       }  
   },
   {
     path: '/error', 
       component: Blank ,
+      title : 'Page Not Found - Mypets'
   }
   ]
 })
