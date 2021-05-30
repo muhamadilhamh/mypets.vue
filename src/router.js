@@ -43,7 +43,10 @@ let router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta : {
+        title : 'Home'
+      }
     },
     {
       path: '/login',

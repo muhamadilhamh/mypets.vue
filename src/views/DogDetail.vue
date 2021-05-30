@@ -66,7 +66,7 @@
 
                 <v-col cols="4" md="4" class="family">
                   <p>
-                    <span class="bold">Family:</span> {{ dog_detail[0].family }}
+                    <span class="bold">Family:</span> {{ dog_detail.family }}
                   </p>
                 </v-col>
                 <v-col cols="4" md="4" class="type">
@@ -133,20 +133,20 @@
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Major Concerns : {{ dog_detail[0].major_concerns }}
+                        Major Concerns : {{ dog_detail.major_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Minor Concerns : {{ dog_detail[0].minor_concerns }}
+                        Minor Concerns : {{ dog_detail.minor_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
                         Occasionally Seen :
-                        {{ dog_detail[0].occasionally_seen }}
+                        {{ dog_detail.occasionally_seen }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Suggested Tests : {{ dog_detail[0].suggested_test }}
+                        Suggested Tests : {{ dog_detail.suggested_test }}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -161,7 +161,7 @@
                     </v-card-title>
                     <v-card-text>
                     
-                      {{ dog_detail[0].temperament }}
+                      {{ dog_detail.temperament }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -174,7 +174,7 @@
                     </v-card-title>
                     <v-card-text>
                     
-                      {{ dog_detail[0].upkeep }}
+                      {{ dog_detail.upkeep }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -255,20 +255,20 @@
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Major Concerns : {{ dog_detail[0].major_concerns }}
+                        Major Concerns : {{ dog_detail.major_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Minor Concerns : {{ dog_detail[0].minor_concerns }}
+                        Minor Concerns : {{ dog_detail.minor_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
                         Occasionally Seen :
-                        {{ dog_detail[0].occasionally_seen }}
+                        {{ dog_detail.occasionally_seen }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Suggested Tests : {{ dog_detail[0].suggested_test }}
+                        Suggested Tests : {{ dog_detail.suggested_test }}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -335,20 +335,20 @@
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Major Concerns : {{ dog_detail[0].major_concerns }}
+                        Major Concerns : {{ dog_detail.major_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Minor Concerns : {{ dog_detail[0].minor_concerns }}
+                        Minor Concerns : {{ dog_detail.minor_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
                         Occasionally Seen :
-                        {{ dog_detail[0].occasionally_seen }}
+                        {{ dog_detail.occasionally_seen }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Suggested Tests : {{ dog_detail[0].suggested_test }}
+                        Suggested Tests : {{ dog_detail.suggested_test }}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -414,20 +414,20 @@
                     <v-container>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Major Concerns : {{ dog_detail[0].major_concerns }}
+                        Major Concerns : {{ dog_detail.major_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Minor Concerns : {{ dog_detail[0].minor_concerns }}
+                        Minor Concerns : {{ dog_detail.minor_concerns }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
                         Occasionally Seen :
-                        {{ dog_detail[0].occasionally_seen }}
+                        {{ dog_detail.occasionally_seen }}
                       </v-card-text>
                       <v-card-text class="text_desc">
                         <v-icon left> mdi-circle-small </v-icon>
-                        Suggested Tests : {{ dog_detail[0].suggested_test }}
+                        Suggested Tests : {{ dog_detail.suggested_test }}
                       </v-card-text>
                     </v-container>
                   </v-container>
@@ -443,7 +443,7 @@
                           <h5>Energy</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].energy"
+                            v-model="dog_detail.energy"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -457,7 +457,7 @@
                           <h5>Affection</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].affection"
+                            v-model="dog_detail.affection"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -471,7 +471,7 @@
                           <h5>Exercise</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].exercise"
+                            v-model="dog_detail.exercise"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -485,7 +485,7 @@
                           <h5>Watchfulness</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].watchfulness"
+                            v-model="dog_detail.watchfulness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -499,7 +499,7 @@
                           <h5>Playfulness</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].playfulness"
+                            v-model="dog_detail.playfulness"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -513,7 +513,7 @@
                           <h5>Training</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].training"
+                            v-model="dog_detail.training"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -527,7 +527,7 @@
                           <h5>Friendliness To Dogs</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].friend_dog"
+                            v-model="dog_detail.friend_dog"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -541,7 +541,7 @@
                           <h5>Grooming</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].grooming"
+                            v-model="dog_detail.grooming"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -555,7 +555,7 @@
                           <h5>Friendliness To Other Pets</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].friend_pet"
+                            v-model="dog_detail.friend_pet"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -569,7 +569,7 @@
                           <h5>Heat</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].heat"
+                            v-model="dog_detail.heat"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -583,7 +583,7 @@
                           <h5>Friendliness To Strangers</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].friend_strangers"
+                            v-model="dog_detail.friend_strangers"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -597,7 +597,7 @@
                           <h5>Vocality</h5>
                           <v-rating
                             hover
-                            v-model="dog_detail[0].vocality"
+                            v-model="dog_detail.vocality"
                             background-color="grey darken-1"
                             color="#FFA62B"
                             large
@@ -678,6 +678,7 @@ export default {
       "animal/dog/details/" + this.$route.params.slug;
       this.$http.get(uri_dog).then((response) => {
         this.dog_detail = response.data;
+        this.getLikeStatus();
 
       }).catch(error => {
        if(error.response.status === 404)
@@ -692,8 +693,8 @@ export default {
       process.env.VUE_APP_ROOT_API + "moment/" + this.$route.params.slug;
     this.$http.get(uri_moment).then((response) => {
       this.moments = response.data;
-    }),
-      this.getLikeStatus();
+    })
+      
   },
   mounted() {
    

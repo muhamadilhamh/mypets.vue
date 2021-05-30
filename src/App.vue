@@ -36,6 +36,12 @@ export default {
         isLoading : 'isLoading',
        
       })
-  }
+  },
+   watch: {
+      '$route' (to, from) {
+        document.title = to.meta.title || 'Mypets'
+      }
+    },
+
 };
 </script>
