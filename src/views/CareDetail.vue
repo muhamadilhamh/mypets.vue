@@ -46,8 +46,8 @@
                 network="facebook"
                 :url="current_url"
                 :title="care_info.title + 'Adoption'"
-                description="Wow guys look, this pet is so cute!! found it on MyPets website"
-                quote="Wow guys look, this pet is so cute!! found it on MyPets website"
+                description="This post was really helpful guys! You should check it at MyPets website!"
+                quote="This post was really helpful guys! You should check it at MyPets website!"
                 hashtags="pet_treatment"
                 tag="v-btn"
               >
@@ -62,7 +62,7 @@
                 :url="current_url"
                 :title="
                   care_info.title +
-                  ' - This post really helpful guys! You should check it at MyPets website!'
+                  ' - This post was really helpful guys! You should check it at MyPets website!'
                 "
                 hashtags="animal_care,pet,breeds,animal"
                 tag="v-btn"

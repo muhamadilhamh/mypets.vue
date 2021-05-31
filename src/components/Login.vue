@@ -151,7 +151,7 @@ export default {
         .dispatch("login", { email, password })
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/adoption");
+          this.$router.push("/");
         })
         .catch((error) => (this.errors = error.response.data.message));
     },
