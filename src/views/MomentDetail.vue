@@ -143,7 +143,7 @@
                             params: { slug: breeds_info.animal_type },
                           }"
                           style="text-decoration: none"
-                          ><v-chip
+                          ><v-chip color="#489FB5" dark
                             ><p class="testing">
                               {{ breeds_info.animal_type }}
                             </p></v-chip
