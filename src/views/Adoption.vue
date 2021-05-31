@@ -185,29 +185,43 @@
         <v-col cols="6" md="3">
           <div class="location" v-if="showSort">
             <h5>Name</h5>
-            <v-select
-              outlined
-              item-text="name"
-              :items="sortName"
-              item-value="value"
-              v-model="sortType"
-              placeholder="Name"
-              @change="sortedItem = 'name'"
-            ></v-select>
+             <v-radio-group
+     
+      row
+      @change="sortedItem = 'name'"
+    >
+      <v-radio
+        label="Ascending"
+        value="asc"
+        @click="sortType = 'asc'"
+      ></v-radio>
+      <v-radio
+        label="Descending"
+        value="desc"
+        @click="sortType = 'desc'"
+      ></v-radio>
+    </v-radio-group>
           </div>
         </v-col>
         <v-col cols="6" md="3">
           <div class="location" v-if="showSort">
             <h5>Age</h5>
-            <v-select
-              outlined
-              item-text="name"
-              :items="sortName"
-              item-value="value"
-              v-model="sortType"
-              placeholder="Age"
-              @change="sortedItem = 'age'"
-            ></v-select>
+           <v-radio-group
+     
+      row
+      @change="sortedItem = 'age'"
+    >
+      <v-radio
+        label="Ascending"
+        value="asc"
+        @click="sortType = 'asc'"
+      ></v-radio>
+      <v-radio
+        label="Descending"
+        value="desc"
+        @click="sortType = 'desc'"
+      ></v-radio>
+    </v-radio-group>
           </div>
         </v-col>
       </v-row>
