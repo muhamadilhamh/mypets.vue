@@ -21,7 +21,7 @@
                   small
                   color="#489FB5"
                   dark
-                  v-show="islogin"
+                  disabled
                 >
                   Register
                 </v-btn>
@@ -37,7 +37,14 @@
                 Memberikan hewanmu, untuk kasih sayang yang diperlukan
               </p>
               <div class="btn_gotoregis">
-                <v-btn to="/register" rounded small color="#489FB5" dark>
+                <v-btn
+                  to="/register"
+                  rounded
+                  small
+                  color="#489FB5"
+                  dark
+                  disabled
+                >
                   Register
                 </v-btn>
               </div>
@@ -85,45 +92,50 @@
     </v-container>
 
     <v-container>
-      <v-col cols="12" md="4">
-        <div class="filter">
-          <v-btn
-            outlined
-            rounded
-            solo
-            @click="
-              showFilter = !showFilter;
-              showSort = false;
-            "
-          >
-            <v-icon left> mdi-filter-variant </v-icon>
-            filter
-          </v-btn>
-          <v-btn
-            outlined
-            rounded
-            solo
-            @click="
-              showSort = !showSort;
-              showFilter = false;
-            "
-          >
-            <v-icon left> mdi-sort-variant </v-icon>
-            Sort
-          </v-btn>
-          <v-btn
-            outlined
-            rounded
-            solo
-            @click="
-              resetFilter()
-            "
-          >
-            <v-icon left> mdi-refresh </v-icon>
-            Clear Filter & Sort
-          </v-btn>
-        </div>
-      </v-col>
+      <v-row>
+        <v-col cols="4" lg="2">
+          <div class="clear">
+            <v-btn
+              outlined
+              rounded
+              solo
+              @click="
+                showFilter = !showFilter;
+                showSort = false;
+              "
+            >
+              <v-icon left> mdi-filter-variant </v-icon>
+              filter
+            </v-btn>
+          </div>
+        </v-col>
+
+        <v-col cols="4" lg="2">
+          <div class="clear">
+            <v-btn
+              outlined
+              rounded
+              solo
+              @click="
+                showSort = !showSort;
+                showFilter = false;
+              "
+            >
+              <v-icon left> mdi-sort-variant </v-icon>
+              Sort
+            </v-btn>
+          </div>
+        </v-col>
+
+        <v-col cols="5" lg="3">
+          <div class="clear">
+            <v-btn outlined rounded solo @click="resetFilter()">
+              <v-icon left> mdi-refresh </v-icon>
+              Clear Filter & Sort
+            </v-btn>
+          </div>
+        </v-col>
+      </v-row>
 
       <v-row class="ma-1">
         <v-col cols="6" md="3">
@@ -268,6 +280,7 @@
                               </template>
 
                               <div v-if="item.gender == 'Male'">
+                                {{ item.name }}
                                 <v-icon small left color="#fff">
                                   mdi-gender-male
                                 </v-icon>
@@ -277,8 +290,7 @@
                                   mdi-gender-female
                                 </v-icon>
                               </div>
-                              {{ item.age }} Months,
-                              {{ item.upload_time }}
+                              {{ item.age }} Months
                             </div>
                           </v-expand-transition>
                         </v-img>
@@ -291,8 +303,7 @@
                       <v-img class="elevation-6" :src="url + item.user.picture">
                       </v-img>
                     </v-list-item-avatar>
-
-                    <v-list-item-content>
+                    <v-list-item-content class="test">
                       <router-link
                         :to="{
                           name: 'profile',
@@ -300,12 +311,18 @@
                         }"
                         style="text-decoration: none"
                       >
-                        <v-list-item class="name_user">
+                        <v-btn text class="btn_profil_adop">
                           {{ item.user.full_name }}
-                        </v-list-item>
+                        </v-btn>
                       </router-link>
+                      <v-card-subtitle>
+                        {{ item.location }}
+                      </v-card-subtitle>
                     </v-list-item-content>
-                  </v-card-actions>
+                    <v-card-subtitle class="time">
+                      {{ item.upload_time }}</v-card-subtitle
+                    ></v-card-actions
+                  >
                 </v-card>
               </v-hover>
             </v-list-item-group>
@@ -337,7 +354,6 @@ export default {
   data() {
     return {
       showFilter: false,
-      islogin: false,
       showSort: false,
       sortedItem: "",
       sortType: "",
@@ -469,15 +485,15 @@ export default {
         });
       }
     },
-    resetFilter(){
-      this.age_selected = null,
-      this.sortType = null,
-      this.sortedItem = null,
-      this.location_selected = null,
-      this.species = null,
-      this.search = null
-      this.subSpecies()
-    }
+    resetFilter() {
+      (this.age_selected = null),
+        (this.sortType = null),
+        (this.sortedItem = null),
+        (this.location_selected = null),
+        (this.species = null),
+        (this.search = null);
+      this.subSpecies();
+    },
   },
   computed: {
     filteredList: function () {
@@ -543,11 +559,18 @@ export default {
           if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
           return 0;
         })
-        .slice(0, this.listToShow)
-       
+        .slice(0, this.listToShow);
     },
   },
 };
 </script>
 <style lang="scss">
+.btn_profil_adop {
+  text-transform: capitalize;
+  top: 15px;
+  font-weight: 700;
+}
+.time {
+  width: 30%;
+}
 </style>

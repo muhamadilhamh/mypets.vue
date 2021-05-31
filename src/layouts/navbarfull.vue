@@ -130,7 +130,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title
-                ><v-btn to="/care" x-small color="orange" text>
+                ><v-btn to="/care_training" x-small color="orange" text>
                   Care&Training
                 </v-btn></v-list-item-title
               >

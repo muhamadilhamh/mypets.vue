@@ -21,79 +21,68 @@
     <v-container>
       <v-row>
         <v-col offset-md="2" cols="12">
-          <p class="adop_detail">{{breeds_info.user.username}}'s Moment</p>
+          <p class="adop_detail">{{ breeds_info.user.username }}'s Moment</p>
         </v-col>
       </v-row>
       <v-row>
         <v-col offset-md="2">
-          <p class="tgl">Post Time : {{breeds_info.time}}</p>
+          <p class="tgl">Post Time : {{ breeds_info.time }}</p>
         </v-col>
       </v-row>
       <v-row>
         <v-col offset-md="2">
-          <p class="title_adop">{{breeds_info.title}}</p>
+          <p class="title_adop">{{ breeds_info.title }}</p>
         </v-col>
       </v-row>
       <v-row>
-      <v-col offset-sm="2" md="8">
-        <v-row>       
-           <v-col  cols="6" sm="2">
-          <ShareNetwork
-    network="facebook"
-    :url="current_url"
-    :title="breeds_info.name + 'Adoption'"
-    description="Wow guys look, this pet is so cute!! found it on MyPets website"
-    quote="Wow guys look, this pet is so cute!! found it on MyPets website"
-    hashtags="adoption,pet,breeds,animal"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-facebook</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
+        <v-col offset-sm="2" md="8">
+          <v-row>
+            <v-col cols="6" sm="2">
+              <ShareNetwork
+                network="facebook"
+                :url="current_url"
+                :title="breeds_info.name + 'Adoption'"
+                description="Wow guys look, this pet is so cute!! found it on MyPets website"
+                quote="Wow guys look, this pet is so cute!! found it on MyPets website"
+                hashtags="adoption,pet,breeds,animal"
+                tag="v-btn"
+              >
+                <v-btn outlined rounded color="#3b5998">
+                  <v-icon>mdi-facebook</v-icon> Share
+                </v-btn>
+              </ShareNetwork>
+            </v-col>
+            <v-col cols="6" sm="2">
+              <ShareNetwork
+                network="twitter"
+                :url="current_url"
+                :title="
+                  breeds_info.title +
+                  ' - Wow guys look, this pet is so cute!! found it on MyPets website'
+                "
+                hashtags="moment,pet,breeds,animal"
+                tag="v-btn"
+              >
+                <v-btn outlined rounded color="#00acee">
+                  <v-icon>mdi-twitter</v-icon> Share
+                </v-btn>
+              </ShareNetwork>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col  cols="6" sm="2">
-           <ShareNetwork
-    network="twitter"
-    :url="current_url"
-   
-    :title="breeds_info.title + ' - Wow guys look, this pet is so cute!! found it on MyPets website'"
-    hashtags="moment,pet,breeds,animal"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-twitter</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
-        </v-col>
-        <v-col cols="6" md="2">
-          <v-btn outlined rounded>
-            <v-icon left>mdi-link-variant</v-icon> Copy Link
-          </v-btn>
-        </v-col>
-        </v-row>
-        </v-col>
-
       </v-row>
     </v-container>
     <v-container>
-      <v-carousel height="1000px" hide-delimiters class="hidden-xs-only">
-        <v-carousel-item
-      v-for="(item,i) in breeds_info.image"
-      :key="i"
-    >
-    
-      <v-img class="rounded-lg" :src="url + item.img"> </v-img></v-carousel-item>
+      <v-carousel height="500px" hide-delimiters class="hidden-xs-only">
+        <v-carousel-item v-for="(item, i) in breeds_info.image" :key="i">
+          <v-img class="rounded-lg" :src="url + item.img"> </v-img
+        ></v-carousel-item>
       </v-carousel>
       <v-carousel height="400px" hide-delimiters class="hidden-sm-and-up">
-        <v-carousel-item
-      v-for="(item,i) in breeds_info.image"
-      :key="i"
-    >
-    
-      <v-img class="rounded-lg" :src="url + item.img" height="400px"> </v-img></v-carousel-item>
+        <v-carousel-item v-for="(item, i) in breeds_info.image" :key="i">
+          <v-img class="rounded-lg" :src="url + item.img" height="400px">
+          </v-img
+        ></v-carousel-item>
       </v-carousel>
     </v-container>
 
@@ -110,47 +99,65 @@
             >
               <v-container>
                 <v-card-title>
-                  <h2>About Pet</h2>
+                  <h2>About Moment</h2>
                 </v-card-title>
                 <hr class="hr" />
                 <hr class="hr" />
                 <v-card-subtitle>
                   <v-row>
-                    <v-col cols="6" md="1" sm="4">
-                      <v-chip>
+                    <v-col md="3" sm="3">
+                      <v-chip color="#489FB5" dark>
                         <p class="testing">{{ breeds_info.animal_name }}</p>
                       </v-chip>
                     </v-col>
-                    <v-col cols="6" md="1" sm="4">
-                      <v-chip>
+                    <v-col md="3" sm="3">
+                      <v-chip color="#489FB5" dark>
                         <p class="testing">{{ breeds_info.gender }}</p></v-chip
                       >
                     </v-col>
-                    <v-col cols="6" md="2" sm="4">
-                      <v-chip>
+                    <v-col md="3" sm="3">
+                      <v-chip color="#489FB5" dark>
                         <p class="testing">{{ breeds_info.gender }}</p></v-chip
                       >
                     </v-col>
 
-                    <v-col cols="6" md="2" sm="4">
-                        <div v-if="breeds_info.animal_name == 'Dog'">
-                      <router-link :to="{ name: 'dogdetail', params: { slug: breeds_info.animal_type } }" style="text-decoration:none"><v-chip
-                        ><p class="testing">{{ breeds_info.animal_type }}</p></v-chip
-                      ></router-link>
+                    <v-col md="2" sm="4">
+                      <div v-if="breeds_info.animal_name == 'Dog'">
+                        <router-link
+                          :to="{
+                            name: 'dogdetail',
+                            params: { slug: breeds_info.animal_type },
+                          }"
+                          style="text-decoration: none"
+                          ><v-chip color="#489FB5" dark
+                            ><p class="testing">
+                              {{ breeds_info.animal_type }}
+                            </p></v-chip
+                          ></router-link
+                        >
                       </div>
-                       <div v-if="breeds_info.animal_name == 'Cat'">
-                      <router-link :to="{ name: 'catdetail', params: { slug: breeds_info.animal_type } }" style="text-decoration:none"><v-chip
-                        ><p class="testing">{{ breeds_info.animal_type }}</p></v-chip
-                      ></router-link>
+                      <div v-if="breeds_info.animal_name == 'Cat'">
+                        <router-link
+                          :to="{
+                            name: 'catdetail',
+                            params: { slug: breeds_info.animal_type },
+                          }"
+                          style="text-decoration: none"
+                          ><v-chip color="#489FB5" dark
+                            ><p class="testing">
+                              {{ breeds_info.animal_type }}
+                            </p></v-chip
+                          ></router-link
+                        >
                       </div>
                     </v-col>
-                    <v-col cols="12" md="3" sm="5">
-                      <v-chip
-                        ><p class="testing">{{ breeds_info.location }}</p></v-chip
+                    <v-col md="3" sm="5">
+                      <v-chip color="#489FB5" dark
+                        ><p class="testing">
+                          {{ breeds_info.location }}
+                        </p></v-chip
                       >
                     </v-col>
-                
-                    
                   </v-row>
                 </v-card-subtitle>
 
@@ -160,12 +167,10 @@
                 <v-card-text> {{ breeds_info.description }}. </v-card-text>
                 <v-card-text> Date : {{ breeds_info.date }} </v-card-text>
 
-  <section class='comments' aria-labelledby="comment">
-    <h2 id="comment">Comments</h2>
-    <Disqus shortname='mypets-1' />
-  </section>
- 
-                
+                <section class="comments" aria-labelledby="comment">
+                  <h2 id="comment">Comments</h2>
+                  <Disqus shortname="mypets-1" />
+                </section>
               </v-container>
             </v-card>
           </v-col>
@@ -175,22 +180,23 @@
               <v-container>
                 <v-card-actions>
                   <v-list-item-avatar>
-                   
-                    <v-img
-                      class="elevation-6"
-                      :src="url + breeds_info.picture"
-                    >
+                    <v-img class="elevation-6" :src="url + breeds_info.picture">
                     </v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item class="name_user"> {{breeds_info.full_name}} </v-list-item>
+                    <v-list-item class="name_user">
+                      {{ breeds_info.full_name }}
+                    </v-list-item>
                   </v-list-item-content>
                 </v-card-actions>
                 <v-card-actions>
                   <v-btn
                     block
-                   :to="{ name: 'profile', params: { username : breeds_info.username } }"
+                    :to="{
+                      name: 'profile',
+                      params: { username: breeds_info.username },
+                    }"
                     large
                     color="#489FB5"
                     rounded
@@ -199,12 +205,8 @@
                   >
                     About Profile
                   </v-btn>
-                  
                 </v-card-actions>
-                   <v-card-actions>
-               
-                
-                </v-card-actions>
+                <v-card-actions> </v-card-actions>
               </v-container>
             </v-card>
             <br />
@@ -216,11 +218,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { Disqus } from 'vue-disqus'
+import { mapGetters } from "vuex";
+import { Disqus } from "vue-disqus";
 export default {
-components: {
-    Disqus
+  components: {
+    Disqus,
   },
   nama: "CatDetail",
   created() {
@@ -228,61 +230,75 @@ components: {
   },
   data() {
     return {
-      dialog : false,
-      current_url : 'mypets-vue.netlify.app' + this.$router.currentRoute.path,
-    url : process.env.VUE_APP_IMAGE_URL,
-    breeds_info: [],
-    breeds_images : [],
-    category: [
-      {
-        id: 1,
-        profile: "testing",
-        animaltype: "Cat",
-        gender: "Female",
-        age: "1 years",
-        jenis: "Persian",
-        location: "DKI Jakarta",
-        desc:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eaque, modi ipsa quae consectetur esse molestiae iure, aut doloremque veritatis laboriosam fugiat assumenda? Animi rem tenetur hic, temporibus qui quasi.",
-        gmail: "duniagenggamanmu@gmail.com",
-        phone: "0811223456789 ",
-      },
-    ],
+      dialog: false,
+      current_url: "mypets-vue.netlify.app" + this.$router.currentRoute.path,
+      url: process.env.VUE_APP_IMAGE_URL,
+      breeds_info: [],
+      breeds_images: [],
+      category: [
+        {
+          id: 1,
+          profile: "testing",
+          animaltype: "Cat",
+          gender: "Female",
+          age: "1 years",
+          jenis: "Persian",
+          location: "DKI Jakarta",
+          desc:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eaque, modi ipsa quae consectetur esse molestiae iure, aut doloremque veritatis laboriosam fugiat assumenda? Animi rem tenetur hic, temporibus qui quasi.",
+          gmail: "duniagenggamanmu@gmail.com",
+          phone: "0811223456789 ",
+        },
+      ],
 
-    emptyIcon: "mdi-heart-outline",
-    fullIcon: "mdi-heart ",
-  }
+      emptyIcon: "mdi-heart-outline",
+      fullIcon: "mdi-heart ",
+    };
   },
   mounted() {
-    let uri = process.env.VUE_APP_ROOT_API + "moment/detail/" + this.$route.params.id_moment;
-    this.$http.get(uri).then((response) => {
-      this.breeds_info = response.data;
-    }).catch(error => {
-       if(error.response.status === 404)
-      this.$router.push('/error')
-    }); 
-  },
-  methods : {
-   addInterest(){
-     this.dialog = false;
-     let uri = process.env.VUE_APP_ROOT_API + "adoption/" + this.$route.params.id_adoption + "/" + this.current_user.id + "/interest"
-     this.$http.post(uri).then((response) => {
-       let uri_breed = process.env.VUE_APP_ROOT_API + "adoption/detail/" + this.$route.params.id_adoption;
-    this.$http.get(uri_breed).then((response) => {
-      this.breeds_info = response.data;
-    });
-     })
-   },
-   redirect: function (link, target = '_blank') {
-            window.open(link, target);
-        } 
-  },
-  computed : {
-    ...mapGetters({ 
-        isLoggedIn: 'isLoggedIn',
-        current_user: 'user',
+    let uri =
+      process.env.VUE_APP_ROOT_API +
+      "moment/detail/" +
+      this.$route.params.id_moment;
+    this.$http
+      .get(uri)
+      .then((response) => {
+        this.breeds_info = response.data;
       })
-  }
+      .catch((error) => {
+        if (error.response.status === 404) this.$router.push("/error");
+      });
+  },
+  methods: {
+    addInterest() {
+      this.dialog = false;
+      let uri =
+        process.env.VUE_APP_ROOT_API +
+        "adoption/" +
+        this.$route.params.id_adoption +
+        "/" +
+        this.current_user.id +
+        "/interest";
+      this.$http.post(uri).then((response) => {
+        let uri_breed =
+          process.env.VUE_APP_ROOT_API +
+          "adoption/detail/" +
+          this.$route.params.id_adoption;
+        this.$http.get(uri_breed).then((response) => {
+          this.breeds_info = response.data;
+        });
+      });
+    },
+    redirect: function (link, target = "_blank") {
+      window.open(link, target);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      isLoggedIn: "isLoggedIn",
+      current_user: "user",
+    }),
+  },
 };
 </script>
 

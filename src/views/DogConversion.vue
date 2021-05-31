@@ -66,20 +66,23 @@
             <v-radio
               on-icon="mdi-dog"
               label="Small Dog"
+              class="small_dog"
               value="small"
               @click="showOutput = true"
             ></v-radio>
             <v-radio
               on-icon="mdi-dog"
               label="Medium Dog"
+              class="small_dog"
               value="medium"
-              @click="showOutput =  true"
+              @click="showOutput = true"
             ></v-radio>
             <v-radio
               on-icon="mdi-dog"
               label="Big Dog"
+              class="small_dog"
               value="big"
-              @click="showOutput =  true"
+              @click="showOutput = true"
             ></v-radio>
           </v-radio-group>
 
@@ -244,6 +247,8 @@ export default {
       size: null,
       humanYear: 0,
 
+      radio: "",
+      radioRules: [(value) => !!value || "Username required"],
       feed_age_dog: [
         {
           id: 1,
@@ -266,8 +271,7 @@ export default {
       this.ageCalculation();
     },
     decreaseYear() {
-      if(this.yearCount > 0)
-      this.yearCount -= 1;
+      if (this.yearCount > 0) this.yearCount -= 1;
       this.ageCalculation();
     },
     ageCalculation() {
@@ -288,28 +292,28 @@ export default {
             24 + 4 * (this.yearCount - 2) + (this.yearCount - 1) / 2
           );
         }
-      } else if (this.yearCount > 5 && this.size == "big"){
-        if(this.yearCount < 9){
-        if (this.yearCount % 2 == 1) {
-          this.humanYear = parseInt(
-            24 + 4 * (this.yearCount - 1) + this.yearCount - 5
-          );
+      } else if (this.yearCount > 5 && this.size == "big") {
+        if (this.yearCount < 9) {
+          if (this.yearCount % 2 == 1) {
+            this.humanYear = parseInt(
+              24 + 4 * (this.yearCount - 1) + this.yearCount - 5
+            );
+          } else {
+            this.humanYear = parseInt(
+              24 + 4 * (this.yearCount - 1) + (this.yearCount - 5)
+            );
+          }
         } else {
-          this.humanYear = parseInt(
-            24 + 4 * (this.yearCount - 1) + (this.yearCount - 5) 
-          );
-        }
-        }else {
-          if(this.yearCount == 9) return this.humanYear = 61
-          if(this.yearCount == 10) return this.humanYear = 66
-          if(this.yearCount == 11) return this.humanYear = 72
-          if(this.yearCount == 12) return this.humanYear = 77
-          if(this.yearCount == 13) return this.humanYear = 82
-          if(this.yearCount == 14) return this.humanYear = 88
-          if(this.yearCount == 15) return this.humanYear = 93
-           if(this.yearCount == 16) return this.humanYear = 120
-          if(this.yearCount > 16){
-            this.humanYear = 7 * this.yearCount + this.yearCount - 3
+          if (this.yearCount == 9) return (this.humanYear = 61);
+          if (this.yearCount == 10) return (this.humanYear = 66);
+          if (this.yearCount == 11) return (this.humanYear = 72);
+          if (this.yearCount == 12) return (this.humanYear = 77);
+          if (this.yearCount == 13) return (this.humanYear = 82);
+          if (this.yearCount == 14) return (this.humanYear = 88);
+          if (this.yearCount == 15) return (this.humanYear = 93);
+          if (this.yearCount == 16) return (this.humanYear = 120);
+          if (this.yearCount > 16) {
+            this.humanYear = 7 * this.yearCount + this.yearCount - 3;
           }
         }
       }
@@ -408,5 +412,8 @@ export default {
 }
 .table {
   width: 100%;
+}
+.small_dog {
+  font-weight: 700;
 }
 </style>

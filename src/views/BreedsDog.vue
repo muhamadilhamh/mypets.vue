@@ -54,7 +54,15 @@
           </div>
           <v-spacer></v-spacer>
           <div class="filter">
-            <v-btn outlined rounded solo class="gotocat" to="/breeds/cat">
+            <v-btn
+              color="#FFA62B"
+              elevation="2"
+              rounded
+              solo
+              class="gotocat"
+              to="/breeds/cat"
+              dark
+            >
               <v-icon left> mdi-cat </v-icon>
               Go to Cat
             </v-btn>
@@ -76,10 +84,6 @@
             ></v-select>
           </div>
         </v-col>
-
-      
-
-       
       </v-row>
     </v-container>
 
@@ -99,7 +103,7 @@
 
                 <v-list-item-content>
                   <v-row>
-                    <v-col cols="1" md="1">
+                    <v-col cols="2" md="1">
                       <v-rating
                         hover
                         background-color="grey darken-1"
@@ -108,7 +112,7 @@
                         :empty-icon="emptyIcon"
                         :full-icon="fullIcon"
                         length="1"
-                        :value=1
+                        :value="1"
                         readonly
                       >
                       </v-rating>
@@ -117,7 +121,7 @@
                       <p class="rate">{{ item.user.length }}</p>
                     </v-col>
 
-                    <v-col cols="1" md="1">
+                    <v-col cols="2" md="1">
                       <router-link
                         :to="{ name: 'dogdetail', params: { slug: 'akita' } }"
                       >
@@ -149,15 +153,15 @@
         </v-col>
       </v-row>
       <v-btn
-          class="load_more"
-          text
-          large
-          v-if="loadList == true"
-          @click="listToShow += 9"
-          block
-        >
-          Load More
-        </v-btn>
+        class="load_more"
+        text
+        large
+        v-if="loadList == true"
+        @click="listToShow += 9"
+        block
+      >
+        Load More
+      </v-btn>
     </v-container>
   </div>
 </template>
@@ -174,11 +178,11 @@ export default {
     return {
       showFilter: false,
       allpet_list: [],
-      sortedItem : '',
-      sortType : null,
+      sortedItem: "",
+      sortType: null,
       pet_list: [],
       animal_list: [],
-       sortName: [
+      sortName: [
         {
           name: "Ascending",
           value: "asc",
@@ -192,8 +196,8 @@ export default {
       search: null,
       gender_selected: null,
       location_selected: null,
-      listToShow : 9,
-      loadList : false,
+      listToShow: 9,
+      loadList: false,
       selectedItem: 1,
       emptyIcon: "mdi-heart-outline",
       fullIcon: "mdi-heart ",
@@ -203,11 +207,10 @@ export default {
     };
   },
   mounted() {
-  
     let uri_dog = process.env.VUE_APP_ROOT_API + "animal/dog";
     this.$http.get(uri_dog).then((response) => {
       this.animal_list = response.data;
-       this.allpet_list = response.data;
+      this.allpet_list = response.data;
       this.loadList = true;
     });
   },
@@ -238,19 +241,22 @@ export default {
           if (this.search != null) {
             return post.name.includes(this.search);
           } else {
-            return post
+            return post;
           }
-        }).slice(0,this.listToShow)
-         .sort((a, b) => {
+        })
+        .slice(0, this.listToShow)
+        .sort((a, b) => {
           let modifier = 1;
-          if (this.sortType == "desc") modifier = -1;{
-          if (a[this.sortedItem] < b[this.sortedItem]) {
-            return -1 * modifier;
-          }
+          if (this.sortType == "desc") modifier = -1;
+          {
+            if (a[this.sortedItem] < b[this.sortedItem]) {
+              return -1 * modifier;
+            }
           }
           if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
           return 0;
-        }).slice(0, this.listToShow)
+        })
+        .slice(0, this.listToShow);
     },
   },
 };

@@ -1,6 +1,5 @@
 <template>
   <div>
-  
     <v-row>
       <v-col>
         <img :src="url + user.picture" alt="img" class="img_profil" />
@@ -25,6 +24,7 @@
       <v-row v-if="current_user.id === user.id">
         <v-col class="edit">
           <v-btn
+            color="#489FB5"
             outlined
             rounded
             :to="{ name: 'updateprofile', params: { id: user.id } }"
@@ -37,18 +37,23 @@
     <v-container>
       <div v-if="isLoggedIn">
         <v-row v-if="current_user.id === user.id">
-          <v-col cols="4" md="4" sm="4" class="edit_adop">
-            <v-btn outlined rounded to="/uploadadoption">
+          <v-col md="4" sm="4" class="edit_adop">
+            <v-btn outlined rounded to="/uploadadoption" color="#489FB5">
               <v-icon left>mdi-upload</v-icon> Adoption
             </v-btn>
           </v-col>
-          <v-col cols="4" md="4" sm="4" class="edit_moment">
-            <v-btn outlined rounded to="/uploadmoment">
+          <v-col md="4" sm="4" class="edit_moment">
+            <v-btn outlined rounded to="/uploadmoment" color="#489FB5">
               <v-icon left>mdi-upload</v-icon> Moment
             </v-btn>
           </v-col>
-          <v-col cols="4" md="4" sm="4" class="edit_vaccine">
-            <v-btn outlined rounded to="/uploadvaccine">
+          <v-col md="4" sm="4" class="edit_vaccine hidden-xs-only">
+            <v-btn outlined rounded to="/uploadvaccine" color="#489FB5">
+              <v-icon left>mdi-upload</v-icon> Vaccine
+            </v-btn>
+          </v-col>
+          <v-col md="4" sm="4" class="edit_vaccine_respn d-sm-none">
+            <v-btn outlined rounded to="/uploadvaccine" color="#489FB5">
               <v-icon left>mdi-upload</v-icon> Vaccine
             </v-btn>
           </v-col>
@@ -129,12 +134,12 @@
                                   class="d-flex transition-fast-in-fast-out blue-grey darken-3 v-card--reveal display-5 white--text"
                                   style="height: 25%"
                                 >
-                                  <div v-if="item.animal_name=='Dog'">
+                                  <div v-if="item.animal_name == 'Dog'">
                                     <v-icon small left color="#fff">
                                       mdi-dog</v-icon
                                     >
                                   </div>
-                                  <div v-if="item.animal_name=='Cat'">
+                                  <div v-if="item.animal_name == 'Cat'">
                                     <v-icon small left color="#fff">
                                       mdi-cat</v-icon
                                     >
@@ -150,7 +155,7 @@
                                       mdi-gender-female
                                     </v-icon>
                                   </div>
-                                  {{ item.age }} Months 
+                                  {{ item.age }} Months
                                 </div>
                               </v-expand-transition>
                             </v-img>
@@ -221,15 +226,20 @@
               v-for="(item, index) in moment"
               :key="index"
             >
-              <v-card class="mx-auto rounded-lg" elevation="8" max-width="400">
-                <router-link style="text-decoration:none"
-                          :to="{
-                            name: 'momentdetail',
-                            params: { id_moment : item.id },
-                          }"
-                        >
-                <v-img :src="url + item.picture"></v-img>
-                 </router-link>
+              <v-card
+                class="mx-auto rounded-lg card_moment_profile"
+                elevation="8"
+                max-width="400"
+              >
+                <router-link
+                  style="text-decoration: none"
+                  :to="{
+                    name: 'momentdetail',
+                    params: { id_moment: item.id },
+                  }"
+                >
+                  <v-img :src="url + item.picture"></v-img>
+                </router-link>
                 <v-card-title class="title_momment">
                   {{ item.title }}
                   <!-- Login -->
@@ -269,36 +279,23 @@
                     </v-list>
                   </v-menu>
                 </v-card-title>
-                <v-card-text>
-                  Posted at {{item.date}}
-                </v-card-text>
-               
-                <v-card-actions>
-                  <v-btn text color="#489FB5" @click="reveal = item.id">
-                    Learn More{{clickDetail[0]}}
-                  </v-btn>
-                </v-card-actions>
+                <v-card-text> Posted at {{ item.date }} </v-card-text>
 
-                <v-expand-transition>
-                  <v-card
-                    v-if="reveal == item.id"
-                    class="transition-fast-in-fast-out v-card--reveal1"
-                    style="height: 100%"
-                  >
-                    <v-card-text class="pb-0">
-                      <v-card-title>Description</v-card-title>
-                      <v-card-subtitle>
-                        {{ item.description }}
-                      </v-card-subtitle>
-                    </v-card-text>
-                    <v-card-actions class="pt-0">
-                      <v-btn text color="teal accent-4" @click="reveal = false">
-                        Close
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-expand-transition>
-                
+                <v-card-list>
+                  <v-btn
+                    small
+                    class="moment_page_profile"
+                    elevation="5"
+                    color="#FFA62B"
+                    rounded
+                    dark
+                    :to="{
+                      name: 'momentdetail',
+                      params: { id_moment: item.id },
+                    }"
+                    >Go to Moment Page</v-btn
+                  ></v-card-list
+                >
               </v-card>
             </v-col>
           </v-row>
@@ -368,7 +365,7 @@
                               delete
                             </v-btn>
                           </v-list-item>
-                          </v-list>
+                        </v-list>
                       </v-menu>
                     </div>
                     <v-card-list>
@@ -377,65 +374,65 @@
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-container>
-                      <v-row>                    <v-col cols="12" md="4">
-                      <v-img
-                        :src="url + item.picture"
-                        class="rounded-lg img_expand"
-                        contain
-                        max-width="500px"
-                        max-height="500px"
-                      >
-                      </v-img>
-                    </v-col>
-                    <v-col cols="12" md="8">
                       <v-row>
-                        <v-col cols="12" md="6">
-                          <v-card outlined class="rounded-xl">
-                            <v-card-title class="justify-center">
-                              <h4>Description</h4>
-                            </v-card-title>
-                            <v-card-text class="text-center">{{
-                              item.description
-                            }}</v-card-text>
-                          </v-card>
+                        <v-col cols="12" md="4">
+                          <v-img
+                            :src="url + item.picture"
+                            class="rounded-lg img_expand"
+                            contain
+                            max-width="500px"
+                            max-height="500px"
+                          >
+                          </v-img>
                         </v-col>
-                        <v-col cols="12" md="6">
-                          <v-card outlined class="rounded-xl">
-                            <v-card-title class="justify-center">
-                              <h4>Next Vaccine</h4>
-                            </v-card-title>
-                            <v-card-text class="text-center"
-                              >{{item.next_vaksin}}</v-card-text
-                            >
-                          </v-card>
+                        <v-col cols="12" md="8">
+                          <v-row>
+                            <v-col cols="12" md="6">
+                              <v-card outlined class="rounded-xl">
+                                <v-card-title class="justify-center">
+                                  <h4>Description</h4>
+                                </v-card-title>
+                                <v-card-text class="text-center">{{
+                                  item.description
+                                }}</v-card-text>
+                              </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                              <v-card outlined class="rounded-xl">
+                                <v-card-title class="justify-center">
+                                  <h4>Next Vaccine</h4>
+                                </v-card-title>
+                                <v-card-text class="text-center">{{
+                                  item.next_vaksin
+                                }}</v-card-text>
+                              </v-card>
+                            </v-col>
+                          </v-row>
+
+                          <v-row>
+                            <v-col cols="12" md="6">
+                              <v-card outlined class="rounded-xl">
+                                <v-card-title class="justify-center">
+                                  <h4>Age</h4>
+                                </v-card-title>
+                                <v-card-text class="text-center">{{
+                                  item.age
+                                }}</v-card-text>
+                              </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                              <v-card outlined class="rounded-xl">
+                                <v-card-title class="justify-center">
+                                  <h4>Vaccine Type</h4>
+                                </v-card-title>
+                                <v-card-text class="text-center">{{
+                                  item.vaksin_type
+                                }}</v-card-text>
+                              </v-card>
+                            </v-col>
+                          </v-row>
                         </v-col>
                       </v-row>
-
-                      <v-row>
-                        <v-col cols="12" md="6">
-                          <v-card outlined class="rounded-xl">
-                            <v-card-title class="justify-center">
-                              <h4>Age</h4>
-                            </v-card-title>
-                            <v-card-text class="text-center">{{
-                              item.age
-                            }}</v-card-text>
-                          </v-card>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <v-card outlined class="rounded-xl">
-                            <v-card-title class="justify-center">
-                              <h4>Vaccine Type</h4>
-                            </v-card-title>
-                            <v-card-text class="text-center">{{
-                              item.vaksin_type
-                            }}</v-card-text>
-                          </v-card>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                    </v-row>
-
                     </v-container>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -490,55 +487,51 @@ export default {
         this.user = response.data;
         this.loadData();
       })
-      .catch( (error)  => {
-        if(error.response.status === 404)
-        this.$router.push("/error")
+      .catch((error) => {
+        if (error.response.status === 404) this.$router.push("/error");
       });
   },
-  mounted() {
-    
-   
-  },
+  mounted() {},
   data() {
     return {
       table: "",
-      clickDetail : [],
+      clickDetail: [],
       selectedItem: "",
       dialog: false,
       url: process.env.VUE_APP_IMAGE_URL,
       user: [],
-      reveal: '',
+      reveal: "",
       moment: [],
       feed_adop: [],
       vaccine: [],
     };
   },
   methods: {
-    revealDetail(index){
+    revealDetail(index) {
       this.clickDetail[index] = true;
     },
-    loadData(){
-       let uri_adopt =
-      process.env.VUE_APP_ROOT_API +
-      "profile/adoption/" +
-      this.$route.params.username;
-    this.$http.get(uri_adopt).then((response) => {
-      this.feed_adop = response.data;
-    });
-    let uri_moment =
-      process.env.VUE_APP_ROOT_API +
-      "profile/moment/" +
-      this.$route.params.username;
-    this.$http.get(uri_moment).then((response) => {
-      this.moment = response.data;
-    });
-    let uri_vaccine =
-      process.env.VUE_APP_ROOT_API +
-      "profile/vaccine/" +
-      this.$route.params.username;
-    this.$http.get(uri_vaccine).then((response) => {
-      this.vaccine = response.data;
-    });
+    loadData() {
+      let uri_adopt =
+        process.env.VUE_APP_ROOT_API +
+        "profile/adoption/" +
+        this.$route.params.username;
+      this.$http.get(uri_adopt).then((response) => {
+        this.feed_adop = response.data;
+      });
+      let uri_moment =
+        process.env.VUE_APP_ROOT_API +
+        "profile/moment/" +
+        this.$route.params.username;
+      this.$http.get(uri_moment).then((response) => {
+        this.moment = response.data;
+      });
+      let uri_vaccine =
+        process.env.VUE_APP_ROOT_API +
+        "profile/vaccine/" +
+        this.$route.params.username;
+      this.$http.get(uri_vaccine).then((response) => {
+        this.vaccine = response.data;
+      });
     },
     openDialog(table, value) {
       this.dialog = true;
@@ -678,6 +671,11 @@ export default {
   margin-top: 2%;
   text-align: left;
 }
+.edit_vaccine_respn {
+  margin-top: 2%;
+  text-align: left;
+  margin-left: 20px;
+}
 .edit_moment {
   margin-top: 2%;
   text-align: center;
@@ -718,8 +716,15 @@ export default {
   margin-bottom: 30px;
 }
 .img_expand {
-  clip-path: inset(20px 20px 50px round 25px 0);
+  clip-path: inset(0 0 5px round 15px 0);
   margin-left: 70px;
   margin-right: 70px;
+}
+.moment_page_profile {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.card_moment_profile {
+  margin-bottom: 20px;
 }
 </style>

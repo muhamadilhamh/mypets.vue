@@ -27,78 +27,71 @@
       </v-row>
       <v-row>
         <v-col offset="2">
-          <p class="tgl">{{care_info.date}}</p>
+          <p class="tgl">{{ care_info.date }}</p>
         </v-col>
       </v-row>
       <v-row>
-        <v-col offset="2" >
-          <p class="title_adop">{{care_info.title}}</p>
+        <v-col offset="2" class="hidden-xs-only">
+          <p class="title_adop">{{ care_info.title }}</p>
+        </v-col>
+        <v-col offset="2" class="d-sm-none">
+          <p class="title_adop_respn">{{ care_info.title }}</p>
         </v-col>
       </v-row>
       <v-row>
-           <v-col offset-sm="2" md="8">
-        <v-row>       
-           <v-col  cols="6" sm="2">
-          <ShareNetwork
-    network="facebook"
-    :url="current_url"
-    :title="care_info.title + 'Adoption'"
-    description="Wow guys look, this pet is so cute!! found it on MyPets website"
-    quote="Wow guys look, this pet is so cute!! found it on MyPets website"
-    hashtags="pet_treatment"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-facebook</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
+        <v-col offset="2">
+          <v-row>
+            <v-col cols="6" sm="2">
+              <ShareNetwork
+                network="facebook"
+                :url="current_url"
+                :title="care_info.title + 'Adoption'"
+                description="Wow guys look, this pet is so cute!! found it on MyPets website"
+                quote="Wow guys look, this pet is so cute!! found it on MyPets website"
+                hashtags="pet_treatment"
+                tag="v-btn"
+              >
+                <v-btn outlined rounded color="#3b5998">
+                  <v-icon>mdi-facebook</v-icon> Share
+                </v-btn>
+              </ShareNetwork>
+            </v-col>
+            <v-col cols="6" sm="2">
+              <ShareNetwork
+                network="twitter"
+                :url="current_url"
+                :title="
+                  care_info.title +
+                  ' - This post really helpful guys! You should check it at MyPets website!'
+                "
+                hashtags="animal_care,pet,breeds,animal"
+                tag="v-btn"
+              >
+                <v-btn outlined rounded color="#00acee">
+                  <v-icon>mdi-twitter</v-icon> Share
+                </v-btn>
+              </ShareNetwork>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col  cols="6" sm="2">
-          <ShareNetwork
-    network="twitter"
-    :url="current_url"
-   
-    :title="care_info.title + ' - This post really helpful guys! You should check it at MyPets website!'"
-    hashtags="animal_care,pet,breeds,animal"
-  tag="v-btn">
-          <v-btn outlined rounded>
-<v-icon>mdi-twitter</v-icon> Share
-
-            
-          </v-btn>
-</ShareNetwork>
-        </v-col>
-        
-        </v-row>
-        </v-col>
-      
-      
       </v-row>
     </v-container>
 
-     <v-container>
+    <v-container>
       <v-col cols="12" offset-md="2">
-        <v-img
-          class="rounded-lg img_care"
-          :src="care_info.picture"
-          
-        >
-        </v-img>
+        <v-img class="rounded-lg img_care" :src="care_info.picture"> </v-img>
       </v-col>
     </v-container>
 
     <v-container>
-      <v-col cols="12" md="6" offset-md="2">
-      <v-card outlined class="rounded-xl" width="800px" elevation="2" >
-        
-          <v-col cols="12" md="10" offset-md="1" class="justify-start ">
-            <p  class="mt-5" style="white-space: pre-line">
-          {{care_info.description}}
-          </p>
+      <v-col cols="12" md="9" offset-md="2">
+        <v-card outlined class="rounded-lg" width="800px" elevation="1">
+          <v-col cols="12" md="10" offset-md="1" class="justify-center">
+            <p class="mt-5" style="white-space: pre-line">
+              {{ care_info.description }}
+            </p>
           </v-col>
-      
-      </v-card>
+        </v-card>
       </v-col>
     </v-container>
   </div>
@@ -111,40 +104,45 @@ export default {
     this.$emit("update:layout", "div");
   },
   data() {
-    return{
-    care_info: [],
-    current_url : 'animox-vue.netlify.app' + this.$router.currentRoute.path,
-    category: [
-      {
-        id: 1,
-        profile: "testing",
-        animaltype: "Cat",
-        gender: "Female",
-        age: "1 years",
-        jenis: "Persian",
-        location: "DKI Jakarta",
-        desc:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eaque, modi ipsa quae consectetur esse molestiae iure, aut doloremque veritatis laboriosam fugiat assumenda? Animi rem tenetur hic, temporibus qui quasi.",
-        gmail: "duniagenggamanmu@gmail.com",
-        phone: "0811223456789 ",
-      },
-    ],
+    return {
+      care_info: [],
+      current_url: "animox-vue.netlify.app" + this.$router.currentRoute.path,
+      category: [
+        {
+          id: 1,
+          profile: "testing",
+          animaltype: "Cat",
+          gender: "Female",
+          age: "1 years",
+          jenis: "Persian",
+          location: "DKI Jakarta",
+          desc:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eaque, modi ipsa quae consectetur esse molestiae iure, aut doloremque veritatis laboriosam fugiat assumenda? Animi rem tenetur hic, temporibus qui quasi.",
+          gmail: "duniagenggamanmu@gmail.com",
+          phone: "0811223456789 ",
+        },
+      ],
 
-    emptyIcon: "mdi-heart-outline",
-    fullIcon: "mdi-heart ",
-  }},
+      emptyIcon: "mdi-heart-outline",
+      fullIcon: "mdi-heart ",
+    };
+  },
   mounted() {
-    let uri = process.env.VUE_APP_ROOT_API + 'care_training/' + this.$route.params.id_care + '/details';
-    this.$http.get(uri).then((response) => {
-      this.care_info = response.data;
-    }).catch(error => {
-       if(error.response.status === 404)
-      this.$router.push('/error')
-    });
+    let uri =
+      process.env.VUE_APP_ROOT_API +
+      "care_training/" +
+      this.$route.params.id_care +
+      "/details";
+    this.$http
+      .get(uri)
+      .then((response) => {
+        this.care_info = response.data;
+      })
+      .catch((error) => {
+        if (error.response.status === 404) this.$router.push("/error");
+      });
   },
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 
@@ -207,6 +205,14 @@ export default {
 .title_adop {
   margin-top: 20px;
   font-size: 2.5rem;
+  font-weight: 700;
+  color: #515151;
+  letter-spacing: 2%;
+  line-height: 3%;
+}
+.title_adop_respn {
+  margin-top: 20px;
+  font-size: 1.7rem;
   font-weight: 700;
   color: #515151;
   letter-spacing: 2%;

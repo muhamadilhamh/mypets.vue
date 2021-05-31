@@ -1,5 +1,6 @@
 <template>
   <div class="home_page">
+    <!-- Taro IMG disini -->
     <v-img src="../assets/heroes_adoption.png">
       <v-row>
         <v-col cols="12" sm="6" class="hidden-xs-only">
@@ -14,7 +15,9 @@
                 Let's explore
               </p>
               <div class="btn_eksplore">
-                <v-btn to="" rounded small color="#489FB5" dark> Start </v-btn>
+                <v-btn disabled rounded small color="#489FB5" dark>
+                  explore
+                </v-btn>
               </div>
             </v-container>
           </v-row>
@@ -82,7 +85,7 @@
           <!--Artikel -->
           <!-- Layar Responsif -->
           <v-carousel
-            height="320"
+            height="350"
             hide-delimiter-background
             show-arrows-on-hover
             class="hidden-sm-and-up"
@@ -340,8 +343,7 @@
                                             mdi-gender-female
                                           </v-icon>
                                         </div>
-                                        {{ item.age }} Months,
-                                        {{ item.upload_time }}
+                                        {{ item.age }} Months
                                       </div>
                                     </v-expand-transition>
                                   </v-img>
@@ -361,6 +363,9 @@
                                 <p class="name_user">
                                   {{ item.user.full_name }}
                                 </p>
+                                <p class="location">
+                                  {{ item.location }}
+                                </p>
                               </v-list-item-content>
                             </v-card-actions>
                           </v-card>
@@ -378,221 +383,218 @@
 
     <!-- Age -->
     <v-row>
-      <v-img src="../assets/heroes_adoption.png">
-        <v-container>
-          <v-col>
-            <h3 class="header_artikel">Find your</h3>
-            <h3 class="header_artikel_second">Favorite pet!</h3>
+      <v-container>
+        <v-col>
+          <h3 class="header_artikel">Find your</h3>
+          <h3 class="header_artikel_second">Favorite pet!</h3>
+        </v-col>
+        <v-row>
+          <v-col cols="12" sm="1" class="hidden-xs-only">
+            <v-img src="../assets/pic_bg.png"> </v-img>
           </v-col>
+        </v-row>
+
+        <!-- Age layar lappy -->
+        <v-container class="hidden-xs-only">
           <v-row>
-            <v-col cols="12" sm="1" class="hidden-xs-only">
-              <v-img src="../assets/pic_bg.png"> </v-img>
+            <v-col cols="12" md="8" offset-md="2">
+              <v-row>
+                <v-col cols="12" sm="6">
+                  <!-- Card Anjing -->
+                  <v-row>
+                    <v-col cols="12" sm="4">
+                      <v-img
+                        class="il_anjing_age hidden-xs-only"
+                        src="../assets/anjing.svg"
+                      >
+                      </v-img>
+                    </v-col>
+                    <v-col cols="12" sm="8">
+                      <v-card
+                        elevation="11"
+                        class="rounded-xl cat"
+                        color="#FFA62B"
+                        to="/breeds"
+                      >
+                        <v-card-title>
+                          <p class="title_dog">'Dog'</p>
+                        </v-card-title>
+                        <v-card-subtitle>
+                          <p class="desc_anjing">More about dog</p>
+                        </v-card-subtitle>
+                        <v-card-actions>
+                          <v-btn rounded color="#FFF" block class="btn_dog">
+                            Learn more
+                            <v-icon right> mdi-chevron-right </v-icon>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-col>
+
+                <v-col cols="12" sm="6">
+                  <!-- Card Kucing -->
+                  <v-row>
+                    <v-col cols="12" sm="4">
+                      <v-img
+                        class="il_kucing_age hidden-xs-only"
+                        src="../assets/kucing.svg"
+                      >
+                      </v-img>
+                    </v-col>
+                    <v-col cols="12" sm="8">
+                      <v-card
+                        elevation="11"
+                        class="rounded-xl cat"
+                        color="#FFA62B"
+                        to="/breeds"
+                      >
+                        <v-card-title>
+                          <p class="title_dog">'Cat'</p>
+                        </v-card-title>
+                        <v-card-subtitle>
+                          <p class="desc_anjing">More about cat</p>
+                        </v-card-subtitle>
+                        <v-card-actions>
+                          <v-btn rounded color="#FFF" block class="btn_dog">
+                            Learn more
+                            <v-icon right> mdi-chevron-right </v-icon>
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
-
-          <!-- Age layar lappy -->
-          <v-container class="hidden-xs-only">
-            <v-row>
-              <v-col cols="12" md="8" offset-md="2">
-                <v-row>
-                  <v-col cols="12" sm="6">
-                    <!-- Card Anjing -->
-                    <v-row>
-                      <v-col cols="12" sm="4">
-                        <v-img
-                          class="il_anjing_age hidden-xs-only"
-                          src="../assets/anjing.svg"
-                        >
-                        </v-img>
-                      </v-col>
-                      <v-col cols="12" sm="8">
-                        <v-card
-                          elevation="11"
-                          class="rounded-xl cat"
-                          color="#FFA62B"
-                          to="/breeds"
-                        >
-                          <v-card-title>
-                            <p class="title_dog">'Dog'</p>
-                          </v-card-title>
-                          <v-card-subtitle>
-                            <p class="desc_anjing">More about dog</p>
-                          </v-card-subtitle>
-                          <v-card-actions>
-                            <v-btn rounded color="#FFF" block class="btn_dog">
-                              Learn more
-                              <v-icon right> mdi-chevron-right </v-icon>
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-col>
-                    </v-row>
-                  </v-col>
-
-                  <v-col cols="12" sm="6">
-                    <!-- Card Kucing -->
-                    <v-row>
-                      <v-col cols="12" sm="4">
-                        <v-img
-                          class="il_kucing_age hidden-xs-only"
-                          src="../assets/kucing.svg"
-                        >
-                        </v-img>
-                      </v-col>
-                      <v-col cols="12" sm="8">
-                        <v-card
-                          elevation="11"
-                          class="rounded-xl cat"
-                          color="#FFA62B"
-                          to="/breeds"
-                        >
-                          <v-card-title>
-                            <p class="title_dog">'Cat'</p>
-                          </v-card-title>
-                          <v-card-subtitle>
-                            <p class="desc_anjing">More about cat</p>
-                          </v-card-subtitle>
-                          <v-card-actions>
-                            <v-btn rounded color="#FFF" block class="btn_dog">
-                              Learn more
-                              <v-icon right> mdi-chevron-right </v-icon>
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-col>
-                    </v-row>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-container>
-
-          <!-- Age Responsif -->
-          <v-container class="hidden-sm-and-up">
-            <v-row>
-              <v-col cols="12" md="8" offset-md="2">
-                <v-carousel
-                  height="310"
-                  hide-delimiter-background
-                  show-arrows-on-hover
-                >
-                  <v-carousel-item>
-                    <v-row class="pa-5">
-                      <v-col
-                        v-for="item in feed_age_cat"
-                        :key="item.id"
-                        cols="12"
-                        sm="6"
-                      >
-                        <v-container>
-                          <v-card
-                            class="rounded-xl"
-                            color="#FFA62B"
-                            elevation="8"
-                            to="/breeds"
-                          >
-                            <v-btn
-                              color="#F5F1EC"
-                              fab
-                              large
-                              absolute
-                              bottom
-                              top
-                              class="pa-9 rounded"
-                            >
-                              <v-img
-                                src="../assets/anjing.svg"
-                                class="img_anjing"
-                              ></v-img>
-                            </v-btn>
-                            <v-card-title>
-                              <p class="title_home_age">{{ item.title }}</p>
-                            </v-card-title>
-                            <v-card-subtitle>
-                              <p class="desc_home_age">
-                                {{ item.desc }}
-                              </p>
-                            </v-card-subtitle>
-                            <v-card-actions>
-                              <v-btn
-                                rounded
-                                block
-                                elevation="10"
-                                class="btn_home_age"
-                                color="#FFA62B"
-                              >
-                                Learn more
-                                <v-icon right> mdi-chevron-right </v-icon>
-                              </v-btn>
-                            </v-card-actions>
-                          </v-card>
-                        </v-container>
-                      </v-col>
-                    </v-row>
-                  </v-carousel-item>
-
-                  <v-carousel-item>
-                    <v-row class="pa-5">
-                      <v-col
-                        v-for="item in feed_age_dog"
-                        :key="item.id"
-                        cols="12"
-                        sm="6"
-                      >
-                        <v-container>
-                          <v-card
-                            class="rounded-xl"
-                            color="#FFA62B"
-                            elevation="8"
-                            to="/breeds"
-                          >
-                            <v-btn
-                              color="#F5F1EC"
-                              fab
-                              large
-                              absolute
-                              bottom
-                              top
-                              class="pa-9 rounded"
-                            >
-                              <v-img
-                                src="../assets/kucing.svg"
-                                class="img_anjing"
-                              ></v-img>
-                            </v-btn>
-                            <v-card-title>
-                              <p class="title_home_age">{{ item.title }}</p>
-                            </v-card-title>
-                            <v-card-subtitle>
-                              <p class="desc_home_age">
-                                {{ item.desc }}
-                              </p>
-                            </v-card-subtitle>
-                            <v-card-actions>
-                              <v-btn
-                                rounded
-                                block
-                                elevation="10"
-                                class="btn_home_age"
-                                color="#FFA62B"
-                              >
-                                Learn more
-                                <v-icon right> mdi-chevron-right </v-icon>
-                              </v-btn>
-                            </v-card-actions>
-                          </v-card>
-                        </v-container>
-                      </v-col>
-                    </v-row>
-                  </v-carousel-item>
-                </v-carousel>
-              </v-col>
-            </v-row>
-          </v-container>
         </v-container>
-      </v-img>
-    </v-row>
 
+        <!-- Age Responsif -->
+        <v-container class="hidden-sm-and-up">
+          <v-row>
+            <v-col cols="12" sm="8" offset-md="2">
+              <v-carousel
+                height="310"
+                hide-delimiter-background
+                show-arrows-on-hover
+              >
+                <v-carousel-item>
+                  <v-row class="pa-5">
+                    <v-col
+                      v-for="item in feed_age_cat"
+                      :key="item.id"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-container>
+                        <v-card
+                          class="rounded-xl"
+                          color="#FFA62B"
+                          elevation="8"
+                          to="/breeds"
+                        >
+                          <v-btn
+                            color="#F5F1EC"
+                            fab
+                            large
+                            absolute
+                            bottom
+                            top
+                            class="pa-9 rounded"
+                          >
+                            <v-img
+                              src="../assets/anjing.svg"
+                              class="img_anjing"
+                            ></v-img>
+                          </v-btn>
+                          <v-card-title>
+                            <p class="title_home_age">{{ item.title }}</p>
+                          </v-card-title>
+                          <v-card-subtitle>
+                            <p class="desc_home_age">
+                              {{ item.desc }}
+                            </p>
+                          </v-card-subtitle>
+                          <v-card-actions>
+                            <v-btn
+                              rounded
+                              block
+                              elevation="10"
+                              class="btn_home_age"
+                              color="#FFA62B"
+                            >
+                              Learn more
+                              <v-icon right> mdi-chevron-right </v-icon>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-container>
+                    </v-col>
+                  </v-row>
+                </v-carousel-item>
+
+                <v-carousel-item>
+                  <v-row class="pa-5">
+                    <v-col
+                      v-for="item in feed_age_dog"
+                      :key="item.id"
+                      cols="12"
+                      sm="6"
+                    >
+                      <v-container>
+                        <v-card
+                          class="rounded-xl"
+                          color="#FFA62B"
+                          elevation="8"
+                          to="/breeds"
+                        >
+                          <v-btn
+                            color="#F5F1EC"
+                            fab
+                            large
+                            absolute
+                            bottom
+                            top
+                            class="pa-9 rounded"
+                          >
+                            <v-img
+                              src="../assets/kucing.svg"
+                              class="img_anjing"
+                            ></v-img>
+                          </v-btn>
+                          <v-card-title>
+                            <p class="title_home_age">{{ item.title }}</p>
+                          </v-card-title>
+                          <v-card-subtitle>
+                            <p class="desc_home_age">
+                              {{ item.desc }}
+                            </p>
+                          </v-card-subtitle>
+                          <v-card-actions>
+                            <v-btn
+                              rounded
+                              block
+                              elevation="10"
+                              class="btn_home_age"
+                              color="#FFA62B"
+                            >
+                              Learn more
+                              <v-icon right> mdi-chevron-right </v-icon>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-container>
+                    </v-col>
+                  </v-row>
+                </v-carousel-item>
+              </v-carousel>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-row>
     <!--footer -->
     <div class="footer">
       <v-row class="pa-12">
@@ -723,15 +725,16 @@ export default {
           id: 1,
           title: "Training",
           src: require("../assets/kesehatan.svg"),
-          desc: "Tahukah kamu setiap hewan memiliki penyakit yang berbeda-beda",
+          desc:
+            "Did you know, every animal has a different issues of their own",
         },
       ],
       feed_home_respn2: [
         {
           id: 2,
-          title: "Nutrisi",
+          title: "Nutrition",
           src: require("../assets/nutrision.svg"),
-          desc: "Kadar nutrisi antara setiap hewan berbeda-beda",
+          desc: "Your little friend got a different diet of their own",
         },
       ],
       feed_home_respn3: [
@@ -739,7 +742,7 @@ export default {
           id: 3,
           title: "Care",
           src: require("../assets/care.svg"),
-          desc: "Yang butuh mandi bukan kamu aja loh, hewanmu pun butuh mandi",
+          desc: "Its not just you who need to take a bath, your pet too!",
         },
       ],
       feed_adop: [],
@@ -762,4 +765,10 @@ export default {
 };
 </script>
 <style lang="scss">
+.location {
+  font-weight: 300;
+  color: rgb(110, 109, 109);
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
 </style>

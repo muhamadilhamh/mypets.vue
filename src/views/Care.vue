@@ -9,11 +9,10 @@
                 <h2>What’s in MyPets</h2>
               </div>
             </v-col>
-            <v-col cols="6" sm="6"
+            <v-col md="6" cols="12"
               ><div class="search_care">
                 <!-- chips = bakal di highlight, clearable = menghapus highlight, filled = melebarkan layout, rounded = sudut menjadi tidak kaku, solo = membuat menjadi berwarna -->
                 <v-autocomplete
-                  
                   clearable
                   rounded
                   solo
@@ -27,15 +26,19 @@
               </div>
             </v-col>
             <!-- Button click -->
-            <v-col cols="6" sm="6" @click="model = null">
-              
-            </v-col>
+            <v-col cols="6" sm="6" @click="model = null"> </v-col>
             <!--feed-->
             <v-col v-for="item in filteredList" :key="item.id" cols="12" sm="4">
               <div class="feed_artikel">
                 <v-card flat tile class="mx-auto">
-                  <router-link  :to="{ name: 'caredetail', params: { id_care : item.id } }">
-                    <v-img class="rounded" :src="item.picture" aspect-ratio="1.5">
+                  <router-link
+                    :to="{ name: 'caredetail', params: { id_care: item.id } }"
+                  >
+                    <v-img
+                      class="rounded"
+                      :src="item.picture"
+                      aspect-ratio="1.5"
+                    >
                     </v-img>
                   </router-link>
                   <v-card-text>
@@ -48,16 +51,16 @@
           </v-row>
         </v-container>
       </v-row>
-        <v-btn
-          class="load_more"
-          text
-          large
-          v-if="loadList == true"
-          @click="listToShow += 9"
-          block
-        >
-          Load More
-        </v-btn>
+      <v-btn
+        class="load_more"
+        text
+        large
+        v-if="loadList == true"
+        @click="listToShow += 9"
+        block
+      >
+        Load More
+      </v-btn>
     </v-app>
   </div>
 </template>
@@ -68,35 +71,35 @@ export default {
   created() {
     this.$emit("update:layout", navbarfull);
   },
-  mounted(){
-    let uri  = process.env.VUE_APP_ROOT_API + 'care_training';
-    this.$http.get(uri).then(response => {
+  mounted() {
+    let uri = process.env.VUE_APP_ROOT_API + "care_training";
+    this.$http.get(uri).then((response) => {
       this.feed_care = response.data;
       this.loadList = true;
-    })
+    });
   },
   data() {
     return {
-      loadList : false,
-      listToShow : 9,
-      search : '',
-      url : process.env.VUE_APP_IMAGE_URL,
-      feed_care: [
-        
-      ],
+      loadList: false,
+      listToShow: 9,
+      search: "",
+      url: process.env.VUE_APP_IMAGE_URL,
+      feed_care: [],
     };
   },
-  computed :{
-    filteredList : function(){
-      return this.feed_care.filter(post => {
-        if(this.search != null){
-          return post.title.includes(this.search);
-        }else{
-          return post
-        }
-      }).slice(0, this.listToShow)
-    }
-  }
+  computed: {
+    filteredList: function () {
+      return this.feed_care
+        .filter((post) => {
+          if (this.search != null) {
+            return post.title.includes(this.search);
+          } else {
+            return post;
+          }
+        })
+        .slice(0, this.listToShow);
+    },
+  },
 };
 </script>
 <style lang="scss">

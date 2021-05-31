@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <v-toolbar-title>
         <v-card-actions>
-          <h5 class="title_cat">Abyssinian</h5>
+          <h5 class="title_cat"></h5>
         </v-card-actions>
       </v-toolbar-title>
     </v-toolbar>
@@ -13,7 +13,7 @@
         <v-col cols="2" md="2">
           <v-btn rounded depressed class="btn_back" to="/breeds/cat">
             <v-icon left> mdi-chevron-left </v-icon>
-            All Breeds
+            All Breeds 'Cat'
           </v-btn>
         </v-col>
       </v-row>
@@ -21,16 +21,16 @@
 
     <v-container>
       <v-row>
-        <v-col cols="7" md="5" offset="1">
+        <v-col md="5" offset-md="1">
           <v-card elevation="5">
-            <v-card-title> {{breeds_info[0].name}}</v-card-title>
+            <v-card-title> {{ breeds_info[0].name }}</v-card-title>
             <v-card-text>
-              {{breeds_info[0].description}}
+              {{ breeds_info[0].description }}
             </v-card-text>
             <v-card-actions>
               <v-row>
-                <v-col cols="1" md="1">
-                 <template v-if="!likeStatus">
+                <v-col cols="2" md="1">
+                  <template v-if="!likeStatus">
                     <button @click="addLike(user.id)">
                       <v-rating
                         hover
@@ -47,6 +47,7 @@
                   <template v-if="likeStatus">
                     <button @click="addLike(user.id)">
                       <v-rating
+                        class="rating_cat"
                         hover
                         background-color="grey darken-1"
                         color="#EF5350"
@@ -61,7 +62,7 @@
                   </template>
                 </v-col>
                 <v-col cols="3" md="3">
-                  <p class="rate">{{breeds_info[0].user.length}}</p>
+                  <p class="rate">{{ breeds_info[0].user.length }}</p>
                 </v-col>
 
                 <v-col cols="4" md="4" class="type">
@@ -83,41 +84,43 @@
         <v-tab class="title_fact">Key Fact</v-tab>
         <v-tab-item class="konten_fact">
           <!--tab key fact -->
+          <v-col cols="12" md="12" class="text-center">
+            <h3 class="desc_fact">Physical Attributes</h3>
+          </v-col>
           <v-row>
-            <v-col cols="12" md="3">
-                <v-card outlined class="rounded-xl">
+            <v-col offset-md="1">
+              <v-card outlined class="rounded-xl">
+                <v-container>
+                  <v-card-title class="justify-center">
+                    <h3>Profile</h3>
+                  </v-card-title>
                   <v-container>
-                    <v-card-title class="justify-center">
-                      <h3>Profile</h3>
-                    </v-card-title>
-                    <v-container>
-                      <v-card-text class="text_desc">
-                        <span class="bold">Lifespan:</span>{{  breeds_info[0].lifespan }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <span class="bold">Weight: </span>{{  breeds_info[0].weight }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <span class="bold">Size:</span> {{  breeds_info[0].size }}
-                      </v-card-text>
-                      <v-card-text class="text_desc">
-                        <span class="bold">Origin:</span> {{  breeds_info[0].origin}}
-                      </v-card-text>
-                    </v-container>
+                    <v-card-text class="text_desc">
+                      <span class="bold">Lifespan:</span
+                      >{{ breeds_info[0].lifespan }}
+                    </v-card-text>
+                    <v-card-text class="text_desc">
+                      <span class="bold">Weight: </span
+                      >{{ breeds_info[0].weight }}
+                    </v-card-text>
+                    <v-card-text class="text_desc">
+                      <span class="bold">Size:</span> {{ breeds_info[0].size }}
+                    </v-card-text>
+                    <v-card-text class="text_desc">
+                      <span class="bold">Origin:</span>
+                      {{ breeds_info[0].origin }}
+                    </v-card-text>
                   </v-container>
-                </v-card>
+                </v-container>
+              </v-card>
 
-                <br />
-                
-              </v-col>
-            <v-col cols="12" md="9">
-              <h3 class="desc_fact">Physical Attributes</h3>
+              <br />
             </v-col>
           </v-row>
           <v-container>
             <v-row>
               <!--left side -->
-              <v-col cols="5" md="5" offset-md="1">
+              <v-col md="5" offset-md="1">
                 <v-card outlined class="rounded-xl">
                   <v-container>
                     <v-card-title>
@@ -125,33 +128,33 @@
                     </v-card-title>
 
                     <v-card-text>
-                      {{cat_detail.body }}
+                      {{ cat_detail.body }}
                     </v-card-text>
                   </v-container>
                 </v-card>
 
                 <br />
                 <v-card outlined class="rounded-xl">
-                  <v-container >
+                  <v-container>
                     <v-card-title>
                       <h3>Head</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ cat_detail.head}}
+                      {{ cat_detail.head }}
                     </v-card-text>
                   </v-container>
                 </v-card>
 
                 <br />
                 <v-card outlined class="rounded-xl">
-                  <v-container >
+                  <v-container>
                     <v-card-title>
                       <h3>Legs</h3>
                     </v-card-title>
 
                     <v-card-text>
-                      {{ cat_detail.legs }}
+                      {{ cat_detail.legs_paws }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -170,9 +173,9 @@
                 </v-card>
               </v-col>
 
-              <v-col cols="6" md="6">
+              <v-col md="6">
                 <v-card outlined class="rounded-xl">
-                  <v-container >
+                  <v-container>
                     <v-card-title>
                       <h3>Ears</h3>
                     </v-card-title>
@@ -201,7 +204,7 @@
                       <h3>Tail</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{cat_detail.tail }}
+                      {{ cat_detail.tail }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -213,7 +216,7 @@
                       <h3>Coat</h3>
                     </v-card-title>
                     <v-card-text>
-                      {{ cat_detail.coat}}
+                      {{ cat_detail.coat }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -235,11 +238,11 @@
             <v-row>
               <!--left side -->
 
-              <v-col cols="8" md="8" offset-md="2">
+              <v-col md="8" offset-md="2">
                 <v-card outlined class="rounded-xl">
-                  <v-container >
-                    <v-card-text>
-                      {{breeds_info[0].description}}
+                  <v-container>
+                    <v-card-text class="text-center">
+                      {{ breeds_info[0].description }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -257,37 +260,58 @@
               <h3 class="desc_fact">Personality</h3>
             </v-col>
           </v-row>
-          
+
           <v-container>
             <v-row>
               <!--left side -->
 
-              <v-col cols="8" md="8" offset="2">
+              <v-col md="8" offset-md="2">
                 <v-card outlined class="rounded-xl">
-                  <v-container >
-                    <v-card-text>
-                      {{breeds_info[0].personality}}
+                  <v-container>
+                    <v-card-text class="text-center">
+                      {{ breeds_info[0].personality }}
                     </v-card-text>
                   </v-container>
                 </v-card>
               </v-col>
             </v-row>
           </v-container>
-           <v-row>
+          <v-row>
             <v-col cols="12">
               <h3 class="desc_fact">Characteristics</h3>
             </v-col>
           </v-row>
-          
+
           <v-container>
             <v-row>
               <!--left side -->
 
-              <v-col cols="8" md="8" offset="2">
+              <v-col md="8" offset-md="2">
                 <v-card outlined class="rounded-xl">
-                  <v-container >
-                    <v-card-text>
-                      {{breeds_info[0].characteristics}}
+                  <v-container>
+                    <v-card-text class="text-center">
+                      {{ breeds_info[0].characteristics }}
+                    </v-card-text>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <v-row>
+            <v-col cols="12">
+              <h3 class="desc_fact">Health</h3>
+            </v-col>
+          </v-row>
+          <v-container>
+            <v-row>
+              <!--left side -->
+
+              <v-col md="8" offset-md="2">
+                <v-card outlined class="rounded-xl">
+                  <v-container>
+                    <v-card-text class="text-center">
+                      {{ breeds_info[0].health }}
                     </v-card-text>
                   </v-container>
                 </v-card>
@@ -307,12 +331,12 @@
           </v-row>
           <v-container>
             <v-row>
-              <v-col cols="8" md="8" offset-md="2">
+              <v-col md="8" offset-md="2">
                 <v-card outlined class="rounded-xl">
                   <div class="pa-5">
                     <v-container>
                       <v-row>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Activity</h5>
                           <v-rating
                             hover
@@ -326,7 +350,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Attention</h5>
                           <v-rating
                             hover
@@ -340,7 +364,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Hardiness</h5>
                           <v-rating
                             hover
@@ -354,7 +378,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Affection to Owners</h5>
                           <v-rating
                             hover
@@ -368,7 +392,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Playfulness</h5>
                           <v-rating
                             hover
@@ -382,7 +406,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Grooming</h5>
                           <v-rating
                             hover
@@ -396,7 +420,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Friendliness To Children</h5>
                           <v-rating
                             hover
@@ -410,7 +434,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Independence</h5>
                           <v-rating
                             hover
@@ -424,7 +448,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Friendliness To Other Pets</h5>
                           <v-rating
                             hover
@@ -438,7 +462,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Docility</h5>
                           <v-rating
                             hover
@@ -452,7 +476,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Intelligence</h5>
                           <v-rating
                             hover
@@ -466,7 +490,7 @@
                           >
                           </v-rating>
                         </v-col>
-                        <v-col cols="7" md="6">
+                        <v-col md="6">
                           <h5>Vocality</h5>
                           <v-rating
                             hover
@@ -490,43 +514,51 @@
         </v-tab-item>
 
         <!--Fourth-->
-        <v-tab class="tit"> Moment {{moments.length}}</v-tab>
-         <v-tab-item class="konten_fact">
+        <v-tab class="tit"> Moment {{ moments.length }}</v-tab>
+        <v-tab-item class="konten_fact">
           <v-row>
-            <v-col cols="12" v-for="item in moments" :key="item.id">
+            <v-col v-for="item in moments" :key="item.id" md="12">
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header>
                     <v-icon left> mdi-cat </v-icon>
-                    <v-card-title> {{ item.title }}</v-card-title>
+                    <v-card-title class="hidden-xs-only">
+                      {{ item.title }}</v-card-title
+                    >
 
                     <v-card-list>
-                      <v-card-subtitle>{{item.date}} </v-card-subtitle>
+                      <v-card-subtitle class="hidden-xs-only"
+                        >{{ item.date }}
+                      </v-card-subtitle>
                     </v-card-list>
-                    <v-card-list> <v-btn :to="{
-                            name: 'momentdetail',
-                            params: { id_moment : item.id },
-                          }">Go to Moment Page</v-btn></v-card-list>
+                    <v-card-list>
+                      <v-btn
+                        small
+                        class="moment_page"
+                        elevation="5"
+                        color="#489FB5"
+                        rounded
+                        dark
+                        :to="{
+                          name: 'momentdetail',
+                          params: { id_moment: item.id },
+                        }"
+                        >Go to Moment Page</v-btn
+                      ></v-card-list
+                    >
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <v-col offset-md="3">
+                    <v-col class="justify-center">
                       <v-img
-                        src="../assets/1x3_ad.png"
-                        class="rounded-lg"
-                        max-width="500"
+                        :src="url + item.picture"
+                        class="rounded-lg img_care"
                       >
                       </v-img>
                     </v-col>
-                     <h4>Description</h4>
-                    <v-card-text
-                      >{{item.description}}</v-card-text
-                    >
+                    <h4>Description</h4>
+                    <v-card-text>{{ item.description }}</v-card-text>
                     <h4>Location</h4>
-                    <v-card-text
-                      >{{item.location}}</v-card-text
-                    >
-                   
-                    
+                    <v-card-text>{{ item.location }}</v-card-text>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -534,59 +566,65 @@
           </v-row>
         </v-tab-item>
         <v-tab class="tit"> Comments</v-tab>
-        <v-tab-item>  <section class='comments' aria-labelledby="comment">
-    <h2 id="comment">Comments</h2>
-    <Disqus shortname='mypets-1' />
-  </section></v-tab-item>
+        <v-tab-item>
+          <section class="comments" aria-labelledby="comment">
+            <h2 id="comment">Comments</h2>
+            <Disqus shortname="mypets-1" /></section
+        ></v-tab-item>
       </v-tabs>
-      
     </v-container>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { Disqus } from 'vue-disqus'
+import { Disqus } from "vue-disqus";
 export default {
   nama: "CatDetail",
   components: {
-    Disqus
+    Disqus,
   },
   created() {
     this.$emit("update:layout", "div");
   },
-  data: () => ({
-    url : process.env.VUE_APP_IMAGE_URL,
-    breeds_info: [],
-    actifity: 5,
-    cat_detail : [{}],
-    likeStatus: false,
-    attention: 4,
-    Hardiness: 2,
-    Affection: 4,
-    playfulness: 5,
-    groom: 2,
-    independence: 3,
-    friendlinessChild: 2,
-    friendlinessOther: 3,
-    docility: 1,
-    intelligence: 4,
-    moments : [],
-    vocality: 1,
-    emptyIcon: "mdi-heart-outline",
-    fullIcon: "mdi-heart ",
-
-  }),
+  data() {
+    return {
+      url: process.env.VUE_APP_IMAGE_URL,
+      breeds_info: [],
+      actifity: 5,
+      cat_detail: [{}],
+      likeStatus: false,
+      attention: 4,
+      Hardiness: 2,
+      Affection: 4,
+      playfulness: 5,
+      groom: 2,
+      independence: 3,
+      friendlinessChild: 2,
+      friendlinessOther: 3,
+      docility: 1,
+      intelligence: 4,
+      moments: [],
+      vocality: 1,
+      emptyIcon: "mdi-heart-outline",
+      fullIcon: "mdi-heart ",
+    };
+  },
   mounted() {
-    let uri_cat = process.env.VUE_APP_ROOT_API + "animal/cat/details/" + this.$route.params.slug;
-      this.$http.get(uri_cat).then((response) => {
+    let uri_cat =
+      process.env.VUE_APP_ROOT_API +
+      "animal/cat/details/" +
+      this.$route.params.slug;
+    this.$http
+      .get(uri_cat)
+      .then((response) => {
         this.cat_detail = response.data;
-
-      }).catch(error => {
-       if(error.response.status === 404)
-      this.$router.push('/error')
-    });
-    let uri = process.env.VUE_APP_ROOT_API + "animal/cat/" + this.$route.params.slug;
+      })
+      .catch((error) => {
+        if (error.response.status === 404) this.$router.push("/error");
+      });
+    let uri =
+      process.env.VUE_APP_ROOT_API + "animal/cat/" + this.$route.params.slug;
     this.$http.get(uri).then((response) => {
       this.breeds_info = response.data;
     });
@@ -595,10 +633,10 @@ export default {
     this.$http.get(uri_moment).then((response) => {
       this.moments = response.data;
     }),
-    this.getLikeStatus();
+      this.getLikeStatus();
   },
   methods: {
-     getLikeStatus() {
+    getLikeStatus() {
       if (this.isLoggedIn) {
         let uri =
           process.env.VUE_APP_ROOT_API +
@@ -680,6 +718,13 @@ export default {
 .desc_fact {
   text-align: center;
   font-size: 1.5rem;
+}
+.img_care {
+  width: 800px;
+  height: 400px;
+}
+.moment_page {
+  text-transform: capitalize;
 }
 </style>
 
