@@ -131,7 +131,7 @@
                       solo
                     >
                       <template slot="selection" slot-scope="{ item }">
-                        {{ item.type }} - {{ item.slug }}
+                        {{ item.type }} - {{ item.name }}
                       </template>
                       <template slot="item" slot-scope="{ item }">
                         {{ item.type }} - {{ item.name }}
@@ -398,7 +398,7 @@ export default {
             confirmButtonText: "Confirm",
             closeOnCancel: true,
           });
-          this.$router.push("/adoption");
+          this.$router.push({name : 'profile', params : {username : this.user.username}});
         })
         .catch((error) => {
           this.errMessage = error.response.data;

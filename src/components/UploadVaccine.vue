@@ -238,7 +238,7 @@
                       block
                       @click="upload"
                     >
-                      Publish Moment
+                      Upload Vaccine
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -408,10 +408,7 @@ export default {
             confirmButtonText: "Confirm",
             closeOnCancel: true,
           });
-          self.$router.push({
-            name: "profile",
-            params: { username: self.user.username },
-          });
+          this.$router.push({name : 'profile', params : {username : this.user.username}});
         })
         .catch((error) => {
           this.errMessage = error.response.data;

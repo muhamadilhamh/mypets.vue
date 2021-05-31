@@ -56,7 +56,7 @@
               <ShareNetwork
                 network="twitter"
                 :url="current_url"
-                :title="breeds_info.name + 'Adoption'"
+                title="Wow guys look, this pet is so cute!! found it on MyPets website"
                 description="Wow guys look, this pet is so cute!! found it on MyPets website"
                 quote="Wow guys look, this pet is so cute!! found it on MyPets website"
                 hashtags="adoption,pet,breeds,animal"
@@ -72,7 +72,8 @@
       </v-row>
     </v-container>
     <v-container>
-      <v-carousel hide-delimiters class="hidden-xs-only img_desktop">
+     
+      <v-carousel hide-delimiters class="hidden-xs-only">
         <v-carousel-item v-for="(item, i) in breeds_images" :key="i">
           <v-img class="rounded-lg" :src="url + item.img"> </v-img
         ></v-carousel-item>
@@ -84,7 +85,6 @@
         ></v-carousel-item>
       </v-carousel>
     </v-container>
-
     <v-container>
       <v-container>
         <v-row>
@@ -131,9 +131,14 @@
                         </p></v-chip
                       >
                     </v-col>
-                    <v-col md="4" sm="5">
+                    <v-col md="3" sm="5">
                       <v-chip color="#489FB5" dark
                         ><p class="testing">{{ breeds_info.health }}</p></v-chip
+                      >
+                    </v-col>
+                    <v-col md="3" sm="3">
+                      <v-chip color="#489FB5" dark
+                        ><p class="testing">{{ breeds_info.color }}</p></v-chip
                       >
                     </v-col>
                   </v-row>
@@ -290,7 +295,7 @@
                   <v-dialog v-model="dialog" max-width="500">
                     <v-card>
                       <v-card-title class="headline">
-                        Are you sure you really plant to adopt this
+                        Are you sure you really plan to adopt this pet
                       </v-card-title>
 
                       <v-card-text>

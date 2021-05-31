@@ -25,9 +25,9 @@
               item-text="name"
               :items="animal_list"
               item-value="name"
-              label="Search Adoption"
+              label="Search Breeds"
               v-model="search"
-              placeholder="Search Breeds"
+              placeholder="Select Breeds"
               prepend-inner-icon="mdi-magnify"
               solo
             >

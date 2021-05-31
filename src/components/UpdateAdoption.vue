@@ -402,7 +402,7 @@ export default {
             confirmButtonText: "Confirm",
             closeOnCancel: true,
           });
-          self.$router.push("/adoption");
+          this.$router.push({name : 'profile', params : {username : this.user.username}});
         })
         .catch((error) => {
           this.errMessage = error.response.data;

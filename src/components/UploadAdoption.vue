@@ -417,7 +417,6 @@ export default {
       return `${Math.round(size * 100) / 100} ${fSExt[i]}`;
     },
     upload() {
-      let self = this;
       const formData = new FormData();
       const config = {
         headers: {
@@ -456,7 +455,7 @@ export default {
             confirmButtonText: "Confirm",
           });
           console.log(response.data);
-          self.$router.push("/adoption");
+         this.$router.push({name : 'profile', params : {username : this.user.username}});
         })
         .catch((error) => {
           this.errMessage = error.response.data;

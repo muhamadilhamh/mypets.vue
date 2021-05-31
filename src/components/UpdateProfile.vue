@@ -184,6 +184,7 @@ export default {
     this.$emit("update:layout", "div");
   },
   mounted() {
+
     let uri_loc = process.env.VUE_APP_ROOT_API + "location/cities";
     this.$http.get(uri_loc).then((response) => {
       this.location_data = response.data;
@@ -200,8 +201,8 @@ export default {
         this.username = response.data.username;
       })
       .catch(function (error) {
-        let self = this;
-        self.$router.push("/");
+        
+        this.$router.push("/");
       });
   },
   data() {
@@ -212,6 +213,7 @@ export default {
       isDragging: false,
       dragCount: 0,
       files: [],
+      user : [],
       images: [],
       location_data: [],
 
@@ -336,7 +338,8 @@ export default {
             text: "Profile has been successfully updated",
             confirmButtonText: "Confirm",
           });
-          this.$router.push("/");
+          console.log(response.data)
+          this.$router.push({name : 'profile', params : {username : this.user.username}});
         })
         .catch((err) => {
           this.errMessage = err.response;
