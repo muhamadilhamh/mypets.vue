@@ -114,6 +114,7 @@
                       <v-radio-group
                         v-model="animal_name"
                         row
+                        
                         @change="subSpecies(animal_name)"
                       >
                         <v-radio
@@ -160,6 +161,7 @@
                       item-text="name"
                       :items="animal_list"
                       item-value="slug"
+                      :rules="typeRules"
                       label="Select Pet Type"
                       v-model="type"
                       placeholder="Select Pet Type"
@@ -191,6 +193,7 @@
                           readonly
                           v-bind="attrs"
                           v-on="on"
+                          :rules="dateRules"
                         ></v-text-field>
                       </template>
                       <v-date-picker
@@ -269,6 +272,8 @@ export default {
     body: "",
     health: "",
     nameRules: [(value) => !!value || "Name required"],
+    typeRules: [(value) => !!value || "Animal Type must be selected"],
+    dateRules: [(value) => !!value || "Date must be selected"],
     desc: "",
     descRules: [(value) => !!value || "Description is required"],
     loc: "",

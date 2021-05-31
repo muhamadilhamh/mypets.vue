@@ -80,7 +80,7 @@
                 <h5>Vaccine Type</h5>
                 <v-text-field
                   v-model="type"
-                  :rules="nameRules"
+                  :rules="vaccineRules"
                   placeholder="Input Vaccine Type"
                   required
                   outlined
@@ -110,6 +110,7 @@
                   color="#489FB5"
                   :min="0"
                   :max="10"
+                  :rules="ageRules"
                   step="0.5"
                   thumb-label="always"
                 ></v-slider>
@@ -174,6 +175,7 @@
                           prepend-icon="mdi-calendar"
                           readonly
                           v-bind="attrs"
+                          :rules="dateRules"
                           v-on="on"
                         ></v-text-field>
                       </template>
@@ -190,6 +192,7 @@
                       :nudge-right="40"
                       transition="scale-transition"
                       offset-y
+                      :rules="dateRules"
                       min-width="auto"
                     >
                       <template v-slot:activator="{ on, attrs }">
@@ -277,9 +280,11 @@ export default {
     menu2: false,
     date: new Date().toISOString().substr(0, 10),
     next_date: new Date().toISOString().substr(0, 10),
-    nameRules: [(value) => !!value || "Name required"],
+    nameRules: [(value) => !!value || "Name is required"],
+    vaccineRules: [(value) => !!value || "Vaccine Type is required"],
     desc: "",
     descRules: [(value) => !!value || "Description is required"],
+    dateRules: [(value) => !!value || "Date must be selected"],
     loc: "",
     locRules: [(value) => !!value || "Location is required"],
     submitStatus: null,

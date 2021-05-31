@@ -117,7 +117,7 @@
                       >
                     </v-col>
 
-                    <v-col md="2" sm="4">
+                    <v-col md="3" sm="4">
                       <v-chip color="#489FB5" dark
                         ><p class="testing">
                           {{ breeds_info.animal_type }}

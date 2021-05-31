@@ -139,7 +139,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breeds"
+                      to="/dogconversion"
                     >
                       <v-btn
                         color="#F5F1EC"
@@ -194,7 +194,7 @@
                       class="rounded-xl"
                       color="#FFA62B"
                       elevation="8"
-                      to="/breeds"
+                      to="/catconversion"
                     >
                       <v-btn
                         color="#F5F1EC"

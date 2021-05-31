@@ -15,9 +15,8 @@
                 Let's explore
               </p>
               <div class="btn_eksplore">
-                <v-btn disabled rounded small color="#489FB5" dark>
-                  explore
-                </v-btn>
+              
+              
               </div>
             </v-container>
           </v-row>
@@ -263,7 +262,7 @@
               color="#489FB5"
               to="/adoption"
             >
-              Eksplore
+              Explore
             </v-btn>
 
             <v-btn
@@ -274,7 +273,7 @@
               color="#489FB5"
               to="/adoption"
             >
-              Eksplore
+              Explore
             </v-btn>
 
             <v-row class="feed_adop">
@@ -633,7 +632,7 @@
               </v-btn>
             </v-card-actions>
             <v-card-actions>
-              <v-btn to="/care" x-small text color="#515151">
+              <v-btn to="/care_training" x-small text color="#515151">
                 Care&Training
               </v-btn>
             </v-card-actions>

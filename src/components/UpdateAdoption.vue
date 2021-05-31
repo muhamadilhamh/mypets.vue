@@ -106,6 +106,7 @@
                     <v-autocomplete
                       clearable
                       rounded
+                      :rules="typeRules"
                       item-text="name"
                       :items="animal_list"
                       item-value="name"
@@ -156,7 +157,7 @@
                     <h5>Color</h5>
                     <v-text-field
                       v-model="adoption_info.color"
-                      :rules="ageRules"
+                      :rules="colorRules"
                       label="Color"
                       required
                       outlined
@@ -175,6 +176,7 @@
                       v-model="adoption_info.health"
                       :items="health_value"
                       dense
+                      :rules="healthRules"
                       filled
                       label="Health"
                       solo
@@ -189,6 +191,7 @@
                       v-model="adoption_info.body"
                       :items="body_value"
                       dense
+                      :rules="bodyRules"
                       filled
                       label="Body"
                       solo
@@ -284,7 +287,10 @@ export default {
     loc: "",
     locRules: [(value) => !!value || "Location is required"],
     submitStatus: null,
-    location_data: [],
+    location_data: [], 
+    healthRules: [(value) => !!value || "Health Condition must be selected"],
+    typeRules: [(value) => !!value || "Animal Type must be selected"],
+    bodyRules: [(value) => !!value || "Body Type must be selected"],
     age: "",
     ageRules: [(value) => !!value || "Age is required"],
     color: "",

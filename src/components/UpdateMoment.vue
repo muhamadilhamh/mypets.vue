@@ -124,6 +124,7 @@
                       item-text="name"
                       :items="animal_list"
                       item-value="slug"
+                      :rules="typeRules"
                       label="Search Pet Type"
                       v-model="moment.animal_type"
                       placeholder="Select Pet Type"
@@ -153,6 +154,7 @@
                       label="Date"
                       prepend-icon="mdi-calendar"
                       readonly
+                      :rules="dateRules"
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
@@ -233,8 +235,11 @@ export default {
     location_data: [],
     body: "",
     health: "",
-    nameRules: [(value) => !!value || "Name required"],
+    nameRules: [(value) => !!value || "Name is required"],
     desc: "",
+    
+    typeRules: [(value) => !!value || "Animal Type must be selected"],
+    dateRules: [(value) => !!value || "Date must be selected"],
     descRules: [(value) => !!value || "Description is required"],
     loc: "",
     locRules: [(value) => !!value || "Location is required"],

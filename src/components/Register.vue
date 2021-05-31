@@ -97,7 +97,6 @@
                 outlined
                 rounded
                 dense
-                type="number"
               ></v-text-field>
 
               <v-row class="hidden-xs-only">
@@ -310,17 +309,20 @@ export default {
     phoneRules: [
       (value) => !!value || "Phone required",
       (value) =>
-        (value && value.length >= 7) || "Phone must have 7+ characters",
+        (value && value.length >= 9) || "Phone must have 9+ numbers",
+        (value) => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(value) || "Phone Number is not valid"
     ],
     email: "",
     emailRules: [
       (value) => !!value || "E-mail required",
-      (value) => /.+@.+/.test(value) || "E-mail must be valid",
+      (value) => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value) || "E-mail must be valid",
     ],
     password: "",
-    passwordRules: [(value) => !!value || "Please type password."],
+    passwordRules: [(value) => !!value || "Please type password.",
+    (value) => value.length >= 8 || "Password must be at least 8 characters long"],
     confirmPassword: "",
-    confirmPasswordRules: [(value) => !!value || "Please type password again"],
+    confirmPasswordRules: [(value) => !!value || "Please type password again",
+    (value) => value.length >= 8 || "Password must be at least 8 characters long"],
   }),
   computed: {
     passwordConfirmationRule() {

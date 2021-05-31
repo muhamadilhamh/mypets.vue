@@ -147,6 +147,7 @@
                       item-value="name"
                       label="Search Adoption"
                       v-model="type"
+                      :rules="typeRules"
                       placeholder="Search Adoption"
                       prepend-inner-icon="mdi-magnify"
                       solo
@@ -192,7 +193,7 @@
                     <h5>Color</h5>
                     <v-text-field
                       v-model="color"
-                      :rules="ageRules"
+                      :rules="colorRules"
                       label="Color"
                       required
                       outlined
@@ -209,6 +210,7 @@
                       clearable
                       rounded
                       v-model="health"
+                      :rules="healthRules"
                       :items="health_value"
                       dense
                       filled
@@ -223,6 +225,7 @@
                       clearable
                       rounded
                       v-model="body"
+                      :rules="bodyRules"
                       :items="body_value"
                       dense
                       filled
@@ -299,6 +302,9 @@ export default {
     name: "",
     body: "",
     health: "",
+    healthRules: [(value) => !!value || "Health Condition must be selected"],
+    typeRules: [(value) => !!value || "Animal Type must be selected"],
+    bodyRules: [(value) => !!value || "Body Type must be selected"],
     body_value: ["Small", "Medium", "Big"],
     nameRules: [(value) => !!value || "Name required"],
     desc: "",
@@ -310,7 +316,7 @@ export default {
     age: "",
     ageRules: [(value) => !!value || "Age is required"],
     color: "",
-    colorRules: [(value) => !!value || "Type is required"],
+    colorRules: [(value) => !!value || "Color is required"],
   }),
   validations: {
     name: {

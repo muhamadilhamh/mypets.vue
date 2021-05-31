@@ -12,7 +12,7 @@
             <v-container>
               <h3 class="header_heroes">Be My New Family!</h3>
               <p class="desc_age_option">
-                Memberikan hewanmu, untuk kasih sayang yang diperlukan
+                Give them plenty of love, by adopting one of them
               </p>
               <div class="btn_gotoregis">
                 <v-btn
@@ -328,6 +328,7 @@
                                 </v-icon>
                               </div>
                               <div v-else>
+                                {{ item.name }}
                                 <v-icon small left color="#fff">
                                   mdi-gender-female
                                 </v-icon>
@@ -594,6 +595,7 @@ export default {
         })
         .slice(0, this.listToShow)
         .sort((a, b) => {
+          if(this.sortedItem != 'age'){
           let modifier = 1;
           if (this.sortType == "desc") modifier = -1;
           if (a[this.sortedItem] < b[this.sortedItem]) {
@@ -601,6 +603,15 @@ export default {
           }
           if (a[this.sortedItem] > b[this.sortedItem]) return 1 * modifier;
           return 0;
+        }else {
+          let modifier = 1;
+          if (this.sortType == "desc") modifier = -1;
+          if (parseInt(a[this.sortedItem]) < parseInt(b[this.sortedItem])) {
+            return -1 * modifier;
+          }
+          if (parseInt(a[this.sortedItem]) > parseInt(b[this.sortedItem])) return 1 * modifier;
+          return 0;
+        }
         })
         .slice(0, this.listToShow);
     },
