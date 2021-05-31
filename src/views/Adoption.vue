@@ -250,7 +250,7 @@
         @click="sortType = 'desc'"
       ></v-radio>
       <v-radio
-        label="Most Recent"
+        label="Least Recent"
         value="desc"
         @click="sortType = 'asc'"
       ></v-radio>
