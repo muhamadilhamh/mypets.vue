@@ -123,7 +123,7 @@
 
                     <v-col cols="2" md="1">
                       <router-link
-                        :to="{ name: 'dogdetail', params: { slug: 'akita' } }"
+                       :to="{ name: 'dogdetail', params: { slug: item.slug } }"
                       >
                         <v-rating
                           hover
