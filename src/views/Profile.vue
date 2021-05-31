@@ -106,7 +106,7 @@
                                       mdi-dog</v-icon
                                     >
                                   </v-if>
-                                  {{ item.title }}
+                                  {{ item.name }}
                                   <div v-if="item.gender == 'Male'">
                                     <v-icon small left color="#fff">
                                       mdi-gender-male
@@ -144,7 +144,7 @@
                                       mdi-cat</v-icon
                                     >
                                   </div>
-                                  {{ item.title }}
+                                  {{ item.name }}
                                   <div v-if="item.gender == 'Male'">
                                     <v-icon small left color="#fff">
                                       mdi-gender-male
