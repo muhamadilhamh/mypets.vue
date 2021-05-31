@@ -9,6 +9,7 @@
     </v-toolbar>
     <v-row>
       <v-col cols="12" md="4" sm="4" offset-md="1">
+        
         <div
           class="uploader"
           @dragenter="OnDragEnter"
@@ -24,13 +25,17 @@
 
           <div v-show="!images.length">
             <i class="fa fa-cloud-upload"></i>
+            <p>You can upload up to 4 images</p>
             <p>Drag your images here</p>
             <div>OR</div>
             <div class="file-input">
               <label for="file">Select a file</label>
               <input type="file" id="file" @change="onInputChange" multiple />
             </div>
+            Please upload your photo with this ratio "16:9" otherwise, your photo will possibly turn blurry or not as intended
           </div>
+          
+          
 
           <div class="images-preview" v-show="images.length">
             <div
@@ -48,8 +53,11 @@
               </div>
             </div>
           </div>
+         
         </div>
+        
       </v-col>
+      
       <v-col cols="12" sm="6" md="6">
         <v-row class="pa-12">
           <v-container>

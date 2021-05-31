@@ -24,12 +24,14 @@
 
           <div v-show="!images.length">
             <i class="fa fa-cloud-upload"></i>
+             <p>You can upload up to 4 images</p>
             <p>Drag your images here</p>
             <div>OR</div>
             <div class="file-input">
               <label for="file">Select a file</label>
               <input type="file" id="file" @change="onInputChange" multiple />
             </div>
+             Please upload your photo with this ratio "16:9" otherwise, your photo will possibly turn blurry or not as intended
           </div>
 
           <div class="images-preview" v-show="images.length">
