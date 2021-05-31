@@ -304,6 +304,7 @@ export default {
       (value) => !!value || "Username required",
       (value) =>
         (value && value.length >= 5) || "Username must have 5+ characters",
+        (value) => /^[A-Za-z0-9]+$/.test(value) || "Only Letters and Numbers are allowed for username"
     ],
     phone: "",
     phoneRules: [
