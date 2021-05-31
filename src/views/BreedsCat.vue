@@ -152,6 +152,7 @@
           </v-list>
         </v-col>
       </v-row>
+      <template v-if="listToShow < animal_list.length">
       <v-btn
         class="load_more"
         text
@@ -162,6 +163,7 @@
       >
         Load More
       </v-btn>
+      </template>
     </v-container>
   </div>
 </template>

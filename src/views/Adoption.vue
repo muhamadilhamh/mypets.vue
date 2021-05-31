@@ -372,7 +372,7 @@
             </v-list-item-group>
           </v-list>
         </v-col>
-
+        <template v-if="listToShow < pet_list.length">
         <v-btn
           class="load_more"
           text
@@ -383,6 +383,7 @@
         >
           Load More
         </v-btn>
+        </template>
       </v-row>
     </v-container>
   </div>

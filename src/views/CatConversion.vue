@@ -59,7 +59,7 @@
           </div>
 
           <p class="output_year_cat">
-            Your {{ yearCount }} year(s) old dog would have
+            Your {{ yearCount }} year(s) old cat would have
             {{ humanYear }} year(s) if it is a human
           </p>
         </v-col>

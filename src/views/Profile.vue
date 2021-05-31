@@ -489,7 +489,8 @@ export default {
         this.loadData();
       })
       .catch((error) => {
-        if (error.response.status === 404) this.$router.push("/error");
+        if (error.response.status === 404) 
+        this.$router.push("/error");
       });
   },
   mounted() {},
