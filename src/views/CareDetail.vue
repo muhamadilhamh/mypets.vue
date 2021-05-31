@@ -106,7 +106,7 @@ export default {
   data() {
     return {
       care_info: [],
-      current_url: "animox-vue.netlify.app" + this.$router.currentRoute.path,
+      current_url: "animox-mypets.netlify.app" + this.$router.currentRoute.path,
       category: [
         {
           id: 1,

@@ -231,7 +231,7 @@ export default {
   data() {
     return {
       dialog: false,
-      current_url: "mypets-vue.netlify.app" + this.$router.currentRoute.path,
+      current_url: "animox-mypets.netlify.app" + this.$router.currentRoute.path,
       url: process.env.VUE_APP_IMAGE_URL,
       breeds_info: [],
       breeds_images: [],

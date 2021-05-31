@@ -236,6 +236,48 @@
     </v-radio-group>
           </div>
         </v-col>
+        <v-col cols="6" md="3">
+          <div class="location" v-if="showSort">
+            <h5>Date</h5>
+           <v-radio-group
+     
+      row
+      @change="sortedItem = 'created_at'"
+    >
+      <v-radio
+        label="Most Recent"
+        value="asc"
+        @click="sortType = 'desc'"
+      ></v-radio>
+      <v-radio
+        label="Most Recent"
+        value="desc"
+        @click="sortType = 'asc'"
+      ></v-radio>
+    </v-radio-group>
+          </div>
+        </v-col>
+        <v-col cols="6" md="3">
+          <div class="location" v-if="showSort">
+            <h5>Popularity</h5>
+           <v-radio-group
+     
+      row
+      @change="sortedItem = 'popularity'"
+    >
+      <v-radio
+        label="Most Popular"
+        value="asc"
+        @click="sortType = 'desc'"
+      ></v-radio>
+      <v-radio
+        label="Least Popular"
+        value="desc"
+        @click="sortType = 'asc'"
+      ></v-radio>
+    </v-radio-group>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
 
@@ -278,7 +320,7 @@
                               <template v-if="item.animal_name == 'Cat'">
                                 <v-icon left color="#fff"> mdi-cat</v-icon>
                               </template>
-
+                            
                               <div v-if="item.gender == 'Male'">
                                 {{ item.name }}
                                 <v-icon small left color="#fff">
@@ -297,7 +339,6 @@
                       </router-link>
                     </v-carousel-item>
                   </v-carousel>
-
                   <v-card-actions>
                     <v-list-item-avatar>
                       <v-img class="elevation-6" :src="url + item.user.picture">
@@ -320,8 +361,10 @@
                       </v-card-subtitle>
                     </v-list-item-content>
                     <v-card-subtitle class="time">
-                      {{ item.upload_time }}</v-card-subtitle
-                    ></v-card-actions
+                      {{ item.upload_time }}
+                      <p> {{item.popularity}} <v-icon> mdi-heart </v-icon></p></v-card-subtitle
+                    >
+                    </v-card-actions
                   >
                 </v-card>
               </v-hover>

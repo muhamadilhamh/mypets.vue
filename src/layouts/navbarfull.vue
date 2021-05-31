@@ -156,6 +156,7 @@
                 </v-btn></v-list-item-title
               >
             </v-list-item>
+            <template v-if="isLoggedIn != true">
             <v-list-item>
               <v-list-item-title
                 ><v-btn to="/register" x-small text color="#515151">
@@ -170,9 +171,31 @@
                 </v-btn></v-list-item-title
               >
             </v-list-item>
+            </template>
+            <template v-if="isLoggedIn == true">
+<v-list-item>
+              <v-list-item-title
+                ><v-btn :to="{
+                        name: 'profile',
+                        params: { username: user.username },
+                      }" x-small text color="#515151">
+                  Profile
+                </v-btn></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <v-btn @click="logout" x-small text color="#515151">
+                  Logout
+                </v-btn></v-list-item-title
+              >
+            </v-list-item>
+              
+            </template>
           </v-list>
         </v-menu>
       </div>
+      
     </v-toolbar>
     <v-content>
       <slot />

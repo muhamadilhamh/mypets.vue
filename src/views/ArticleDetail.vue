@@ -49,8 +49,8 @@
                 network="facebook"
                 :url="current_url"
                 :title="article_info.title + 'Article'"
-                description="Wow guys look, this pet is so cute!! found it on MyPets website"
-                quote="Wow guys look, this pet is so cute!! found it on MyPets website"
+                description="This post really helpful guys! You should check it at MyPets website!"
+                quote="This post really helpful guys! You should check it at MyPets website!"
                 hashtags="pet_treatment"
                 tag="v-btn"
               >
@@ -109,7 +109,7 @@ export default {
   data() {
     return {
       article_info: [],
-      current_url: "animox-vue.netlify.app" + this.$router.currentRoute.path,
+      current_url: "animox-mypets.netlify.app" + this.$router.currentRoute.path,
     };
   },
   mounted() {
