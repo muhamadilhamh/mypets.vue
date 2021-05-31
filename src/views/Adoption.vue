@@ -362,7 +362,7 @@
                     </v-list-item-content>
                     <v-card-subtitle class="time">
                       {{ item.upload_time }}
-                      <p> {{item.popularity}} <v-icon> mdi-heart </v-icon></p></v-card-subtitle
+                      <p> <v-icon> mdi-heart </v-icon> {{item.popularity}} </p></v-card-subtitle
                     >
                     </v-card-actions
                   >

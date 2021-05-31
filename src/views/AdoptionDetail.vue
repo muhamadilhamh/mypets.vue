@@ -185,7 +185,7 @@
                       <v-list-item-avatar>
                         <v-icon
                           color="success"
-                          v-if="breeds_info.user.whatsapp == 1"
+                         
                         >
                           mdi-whatsapp
                         </v-icon>
@@ -210,6 +210,11 @@
                               <v-icon left>mdi-whatsapp</v-icon>
                               {{ breeds_info.phone }}</v-btn
                             ></template
+                          >
+                          <template v-if="breeds_info.user.whatsapp == 0"
+                            >
+                              {{ breeds_info.phone }}
+                            </template
                           >
                         </v-list-item>
                       </v-list-item-content>
