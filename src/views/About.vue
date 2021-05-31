@@ -97,7 +97,7 @@
             <v-btn to="/adoption" x-small text color="#515151"> Adopsi </v-btn>
           </v-card-actions>
           <v-card-actions>
-            <v-btn to="/care" x-small text color="#515151">
+            <v-btn to="/care_training" x-small text color="#515151">
               Care&Training
             </v-btn>
           </v-card-actions>
