@@ -537,7 +537,8 @@ export default {
         (this.location_selected = null),
         (this.species = null),
         (this.search = null);
-      this.subSpecies();
+        this.gender_selected = null;
+        this.subSpecies();
     },
   },
   computed: {
