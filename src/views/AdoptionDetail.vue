@@ -73,14 +73,14 @@
     </v-container>
     <v-container>
      
-      <v-carousel height="1000px" hide-delimiters class="hidden-xs-only">
+      <v-carousel height="1080px" max-height ="1080px" hide-delimiters class="hidden-xs-only">
         <v-carousel-item v-for="(item, i) in breeds_images" :key="i">
-          <v-img class="rounded-lg"  :src="url + item.img"> </v-img
+          <v-img max-height = "1080px" width ="1920px" class="rounded-lg"  :src="url + item.img"> </v-img
         ></v-carousel-item>
       </v-carousel>
       <v-carousel height="400px" hide-delimiters class="hidden-sm-and-up">
         <v-carousel-item v-for="(item, i) in breeds_images" :key="i">
-          <v-img class="rounded-lg" :src="url + item.img" height="400px">
+          <v-img width="600px" class="rounded-lg" :src="url + item.img" height="400px">
           </v-img
         ></v-carousel-item>
       </v-carousel>
