@@ -662,7 +662,7 @@
 
                     <v-card-list>
                       <v-card-subtitle class="hidden-xs-only"
-                        >{{ item.date }}
+                        >{{ item.publish_time }}
                       </v-card-subtitle>
                     </v-card-list>
                     <v-card-list>

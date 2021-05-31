@@ -279,7 +279,8 @@
                     </v-list>
                   </v-menu>
                 </v-card-title>
-                <v-card-text> Posted at {{ item.date }} </v-card-text>
+                
+                <v-card-text> Posted {{ item.publish_time }} </v-card-text>
 
                 <v-card-list>
                   <v-btn
