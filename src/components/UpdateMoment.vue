@@ -213,7 +213,8 @@ export default {
   created() {
     this.$emit("update:layout", "div");
   },
-  data: () => ({
+  data(){
+    return {
     url: process.env.VUE_APP_IMAGE_URL,
     moment: [],
     menu2: false,
@@ -242,7 +243,8 @@ export default {
     ageRules: [(value) => !!value || "Age is required"],
     color: "",
     colorRules: [(value) => !!value || "Type is required"],
-  }),
+  }
+  },
   validations: {
     name: {
       required,
@@ -273,7 +275,7 @@ export default {
         if (error.response.status === 404 || error.response.status === 422)
           this.$router.push("/error");
       });
-    let uri_animal = process.env.VUE_APP_ROOT_API + "animal/";
+    let uri_animal = process.env.VUE_APP_ROOT_API + "animal";
     this.$http.get(uri_animal).then((response) => {
       this.animal_list = response.data;
     });
