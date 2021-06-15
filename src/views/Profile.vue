@@ -21,6 +21,7 @@
       </v-col>
     </v-row>
     <div v-if="isLoggedIn">
+  
       <v-row v-if="current_user.id === user.id">
         <v-col class="edit">
           <v-btn
@@ -36,7 +37,7 @@
     </div>
     <v-container>
       <div v-if="isLoggedIn">
-        <v-row v-if="current_user.id === user.id">
+        <v-row  v-if="current_user.id === user.id">
           <v-col md="4" sm="4" class="edit_adop">
             <v-btn outlined rounded to="/uploadadoption" color="#489FB5">
               <v-icon left>mdi-upload</v-icon> Adoption
@@ -163,7 +164,7 @@
                         </router-link>
 
                         <v-card-actions>
-                          <v-menu offset-y v-if="isLoggedIn">
+                          <v-menu offset-y v-if="current_user.id === user.id">
                             <template v-slot:activator="{ on }">
                               <v-btn class="mx-2" rounded icon small v-on="on">
                                 <v-icon dark> mdi-pencil </v-icon>
@@ -243,7 +244,7 @@
                 <v-card-title class="title_momment">
                   {{ item.title }}
                   <!-- Login -->
-                  <v-menu offset-y v-if="isLoggedIn">
+                  <v-menu offset-y v-if="current_user.id === user.id">
                     <template v-slot:activator="{ on }">
                       <v-btn class="mx-2" rounded icon small v-on="on">
                         <v-icon dark> mdi-pencil </v-icon>
